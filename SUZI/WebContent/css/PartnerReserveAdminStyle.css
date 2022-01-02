@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+div
+{
+	/* border: 1px solid gray; */
+	margin: 8px;
+}
+
+.closeContainer
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.closeItems
+{
+	display: flex;
+	text-align: center;
+	height: 100px;
+	background-color: #febec5;
+	align-items: center;
+}
+
+.closeItems:first-child
+{
+	height: 50px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.closeItems:last-child
+{
+	height: 50px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.closeItems:nth-child(2)
+{
+	height: 50px;
+}
+
+.closeItem:nth-child(1) 
+{
+	flex: 1;
+}
+
+.closeItem:nth-child(2) 
+{
+	flex: 1;
+}
+
+#dateSelect
+{
+	height: 30px;
+}
+
+
+#subminBtn
+{
+	height: 30px;
+	widows: 50px;
+}
+
+#enddate, #startdate
+{
+	height: 20px;
+}
+
+#resetBtn
+{
+	height: 25px;
+}
+
+#submitItem
+{
+	padding: 1px 10px;
+}
+
+
+
+
+
+
+

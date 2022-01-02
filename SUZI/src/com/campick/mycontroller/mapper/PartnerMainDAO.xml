@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campick.dao.IPartnerMainDAO">
+	
+	<select id="checkMyCampground" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM CAMPGROUND
+		WHERE PARTNERNUM=#{partnerNum}
+	</select>
+	
+	<select id="getCampgroundId" resultType="java.lang.String">
+		SELECT CAMPGROUNDID
+		FROM CAMPGROUND
+		WHERE PARTNERNUM =#{partnerNum}
+	</select>
+	
+</mapper>

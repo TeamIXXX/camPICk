@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campick.dao.IReviewPartnerDAO">
+	
+	<select id="getReviewCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT 
+		FROM REVIEW_VIEW 
+		WHERE CAMPGROUNDID=#{campgroundId}
+	</select>
+	
+	<select id="getReviewLists" resultType="com.campick.dto.ReviewDTO">
+		SELECT CONTENTNUM, BOOKINGNUM, TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE, CAMPERID
+	     , MEMBERNUM, TO_CHAR(CREATEDATE, 'YYYY-MM-DD') AS CREATEDATE, FIREWOOD, CONTENT AS CONTENT
+	     , NVL(REPLY, 0) AS REPLY, NVL(TO_CHAR(REPLYCREATEDATE, 'YYY-MM-DD'), 0) AS REPLYCREATEDATE, NVL(REPLYNUM, 0) AS REPLYNUM
+		FROM 
+		(
+		    SELECT ROWNUM AS RNUM, DATA.*
+		    FROM
+		    (
+		        SELECT CONTENTNUM, BOOKINGNUM, CAMPGROUNDID, CHECKINDATE, CAMPERID, MEMBERNUM, CREATEDATE, FIREWOOD, CONTENT, REPLY, REPLYCREATEDATE, REPLYNUM
+		        FROM REVIEW_VIEW
+		        WHERE CAMPGROUNDID=#{campgroundId}
+		        ORDER BY ${sortKey} ${sortOrder}
+		    ) DATA
+		)
+		<![CDATA[ WHERE RNUM >= ${start} AND RNUM <= ${end} ]]>
+	</select>
+	
+	
+	<update id="modifyReply">
+		UPDATE REVIEWREPLY
+		SET REPLY = #{reply}
+		WHERE REPLYNUM = ${replyNum}
+	</update>
+	
+	
+	<delete id="removeReply">
+		DELETE
+		FROM REVIEWREPLY
+		WHERE REPLYNUM = ${replyNum}
+	</delete>
+	
+	
+	<insert id="addReply">
+		INSERT INTO REVIEWREPLY(REPLYNUM, CONTENTNUM, BOOKINGNUM, REPLY, CREATEDATE) 
+		VALUES(REVIEWREPLYSEQ.NEXTVAL, ${contentNum}, #{bookingNum}, #{reply}, SYSDATE)
+	</insert>
+	
+</mapper>
+
+
+

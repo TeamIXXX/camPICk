@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#foot
+{
+	text-align: center;
+	/* position: absolute; */
+	left:0px;
+	bottom:0px;
+	width:100%;
+	color: white;
+	padding: 10px 0;
+	margin-top: 20px;
+ 	background-color: #a7a9b3;
+ 	font-size: 14px;
+}
+
+#foot .footmenu
+{
+	margin: 0 auto;	
+}
+
+a.foot
+{
+	text-decoration : none;
+	color:black;
+	
+}
+a.foot:link, a.foot:visited
+{
+	color:white;
+}
+
+#foot .footmenu .vline
+{
+	display: inline-block;
+	margin: 0 16px;
+}
+
+
+
+
+

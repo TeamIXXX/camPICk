@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+@media (min-width: 1200px)
+{
+	html, body
+	{
+	    margin: 0;
+    	padding: 0;
+    	height: 100%;
+    }
+}
+
+
+.bannerContentContainer
+{
+	display: grid;
+	grid-template-columns: 1fr 4.5fr 1fr;
+	grid-template-rows:  1fr  0.5fr;
+	align-items: center;
+	text-align: center;
+	grid-gap: 1rem;
+	margin-top: 200px;
+}
+
+.bannerContentContainer a { text-decoration: none; }
+
+.bannerContentItem:nth-child(1) /* 바쁘다 바빠 현대사회 */
+{
+	grid-column: 1/5;
+	padding: 2em;
+	padding-top : 40px;
+	/* font-color: black; */
+	-webkit-text-stroke-width: 0.2px;
+	-webkit-text-stroke-color: black;
+}
+
+.bannerContentItem:nth-child(2) /* 신규 캠핑장 & 이달의 캠핑왕 */
+{
+	align-self: center;
+	justify-self: center; 
+	grid-column: 1/5;
+	grid-row: 2/3;
+}
+
+.quick
+{
+    background: url('https://source.unsplash.com/960x540/?nature') no-repeat;
+    background-size: cover;
+  
+    z-index: 1;
+}
+
+/* #mainSearch
+{
+	color : black;
+} */
+.quick1 
+{ 
+	font-size: 27pt;
+	font-weight: 900;
+	color:white;
+}
+
+.quick2 
+{ 
+	font-size: 22pt; 
+	font-weight: 900;
+	color:white;
+}
+
+.carousel-inner img
+{
+	max-height: 400px;
+	max-width: 600px;
+}

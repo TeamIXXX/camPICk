@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+@media (min-width: 1200px)
+{
+	html, body
+	{
+	    margin: 0;
+    	padding: 0;
+    	height: 100%;
+    }
+}
+
+
+.mainContentContainer
+{
+	display: grid;
+	grid-template-columns: 1fr 3.5fr 4.5fr 1fr;
+	align-items: center;
+	text-align: center;
+	grid-gap: 1rem;
+}
+
+.mainContentContainer a { text-decoration: none; }
+
+.mainContentItem:nth-child(1) /* 바쁘다 바빠 현대사회 */
+{
+	grid-column: 1/5;
+	background-color: #F7CAC9;
+	padding: 2em;
+}
+
+.mainContentItem:nth-child(2) /* 신규 캠핑장 & 이달의 캠핑왕 */
+{
+	display: flex;
+	align-self: center;
+	justify-self: center; 
+	grid-column: 2/4;
+	grid-row: 2/3;
+	/* background-color: silver; */ 
+}
+
+.mainContentItem:nth-child(3) /* 검색 */
+{
+	grid-column: 2/4;
+	grid-row: 3/4;
+	height: 50pt;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	
+}
+
+.mainContentItem:nth-child(4) /* 지도 날씨 */
+{
+	grid-column: 2/3;
+	grid-row: 4/6;
+	height: 400pt;
+	border: 2px solid #000000;
+}
+
+.mainContentItem:nth-child(5) /* 체크박스 */
+{
+	grid-column: 3/4;
+	grid-row: 4/5;
+	text-align: left;
+	padding-left: 10pt;
+}
+
+.mainContentItem:nth-child(6) /* 날짜 선택 */
+{
+	grid-column: 3/4;
+	grid-row: 5/6;
+	padding-left: 10pt;	
+	text-align: left;
+}
+
+.mainContentItem:nth-child(7) /* 캠핑장 정렬 조건*/
+{
+	grid-column: 2/4;
+	grid-row: 6/7;
+	height: 20pt;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.mainContentItem:nth-child(8) /* 캠핑장 출력 */
+{
+	grid-column: 2/4;
+	grid-row: 7/8;
+	background-color: silver;
+}
+.quick1 { font-size: 25pt; }
+
+.quick2 { font-size: 15pt; }
+
+.opTitle
+{
+	background-color: #FFD03E;
+	color: #45818E;
+	font-size: 15pt;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 20pt;
+}
+
+.groundInfoContainer
+{
+	display: grid;
+	grid-template-columns: 3fr 2fr 2fr 3fr;
+	align-items: center;
+	text-align: center;
+	grid-gap: 1rem;
+}
+
+/* #mainSearch
+{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+ */
+.mainSearch
+{
+	border-style: 12pt solid #45818E;
+	border-radius : 30pt;
+	padding-left: 20pt;
+	height: 40pt;
+	width: 40vw;
+	
+}
+
+.btnSearch
+{
+	background-color: #FFFFFF;
+	border-style: none;
+	height: 30pt; 
+}
+
+.btnSearch > img
+{
+	height: 30pt;
+}
+
+
+#datepicker1, #datepicker2 
+{
+	width: 150pt;
+	height: 20pt;
+}  
+
+.carousel-inner img
+{
+	max-height: 400px;
+	max-width: 600px;
+}

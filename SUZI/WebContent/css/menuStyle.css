@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+/* #14. 메뉴스타일 구성 */
+
+ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+li
+{
+	width: 20%;
+	float: left;
+}
+
+a.menu:link, a.menu:visited
+{
+	display: block;
+	font-weight: blod;
+	color: #ffffff;
+	background-color: #008000;
+	text-align: center;
+	padding: 4px;
+	text-decoration: none;
+	text-transform: uppercase;
+	height: 30px;
+	font-size: 14pt;
+}
+
+
+a.menu:hover, a.menu:active
+{
+	background-color: #ffffff;
+	color: #008000;
+	border: 2px solid #008000;
+	border-radius: 5px;
+	height: 26px;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campick.dao.IPartnerCampgroundDAO">
+	
+	<select id="myCampgroundInfo" resultType="com.campick.dto.CampgroundDTO">
+		SELECT PARTNERNUM, CAMPGROUNDID,CAMPGROUNDNAME, SIGNUPDATE, ADDRESS1, ADDRESS2,ADDRESS3,  PICKCOUNT AS PICK, REVIEWCOUNT AS REVIEW, FIREWOOD, TEL, EXTRAINFO, CHECKINDATE, CHECKOUTDATE
+		FROM CAMPGROUND_VIEW
+		WHERE PARTNERNUM=#{partnerNum}
+	</select>
+	
+	<select id="roomTypeList" resultType="java.lang.String">
+		SELECT DISTINCT ROOMTYPENAME
+		FROM ROOMVIEW
+		WHERE PARTNERNUM =#{partnerNum}
+	</select>
+	
+	<select id="comfortsList" resultType="java.lang.String">
+		SELECT OPTIONNAME
+		FROM OPTION_VIEW1
+		WHERE CAMPGROUNDID =(SELECT CAMPGROUNDID FROM CAMPGROUND_VIEW WHERE PARTNERNUM = #{partnerNum})
+	</select>
+	
+	<select id="funList" resultType="java.lang.String">
+		SELECT OPTIONNAME
+		FROM OPTION_VIEW2
+		WHERE CAMPGROUNDID =(SELECT CAMPGROUNDID FROM CAMPGROUND_VIEW WHERE PARTNERNUM = #{partnerNum})
+	</select>
+	
+	<select id="getCampgroundId" resultType="java.lang.String">
+		SELECT CAMPGROUNDID
+		FROM CAMPGROUND
+		WHERE PARTNERNUM =#{partnerNum}
+	</select>
+	
+</mapper>
+

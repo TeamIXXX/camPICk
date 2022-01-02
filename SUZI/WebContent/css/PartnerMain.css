@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+@media (min-width: 1200px)
+{
+	html, body
+	{
+	    margin: 0;
+    	padding: 0;
+    	height: 100%;
+    }
+}
+
+.PartnerMain
+{
+	width: 85%;
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	grid-template-rows: 1fr 8fr 0.5fr;
+	grid-gap: 2%;
+	margin: 0 auto;
+	/* background-color: gray; */
+}
+
+
+.partnerItem:nth-child(1) 	/* TopMenu */
+{
+	grid-column: 2 / 3;
+	grid-row: 1 / 2;
+	justify-self: end;
+	align-self: flex-end; 
+	
+}
+
+.partnerItem:nth-child(2) /* Logo */ 
+{
+	grid-column: 1 / 2;
+	grid-row: 1 / 2;	
+	margin: 5px;
+}
+
+.partnerItem:nth-child(3) /* 내용 영역 */
+{
+	grid-column: 1 / 3;
+	grid-row: 2/ 3;
+	display: flex;
+	flex-direction : row;
+	justify-content : center;
+	align-self: center;
+	padding: 5px;
+}
+
+.partnerMainButton
+{
+	width : 20%;
+	margin : 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn
+{
+	width: 300px;
+}
+
+#mainLogo > img
+{ 
+	width: 100%;
+	object-fit: cover; 
+}
+
+.buttonName
+{
+	font-weight: bold; 
+	font-size: 30px;"
+}

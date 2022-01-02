@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+/*======================= 메인 템플릿========================= */
+
+.mainContainer
+{
+	width: 85%;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-template-rows: 0.3fr 0.5fr 4fr;
+	grid-gap: 2%;
+	margin: 0 auto;
+	/* background-color: gray; */
+}
+
+
+.mainItem:nth-child(1) 	/* TopMenu */
+{
+	grid-column: 1 / 3;
+	justify-self: end;
+	align-self: flex-end; 
+	
+}
+
+.mainItem:nth-child(2) /* Logo */ 
+{
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
+}
+
+.mainItem:nth-child(3) /* SitemapRight */ 
+{
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+}
+
+.mainItem:nth-child(4) /* NavigationBar  */
+{
+	grid-column: 1 / 2;
+	grid-row: 3 / 4;
+}
+
+.mainItem:nth-child(5) /* Content */
+{
+	/* #FFAEC9 */
+	background-color: white;
+	grid-column: 2 / 3;
+	grid-row: 3/ 4;
+	margin: 0 auto;
+}
+
+
+#mainLogo > img
+{ 
+	width: 100%;
+	object-fit: cover; 
+}
+
+/* ============================================================= */
+
+
+
+.container-survey
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.item-survey
+{
+	padding: 15px;
+	/* border: 1px solid black; */
+	margin: 30px;
+}
+
+/* 설문 항목 1. ~ 4. */
+.item-survey> p
+{
+	text-align: left;
+	font-size: 23px;
+	font-weight: bold;
+	margin: 20px;
+}
+
+/* 라디오버튼 리스트 */
+.surlist
+{
+	display:inline-block;
+	width: 200px;
+	font-size: 18px;
+	margin: 10px;
+	
+}
+
+.item-survey> .option
+, .item-survey .season
+, .item-survey .member
+, .item-survey .vibe
+, .item-survey> .fire-wood
+, .item-survey> .end
+{
+	margin-left: 30px;
+}
+
+
+.btn1
+{
+	width: 100px;
+	height: 33px;
+	font-size: 18px;
+	background: #EDCBCB;
+	border: none;
+	margin: 50px 80px;
+}
+
+.btn:hover
+{
+	color: #ffffff;
+	background: #848484;
+	border: 2px solid black;
+}
+
+
+.item-survey> .end
+{/* 
+	text-align: center; */
+}
+
+.end> .errMsg
+{
+	color: red;
+	font-size: 15px;
+}
+
+textarea.textreview
+{
+    resize: none;
+}
+
+.input
+{
+	margin-top: 10px;
+}
+
+.input>label
+, .star-input>label
+{
+	padding-left: 20px;
+}

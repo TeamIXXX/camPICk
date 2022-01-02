@@ -1,0 +1,92 @@
+@font-face 
+{
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.sitemapItem ul, .sitemapItem li  
+{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	list-style: none;
+}
+
+.mainMenu >a 
+{
+	text-align: center;
+}
+.mainMenu >li 
+{
+	position: relative;
+	height: 25pt;
+	width: 20%;
+	float: left;
+}
+
+.mainMenu >li >a 
+{
+	background-color: #C4C4C4;
+	color: #45818E;
+	text-decoration: none;
+	font-size: 1.5vw;
+	font-weight: bold;
+	display: block;
+	padding: 6px;
+	border-right: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+.siteSubMenu 
+{
+	background-color: #C4C4C4;
+	opacity: 0;
+	list-style: none;
+	visibility: hidden;
+	padding-right:10pt;
+}
+
+.siteSubMenu >li 
+{
+	width: 100%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	list-style: none;
+	text-align: center;
+	height: 3.5vw;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.siteSubMenu >li >a 
+{
+	color: #45818E;
+	font-size: 1.4vw;
+	text-decoration: none;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.mainMenu >li:hover .siteSubMenu 
+{
+	display: block;
+	opacity: 1;
+	visibility: visible;
+	background-color: #FFD03E;
+}
+
+.siteSubMenu >li:hover 
+{
+	opacity: 1;
+	visibility: visible;
+	background-color: #45818E;
+	color: #FFD03E;
+}
+
+.siteSubMenu >li:hover > a
+{
+	color: #FFD03E;
+}
+

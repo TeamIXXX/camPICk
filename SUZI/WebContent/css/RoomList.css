@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/* 컨테이너 구성 */
+.container_roomlist
+{
+	display: flex;
+	flex-direction: row;
+	justify-content:center;
+	align-items:center;
+	width: 100%;
+	height: 100%;
+	margin:0 auto;
+	//border-radius: 20px;
+	//border: 2px solid black;
+	padding: 5px;
+	font-size: 13px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	
+}
+
+.item_roomlist
+{
+	//padding: 10px;
+	margin:0 auto;
+	width: 100%;
+	height: 100px;
+}
+
+
+.item_roomlist:nth-child(1)
+{
+	margin: 3px 15px; 
+}
+
+.item_roomlist:nth-child(2)
+{
+	width: 60%;
+	padding-left: 20px;
+}
+
+.item_roomlist:nth-child(1)
+, .item_roomlist:nth-child(3)
+{
+	width: 20%;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	text-align: center;
+
+}
+
+/* 캠핑장 객실 이미지 */
+.item_roomlist:nth-child(1)> .image-room
+{
+	min-width: 100%;
+	object-fit: cover;	/* 종횡비를 유지하면서 정의된 너비와 높이를 가득 채울때까지 확대 */
+    border : 1px solid black;
+}
+
+/* 방 이름 */
+.bangname
+{
+	font-weight: bold;
+	font-size: 15pt;
+}
+
+/* 예약버튼 */
+.reserveBtn
+{
+	width: 80px;
+	height:40px;
+	border : 0px;
+	background-color : #FFD03E;
+	border-radius : 3px;
+	font-size : 15px;
+}
+
+.reserveBtn:hover
+{
+	border :1px solid black;
+	color : #45818E;
+}
+
+
+/* 파트너쪽 수정 삭제버튼 */
+.roomlistBtn
+{
+	width: 70px;
+	height:35px;
+	border : 0px;
+	background-color : #FFD03E;
+	border-radius : 3px;
+	font-size : 13px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.roomlistBtn:hover
+{
+	border :1px solid black;
+	color : #45818E;
+}

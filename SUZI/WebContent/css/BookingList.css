@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+/* Tab */
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus
+	{
+	color: #fff;
+	background-color: #45818e;
+	}
+
+/*예약 내역 컨테이너*/
+.wrap
+{
+	background-color:lightgray;
+	margin:0 auto;
+	width: 80%;
+	
+	
+	 
+}
+
+.container_bookinglist
+{
+	display: flex;
+	flex-direction: row;
+	justify-content:center;
+	align-items:center;
+	width: 80%;
+	height: 200%;
+	margin:0 auto;
+	border-radius: 20px;
+	border: solid 3px  black;
+	padding: 20px;
+	font-size: 14px;
+	background-color: white;
+	margin-bottom: 60px;
+	margin-top: 10px;
+}
+
+
+.item_bookinglist
+{
+	padding: 10px;
+	margin:0 auto;
+	height: 150px;
+}
+
+.campName
+{
+	font-size: 20px;
+}
+
+.selectpicker
+, .campTab
+{
+	font-size: 16px;
+}
+
+
+.item_bookinginfo:nth-child(2)
+{
+	margin-left: 20px;
+	width: 70%;
+}
+.item_bookinglistlist:nth-child(3)
+{
+	width: 10%;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	text-align: center;
+}
+
+
+.item_bookinglistlist:nth-child(1)
+{
+	width: 20%;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	text-align: center;
+	background-color: #ffC0CB ;
+}
+
+
+
+/* 캠핑장 객실 이미지 */
+.item_bookinglist:nth-child(1)> .image-room
+{
+	width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/*room name*/
+.item_bookinglist:nth-child(2)> .bookinginfo
+{
+	margin-left: 30px;
+	width: 60%;
+
+}
+
+
+.item_bookinglist:nth-child(3)> .reserveBtn
+{
+  border-radius:10%;
+  align-items: center;
+  
+}
+.item_bookinglist:nth-child(3)> .review_btn
+{
+	border-radius:10%;
+	align-items: center;
+	
+}

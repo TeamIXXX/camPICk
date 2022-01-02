@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.tabmenu 
+{
+	width: 900px;
+	height: 700px;
+}
+
+.tab_title li 
+{
+	list-style: none;
+	float: left;
+	width: 150px;
+	padding: 10px 15px;
+	cursor: pointer;
+	text-align: center;
+	border: none;
+}
+
+.tab_title li.on 
+{
+	background-color: #FFD03E;
+	font-weight: bold;
+	color: #45818E;
+}
+
+.tab_cont 
+{
+	clear: both;
+	width: 100%;
+	height: 80%;
+	background-color: #fefcde;
+	padding: 4%;
+}
+
+.tab_cont div 
+{
+	display: none;
+	text-align: center;
+}
+
+.tab_cont div.on 
+{
+	display: block;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+#leftNav
+{
+	font-size: 9pt;
+	width: 90%;
+	margin: 0 auto;
+}
+
+ul.menu
+{
+	width: 95%;
+	list-style-type : none;
+	overflow: hidden;
+	background-color: #45818E;
+	padding: 15px;
+	border-radius: 10px;
+	text-align: center;
+	/* background-color: rgba(69, 129, 142, 0.5); */
+	color: #ffffff;
+	font-weight: bold;
+	/* font-size: 25px; */
+}
+
+li.Menu
+{
+	display: block;
+	color: #ffffff;
+	text-align: center;
+	height: 40px;
+	text-decoration: none;
+	
+}
+
+.Menu a
+{
+	font-weight: normal;
+}
+
+.subMenu
+{
+	display: none;
+	font-size: 0.8vw;
+	font-weight: bold;
+	color: #ffffff;
+	text-align: center;
+	height: 20%;
+	text-decoration: none;
+	
+}
+
+a.Menu:visited
+{
+	color: #ffffff;
+}
+
+a.Menu:hover, .subMenu:hover, span.Menu:hover
+{
+	color: #FFD03E;
+	cursor: pointer;
+}
+
+	
+#navigationBarSearchButton
+{
+	width: 30px;
+	border-radius: 30%;
+	padding-top: 20px;
+}
+
+.naviSearch
+{
+		border-radius : 30px;
+		height: 30px;
+		color: black;
+		/* font-size: 15px; */
+		border-color: #45818E;
+		border-style: none;
+		align: center;
+		width: 80%;
+		padding-left:15px; 
+	
+}
+
+a:link { text-decoration: none;}
+a:visited { text-decoration: none;}
+
+a:hover
+{
+	cursor: pointer;
+	text-decoration: none;
+}

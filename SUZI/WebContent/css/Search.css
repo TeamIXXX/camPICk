@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+@media (min-width: 1200px)
+{
+	html, body
+	{
+	    margin: 0;
+    	padding: 0;
+    	height: 100%;
+    }
+}
+
+
+.mainContentContainer
+{
+	display: grid;
+	grid-template-columns: 0.7fr 3.5fr 4.5fr 0.5fr;
+	align-items: center;
+	text-align: center;
+	grid-gap: 1rem;
+}
+
+.mainContentContainer a { text-decoration: none; }
+
+
+.mainContentItem:nth-child(1) /* 검색 */
+{
+	grid-column: 2/4;
+	grid-row: 2/3;
+	height: 50pt;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	
+}
+
+.mainContentItem:nth-child(2) /* 지도 날씨 */
+{
+	grid-column: 2/3;
+	grid-row: 3/6;
+	height: 400pt;
+	width: 450pt;
+	border: 2px solid #000000;
+}
+
+.mainContentItem:nth-child(3) /* 체크박스 */
+{
+	grid-column: 3/4;
+	grid-row: 3/5;
+	text-align: left;
+	padding-left: 65pt;
+}
+
+.mainContentItem:nth-child(5) /* 캠핑장 정렬 조건*/
+{
+	grid-column: 2/4;
+	grid-row: 6/7;
+	height: 20pt;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.mainContentItem:nth-child(6) /* 캠핑장 출력 */
+{
+	grid-column: 2/4;
+	grid-row: 7/8;
+	background-color: whilte;
+}
+
+.opTitle
+{
+	background-color: #FFD03E;
+	color: #45818E;
+	font-size: 15pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+.groundInfoContainer
+{
+	display: grid;
+	grid-template-columns: 2fr 2fr 1fr 5fr;
+	align-items: center;
+	text-align: center;
+	/* grid-gap: 1rem; */
+	background-color: white;
+    border-bottom: solid 1px;
+}
+
+/* #mainSearch
+{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+ */
+.mainSearch
+{
+	border-style: 12pt solid #45818E;
+	border-radius : 30pt;
+	padding-left: 20pt;
+	height: 40pt;
+	width: 40vw;
+	
+}
+
+.btnSearch
+{
+	background-color:transparent;
+	border-style: none;
+}
+
+.btnSearch > svg
+{
+	vertical-align:middle;
+}
+
+/* 캠핑장 이름 */
+#cgName
+{
+	font-size: x-large;
+	font-weight: bold; 
+	color: black;
+}
+/* 캠핑장 주소 */
+#cgAddr
+{
+	font-size: small;
+	color: black;
+}
+.groundInfoItem
+{
+	text-align: left;
+	background-color: white;
+}
+
+/*픽, 장작 수 뱃지*/
+.groundInfoItem .badge
+{
+	background-color: #FFD03E;
+	text-align: center;
+	color : black;
+}
+/*픽, 리뷰*/
+.pr
+{
+	padding-right : 10px;
+	text-align : right;
+	font-size : 10pt;
+}
+
+/* 각 캠핑장별 객실유형, 옵션, 테마 문구*/
+.rot
+{
+	text-align: center;
+	line-height: 1.6;
+	font-size: small;
+}
+.rot span
+{
+	font-size: medium;
+}
+.rot .badge
+{
+	background-color: #FFD03E;
+	width: 90px;
+	color : black;
+}
+

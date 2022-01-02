@@ -1,0 +1,86 @@
+
+.partnerSitemapItem ul, .partnerSitemapItem li  
+{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	list-style: none;
+}
+
+.partnerMainMenu >a 
+{
+	text-align: center;
+}
+
+.partnerMainMenu >li 
+{
+	position: relative;
+	height: 25pt;
+	width: 25%;
+	float: left;
+}
+
+.partnerMainMenu >li >a 
+{
+	background-color: #C4C4C4;
+	color: #45818E;
+	text-decoration: none;
+	font-size: 1.5vw;
+	font-weight: bold;
+	display: block;
+	padding: 6px;
+	border-right: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+.partnerSiteSubMenu 
+{
+	background-color: #C4C4C4;
+	opacity: 0;
+	list-style: none;
+	visibility: hidden;
+	padding-right:10pt;
+}
+
+.partnerSiteSubMenu >li 
+{
+	width: 100%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	list-style: none;
+	display : flex;
+	justify-content : center;
+	align-items : center;
+	text-align: center;
+	height: 3.5vw;
+	padding: 0;
+}
+
+.partnerSiteSubMenu >li >a 
+{
+	color: #45818E;
+	font-size: 1.4vw;
+	text-decoration: none;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.partnerMainMenu >li:hover .partnerSiteSubMenu 
+{
+	display: block;
+	opacity: 1;
+	visibility: visible;
+	background-color: #FFD03E;
+}
+
+.partnerSiteSubMenu >li:hover 
+{
+	opacity: 1;
+	visibility: visible;
+	background-color: #45818E;
+	color: #FFD03E;
+}
+
+.partnerSiteSubMenu >li:hover > a
+{
+	color: #FFD03E;
+}
+

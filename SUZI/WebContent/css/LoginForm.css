@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.loginFrm 
+{
+	text-align: center;
+	padding-top: 4%;
+	
+	font-size: 14pt;
+	font-family: 맑은 고딕;
+}
+
+
+.others 
+{
+	display: flex;
+	flex-direction: column;
+	margin: 5px;
+	justify-content: center;
+	font-family: 맑은 고딕;
+	padding: 5px 5px;
+	margin-top : 40px;
+	
+	text-align: center;
+}
+
+.item
+{
+	margin: 4px;
+}
+
+.item:nth-child(1)
+{
+	font-size: 20px;
+}
+
+.item:nth-child(2)
+{
+	font-size: small;
+}
+
+
+a 
+{
+	text-decoration: none;
+	color: gray;
+}
+
+a:hover 
+{
+	text-decoration: underline;
+	color: green;
+}
+
+.select>label 
+{
+	padding: 5px 10px;
+	text-decoration: none;
+	color: gray;
+}
+
+.vline
+{
+	display: inline-block;
+	margin: 0 8px;
+}
+
+.btn:hover
+{
+	cursor: pointer;
+}

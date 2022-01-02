@@ -1,0 +1,235 @@
+@charset "UTF-8";
+
+@media (min-width: 1200px)
+{
+   html, body
+   {
+       margin: 0;
+       padding: 0;
+       height: 100%;
+    }
+}
+
+@font-face 
+{
+     font-family: 'S-CoreDream-6Bold';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+.mainContainer
+{
+	font-family: 'S-CoreDream-6Bold';
+}
+
+/* 컨테이너 구성 */
+.container-cgd 
+{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 1000px;      /* 합칠 때 빼고 1000px 로 두고 보기 */
+   margin:0 auto;
+   border-radius: 20px;
+   border: none;
+   padding: 15px;
+   /* background: #E0FBF7; */
+   font-size: 15px;
+}
+
+/* item 구성 */
+.item-cgd 
+{
+   padding: 15px;
+}
+
+/* item 중 table 있는 아이템 */
+.item-cgd> .item-table
+{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+/* 사진 옆으로 넘기기 밑작업 */
+.image-cgd
+{
+   overflow:hidden;
+}
+
+/* 넘어가는 사진들 박스에 담기 */
+.image-box
+{
+    width: 100%;
+    
+    overflow: hidden;   /*  */
+    margin: 0 auto;
+}
+
+/* 사진들 겹치기 */
+.image-thumbnail
+{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.campgroundInfoValue
+{
+   font-size: 20px;
+   padding: 5px;
+   padding-left: 20px;
+}
+
+.campgroundInfoTitle
+{
+   width : 180px;
+   padding : 5px;
+   text-align: center;
+   color: black;
+   background-color: rgba(255,208,58,0.8);
+   border-radius: 5px;
+   font-size: 18px;
+   
+}
+
+.textbox
+{
+   width: 80px;
+}
+
+.errMsg
+{
+   color: red;
+   font-size: 15px;
+}
+
+
+/*===== 캠핑장 객실 div =====*/
+#roomInsertMain
+{
+   width: 100%;     
+   background: #ffffff;
+   margin: 0 auto;
+   text-align:left;
+   
+}
+
+.roomInsertInfo
+{
+   display: flex;
+   justify-content: flex-end;
+   margin: 10px;
+   
+}
+
+#roomInsertSpace
+{
+   border: 1px solid black;
+   border-radius: 7px; 
+   margin: 10px;
+}
+
+/*======= 리뷰 =======*/
+
+
+.btn2
+{
+   float: right;
+   border: 0;
+   background-color:transparent;   /* 배경색 투명 */
+   font-size: x-small;
+}
+
+/* 캠퍼 리뷰 */
+.review-space
+{
+   padding: 5px; 
+   margin-top: 3px; 
+   margin-bottom: 3px;
+}
+
+.review-content
+{
+   height: 60px; 
+   font-size: small; 
+   border: 1px solid gray;
+   resize: none;
+}
+
+.review-content:focus
+{
+   outline: none;
+}
+
+
+/* 파트너 답글 */
+.reply-space
+{
+   padding: 5px; 
+   margin-bottom: 3px;
+}
+
+.reply-content
+{
+   height: 45px; 
+   font-size: small; 
+   border: 1px solid gray; 
+   border-radius: 20px;
+   resize: none;
+}
+
+.reply-content:focus
+{
+   outline: none;
+}
+
+.pageBtn:hover
+{
+   font-weight: bold;
+   cursor: pointer;
+}
+
+
+/* 리뷰 차트 */
+.chartArea
+{
+   width: 80%;
+   text-align: center;
+   margin-bottom: 15px;
+   
+}
+
+/* 차트 양쪽 그라디언트 제거 */
+.carousel-control.left, .carousel-control.right 
+{
+    background-image: none !important;
+}
+
+.carousel-control 
+{ 
+   background: none !important;
+   filter: none !important; progid:none !important;
+   margin-right: -30px;
+   margin-left: -30px;
+}
+ 
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #FFD08E;
+    border-radius: 10px;
+}
+
+
+

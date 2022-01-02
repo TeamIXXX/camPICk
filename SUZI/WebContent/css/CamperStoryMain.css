@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+.camperstoryMain
+{
+	display: flex;
+	height : 200vh;
+	flex-direction: column;
+}
+
+.camperstoryitem:nth-child(1)
+{
+	flex: 2;
+	margin-top: 10pt;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+
+.camperstoryitem:nth-child(2)
+{
+	flex: 2;
+	margin-top: 10pt;
+	border: 2px solid black;
+	height: 100%;
+	color : red;
+	border-radius: 10px;
+	display : flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.camperstoryitem:nth-child(3)
+{
+	flex: 8;
+	margin-top: 10pt;
+	margin-bottom: 10pt;
+}
+
+#camperstoryKing
+{
+	display: flex;
+	flex-direction: row;
+}
+
+.camperstoryKingItem:nth-child(1)
+{
+	flex: 1;
+	background-color: yellow;
+	border-radius: 100px;
+}
+
+.camperstoryKingItem:nth-child(2)
+{
+	flex: 1;
+	background-color: yellow;
+	border-radius: 100px;
+}
+
+.camperstoryKingItem:nth-child(3)
+{
+	flex: 1;
+	background-color: yellow;
+	border-radius: 100px;
+}
+
+#camperstoryNotice
+{
+	
+}
+
+
+	#campserstroyMainTab
+	{
+		width: 100%;
+		padding-top : 30px;           
+		background: #ffffff;
+		
+	}
+ 
+	section 
+	{
+		display: none;
+		border: 2px solid #45818E;	
+		padding: 1%;
+	}
+ 
+	input.tab 
+	{
+		display: none;
+	}
+ 
+	label 
+	{
+		display: inline-block;
+		padding: 15px 25px;
+		font-weight: 600;
+		color: #bbb;
+		border: 1px solid transparent;
+	}
+ 
+	label:hover 
+	{
+		color: #2e9cdf;
+		cursor: pointer;
+	}
+ 
+    /*input 클릭시, label 스타일*/
+	input.tab:checked + label 
+	{
+		color: #555;
+		border: 1px solid #ddd;
+		border: 2px solid #45818E;
+		border-bottom:0px solid #ffffff;
+	}
+ 
+	#tab1:checked ~ #content1,
+	#tab2:checked ~ #content2,
+	#tab3:checked ~ #content3
+	{
+		display: block;
+	}
+

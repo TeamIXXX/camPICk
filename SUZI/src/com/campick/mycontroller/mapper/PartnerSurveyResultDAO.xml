@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campick.dao.ISurveyResultPartnerDAO">
+
+	<select id="getOptionResult" resultType="com.campick.dto.OptionSurvResultDTO">
+		SELECT CH.OPTIONNUM AS OPTIONNUM, OP.OPTIONNAME AS OPTIONNAME, OP.OPTION_TYPENUM AS OPTIONTYPENUM, OP.OPTION_TYPENAME AS OPTIONTYPENAME
+		   , CH.SUM AS SUM, CH.COUNT AS COUNT, CH.AVG AS AVG
+		FROM
+		(
+		    SELECT OPTIONNUM, SUM(SURVEYSCORE) AS SUM, COUNT(*) AS COUNT, ROUND(AVG(SURVEYSCORE), 1) AS AVG
+		    FROM OPTIONSURVEY_VIEW
+		    WHERE CAMPGROUNDID='${campgroundId}'
+		    GROUP BY OPTIONNUM
+		) CH,
+		(
+		    SELECT OPTIONNUM, OPTIONNAME, OPTION_TYPENUM
+		         , (SELECT OPTION_TYPENAME
+		            FROM CAMP_OPTIONTYPE
+		            WHERE OPTION_TYPENUM = CO.OPTION_TYPENUM) AS OPTION_TYPENAME
+		    FROM CAMP_OPTION CO
+		) OP
+		WHERE CH.OPTIONNUM = OP.OPTIONNUM
+	</select>
+	
+	
+	<select id="getThemeTypeCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM THEME
+		WHERE THEME_TYPENUM = ${themeTypeNum}
+	</select>
+	
+	
+	<!-- 테마유형별 총 설문 답변 개수 -->
+	<select id="getThemeResultCount" resultType="com.campick.dto.ThemeSurvResultPartnerDTO">
+		SELECT THEME_TYPENUM, COUNT(*) AS COUNTALL
+		FROM THEMESURVEY_VIEW
+		WHERE CAMPGROUNDID=#{campgroundId}
+		GROUP BY THEME_TYPENUM
+	</select>
+	
+	
+	<!-- 모든 테마 유형에 대한 리스트 -->
+	<select id="getThemeResult" resultType="com.campick.dto.ThemeSurvResultPartnerDTO">
+		SELECT T.THEME_TYPENUM AS THEMETYPENUM, T.THEMENUM AS THEMENUM, T.THEMENAME AS THEMENAME, NVL(TC.COUNT, 0) AS COUNT 
+		FROM
+		(
+		    SELECT THEMENUM, COUNT
+		    FROM
+		    (
+		        SELECT THEMENUM, COUNT(*) AS COUNT
+		        FROM THEMESURVEY_VIEW
+		        WHERE CAMPGROUNDID=#{campgroundId}
+		        GROUP BY THEMENUM
+		    )
+		) TC,
+		(
+		    SELECT THEME_TYPENUM, THEMENUM, THEMENAME
+		    FROM THEME
+		
+		) T
+		WHERE TC.THEMENUM(+) = T.THEMENUM
+	</select>
+	
+</mapper>
