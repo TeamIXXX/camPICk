@@ -56,8 +56,8 @@
 	</div>
 	 
 	<div class="mainItem" style="background-color: none;">
-		<%-- 회원번호 : <%=num %><br>
-		캠퍼/파트너/관리자 : <%=account %> --%>
+		회원번호 : <%=num %><br>
+		캠퍼/파트너/관리자 : <%=account %>
 		<c:import url="/campgroundlist.wei"></c:import>
 		<!-- <a href="campgrounddetail.wei">캠핑장상세페이지</a> -->
 	</div>
