@@ -20,10 +20,10 @@
 	<div class="mainItemNN" id="mainLogo">
 		<img src="<%=cp%>/img/logo_title.png">
 	</div>
-	<div class="mainItemNN">
+	<div class="mainItemNN" style="z-index: 2;">
 		<jsp:include page="/WEB-INF/view/CamperSitemap.jsp"></jsp:include>
 	</div>
-	<div class="mainItemNN">
+	<div class="mainItemNN" style="z-index: 1;">
 		내용영역
 	</div>
 </div>

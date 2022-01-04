@@ -7,17 +7,6 @@
 	background-color: #45818e;
 	}
 
-/*예약 내역 컨테이너*/
-.wrap
-{
-	background-color:lightgray;
-	margin:0 auto;
-	width: 80%;
-	
-	
-	 
-}
-
 .container_bookinglist
 {
 	display: flex;
@@ -44,17 +33,14 @@
 	height: 150px;
 }
 
-.campName
-{
-	font-size: 20px;
-}
+.campName {	font-size: 20px; }
 
-.selectpicker
-, .campTab
+.selectpicker, .campTab
 {
 	font-size: 16px;
 }
 
+.selectpicker { margin-top: 20px; }
 
 .item_bookinginfo:nth-child(2)
 {

@@ -12,6 +12,7 @@
 	
 	sb.append("{\"bookingNum\":\"" + bookingDTO.getBookingNum() + "\"");
 	sb.append(",\"roomName\":\"" + bookingDTO.getRoomName() + "\"");
+	sb.append(",\"campgroundId\":\"" + bookingDTO.getCampgroundId() + "\"");
 	sb.append(",\"campgroundName\":\"" + bookingDTO.getCampgroundName() + "\"");
 	sb.append(",\"name\":\"" + bookingDTO.getName() + "\"");
 	sb.append(",\"phone\":\"" + bookingDTO.getPhone() + "\"");

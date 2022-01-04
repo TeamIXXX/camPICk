@@ -48,7 +48,7 @@
 		<img src="<%=cp%>/img/logo_title.png">
 	</div>
  
-	<div class="mainItem">
+	<div class="mainItem" style="z-index: 2;">
 		<jsp:include page="CamperSitemap.jsp"></jsp:include>		
 	</div>
  
@@ -56,7 +56,7 @@
 		<jsp:include page="NavigationBar.jsp"></jsp:include>
 	</div>
 	 
-	<div class="mainItem" style="background-color: none;">
+	<div class="mainItem" style="background-color: none; z-index: 1;">
 		<jsp:include page="BookingListInside.jsp"></jsp:include>
 	</div>
 	 

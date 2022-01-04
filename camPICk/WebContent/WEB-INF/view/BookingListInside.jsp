@@ -269,6 +269,7 @@
 			, success : function(jsonObj)
 			{
 				var roomName = jsonObj.roomName;
+				var campgroundId = jsonObj.campgroundId;
 				var campgroundName = jsonObj.campgroundName;
 				var name= jsonObj.name;
 				var phone = jsonObj.phone;
@@ -279,6 +280,7 @@
 				var request = jsonObj.request;
 				var bookingDate = jsonObj.bookingDate;
 				
+				$("a.bookingDetailModalCampgroundName").attr("href", "campickdetail.wei?campgroundId=" + campgroundId)
 				$('.bookingDetailCampgroundName').text(campgroundName);
 				$('.bookingDetailBookingNum').text(bookingNum);
 				$('.bookingDetailBookingDate').text(bookingDate);
@@ -302,8 +304,6 @@
 		
 	}
 		
-
-
 </script>
 <style type="text/css">
 
@@ -311,6 +311,15 @@
 	{
     	color: #fff;
     	background-color: #45818e;
+	}
+
+	.bookingDetailSubTitle
+	{
+    	color: #45818E;
+		display: inline-block;
+		width: 120px;
+		text-align: right;
+		padding: 3px 2px;
 	}
 	
 </style>
@@ -341,16 +350,15 @@
 	</div>
 </div>
 
-
 <ul class="nav nav-pills">
-  <li role="presentation" id="bookingListLi" class="campTab"><a>이용 내역</a></li>
-  <li role="presentation" id="pickCampgroundLi" class="campTab"><a>PICk 캠핑장</a></li>
+	<li role="presentation" id="bookingListLi" class="campTab"><a>이용 내역</a></li>
+	<li role="presentation" id="pickCampgroundLi" class="campTab"><a>PICk 캠핑장</a></li>
 </ul>
 
 <div class="bookingList">
 	<div class="col-12">
 		<div class="col-12" style="font-size: large;">
-			<select name="status" id="status" class="selectpicker">
+			<select name="status" id="status" class="selectpicker" style="text-align: center;">
 				<option value="전체" selected="selected">-전체-</option>
 				<option value="예약 확정">예약 확정</option>
 				<option value="이용 완료">이용 완료</option>
@@ -374,25 +382,26 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					<a href="www.naver.com"><span class="bookingDetailCampgroundName">캠핑장 이름</span></a>
+					<a class="bookingDetailModalCampgroundName"><span class="bookingDetailCampgroundName campName">캠핑장 이름</span></a>
 				</h4>
 			</div>
 			<div class="modal-body">
-				예약 번호 : <span class="bookingDetailBookingNum"></span><br> 
-				예약일 : <span class="bookingDetailBookingDate"></span><br> 
-				예약 객실이름 : <span class="bookingDetailRoomName"></span><br> 
-				예약자 : <span class="bookingDetailName"></span><br>
-				연락처 : <span class="bookingDetailPhone"></span><br> 
-				체크인 ~ 체크아웃 : <span class="bookingDetailCheckInDate"></span> 
-									~ <span class="bookingDetailCheckOutDate"></span><br> 
-				결제일 : <span class="bookingDetailPaymentDate"></span><br> 
-				결제 금액 : <span class="bookingDetailPaymentAmount"></span>원<br>
-				인원 수 : <span class="bookingDetailVisitNum"></span><br>
-				예약 시 요청사항 : <span class="bookingDetailRequest"></span><br>
+				<span class="bookingDetailSubTitle">예약 번호</span> : <span class="bookingDetailBookingNum"></span><br>
+				<span class="bookingDetailSubTitle">예약일</span> : <span class="bookingDetailBookingDate"></span><br> 
+				<span class="bookingDetailSubTitle">예약 객실이름</span> : <span class="bookingDetailRoomName"></span><br> 
+				<span class="bookingDetailSubTitle">예약자</span> : <span class="bookingDetailName"></span><br>
+				<span class="bookingDetailSubTitle">연락처</span> : <span class="bookingDetailPhone"></span><br> 
+				<span class="bookingDetailSubTitle">체크인 ~ 체크아웃</span> : 
+					<span class="bookingDetailCheckInDate"></span> ~ <span class="bookingDetailCheckOutDate"></span><br> 
+				<span class="bookingDetailSubTitle">결제일</span> : <span class="bookingDetailPaymentDate"></span><br> 
+				<span class="bookingDetailSubTitle">결제 금액</span> : <span class="bookingDetailPaymentAmount"></span>원<br>
+				<span class="bookingDetailSubTitle">인원 수</span> : <span class="bookingDetailVisitNum"></span><br>
+				<span class="bookingDetailSubTitle">예약 시 요청사항</span> : <span class="bookingDetailRequest"></span><br>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 
 
