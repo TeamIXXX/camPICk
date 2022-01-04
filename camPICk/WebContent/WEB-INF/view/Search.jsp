@@ -233,6 +233,7 @@
 							var address1 = jsonObj[idx].address1;
 							var address2 = jsonObj[idx].address2;
 							var address3 = jsonObj[idx].address3;
+							var extrainfo = jsonObj[idx].extrainfo;
 							var firewood = jsonObj[idx].firewood;
 							var roomtypelist = jsonObj[idx].roomtypelist;
 							var optionlist = jsonObj[idx].optionlist;
@@ -248,7 +249,8 @@
 							out += "						<div class=\"groundInfoItem\">";
 							out += "							<a href=\"campickdetail.wei?campgroundId=" + campgroundId +"\"><span id='cgName'>" + campgroundName + "</span>";
 							out += "							<br><span id='cgAddr'>" + address1 + " " +address2 + " " + address3 + "</span></a>";
-							out += "							<br>장작점수 : " + firewood + " / 5 <br>";
+							out += "							<br><span class='badge rounded-pill'>캠핑장 소개</span><br>" + extrainfo;
+							out += "							<br><span class='badge rounded-pill'>장작점수</span>　" + firewood + " / 5 <br>";
 							for(var i = 0; i<parseInt(firewood); i++)
 							{
 								out += "<span class='firewoods'><img src=\"img/colorwood.png\" width='35px'></span> ";

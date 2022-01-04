@@ -25,6 +25,7 @@
 			sb.append(",\"address1\":\"" + campground.getAddress1() + "\"");
 			sb.append(",\"address2\":\"" + campground.getAddress2() + "\"");
 			sb.append(",\"address3\":\"" + campground.getAddress3() + "\"");
+			sb.append(",\"extrainfo\":\"" + campground.getExtraInfo()+ "\"");
 			sb.append(",\"firewood\":\"" + campground.getFirewood() + "\"");
 			sb.append(",\"roomtypelist\":\"" + campground.getRoomtypelist() + "\"");
 			sb.append(",\"optionlist\":\"" + campground.getOptionlist() + "\"");
