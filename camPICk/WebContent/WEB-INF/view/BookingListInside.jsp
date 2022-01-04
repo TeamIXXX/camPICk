@@ -59,6 +59,22 @@
 		});
 		
 		
+		
+		$(document).ajaxStart(function()			// ajax 처리시 로딩 gif 추가
+		{
+			// AJAX 시작 시...
+			$("#hide").show();
+			$("#reviewList").hide();
+			
+		}).ajaxComplete(function()
+		{
+			// AJAX 종료 시...
+			$("#hide").hide();
+			$("#reviewList").show();
+			
+		});
+		
+		
 	});
 
 	
@@ -212,11 +228,11 @@
 					}
 					
 					strFooter += "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">확인</button>";
-					strFooter += "<button type=\"button\" class=\"btn btn-primary\" onclick='location.href=\"campickdetail.wei?campgroundId=" + campgroundId + "\"'>수정 또는 삭제 (상세페이지로 이동)</button>";
+					strFooter += "<button type=\"button\" class=\"btn btn-primary\" onclick='location.href=\"campickdetail.wei?campgroundId=" + campgroundId + "\"'>수정(상세페이지로 이동)</button>";
 					
 				}
 
-				$("#review-reply").html(str);
+				$("#reviewList").html(str);
 				$("#review-reply-footer").html(strFooter);
 				
 				//alert(campgroundId);
@@ -229,10 +245,7 @@
 			
 		});		
 		
-		
 	}
-		
-		
 		
  
 </script>
@@ -249,20 +262,26 @@
 
 <!-- 리뷰보기 모달 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+	<div class="modal-dialog">
+		<div class="modal-content">
    
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">나의 리뷰</h4>
-      </div>
-      <div class="modal-body" id="review-reply">
-      </div>
-      <div class="modal-footer" id="review-reply-footer">
-      </div>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">나의 리뷰</h4>
+			</div>
+			<div class="" id="review-reply">
+				<div class="col-md-12" id="hide" style="text-align: center;">
+					<img src="img/loading_01.gif" alt="loading" style="align-items: center; width: 60px;"/>
+				</div>
+				<div class="col-md-12" id="reviewList">
+					<!-- 리뷰 영역 -->
+				</div>
+			</div>
+			<div class="modal-footer" id="review-reply-footer">
+			</div>
      
-    </div>
-  </div>
+		</div>
+	</div>
 </div>
 
 
