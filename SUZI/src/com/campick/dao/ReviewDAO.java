@@ -151,6 +151,99 @@ public class ReviewDAO implements IReviewDAO
 		
 		return result;
 	}
+
+
+	
+	//--------------------------------- 추가 코드 --------------------------------
+	// 내캠핑장 > 예약 내역 확인 > 리뷰 보기 에서 리뷰 확인을 위한 코드 추가
+
+	@Override
+	public int getReviewCountForBookingNum(String bookingNum) throws SQLException
+	{
+		int result = 0;
+		
+		Connection conn = dataSource.getConnection();
+		String sql = "SELECT NVL(COUNT(*), 0) AS COUNT FROM REVIEW_VIEW WHERE BOOKINGNUM=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bookingNum);
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			result = rs.getInt("COUNT");
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+
+
+	@Override
+	public ReviewDTO getSpecificReview(String bookingNum) throws SQLException
+	{
+		ReviewDTO dto = new ReviewDTO();
+		
+		Connection conn = dataSource.getConnection();
+		String sql = "SELECT CONTENTNUM, BOOKINGNUM, CAMPGROUNDID, TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE "
+				+ ", CAMPERID, MEMBERNUM, TO_CHAR(CREATEDATE, 'YYYY-MM-DD') AS CREATEDATE, FIREWOOD, CONTENT AS CONTENT "
+				+ ",  NVL(REPLY, 0) AS REPLY, NVL(TO_CHAR(REPLYCREATEDATE, 'YYYY-MM-DD'), 0) AS REPLYCREATEDATE"
+				+ ", NVL(REPLYNUM, 0) AS REPLYNUM"
+				+ " FROM REVIEW_VIEW"
+				+ " WHERE BOOKINGNUM=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bookingNum);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next())
+		{
+			dto.setContentNum(rs.getInt("CONTENTNUM"));
+			dto.setBookingNum(rs.getString("BOOKINGNUM"));
+			dto.setCampgroundId(rs.getString("CAMPGROUNDID"));
+			dto.setCheckInDate(rs.getString("CHECKINDATE"));
+			dto.setCamperId(rs.getString("CAMPERID"));
+			dto.setMemberNum(rs.getString("MEMBERNUM"));
+			dto.setCreateDate(rs.getString("CREATEDATE"));
+			dto.setFireWood(rs.getInt("FIREWOOD"));
+			dto.setContent(rs.getString("CONTENT"));
+			dto.setReply(rs.getString("REPLY"));
+			dto.setReplyCreateDate(rs.getString("REPLYCREATEDATE"));
+			dto.setReplyNum(rs.getInt("REPLYNUM"));
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return dto;
+	}
+
+
+	@Override
+	public int getReviewCheckMonth(String bookingNum) throws SQLException
+	{
+		int result = 0;
+		
+		Connection conn = dataSource.getConnection();
+		String sql = "SELECT CASE WHEN MONTHS_BETWEEN(SYSDATE, CHECKOUTDATE)<=3"
+				+ " AND CHECKOUTDATE < SYSDATE"
+				+ " THEN 1 ELSE 0"
+				+ " END AS CHECKMONTH"
+				+ " FROM BOOKING"
+				+ " WHERE BOOKINGNUM=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bookingNum);
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			result = rs.getInt("CHECKMONTH");
+		}
+		rs.close();
+		pstmt.close();
+		conn.close();
+		
+		return result;
+	}
+	
+	
 	
 	
 

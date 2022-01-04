@@ -27,4 +27,13 @@ public interface IReviewDAO
 	// 특정 리뷰 수정
 	public int modifyReview(ReviewDTO review) throws SQLException;
 	
+	
+	// 추가.
+	// 내캠핑장 > 예약 내역 확인 > 리뷰 보기 에서 리뷰 확인을 위한 코드 추가
+	public int getReviewCountForBookingNum(String bookingNum) throws SQLException;
+	
+	public ReviewDTO getSpecificReview(String bookingNum) throws SQLException;
+	
+	public int getReviewCheckMonth(String bookingNum) throws SQLException;
+	
 }

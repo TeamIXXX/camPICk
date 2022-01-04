@@ -112,3 +112,48 @@
 	align-items: center;
 	
 }
+
+
+
+/* 캠퍼 리뷰 */
+.review-space
+{
+   padding: 5px; 
+   margin-top: 3px; 
+   margin-bottom: 3px;
+}
+
+.review-content
+{
+   height: 60px; 
+   font-size: small; 
+   border: 1px solid gray;
+   resize: none;
+}
+
+.review-content:focus
+{
+   outline: none;
+}
+
+
+/* 파트너 답글 */
+.reply-space
+{
+   padding: 5px; 
+   margin-bottom: 3px;
+}
+
+.reply-content
+{
+   height: 45px; 
+   font-size: small; 
+   border: 1px solid gray; 
+   border-radius: 20px;
+   resize: none;
+}
+
+.reply-content:focus
+{
+   outline: none;
+}
