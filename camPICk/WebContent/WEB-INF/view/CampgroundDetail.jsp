@@ -420,7 +420,7 @@
 					if(memberNum == <%=num%>)		// 리뷰작성자 멤버번호와 캠퍼 로그인 세션에 저장되어있는 멤버번호가 같을 경우 수정/삭제 버튼 랜더링
 					{
 						str += "						<button type='button' class='btn2' onclick='modalOpen(this)' value='" + contentNum + "' data-toggle='modal' data-target='#myModal'>수정</button>";
-						str += "						<button type='button' class='btn2' onclick='deleteReview(this)' value='" + contentNum + "'>삭제</button>";
+						//str += "						<button type='button' class='btn2' onclick='deleteReview(this)' value='" + contentNum + "'>삭제</button>";
 					}
 					str += "					</div>";
 					str += "				</div>";
@@ -498,6 +498,7 @@
 	
 	
 	// 리뷰 삭제 함수
+	/* 
 	function deleteReview(e)
 	{
 		if (!confirm("이 리뷰를 정말 삭제하시겠습니까?"))
@@ -527,7 +528,7 @@
 			});
 		}
 	}
-	
+	*/
 	
 	/* 예약버튼 클릭 시 객실리스트로 이동 */
 	function fnMove()

@@ -116,6 +116,14 @@
 
 
 /* 캠퍼 리뷰 */
+.btn2
+{
+   float: right;
+   border: 0;
+   background-color:transparent;   /* 배경색 투명 */
+   font-size: x-small;
+}
+
 .review-space
 {
    padding: 5px; 
