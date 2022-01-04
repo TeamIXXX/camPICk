@@ -381,8 +381,8 @@ public class BookingDAO implements IBookingDAO
 				   + ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE"
 				   + ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE"
 				   + ", VISITNUM, PAYMENTAMOUNT"
-				   + ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE "
-				   + " FROM BOOKINGVIEW"
+				   + ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE"
+				   + " FROM BOOKINGVIEW_TOTAL"
 				   + " WHERE BOOKINGNUM = ?";
 		
 		PreparedStatement pstmt = null;

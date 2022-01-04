@@ -51,8 +51,7 @@
 		{
 			ajaxBookingList(num);
 		});
-		
-		
+			
 		
 		$(document).ajaxStart(function()			// ajax 처리시 로딩 gif 추가
 		{
@@ -71,6 +70,15 @@
 		
 	});
 
+	// 예약번호 ~ 예약 일 영역 클릭시 예약 상세 모달 띄우기
+	function showBookingDetail(obj)
+	{
+		$('#bookingModal').modal('show');
+		
+		// Ajax 처리
+		ajaxBookingDetailModal(obj.id)
+	}	
+			
 	
 	function ajaxBookingList(camperNum)
 	{
@@ -236,6 +244,58 @@
 			,error : function(e)
 			{
 				alert(e.responseText);
+				
+			}
+			
+		});		
+		
+	}
+	
+	// 
+	function ajaxBookingDetailModal(bookingNum)
+	{
+		//alert("함수 호출");
+		var bookingNum = bookingNum;
+				
+		var str = "";
+		var strFooter = "";
+		
+		$.ajax(
+		{
+			type : "POST"
+			, url : "ajaxbookingdetailmodal.wei"
+			, data : "bookingNum=" + bookingNum
+			, dataType : "json"
+			, success : function(jsonObj)
+			{
+				var roomName = jsonObj.roomName;
+				var campgroundName = jsonObj.campgroundName;
+				var name= jsonObj.name;
+				var phone = jsonObj.phone;
+				var checkInDate = jsonObj.checkInDate;
+				var checkOutDate = jsonObj.checkOutDate;
+				var visitNum = jsonObj.visitNum;
+				var paymentAmount = jsonObj.paymentAmount;
+				var request = jsonObj.request;
+				var bookingDate = jsonObj.bookingDate;
+				
+				$('.bookingDetailCampgroundName').text(campgroundName);
+				$('.bookingDetailBookingNum').text(bookingNum);
+				$('.bookingDetailBookingDate').text(bookingDate);
+				$('.bookingDetailRoomName').text(roomName);
+				$('.bookingDetailName').text(name);
+				$('.bookingDetailPhone').text(phone);
+				$('.bookingDetailCheckInDate').text(checkInDate);
+				$('.bookingDetailCheckOutDate').text(checkOutDate);
+				$('.bookingDetailPaymentDate').text(bookingDate);
+				$('.bookingDetailPaymentAmount').text(paymentAmount);
+				$('.bookingDetailVisitNum').text(visitNum);
+				$('.bookingDetailRequest').text(request);
+				
+			}
+			,error : function(e)
+			{
+				alert("상세 예약내역을 불러올 수 없습니다.");
 			}
 			
 		});		
@@ -243,16 +303,6 @@
 	}
 		
 
-	// 예약번호 ~ 예약 일 영역 클릭시 예약 상세 모달 띄우기
-	function showBookingDetail(obj)
-	{
-		$('#bookingModal').modal('show');
-		
-		$('.bookingDetailBookingNum').text(obj.id);
-		// Ajax 처리
-		
-	}	
-			
 
 </script>
 <style type="text/css">
@@ -262,6 +312,7 @@
     	color: #fff;
     	background-color: #45818e;
 	}
+	
 </style>
 </head>
 <body>
@@ -319,30 +370,31 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					<a href="www.naver.com">해오름캠핑장</a>
+					<a href="www.naver.com"><span class="bookingDetailCampgroundName">캠핑장 이름</span></a>
 				</h4>
 			</div>
 			<div class="modal-body">
-				예약번호 : <span class="bookingDetailBookingNum"></span><br> 
-				예약 날짜 :  <br> 
-				예약 객실이름 : <br> 
-				예약자 : <br>
-				연락처: <br> 
-				결제일 : <br> 
-				결제 금액 :<span> 55,000</span>원<br>
-				인원 수 : <br>
-				예약 시 요청사항 : 그늘자리 부탁드려요 <br>
+				예약 번호 : <span class="bookingDetailBookingNum"></span><br> 
+				예약일 : <span class="bookingDetailBookingDate"></span><br> 
+				예약 객실이름 : <span class="bookingDetailRoomName"></span><br> 
+				예약자 : <span class="bookingDetailName"></span><br>
+				연락처 : <span class="bookingDetailPhone"></span><br> 
+				체크인 ~ 체크아웃 : <span class="bookingDetailCheckInDate"></span> 
+									~ <span class="bookingDetailCheckOutDate"></span><br> 
+				결제일 : <span class="bookingDetailPaymentDate"></span><br> 
+				결제 금액 : <span class="bookingDetailPaymentAmount"></span>원<br>
+				인원 수 : <span class="bookingDetailVisitNum"></span><br>
+				예약 시 요청사항 : <span class="bookingDetailRequest"></span><br>
 			</div>
 		</div>
 	</div>
 </div>
 
- 
-	
+
+
 </body>
 </html>

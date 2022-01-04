@@ -188,6 +188,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	   <property name="bookingDao" ref="bookingDAO"></property>
 	</bean>
 	
+	<bean name="/ajaxbookingdetailmodal.wei" class="com.campick.controller.AjaxBookingDetailModalController">
+	   <property name="bookingDao" ref="bookingDAO"></property>
+	</bean>
+	
+	
+	
+	
 	<!-- 예약 내역에서 리뷰 보기 클릭 시 -->
 	<bean name="/ajaxbookinglistReview.wei" class="com.campick.controller.AjaxBookinglistReviewController">
 		<property name="reviewDao" ref="reviewDAO"></property>	
