@@ -52,12 +52,6 @@
 			ajaxBookingList(num);
 		});
 		
-		// 캠핑장 설명 영역을 누르면 예약 상세정보 모달 
-		$(".bookingInfoModal").on("click", function() //div
-		{
-			$('#bookingModal').modal('show');
-		});
-		
 		
 		
 		$(document).ajaxStart(function()			// ajax 처리시 로딩 gif 추가
@@ -106,9 +100,10 @@
 					out += "	<div class='item_bookinglist'>";
 					out += "		<img src='img/logo.png' class='image-room'>";
 					out += "	</div>";
-					out += "	<div class='item_bookinglist bookingInfoModal'>";
-					out += "      <a class='bookingCPground'><p class='campName'> " + campgroundName + "</p></a><br>";
-					out += "      <span class='campDate'>결제 일 : " + bookingDate + "<br>";
+					out += "	<div class='item_bookinglist'>";
+					out += "      <a href='campickdetail.wei?campgroundId="+ campgroundId +"' class='bookingCPground'><p class='campName'> " + campgroundName + "</p></a><br>";
+					out += "      <span class='campDate bookingInfoModal' onclick='showBookingDetail(this)' id='" + bookingNum+ "'>예약번호 : " + bookingNum + "<br>";
+					out += "	  결제 일 : " + bookingDate + "<br>";
 					out += "      예약 일 : " + checkInDate + " ~ " + checkOutDate + "</span><br>";
 					out += "   </div>";
 					out += "   <div class='item_bookinglist'><br><span class='campStatus'>" + status + "</span><br> <br>";
@@ -247,7 +242,18 @@
 		
 	}
 		
- 
+
+	// 예약번호 ~ 예약 일 영역 클릭시 예약 상세 모달 띄우기
+	function showBookingDetail(obj)
+	{
+		$('#bookingModal').modal('show');
+		
+		$('.bookingDetailBookingNum').text(obj.id);
+		// Ajax 처리
+		
+	}	
+			
+
 </script>
 <style type="text/css">
 
@@ -307,63 +313,35 @@
 	</div>
 </div>
 
-<!-- 
-<div class='container_roomlist' id="roomId">
-	<div class='item_roomlist'>
-		<img src='img/logo.png' class='image-room'>
-	</div>
-	<div class='item_roomlist'>
-		<span class='roomname'>  roomname </span><br>
-		 기준 인원 basicnum 명 / 최대 인원 maxnum 명<br> 
-		 가격 정보 평일 1박 기준 payment 원<br>
-		 주말 1박 기준 weekendprice 원<br>
-	</div>
-	<div class='item_roomlist'>
-		<button type='button' class='reserveBtn' id='reservation_btn' onclick="">예약</button>
+
+
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<a href="www.naver.com">해오름캠핑장</a>
+				</h4>
+			</div>
+			<div class="modal-body">
+				예약번호 : <span class="bookingDetailBookingNum"></span><br> 
+				예약 날짜 :  <br> 
+				예약 객실이름 : <br> 
+				예약자 : <br>
+				연락처: <br> 
+				결제일 : <br> 
+				결제 금액 :<span> 55,000</span>원<br>
+				인원 수 : <br>
+				예약 시 요청사항 : 그늘자리 부탁드려요 <br>
+			</div>
+		</div>
 	</div>
 </div>
--->
- 	<!-- <div class="col-12">
-		<div class="col-12" style="font-size: large;">
-			<select name="status" id="status" style="font-size: small;">
-				<option value="전체" selected="selected">-전체-</option>
-				<option value="예약 확정">예약 확정</option>
-				<option value="이용 완료">이용 완료</option>
-				<option value="예약 취소">예약 취소</option>
-			</select>
-		</div>
-	</div>
 
-	<div id="listDiv">
-		 
-	</div>
-	 -->
-
-	<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<form action="">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">
-							<a href="www.naver.com">해오름캠핑장</a>
-						</h4>
-					</div>
-					<div class="modal-body">
-						${bookingNum.name }으로 가져오기
-						예약번호 : <br> 예약 날짜 : <br> 예약 객실이름 : <br> 예약자 : <br>
-						연락처: <br> 결제일 : <br> 결제 금액 :<span> 55,000</span>원<br>
-						인원 수 : <br> 예약 시 요청사항 : 그늘자리 부탁드려요 <br>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	
  
 	
 </body>
