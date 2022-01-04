@@ -58,29 +58,12 @@
 			$('#bookingModal').modal('show');
 		});
 		
-		/* 
-		// 예약 취소 버튼 클릭 시 예약 취소 폼
-		$(".bookingCancelBtn").click(function() 
-		{
-			$(this).val();
-			alert("5");
-			//$(location).attr("href", "bookingcancelform.wei?bookingNum=" + $(this).val() );
-		});
-		
-		// 리뷰  
-		$(".reviewBtn").on("click", function() 
-		{
-			// 리뷰 작성이랑 연결
-			//$(location).attr("href", "bookingcancelform.wei");
-		});
-		*/
 		
 	});
 
 	
 	function ajaxBookingList(camperNum)
 	{
-		//debugger;
 		var out = "";
 					
 		$.ajax(
@@ -117,7 +100,7 @@
 					
 					if( status == '이용 완료')						
 						out += "	<button type='button' class='reviewBtn'"
-							+ "onclick='location.href=\"surveycheck.wei?campgroundId=" + campgroundId + "&bookingNum=" + bookingNum + "\"'>리뷰 보기</button>";
+							+ "onclick='showReview(this)' value='"+ bookingNum +"' value2='"+ campgroundId +"' data-toggle='modal' data-target='#myModal'>리뷰 보기</button>";
 					else if ( status == '예약 확정')					
 						out += "	<button type='button' class='bookingCancelBtn' onclick='location.href=\"bookingcancelform.wei?bookingNum=" + bookingNum + "\"'>예약 취소</button>";
 						
@@ -132,11 +115,121 @@
 			,error : function(e)
 			{
 				out = "예약 내역이 없습니다.";
-				//alert(e.responseText);
 				$("#listDiv").html(out);
 			}
 			
 		}); 
+	}
+	
+	// '리뷰보기' 버튼 클릭 시 동작하는 리뷰 확인 함수(annotation 사용x)
+	function showReview(e)
+	{
+		//alert("함수 호출");
+		var bookingNum = $(e).attr("value");
+		var campgroundIdVal = $(e).attr("value2");
+		
+		var str = "";
+		var strFooter = "";
+		
+		$.ajax(
+		{
+			type : "POST"
+			, url : "ajaxbookinglistReview.wei"
+			, data : "bookingNum=" + bookingNum
+			, dataType : "json"
+			, success : function(jsonObj)
+			{
+				var bookingNum = jsonObj.bookingNum;
+				
+				if (bookingNum=="0")
+				{
+					var checkMonth = jsonObj.checkMonth;
+					if (checkMonth==1)
+					{
+						str += "등록한 리뷰가 없습니다.";
+						str += "<a href='campickdetail.wei?campgroundId=" + campgroundIdVal + "'> 리뷰 등록하러 가기 </a>";
+					}
+					else
+					{
+						str += "등록한 리뷰가 없습니다. 방문일로부터 3개월 이내의 리뷰만 작성가능합니다.";
+					}
+					
+					
+					strFooter = "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">확인</button>";
+				}
+				else
+				{
+					var contentNum = jsonObj.contentNum;
+					var firewood = jsonObj.firewood;
+					var camperId = jsonObj.camperId;
+					var campgroundId = jsonObj.campgroundId;
+					var createDate = jsonObj.createDate;
+					var checkInDate = jsonObj.checkInDate;
+					var content = jsonObj.content;
+					var memberNum = jsonObj.memberNum;
+					var replyNum = jsonObj.replyNum;
+					var reply = jsonObj.reply;
+					var replyCreateDate = jsonObj.replyCreateDate;
+					
+					str += "			<div class='col-md-12 review-space'>";
+					str += "				<div class='col-md-3' style='text-align: center; padding-top: 20px;'>";
+					str += "					" + camperId + "<br>";
+					
+					for (var i=1; i <= 5; i++)			// 장작점수 만큼 장작아이콘 랜더링
+					{
+						if (i<=firewood)
+							str+= "<img src='img/firewood_ver2_Color.png' style='width: 30px;'>";
+						else
+							str+= "<img src='img/firewood_ver2_BW.png' style='width: 30px;'>";
+					}
+					
+					str += "					<br>";
+					str += "					<span style='font-size: x-small;'>방문일 " + checkInDate + "</span>";
+					str += "				</div>";
+					str += "				<div class='col-md-9' style='padding-top: 5px;'>";
+					str += "					<div class='col-md-12' style='text-align: right; font-size: x-small;'>작성일 " + createDate + "</div>";
+					str += "					<textarea class='col-md-12 review-content' id='reviewCont" + contentNum +"' readonly='readonly'>" + content + "</textarea>";
+					str += "				</div>";
+					str += "			</div>";
+					if (replyNum!=0)				// 리뷰 댓글이 있을 경우에만 랜더링함
+					{
+						str += "			<div class='col-md-12 reply-space'>";
+						str += "				<div class='col-md-3' style='text-align: center; padding-top: 15px;''>";
+						str += "					<img src='img/partnericon.png' style='width: 50px;'>";
+						str += "				</div>";
+						str += "				<div class='col-md-9' style='padding-top: 5px;'>";
+						str += "					<div class='col-md-12' style='text-align: right; font-size: x-small;'>";
+						str += "						작성일 " + replyCreateDate;
+						str += "					</div>";
+						str += "					<textarea class='col-md-12 reply-content' id='replyCont" + replyNum +"' readonly='readonly'>" + reply + "</textarea>";
+						str += "					<div class='col-md-12' style='text-align: right; margin-top: 3px;'>";
+						str += "						<button type='button' class='btn2'>";
+						str += "							<span class='glyphicon glyphicon-exclamation-sign' style='font-size: 15px; color: #eb1e0f;'></span>";
+						str += "						</button>";
+						str += "					</div>";
+						str += "				</div>";
+						str += "			</div>";
+					}
+					
+					strFooter += "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">확인</button>";
+					strFooter += "<button type=\"button\" class=\"btn btn-primary\" onclick='location.href=\"campickdetail.wei?campgroundId=" + campgroundId + "\"'>수정 또는 삭제 (상세페이지로 이동)</button>";
+					
+				}
+
+				$("#review-reply").html(str);
+				$("#review-reply-footer").html(strFooter);
+				
+				//alert(campgroundId);
+				
+			}
+			,error : function(e)
+			{
+				alert(e.responseText);
+			}
+			
+		});		
+		
+		
 	}
 		
 		
@@ -153,6 +246,24 @@
 </style>
 </head>
 <body>
+
+<!-- 리뷰보기 모달 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+   
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">나의 리뷰</h4>
+      </div>
+      <div class="modal-body" id="review-reply">
+      </div>
+      <div class="modal-footer" id="review-reply-footer">
+      </div>
+     
+    </div>
+  </div>
+</div>
 
 
 <ul class="nav nav-pills">

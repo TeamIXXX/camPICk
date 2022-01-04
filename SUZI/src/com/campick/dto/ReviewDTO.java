@@ -8,7 +8,7 @@ public class ReviewDTO
 {
 	// 주요 속성 구성
 	private String campgroundId, checkInDate, memberNum, createDate, content, camperId;
-	private int contentNum, fireWood, replyNum;
+	private int contentNum, fireWood, replyNum, checkMonth;
 	private String reply, replyCreateDate, bookingNum;
 	
 	// getter / setter 
@@ -107,6 +107,14 @@ public class ReviewDTO
 	public void setBookingNum(String bookingNum)
 	{
 		this.bookingNum = bookingNum;
+	}
+	public int getCheckMonth()
+	{
+		return checkMonth;
+	}
+	public void setCheckMonth(int checkMonth)
+	{
+		this.checkMonth = checkMonth;
 	}
 	
 	
