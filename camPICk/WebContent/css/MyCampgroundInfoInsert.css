@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+
+.campgroundInsertTitle
+{
+	display : block;
+	text-align: center;
+	margin: 25px;
+	font-weight: bold;
+}
+.campgroundInsertMain
+{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.campgroundInsertMain>form
+{
+	display: grid;
+	grid-template-columns: repeat(auto-fill);
+	grid-template-rows: repeat(auto-fill);
+}
+
+.campgroundInsertItem
+{
+	border: 1px solid black;
+}
+
+.campgroundInsertItem:nth-child(odd)
+{
+	grid-column: 1/2;
+	display : flex;
+	justify-content : center;
+	align-items : center;
+	text-align: center;
+	padding: 5px;
+	font-weight: bold;
+	background-color: rgba(255,208,50,0.7);
+}
+
+.campgroundInsertItem:nth-child(even)
+{
+	grid-column: 2/3;
+	padding: 10px;
+}
+
+.campgroundInsertItem:nth-child(21)
+{
+	grid-column: 1/3;
+	background-color: white;
+	opacity: 1;
+	border : 0px solid black;
+}
+
+
+.campgroundInsertItem:nth-child(10)
+{
+	display: flex;
+}
+
+
+.item-refund
+{
+	display: grid;
+	grid-template-columns: 0.3fr 1fr;
+	grid-template-rows: repeat(auto-fill);
+}
+
+.refund:nth-child(1)
+,.refund:nth-child(8)
+{
+	grid-column: 1/3;
+	text-align: left;
+	margin: 5px;
+}
+
+.refund:nth-child(2)
+,.refund:nth-child(4)
+,.refund:nth-child(6)
+{
+	text-align: center;
+	border: 2px solid green;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+.item-room
+{
+	display: flex;	
+	flex-direction: column;
+}
+
+.room:nth-child(1)
+{
+	
+}
+
+.room:nth-child(2)
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.roomInsertSuccess:nth-child(1)
+{
+	margin-top : 10px;
+	border: 1px solid black;
+	width: 20%;
+	height: 20vh;
+}
+.roomInsertSuccess:nth-child(2), .roomInsertSuccess:nth-child(3)
+{
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.roomInsertSuccessBtn
+{
+	font-size: x-small;
+	margin: 5px;
+}
+
+.input span
+{
+	font-size: 18px;
+}
+
+.textValue
+{
+	border:0 solid black;
+}
+
+.btn
+{
+	margin: 50px;
+	width: 100px;
+	height: 50px;
+	font-weight: bold;
+}
+
+.intInsert
+{
+	width: 70px;
+}
+
+.notice
+{
+	font-size: small;
+	color: blue;
+}
+.weekPrice
+{
+	width: 100px;
+}
