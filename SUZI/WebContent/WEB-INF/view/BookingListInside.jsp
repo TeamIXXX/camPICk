@@ -58,22 +58,15 @@
 			$('#bookingModal').modal('show');
 		});
 		
-		/* 
-		// 예약 취소 버튼 클릭 시 예약 취소 폼
-		$(".bookingCancelBtn").click(function() 
+		// 예약번호 ~ 예약 일 영역 클릭시 예약 상세 모달 띄우기
+		function showBookingDetail(obj)
 		{
-			$(this).val();
-			alert("5");
-			//$(location).attr("href", "bookingcancelform.wei?bookingNum=" + $(this).val() );
-		});
-		
-		// 리뷰  
-		$(".reviewBtn").on("click", function() 
-		{
-			// 리뷰 작성이랑 연결
-			//$(location).attr("href", "bookingcancelform.wei");
-		});
-		*/
+			$('#bookingModal').modal('show');
+			
+			$('.bookingDetailBookingNum').text(obj.id);
+			// Ajax 처리
+			
+		}	
 		
 	});
 
@@ -177,37 +170,6 @@
 	</div>
 </div>
 
-<!-- 
-<div class='container_roomlist' id="roomId">
-	<div class='item_roomlist'>
-		<img src='img/logo.png' class='image-room'>
-	</div>
-	<div class='item_roomlist'>
-		<span class='roomname'>  roomname </span><br>
-		 기준 인원 basicnum 명 / 최대 인원 maxnum 명<br> 
-		 가격 정보 평일 1박 기준 payment 원<br>
-		 주말 1박 기준 weekendprice 원<br>
-	</div>
-	<div class='item_roomlist'>
-		<button type='button' class='reserveBtn' id='reservation_btn' onclick="">예약</button>
-	</div>
-</div>
--->
- 	<!-- <div class="col-12">
-		<div class="col-12" style="font-size: large;">
-			<select name="status" id="status" style="font-size: small;">
-				<option value="전체" selected="selected">-전체-</option>
-				<option value="예약 확정">예약 확정</option>
-				<option value="이용 완료">이용 완료</option>
-				<option value="예약 취소">예약 취소</option>
-			</select>
-		</div>
-	</div>
-
-	<div id="listDiv">
-		 
-	</div>
-	 -->
 
 	<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
