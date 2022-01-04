@@ -69,7 +69,7 @@ public class BookingDAO implements IBookingDAO
 		ArrayList<BookingDTO> result = new ArrayList<BookingDTO>();
 		
 		Connection conn = dataSource.getConnection();
-		
+				
 		String sql =  "SELECT BOOKINGNUM, ROOMID, ROOMNAME, CAMPGROUNDID, CAMPGROUNDNAME" 
 					+ ", MEMBERNUM, NAME, PHONE" 
 					+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE" 

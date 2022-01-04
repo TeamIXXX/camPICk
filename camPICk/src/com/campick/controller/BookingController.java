@@ -32,7 +32,6 @@ public class BookingController implements Controller
 		ModelAndView mav = new ModelAndView();
 		
 		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
 		
 		int bookCheck = 0; 
 		
