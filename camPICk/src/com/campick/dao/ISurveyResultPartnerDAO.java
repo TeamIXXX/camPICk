@@ -5,10 +5,8 @@
 
 package com.campick.dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campick.dto.OptionSurvResultDTO;
