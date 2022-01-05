@@ -28,7 +28,7 @@
 				<a href="loginform.wei" class="topmenu">로그인</a>
 			</li>
 			<li class="topmenu">
-				<a href="" class="topmenu">회원가입</a>
+				<a href="signupForm.wei" class="topmenu">회원가입</a>
 			</li>
 		</ul>
 	<%} 

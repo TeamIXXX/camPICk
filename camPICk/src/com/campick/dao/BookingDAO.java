@@ -69,7 +69,7 @@ public class BookingDAO implements IBookingDAO
 		ArrayList<BookingDTO> result = new ArrayList<BookingDTO>();
 		
 		Connection conn = dataSource.getConnection();
-		
+				
 		String sql =  "SELECT BOOKINGNUM, ROOMID, ROOMNAME, CAMPGROUNDID, CAMPGROUNDNAME" 
 					+ ", MEMBERNUM, NAME, PHONE" 
 					+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE" 
@@ -381,8 +381,8 @@ public class BookingDAO implements IBookingDAO
 				   + ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE"
 				   + ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE"
 				   + ", VISITNUM, PAYMENTAMOUNT"
-				   + ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE "
-				   + " FROM BOOKINGVIEW"
+				   + ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE"
+				   + " FROM BOOKINGVIEW_TOTAL"
 				   + " WHERE BOOKINGNUM = ?";
 		
 		PreparedStatement pstmt = null;

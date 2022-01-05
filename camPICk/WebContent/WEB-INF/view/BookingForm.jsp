@@ -20,8 +20,11 @@
 
 	$(function()
 	{
-		var basicNum = ${roomDTO.basicNum} 
-		var maxNum = ${roomDTO.maxNum}
+		var basicNum = ${roomDTO.basicNum}; 
+		var maxNum = ${roomDTO.maxNum};
+		var paymentAmount = ${bookingDTO.paymentAmount}; 
+		
+		$("#paymentAmount").html( paymentAmount.toLocaleString('ko-KR') + "원 (1인 기준)");
 		
 		$("#err").css("display", "none");
 
@@ -44,16 +47,6 @@
 				return;
 			}
 			
-			
-			// 2~ 5
-			if (parseInt($("#visitNum").val()) > maxNum
-					|| parseInt($("#visitNum").val()) < basicNum)
-			{
-				$("#err").html("기준인원이상 최대인원이하 예약이 가능합니다");
-				$("#err").css("display", "inline");
-				$("#visitNum").focus();
-				return;
-			}
 			
 			//전화번호 형식
 			if (!isValidPhone($("#phone").val()))
@@ -82,31 +75,46 @@
 			}
 
 			$("#bookingForm").submit();
-
+			
 		});
+ 
+		// 인원수 변경 시 결제 금액 변경
+		$("#visitNum").on("input", function() 
+		{
+			$("#err").html("");
+			
+			if (parseInt($("#visitNum").val()) > maxNum
+					|| parseInt($("#visitNum").val()) < basicNum 
+					|| $("#visitNum").val()=="" )
+			{
+				$("#err").html("기준인원이상 최대인원이하 예약이 가능합니다");
+				$("#err").css("display", "inline");
+				$("#visitNum").focus();
+				
+				$("#paymentAmount").html( paymentAmount.toLocaleString('ko-KR') + "원 (1인 기준)");
+				return;
+			}
+			
+			$("#paymentAmount").html( (paymentAmount * parseInt($("#visitNum").val())).toLocaleString('ko-KR') + "원");
+			
+		});
+
 	});
+	
+	
+	
 </script>
 <style type="text/css">
-	.form-group > .control-label
-	{
-		padding-left : 30px;	 
-	}
+	.form-group > .control-label { padding-left : 30px; }
 	
-	.star
-	{
-		padding : 0 5px;
-		color : red;
-	}
+	.star { padding : 0 5px; color : red; }
 	
-	.center
-	{
-		text-align: center;
-	}
+	.center { text-align: center; }
 	
-	#refund
-   {
-      width: 80%;
-   }
+	#refund { width: 80%; }
+   
+	#paymentAmount { font-weight: bold;}
+   
 </style>
 
 </head>
@@ -158,7 +166,6 @@
 			<div class="col-xs-4">
 				<input type="number" class="form-control" id="visitNum" name="visitNum"  min="${roomDTO.basicNum}" max="${roomDTO.maxNum}"
 					placeholder="${bookingDTO.roomName }방의 기준 인원 : ${roomDTO.basicNum}  /  최대 인원 : ${roomDTO.maxNum}">
-					
 			</div>
 		</div>
 		
@@ -166,7 +173,8 @@
 			<label class="col-xs-4 control-label">금액</label>
 			<div class="col-xs-4">
 				<!-- 여기 AJAX로 처리 -->
-				<p class="form-control-static">${bookingDTO.paymentAmount }</p>
+				<p class="form-control-static" id=paymentAmount></p>
+				<!-- ${bookingDTO.paymentAmount } -->
 			</div>
 		</div>
 

@@ -35,5 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE PARTNERNUM =#{partnerNum}
 	</select>
 	
+	<select id="partnerCampgroundGet" resultType="java.lang.String">
+		SELECT PARTNERNUM
+		FROM CAMPGROUND
+	</select>
+	
 </mapper>
 

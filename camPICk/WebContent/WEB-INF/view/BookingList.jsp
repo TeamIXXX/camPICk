@@ -48,7 +48,7 @@
 		<img src="<%=cp%>/img/logo_title.png">
 	</div>
  
-	<div class="mainItem">
+	<div class="mainItem" style="z-index: 1;">
 		<jsp:include page="CamperSitemap.jsp"></jsp:include>		
 	</div>
  

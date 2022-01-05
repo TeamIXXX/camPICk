@@ -10,6 +10,8 @@ public class PartnerDTO
 	private String partnerId, partnerNum, partnerPw, partnerName, partnerPhone;
 	private String businesslicense, email, signUpDat;
 	private String fileRoute, fileName, fileUploadDate;
+	private String approvalStatusName;
+	private int approvalStatusNum;
 	
 	// getter / setter 
 	public String getPartnerId()
@@ -100,5 +102,24 @@ public class PartnerDTO
 	{
 		this.fileUploadDate = fileUploadDate;
 	}
+	public String getApprovalStatusName()
+	{
+		return approvalStatusName;
+	}
+	public void setApprovalStatusName(String approvalStatusName)
+	{
+		this.approvalStatusName = approvalStatusName;
+	}
+	public int getApprovalStatusNum()
+	{
+		return approvalStatusNum;
+	}
+	public void setApprovalStatusNum(int approvalStatusNum)
+	{
+		this.approvalStatusNum = approvalStatusNum;
+	}
+	
+	
+	
 	
 }

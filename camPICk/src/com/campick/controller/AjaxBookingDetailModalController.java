@@ -1,15 +1,12 @@
 /*==============================
-	BookingController.java
+	SampleController.java
 	- 사용자 정의 컨트롤러
 ===============================*/
 
 package com.campick.controller;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -17,7 +14,7 @@ import org.springframework.web.servlet.mvc.Controller;
 import com.campick.dao.IBookingDAO;
 import com.campick.dto.BookingDTO;
 
-public class BookingController implements Controller
+public class AjaxBookingDetailModalController implements Controller
 {
 	private IBookingDAO bookingDao;
 	
@@ -25,39 +22,26 @@ public class BookingController implements Controller
 	{
 		this.bookingDao = bookingDao;
 	}
-
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		ModelAndView mav = new ModelAndView();
-		
-		HttpSession session = request.getSession();
-		
-		int bookCheck = 0; 
-		
+		BookingDTO bookingDTO = new BookingDTO();
 		try
 		{
+			String bookingNum = request.getParameter("bookingNum");
 			
-			BookingDTO bookingDTO = (BookingDTO) session.getAttribute("bookingDTO");
-			
-			if ( bookingDTO == null)	// BookingModal 이외의 경로로 접근 시 
-			{
-				mav.setViewName("redirect:limit.wei");
-				return mav;			
-			}
-			
-			bookCheck = bookingDao.addBooking(bookingDTO);
-			
-			if(bookCheck > 0)
-			{
-				mav.setViewName("redirect:payment.wei");
-			}
+			bookingDTO = bookingDao.searchBookingNum(bookingNum);
+	
+			mav.addObject("bookingDTO", bookingDTO);
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}
 		
+		mav.setViewName("/WEB-INF/view/AjaxBookingDetailModal.jsp");
 		return mav;
 	}
 	

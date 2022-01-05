@@ -22,7 +22,6 @@ public class BookingModalController implements Controller
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		ModelAndView mav = new ModelAndView();
-		// PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		
 		try
