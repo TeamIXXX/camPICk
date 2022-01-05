@@ -40,42 +40,35 @@
 		// 아이디 중복 확인
 		$("#duplBtn").click(function()
 		{
-			var params = "userId=" + $.trim($("#camperId").val());
+			var param = "id=" + $.trim($("#camperId").val());
 			
 			$.ajax({
-				type: "POST"
-				, url: "AjaxSignCamper.jsp"
-				, data: params
+				type: "GET"
+				, url: "ajaxSignupId.wei"
+				, data: param
+				, dataType: "text"
 				, success: function(args)
 				{
-					$("#result").html(args);
-					
-					$("#camperName").val("");
+					if (args==0)
+					{
+						$("#result").css("color", "#34aadc");
+						$("#result").html("사용 가능한 아이디입니다.");
+					}
+					else if (args==1)
+					{
+						$("#result").css("color", "red");
+						$("#result").html("이미 사용 중인 아이디입니다.");
+					}
+
 				}
 				, beforeSend: showRequest
 				, error: function(e)
 				{
 					alert(e.responseText);
 				}
-			})
-			
-			//$(document).ajaxStart(기능, 동작, 행위).ajaxComplete(기능, 동작, 행위);
-			$(document).ajaxStart(function()
-			{
-				// AJAX 시작 시...
-				$("#loading").show();
-				$("#result").hide();
-				
-			}).ajaxComplete(function()
-			{
-				// AJAX 종료 시...
-				$("#loading").hide();
-				$("#result").show();
-				
 			});
-			
+						
 		});
-		
 		
 		
 		// 비밀번호 확인
@@ -102,20 +95,28 @@
 			
 		});
 		
+
+		// 휴대폰 번호 대쉬(-) 자동삽입
+		$("#camperPhone").keyup(function()
+		{
+			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+		});
+		
+		
 		// 이메일 선택
-		$("#selectEmail").change(function()
+		$("#selectEmailC").change(function()
 		{
 			// 직접입력일 경우
 			if($(this).val() == "1")
 			{
-				$("#email2").val("");
-				$("#email2").attr("disabled", false);	//활성화
+				$("#emailC2").val("");
+				$("#emailC2").attr("disabled", false);	//활성화
 			}
 			// 셀렉트박스 선택일 경우
 			else
 			{
-				$("#email2").val($("#selectEmail").val());
-				$("#email2").attr("disabled", true);	// 비활성화
+				$("#emailC2").val($("#selectEmailC").val());
+				$("#emailC2").attr("disabled", true);	// 비활성화
 			}
 		});
 		
@@ -138,6 +139,7 @@
 		
 		return flag;
 	}
+
 
 </script>
 
@@ -203,8 +205,8 @@
 		</div>
 		<div class="itemC">이메일<span style="font-size: small;">[선택]</span></div>
 		<div class="itemC">
-			<input type="text" name="email1" id="email1"> @ <input type="text" name="email2" id="email2">
-			<select name="selectEmail" id="selectEmail">
+			<input type="text" name="emailC1" id="emailC1"> @ <input type="text" name="emailC2" id="emailC2">
+			<select name="selectEmailC" id="selectEmailC">
 				<option value="1">직접입력</option>
 				<option value="naver.com">naver.com</option>
 				<option value="gmail.com">gmail.com</option>
