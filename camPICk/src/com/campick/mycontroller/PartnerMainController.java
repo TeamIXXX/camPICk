@@ -52,12 +52,20 @@ public class PartnerMainController
 		return "/WEB-INF/view/PartnerMain.jsp";
 	}
 	
-	// 메인에서 『캠핑장 관리』 메뉴 선택시 사이트맵 포함된 캠핑장관리 템플릿으로 이동
+	
+	// 메인에서 『캠핑장 관리』 메뉴 선택 시 캠핑장 유무에 따라 이동
+	// → 있으면... 템플릿있는 상세 페이지
+	// → 없으면... 등록 페이지
 	@RequestMapping(value = "mycampgroundtemplate.wei", method = RequestMethod.GET)
 	public String toMyCampground(HttpServletRequest request, ModelMap model)
 	{
 		// 세션 처리 추가
 		HttpSession session = request.getSession();
+		String numStr = (String)session.getAttribute("num");
+		
+		IPartnerCampgroundDAO partnerDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
+		
+		ArrayList<String> numList = partnerDao.partnerCampgroundGet();
 		
 		if (session.getAttribute("num")==null)
 		{
@@ -68,7 +76,15 @@ public class PartnerMainController
 			return "redirect:campick.wei";
 		}
 		
-		return "/WEB-INF/view/PartnerMainTemplateCampground.jsp";
+		for(String partnerNum:numList)
+		{
+			if(numStr.equals(partnerNum))
+			{
+				return "/WEB-INF/view/PartnerMainTemplateCampground.jsp";
+			}
+		}
+		
+		return "/WEB-INF/view/MyCampgroundInfoInsert.jsp"; 
 	}
 	
 	// 캠핑장관리 템플릿의 메인영역에 include 되는 페이지

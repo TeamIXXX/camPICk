@@ -212,8 +212,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean name="/bookingcancel.wei" class="com.campick.controller.BookingCancelController">
 	   <property name="bookingDao" ref="bookingDAO"></property>   
 	</bean>
-
-
+	
 
 </beans>
 
