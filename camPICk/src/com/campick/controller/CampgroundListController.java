@@ -50,6 +50,10 @@ public class CampgroundListController implements Controller
 		
 		ArrayList<RoomDTO> roomType = new ArrayList<RoomDTO>();
 		
+		String naviSearch = null;		//  네비게이션 바 에서 검색했을 때 입력받을 키워드 변수
+		naviSearch = request.getParameter("naviSearch");
+		
+		
 		try
 		{
 			campgroundSeason = dao.campgroundThemeSeason();
@@ -65,8 +69,15 @@ public class CampgroundListController implements Controller
 			mav.addObject("campgroundFun", campgroundFun);
 			mav.addObject("campgroundConvenience", campgroundConvenience);
 			mav.addObject("roomType", roomType);
+			
+			if(naviSearch != null)		// 네비게이션바를 통해 검색했을 경우
+				mav.addObject("naviSearch", naviSearch);
+			
 			mav.setViewName("/WEB-INF/view/MainHomepage.jsp");
-		} catch (Exception e)
+			
+		}
+		
+		catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}

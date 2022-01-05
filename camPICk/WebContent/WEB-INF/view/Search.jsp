@@ -4,6 +4,8 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 	
+	// 네비게이션바 에서 검색어 받기
+	String naviSearch = request.getParameter("naviSearch");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,8 +29,22 @@
 	//jquery 시작
 	$(function()
 	{
-		// 페이지 로딩되면 리스트(ajax) 출력
-		ajaxCampgroundList();
+		
+		var naviSearch = "${naviSearch}";		
+		
+		if(naviSearch == null || typeof naviSearch == "undefined" || naviSearch == "" )
+		{
+			// 페이지 로딩되면 리스트(ajax) 출력
+			ajaxCampgroundList();
+		}
+		else
+		{
+			//var naviSearch = "${naviSearch}";
+			ajaxCampgroundList(naviSearch, "''", "''", "''", "SIGNUPDATE", "DESC");
+			$('input[name=searchKeyword]').attr('value',naviSearch);
+		}
+		
+		
 		
 		
 		$("#sort").change(function()
@@ -198,7 +214,6 @@
 				var urlStr = "campgroundsearchmybatischeck.wei"; 
 			}
 		
-			
 			$.ajax(
 			{
 				type : "POST"
@@ -211,7 +226,7 @@
 					, "theme" : theme
 					, "sortkey" : sortkey
 					, "sortvalue" : sortvalue
-					, "pagenum" : pagenum
+					//, "pagenum" : pagenum
 				}
 				, dataType : "json"	
 				, success : function(jsonObj)	
@@ -303,7 +318,7 @@
 		
 		<!-- 키워드 검색 -->
 		<div id="mainSearch">
-			<input type="text" class="mainSearch" placeholder="캠핑장을 검색하세요">
+			<input type="text" class="mainSearch" name="searchKeyword" placeholder="캠핑장을 검색하세요">
 			<button type="submit" class="btnSearch"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 </svg></button>

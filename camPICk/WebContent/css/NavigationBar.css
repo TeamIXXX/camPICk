@@ -78,7 +78,8 @@ a.Menu:hover, .subMenu:hover, span.Menu:hover
 		border-style: none;
 		align: center;
 		width: 80%;
-		padding-left:15px; 
+		/* padding-left:15px; */
+		text-align: center;
 	
 }
 
@@ -89,4 +90,29 @@ a:hover
 {
 	cursor: pointer;
 	text-decoration: none;
+} 
+
+
+.SearchBtn
+{ 	
+
+    border: none;
+    outline:none;
+    width: 28px;
+    height: 28px;
+    vertical-align:middle;
+    background-color:transparent;
+	border-style: none;
+	position: relative;
+}
+
+.SearchBtn > svg
+{
+	vertical-align:middle;
+	width: 20px; 
+	height: 20px;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	
 }

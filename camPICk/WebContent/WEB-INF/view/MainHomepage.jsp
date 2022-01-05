@@ -3,6 +3,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String naviSearch = request.getParameter("naviSearch");
 %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +45,9 @@
 		<c:import url="MainBanner.jsp"></c:import>
 	</div>
 	<div class="mainItemNN">
-		<jsp:include page="Search.jsp"/>
+		<c:import url="Search.jsp">
+			<c:param name="naviSearch" value="${naviSearch }"></c:param>
+		</c:import>
 	</div>
 </div>
 

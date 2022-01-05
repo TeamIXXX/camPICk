@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -30,13 +31,10 @@ public class CampgroundSearchController
 		String sortkey = request.getParameter("sortkey");
 		String sortvalue = request.getParameter("sortvalue");
 		
-		//System.out.println(sortkey);
-		//System.out.println(sortvalue);
 		try
 		{
 			ICampgroundSearchDAO dao = sqlSession.getMapper(ICampgroundSearchDAO.class);
 			
-			//System.out.println(keyword);
 			model.addAttribute("campgroundList", dao.campgroundSearchList(keyword, sortkey, sortvalue));
 			model.addAttribute("listCount", dao.campgroundSearchListCount(keyword, sortkey, sortvalue));
 			
@@ -65,14 +63,6 @@ public class CampgroundSearchController
 		String option = request.getParameter("option");
 		String theme = request.getParameter("theme");
 		
-		/*
-		System.out.println(keyword);
-		System.out.println(type);
-		System.out.println(option);
-		System.out.println(theme);
-		System.out.println(sortkey);
-		System.out.println(sortvalue);
-		*/
 		try
 		{
 			
@@ -97,5 +87,4 @@ public class CampgroundSearchController
 		
 		return result;
 	}
-	
 }
