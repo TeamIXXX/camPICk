@@ -13,188 +13,75 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/util.js"></script>
 
+<%-- <script type="text/javascript" src="<%=cp%>/js/sign-camper.js"></script> --%>
+
 <script type="text/javascript">
-
 	$(function()
-	{
-		// 라디오버튼에 따른 회원가입 폼
-		$("#pDiv").hide();
-		$("input[name=campa]").on("click", function()
 		{
-			var radioV = $("input[name=campa]:checked").val();
-			
-			if (radioV == "camper")
+			// 라디오버튼에 따른 회원가입 폼
+			$("#pDiv").hide();
+			$("input[name=campa]").on("click", function()
 			{
-				$("#cDiv").css("display", "block");
-				$("#pDiv").css("display", "none");
-			}
-			else if (radioV == "partner")
-			{
-				$("#cDiv").css("display", "none");
-				$("#pDiv").css("display", "block");
-			}
-		});
-		
-		
-		// 진령쓰 여기부터 안건드림
-		
-		// 아이디 중복 확인
-		// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
-		$("#camperId").keydown(function()
-		{
-			$("input[id=checked_id]").val("n");
-		});
-		
-		$("#duplBtn").click(function()
-		{
-			// 영문 + 숫자 8~14자 이내 검사
-			var regId = /^[A-Za-z0-9]{8,14}$/;
-
-			if(!regId.test($("#camperId").val()))
-			{
-				alert("아이디는 영문, 숫자 8~14자 이내로 사용 가능합니다.");
-
-				$("#camperId").val("");
-				$("#camperId").focus();
-
-				return;
-			}
-			
-			var param = "id=" + $.trim($("#camperId").val());
-			
-			$.ajax({
-				type: "GET"
-				, url: "ajaxSignupId.wei"
-				, data: param
-				, dataType: "text"
-				, success: function(args)
+				var radioV = $("input[name=campa]:checked").val();
+				
+				if (radioV == "camper")
 				{
-					if (args==0)
-					{
-						$("#result").css("color", "#34aadc");
-						$("#result").html("사용 가능한 아이디입니다.");
-						
-						$("input[id=checked_id]").val("y");
-						
-					}
-					else if (args==1)
-					{
-						$("#result").css("color", "red");
-						$("#result").html("이미 사용 중인 아이디입니다.");
-					}
-
+					$("#cDiv").css("display", "block");
+					$("#pDiv").css("display", "none");
 				}
-				, beforeSend: showRequest
-				, error: function(e)
+				else if (radioV == "partner")
 				{
-					alert(e.responseText);
+					$("#cDiv").css("display", "none");
+					$("#pDiv").css("display", "block");
 				}
 			});
 			
-		});
-		
-		
-		// 비밀번호 영문 + 숫자 검사
-		// 비밀번호 확인 입력 후 원래 비밀번호를 수정할 수 있으므로 다시 확인하게 하기 위함
-		$("#camperPw").keydown(function()
-		{
-			$("input[id=checked_pw]").val("n");
-		});
-		
-		$("#camperPw").keyup(function()
-		{
-			var regId = /^[A-Za-z0-9+]*$/;
 			
-			if(!regId.test($("#camperPw").val()))
+			// 아이디 중복 확인
+			// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
+			$("#camperId").keydown(function()
 			{
-				$("#len").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
-				$("#camperPw").val("");
-				return;
-			}
-			else if ($("#camperPw").val().length < 5)
-			{
-				$("#len").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
-			}
-			else
-			{
-				$("#len").html("");
-			}
+				$("input[id=checked_id]").val("n");
+			});
 			
-			chkPw();
-			
-		});
-		
+			$("#duplBtn").click(function()
+			{
+				// 영문 + 숫자 8~14자 이내 검사
+				var regId = /^[A-Za-z0-9]{8,14}$/;
 
-		// 비밀번호 확인
-		$("#pwd2").keyup(function()
-		{
-			chkPw();			
-		});
-		
-		
-		// 이름 한글 검사
-		$("#camperName").keyup(function()
-		{
-			var regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
-			if(!regExp.test($("#camperName").val()))
-			{
-				if ($("#camperName").val().length > 0)
+				if(!regId.test($("#camperId").val()))
 				{
-					alert("이름은 한글로만 입력해 주십시오.");
-					$("#camperName").val("");
-					$("#camperName").focus();
-				}
-			}
-		});
-		
+					alert("아이디는 영문, 숫자 8~14자 이내로 사용 가능합니다.");
 
-		// 휴대폰 번호 대쉬(-) 자동삽입
-		$("#camperPhone").keyup(function()
-		{
-			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
-		});
-		
-		
-		// 이메일 선택
-		$("#selectEmailC").change(function()
-		{
-			// 직접입력일 경우
-			if($(this).val() == "1")
-			{
-				$("#emailC2").val("");
-				$("#emailC2").attr("disabled", false);	//활성화
-			}
-			// 셀렉트박스 선택일 경우
-			else
-			{
-				$("#emailC2").val($("#selectEmailC").val());
-				$("#emailC2").attr("disabled", true);	// 비활성화
-			}
-		});
-		
-		
-		// 랜덤 인증번호 발생
-		$("#chkPhoneC").hide();
-		var rCode = randomCode(4);
-		$("#cerNumC").click(function()
-		{
-			if ($("#camperPhone").val().length != 13)
-			{
-				$("#chkPhoneC").show();
-			}
-			else if ($("#camperPhone").val().length == 13)
-			{
-				/* 
-				var param = "rCode=" + rCode;
+					$("#camperId").val("");
+					$("#camperId").focus();
+
+					return;
+				}
+				
+				var param = "id=" + $.trim($("#camperId").val());
 				
 				$.ajax({
 					type: "GET"
-					, url: ".wei"
+					, url: "ajaxSignupId.wei"
 					, data: param
 					, dataType: "text"
 					, success: function(args)
 					{
-						$("#reCerNumC").val(args);
+						if (args==0)
+						{
+							$("#result").css("color", "#34aadc");
+							$("#result").html("사용 가능한 아이디입니다.");
+							
+							$("input[id=checked_id]").val("y");
+							
+						}
+						else if (args==1)
+						{
+							$("#result").css("color", "red");
+							$("#result").html("이미 사용 중인 아이디입니다.");
+						}
+
 					}
 					, beforeSend: showRequest
 					, error: function(e)
@@ -202,150 +89,257 @@
 						alert(e.responseText);
 					}
 				});
-				꼭 ajax로 해야하는건지 모르겠어서 ajax 보류*/
+				
+			});
+			
+			
+			// 비밀번호 영문 + 숫자 검사
+			$("#camperPw").keyup(function()
+			{
+				var regId = /^[A-Za-z0-9+]*$/;
+				
+				if(!regId.test($("#camperPw").val()))
+				{
+					$("#len").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
+					$("#camperPw").val("");
+					return;
+				}
+				else if ($("#camperPw").val().length < 5)
+				{
+					$("#len").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
+				}
+				else
+				{
+					$("#len").html("");
+				}
+				
+				chkPw();
+				
+			});
+			
 
-				$("#chkPhoneC").hide();
-				
-				$("#reCerNumC").val(rCode);
-				
-				$("#checkCerNumC").attr("disabled", false);
-								
-			}
-		});
-		
-		
-		// 랜덤 인증번호 확인
-		$("#checkCerNumC").click(function()
-		{
-			if ($("#reCerNumC").val() != rCode)
+			// 비밀번호 확인
+			$("#pwd2").keyup(function()
 			{
-				alert("인증번호를 확인해 주십시오.");
-			}
-			else if ($("#reCerNumC").val() == rCode)
+				chkPw();			
+			});
+			
+			
+			// 이름 한글 검사
+			$("#camperName").keyup(function()
 			{
-				alert("인증번호가 확인 되었습니다.");
-				$("#checkCerNumC").attr("disabled", true);
-				$("#cerNumC").attr("disabled", true);
-				$("#camperPhone").attr("readonly", true);
-				$("#reCerNumC").attr("readonly", true);
-			}
+				var regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+				if(!regExp.test($("#camperName").val()))
+				{
+					if ($("#camperName").val().length > 0)
+					{
+						alert("이름은 한글로만 입력해 주십시오.");
+						$("#camperName").val("");
+						$("#camperName").focus();
+					}
+				}
+			});
+			
+
+			// 휴대폰 번호 대쉬(-) 자동삽입
+			$("#camperPhone").keyup(function()
+			{
+				$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+			});
+			
+			
+			// 이메일 선택
+			$("#selectEmailC").change(function()
+			{
+				// 직접입력일 경우
+				if($(this).val() == "1")
+				{
+					$("#emailC2").val("");
+					$("#emailC2").attr("disabled", false);	//활성화
+				}
+				// 셀렉트박스 선택일 경우
+				else
+				{
+					$("#emailC2").val($("#selectEmailC").val());
+					$("#emailC2").attr("disabled", true);	// 비활성화
+				}
+			});
+			
+			
+			// 랜덤 인증번호 발생
+			$("#chkPhoneC").hide();
+			var rCode = randomCode(4);
+			$("#cerNumC").click(function()
+			{
+				if ($("#camperPhone").val().length != 13)
+				{
+					$("#chkPhoneC").show();
+				}
+				else if ($("#camperPhone").val().length == 13)
+				{
+					$("#chkPhoneC").hide();
+					$("#reCerNumC").val(rCode);
+					$("#checkCerNumC").attr("disabled", false);
+				}
+			});
+			
+			
+			// 랜덤 인증번호 확인
+			$("#checkCerNumC").click(function()
+			{
+				if ($("#reCerNumC").val() != rCode)
+				{
+					alert("인증번호를 확인해 주십시오.");
+				}
+				else if ($("#reCerNumC").val() == rCode)
+				{
+					alert("인증번호가 확인 되었습니다.");
+					$("#checkCerNumC").attr("disabled", true);
+					$("#cerNumC").attr("disabled", true);
+					$("#camperPhone").attr("readonly", true);
+					$("#reCerNumC").attr("readonly", true);
+				}
+				
+			});
+			
+			
+			// 모든 약관 동의 체크박스
+			$("#allChk").click(function()
+			{
+				if($("#allChk").is(":checked"))
+					$("input[name=chk]").prop("checked", true);
+				else
+					$("input[name=chk]").prop("checked", false);
+			});
+
+			$("input[name=chk]").click(function()
+			{
+				var total = $("input[name=chk]").length;
+				var checked = $("input[name=chk]:checked").length;
+		
+				if(total != checked)
+					$("#allChk").prop("checked", false);
+				else
+					$("#allChk").prop("checked", true); 
+			});
+			
+			
+			// 필수입력 항목 확인
+			var infoCheck = function()
+			{
+				if($("#camperId").val() == "")
+				{
+					alert("아이디를 입력해 주십시오.");
+					$("#camperId").focus();
+					return;
+				}
+				else if($("#checked_id").val() == "n" || $("#checked_id").val() == "")
+				{
+					alert("아이디 중복검사를 해 주십시오.");
+					$("#camperId").focus();
+					return;
+				}
+				else if($("#camperPw").val() == "" || $("#camperPw").val().length < 5)
+				{
+					alert("비밀번호를 확인해 주십시오.");
+					$("#camperPw").focus();
+					return;
+				}
+				else if($("#pwd2").val() == "")
+				{
+					alert("비밀번호 확인을 입력해 주십시오.");
+					$("#pwd2").focus();
+					return;
+				}
+				else if($("#camperPw").val() != $("#pwd2").val())
+				{
+					alert("비밀번호와 비밀번호 확인이 다릅니다.");
+					$("#camperPw").focus();
+				}
+				else if($("#camperName").val() == "")
+				{
+					alert("이름을 입력해 주십시오.");
+					$("#camperName").focus();
+					return;
+				}
+				else if( ($("#cerNumC").is(":enabled")) )
+				{
+					alert("인증번호를 확인해 주십시오.");
+					return;
+				}
+				else if( !($("#allChk").is(":checked")) )
+				{
+					alert("모든 필수 약관에 동의하지 않으면 회원가입이 불가합니다.");
+					return;
+				}
+				else
+				{
+					form.action = "http://www.naver.com";
+					form.mothod = "GET";
+					form.submit();
+					alert("회원가입 완료");
+				}
+			};
+			 
+
+			$("#signC").click(function()
+			{
+				infoCheck();
+				
+				
+			});
 			
 		});
 		
 		
-		// 필수입력 항목 확인
-		var infoCheck = function()
+		
+		// 아이디 중복 확인 ajax beforeSend
+		function showRequest()
 		{
-			if($("#camperId").val() == "")
+			var flag = true;
+			
+			if(!$("#camperId").val())
 			{
-				alert("아이디를 입력해 주십시오.");
+				alert("아이디를 입력하세요.");
 				$("#camperId").focus();
-				return;
+				flag=false;
 			}
-			else if($("#checked_id").val() == "n" || $("#checked_id").val() == "")
-			{
-				alert("아이디 중복검사를 해 주십시오.");
-				$("#camperId").focus();
-				return;
-			}
-			else if($("#camperPw").val() == "" || $("#camperPw").val().length < 5)
-			{
-				alert("비밀번호를 확인해 주십시오.");
-				$("#camperPw").focus();
-				return;
-			}
-			else if($("#pwd2").val() == "")
-			{
-				alert("비밀번호 확인을 입력해 주십시오.");
-				$("#pwd2").focus();
-				return;
-			}
-			else if($("#camperPw").val() != $("#pwd2").val())
-			{
-				alert("비밀번호와 비밀번호 확인이 다릅니다.");
-				$("#camperPw").focus();
-			}
-			else if($("#camperName").val() == "")
-			{
-				alert("이름을 입력해 주십시오.");
-				$("#camperName").focus();
-				return;
-			}
-			else if( ($("#cerNumC").is(":enabled")) )
-			{
-				alert("인증번호를 확인해 주십시오.");
-				return;
-			}
-			else if( !($("#fre1").is(":checked")) )
-			{
-				alert("이용약관에 체크해 주십시오.");
-				return;
-			}
-			else
-			{
-				alert("회원가입 완료");
-			}
-		};
-		 
-
-		$("#signC").click(function()
-		{
-			infoCheck();
-		});
-		
-	});
-	
-	
-	
-	// 아이디 중복 확인 ajax beforeSend
-	function showRequest()
-	{
-		var flag = true;
-		
-		if(!$("#camperId").val())
-		{
-			alert("아이디를 입력하세요.");
-			$("#camperId").focus();
-			flag=false;
+			
+			return flag;
 		}
 		
-		return flag;
-	}
-	
-	// 비밀번호 값과 비밀번호 확인 값 비교
-	function chkPw()
-	{
-		var pwd1 = $("#camperPw").val();
-		var pwd2 = $("#pwd2").val();
-
-		if (pwd1 != "" && pwd2 != "")
+		// 비밀번호 값과 비밀번호 확인 값 비교
+		function chkPw()
 		{
-			if (pwd1 != pwd2)
+			var pwd1 = $("#camperPw").val();
+			var pwd2 = $("#pwd2").val();
+
+			if (pwd1 != "" && pwd2 != "")
 			{
-				$("#fault").html("비밀번호가 일치하지 않습니다.");
+				if (pwd1 != pwd2)
+				{
+					$("#fault").html("비밀번호가 일치하지 않습니다.");
+				}
+				else
+				{
+					$("#fault").html("");
+				}
 			}
-			else
-			{
-				$("#fault").html("");
-			}
+			
 		}
 		
-	}
-	
-	
-	// 랜덤 자리수 발생
-	function randomCode(n)
-	{
-		var str = "";
-		for (var i = 0; i <n; i++)
-		{
-			str += Math.floor(Math.random()*10);
-		}
 		
-		return str;
-	}
-	
-
+		// 랜덤 자리수 발생
+		function randomCode(n)
+		{
+			var str = "";
+			for (var i = 0; i <n; i++)
+			{
+				str += Math.floor(Math.random()*10);
+			}
+			
+			return str;
+		}
 </script>
 
 </head>
@@ -374,7 +368,7 @@
 
 <!-- 캠퍼 회원가입 -->
 <div id="cDiv">
-	<form class="containerC" id="cFrm">
+	<form class="containerC" id="cFrm" onsubmit="return false">
 		
 		<div class="itemC">아이디<span class="nec">(*)</span></div>
 		<div class="itemC">
@@ -424,11 +418,11 @@
 		
 		<div class="itemC">이용약관 및 개인정보 동의 <span class="nec">(*)</span></div>
 		<div class="itemC">
-		<!-- 
+		
 			<div class="iC">
-				<label><input type="checkbox"> 모든 필수 약관에 동의합니다.</label>
+				<label><input type="checkbox" id="allChk"> 모든 필수 약관에 동의합니다.</label>
 			</div>
-		-->
+		
 			<div class="iC">
 			<textarea readonly="readonly" class="fregister" >
 제1조(목적) 이 약관은 업체 회사(전자상거래 사업자)가 운영하는 업체 사이버 캠픽(이하 “캠픽”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 캠픽과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.
@@ -668,11 +662,11 @@
  
   ② “캠픽”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.
 				</textarea>
-				<br><label><input type="checkbox" id="fre1"> 이용약관에 동의합니다.<span class="nec">(필수)</span></label>
+				<br><label><input type="checkbox" name="chk" id="fre1"> 이용약관에 동의합니다.<span class="nec">(필수)</span></label>
 			</div>
-			<!-- 
+			
 			<div class="iC">
-				<textarea readonly="readonly" class="fregister" >
+				<textarea readonly="readonly" class="fregister">
 [차례]
 1. 총칙
 2. 개인정보 수집에 대한 동의
@@ -808,8 +802,8 @@
 1) 공고일자 : 2021년 01월 04일
 2) 시행일자 : 2021년 01월 04일 
 				</textarea>
-				<br><label><input type="checkbox"> 개인정보 수집 및 이용에 동의합니다.</label>
-			</div> -->
+				<br><label><input type="checkbox" name="chk" id="fre2"> 개인정보 수집 및 이용에 동의합니다.<span class="nec">(필수)</span></label>
+			</div>
 		</div>
 		
 		<div class="itemC">
@@ -820,7 +814,7 @@
 				<button type="button" class="cancel">취소</button>
 			</div>
 		</div>
-	</form>	
+	</form>
 </div>
 
 
