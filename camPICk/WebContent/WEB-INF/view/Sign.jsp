@@ -40,7 +40,7 @@
 		
 		// 아이디 중복 확인
 		// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
-		$("#camperId").keydown(function()
+		$("#camperId").keyup(function()
 		{
 			$("input[id=checked_id]").val("n");
 		});
@@ -95,11 +95,6 @@
 		
 		
 		// 비밀번호 영문 + 숫자 검사
-		// 비밀번호 확인 입력 후 원래 비밀번호를 수정할 수 있으므로 다시 확인하게 하기 위함
-		$("#camperPw").keydown(function()
-		{
-			$("input[id=checked_pw]").val("n");
-		});
 		
 		$("#camperPw").keyup(function()
 		{
@@ -828,26 +823,26 @@
 <div id="pDiv">
 	<form class="containerP" id="partnerFrm">
 			
-		<div class="itemP">아이디</div>
+		<div class="itemP">아이디<span class="nec">(*)</span></div>
 		<div class="itemP">
 			<input type="text">
 			<button type="button" class="">중복확인</button>
 			<br><span class="errMsg">아이디를 입력하세요.</span>
 		</div>
-		<div class="itemP">비밀번호</div>
+		<div class="itemP">비밀번호<span class="nec">(*)</span></div>
 		<div class="itemP">
 			<input type="text">
 		</div>
-		<div class="itemP">비밀번호 확인</div>
+		<div class="itemP">비밀번호 확인<span class="nec">(*)</span></div>
 		<div class="itemP">
 			<input type="text">
 			<br><span class="errMsg">입력하신 비밀번호와 일치하지 않습니다.</span>
 		</div>
-		<div class="itemP">이름</div>
+		<div class="itemP">이름<span class="nec">(*)</span></div>
 		<div class="itemP">
 			<input type="text">
 		</div>
-		<div class="itemP">휴대폰번호</div>
+		<div class="itemP">휴대폰번호<span class="nec">(*)</span></div>
 		<div class="itemP">
 			<input type="text" placeholder="xxx-xxxx-xxxx">
 			<button type="button">인증번호 발송</button>
@@ -858,7 +853,7 @@
 			<button type="button">인증번호 확인</button>
 			<br><span class="errMsg">인증번호가 일치하지 않습니다.</span>
 		</div>
-		<div class="itemP">사업자번호</div>
+		<div class="itemP">사업자번호<span class="nec">(*)</span></div>
 		<div class="itemP">
 			<input type="text">
 		</div>
@@ -876,7 +871,7 @@
 				<option value="daum.net">daum.net</option>
 			</select>
 		</div>
-		<div class="itemP">이용약관 동의</div>
+		<div class="itemP">이용약관 동의<span class="nec">(*)</span></div>
 		<div class="itemP">
 			<textarea readonly="readonly" class="fregister">
 				이용약관
