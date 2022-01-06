@@ -187,7 +187,12 @@
 			// 랜덤 인증번호 확인
 			$("#checkCerNumC").click(function()
 			{
-				if ($("#reCerNumC").val() != rCode)
+				if ($("#camperPhone").val().length != 13)
+				{
+					$("#chkPhoneC").show();
+					return;
+				}
+				else if($("#reCerNumC").val() != rCode)
 				{
 					alert("인증번호를 확인해 주십시오.");
 				}
@@ -223,7 +228,7 @@
 					$("#allChk").prop("checked", true); 
 			});
 			
-			
+
 			// 필수입력 항목 확인
 			var infoCheck = function()
 			{
@@ -274,10 +279,10 @@
 				}
 				else
 				{
-					form.action = "http://www.naver.com";
-					form.mothod = "GET";
-					form.submit();
-					alert("회원가입 완료");
+					alert("완");
+					$("#cFrm").action = "http://www.naver.com";
+					$("#cFrm").mothod = "GET";
+					$("#cFrm").submit();
 				}
 			};
 			 
@@ -285,8 +290,6 @@
 			$("#signC").click(function()
 			{
 				infoCheck();
-				
-				
 			});
 			
 		});
@@ -368,7 +371,7 @@
 
 <!-- 캠퍼 회원가입 -->
 <div id="cDiv">
-	<form class="containerC" id="cFrm" onsubmit="return false">
+	<form class="containerC" id="cFrm" action="http://www.naver.com">
 		
 		<div class="itemC">아이디<span class="nec">(*)</span></div>
 		<div class="itemC">
