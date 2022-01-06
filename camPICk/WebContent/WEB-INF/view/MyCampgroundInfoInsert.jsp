@@ -123,10 +123,10 @@
     }
     
     
-    function campgroundInsert()
+	function campgroundInsert()
 	{
-        var chkArray = new Array(); // 배열 선언
- 
+		var chkArray = new Array(); // 배열 선언
+		 
         $('input:checkbox[name=comforts]:checked').each(function() 	// 체크된 체크박스의 value 값을 가지고 온다.
         { 
             chkArray.push(this.value);
@@ -154,14 +154,15 @@
         var tel = $("#tel").val();
         var extraInfo = $("#extraInfo").val();
         
-       	alert(campgroundName);
-        
-        
-        $("#campgroundForm").submit();
-
+       	//alert(typeof option);
+                
+        $("#campgroundForm").attr("action","mycampgroundinsert.wei?name="+campgroundName+"&checkin="+checkInDate+"&checkout="+checkOutDate
+        							+"&ps1="+policyStandard1+"&ps2="+policyStandard2+"&ps3="+policyStandard3+"&option="+option
+        							+"&ad1="+address1+"&ad2="+address2+"&ad3="+address3+"&tel="+tel+"&extra="+extraInfo); 
+        							
+       	//$("#campgroundForm").attr("action","mycampgroundinsert.wei");
 	}
-
-    
+			  
 </script>
 
 </head>
@@ -172,7 +173,7 @@
 </div>
 
 <div class="campgroundInsertMain">
-	<form action="mycampgroundinsert.wei" method="post" id="campgroundForm">
+	<form action="mycampgroundinsert.wei" method="post" id="campgroundForm" onsubmit="campgroundInsert()">
 		<div class="campgroundInsertItem" id="campgroundName">캠핑장명(*)</div>            
 		<div class="campgroundInsertItem" id="campgroundNameValue">	
 			<input type="text" class="textValue" required="required" id="campgroundNameInput" name="campgroundNameInput">
@@ -204,26 +205,6 @@
 				<div class="refund notice">※ 가이드라인을 벗어난 공제율은 작성이 불가합니다.</div>
 			</div>
 		</div>
-		
-		
-		<!-- <div class="campgroundInsertItem" id="roomInsert">객실추가(*)</div>
-		<div class="campgroundInsertItem" id="roomInsertValue">
-			<div class="item-room">
-				<div class="room">
-					<button type="button" id="roomInsertBtn" data-toggle="modal" data-target="#roomInsertModal">객실추가</button>
-				</div>
-				
-				여기 Ajax로 받아야될거같다용~!~!~!~!
-				<div class="room">
-					<div class="roomInsertSuccess">객실사진</div>
-					<div class="roomInsertSuccess">객실이름</div>
-					<div class="roomInsertSuccess">
-						<button type="button" class="roomInsertSuccessBtn">수정</button>
-						<button type="button" class="roomInsertSuccessBtn">삭제</button>
-					</div>
-				</div>
-			</div>
-		</div> -->
 		
 		<div class="campgroundInsertItem" id="comforts">
 			<div style="display: block;">
@@ -274,8 +255,8 @@
 		<div class="campgroundInsertItem">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기" required="required">
 			<input type="hidden" id="sample6_postcode" placeholder="우편번호"><br>
-			<input type="text" id="sample6_address" placeholder="주소" style="width: 200px;" readonly="readonly">
-			<input type="text" id="sample6_extraAddress" placeholder="참고항목" readonly="readonly"><br>
+			<input type="text" id="sample6_address" placeholder="주소" style="width: 200px;">
+			<input type="text" id="sample6_extraAddress" placeholder="참고항목" ><br>
 			<input type="text" id="sample6_detailAddress" placeholder="상세주소">
 		</div>
 			
@@ -305,66 +286,11 @@
 		
 		<div class="campgroundInsertItem">
 			<button type="reset" class="btn">초기화</button>
-			<button type=button class="btn" onclick="campgroundInsert()">등록</button>
+			<button type="submit" class="btn">등록</button>
 		</div>
 	</form>
 </div>                
 
-
-<!-- 여기서부터 모달 -->
-<div class="modal fade" id="roomInsertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h3 class="modal-title" id="myModalLabel" style="text-align: center">객실 추가</h3>
-			</div>
-		
-			<div class="modal-body">
-				<!-- 객실추가 폼 -->
-				<div class="roomInsertMain">
-					
-						<div class="roomInsertItem">유형선택</div>
-						<div class="roomInsertItem">
-							<label><input type="radio" name="roomType" value="91">오토캠핑 </label>
-      						<label><input type="radio" name="roomType" value="92">글램핑 </label>
-      						<label><input type="radio" name="roomType" value="93">카라반 </label>
-      						<label><input type="radio" name="roomType" value="94">차박 </label>
-						</div>
-						
-						<div class="roomInsertItem">객실이름</div>
-						<div class="roomInsertItem"><input type="text" id="roomNameValue"></div>
-						
-						<div class="roomInsertItem">인원 설정</div>
-						<div class="roomInsertItem">
-							기준인원 <input type="number" class="intInsert" id="basicNumValue" min="0" step="1" required="required" >명 / 
-							최대인원 <input type="number" class="intInsert" min="0" step="1" required="required" id="maxNumValue">명
-						</div>
-						<div class="roomInsertItem">사진</div>
-						<div class="roomInsertItem">
-							<input type="file">
-						</div>
-						<div class="roomInsertItem">가격정보</div>
-						<div class="roomInsertItem">
-							주중 가격  <input type="text" placeholder="일~목" class="weekPrice" id="weekDayPriceValue">원 / 
-							주말 가격  <input type="text" placeholder="금/토" class="weekPrice" id="weekEndPriceValue">원
-						</div>
-						<div class="roomInsertItem">추가설명</div>
-						<div class="roomInsertItem"><textarea rows="5" cols="50" style="resize: none" id="roomInfo"></textarea> </div>
-				</div>
-			</div>
-
-			<div class="modal-footer" style="align-content: center;">
-				<button type="button" class="btn btn-primary" id="roomInsertConfirmBtn" onclick="roomInsertInfo()">확인</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-			</div>
-			
-			
-		</div>
-	</div>
-</div>
 
 
 </body>

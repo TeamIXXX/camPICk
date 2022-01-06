@@ -82,7 +82,10 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
    <bean id="bookingDAO" class="com.campick.dao.BookingDAO">
       <property name="dataSource" ref="remoteDataSource"></property>
    </bean>
-	
+   
+   <bean id="campgroundInsertDAO" class="com.campick.dao.CampgroundInsertDAO">
+   		<property name="dataSource" ref="remoteDataSource"></property>
+   </bean>
 	
 	
 	
@@ -211,6 +214,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
 	<bean name="/bookingcancel.wei" class="com.campick.controller.BookingCancelController">
 	   <property name="bookingDao" ref="bookingDAO"></property>   
+	</bean>
+
+	
+	<!-- 파트너 캠핑장 등록 -->
+	<bean name="/mycampgroundinsert.wei" class="com.campick.controller.PartnerCampgroundController">
+		<property name="campgroundInsertDao" ref="campgroundInsertDAO" ></property>
 	</bean>
 	
 

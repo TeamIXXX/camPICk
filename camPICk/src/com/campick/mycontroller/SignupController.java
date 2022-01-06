@@ -29,7 +29,21 @@ public class SignupController
 	@RequestMapping(value = "signupForm.wei", method = RequestMethod.GET)
 	public String showSignupForm()
 	{
-		return "/WEB-INF/view/Sign.jsp";
+		return "/WEB-INF/view/SignTemplate.jsp";
+	}
+	
+	// 캠퍼 회원가입 폼
+	@RequestMapping(value = "signupCamperForm.wei", method = RequestMethod.GET)
+	public String showCamperForm()
+	{
+		return "";
+	}
+	
+	// 파트너 회원가입 폼
+	@RequestMapping(value = "signupPartnerForm.wei", method = RequestMethod.GET)
+	public String showPartnerForm()
+	{
+		return "";
 	}
 	
 	
