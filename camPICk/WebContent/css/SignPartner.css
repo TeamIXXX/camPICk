@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/* ======== 파트너 회원가입 ======== */
+.container
+{
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	grid-template-columns: repeat(23, minmax(auto-fit, 1fr));
+	margin:0 auto;
+	
+}
+
+.item
+{
+	border: 1px solid;
+	/* margin:0 auto; */
+}
+
+.item:nth-last-child(1)
+{
+	grid-column: 1 / 3;
+	display: flex;
+}
+
+.container > div
+, .item > .iC
+{
+	margin: 10px;
+}
+
+
+.sel
+{
+	border: 1px solid;
+	margin:0 auto;
+}
+
+.errMsg
+, .nec
+{
+	font-size: small;
+	color: red;
+}
+
+.itemSel
+{
+	grid-column: 1 / 3;
+	display: flex;
+	border: 1px solid;
+}
+
+.fregister
+{
+	resize: none;
+	padding: 10px;
+	width:95%;
+	height:150px;
+	border: 1px solid #d8d9df;
+	font-size: 12px;
+	color: #98989f;
+	line-height: 1.6em;
+	overflow:auto; 
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+button.sign
+, button.cancel
+{
+	width: 150px;
+	height: 50px;
+	border-radius: 20px;
+}
+
