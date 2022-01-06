@@ -197,23 +197,23 @@
 		
 		
 		// 모든 약관 동의 체크박스
-		$("#allChk").click(function()
+		$("#allChkC").click(function()
 		{
-			if($("#allChk").is(":checked"))
-				$("input[name=chk]").prop("checked", true);
+			if($("#allChkC").is(":checked"))
+				$("input[name=chkC]").prop("checked", true);
 			else
-				$("input[name=chk]").prop("checked", false);
+				$("input[name=chkC]").prop("checked", false);
 		});
 
-		$("input[name=chk]").click(function()
+		$("input[name=chkC]").click(function()
 		{
-			var total = $("input[name=chk]").length;
-			var checked = $("input[name=chk]:checked").length;
+			var total = $("input[name=chkC]").length;
+			var checked = $("input[name=chkC]:checked").length;
 	
 			if(total != checked)
-				$("#allChk").prop("checked", false);
+				$("#allChkC").prop("checked", false);
 			else
-				$("#allChk").prop("checked", true); 
+				$("#allChkC").prop("checked", true); 
 		});
 		
 
@@ -253,6 +253,12 @@
 			{
 				alert("이름을 입력해 주십시오.");
 				$("#camperName").focus();
+				return;
+			}
+			else if($("#phone").val() == "")
+			{
+				alert("휴대폰번호를 입력해 주십시오.");
+				$("#phone").focus();
 				return;
 			}
 			else if( ($("#cerNum").is(":enabled")) )
@@ -405,21 +411,21 @@
 		<div class="item">
 		
 			<div class="iC">
-				<label><input type="checkbox" id="allChk"> 모든 필수 약관에 동의합니다.</label>
+				<label><input type="checkbox" id="allChkC"> 모든 필수 약관에 동의합니다.</label>
 			</div>
 		
 			<div class="iC">
 			<textarea readonly="readonly" class="fregister" >
 이용약관
 				</textarea>
-				<br><label><input type="checkbox" name="chk" id="fre1"> 이용약관에 동의합니다.<span class="nec">(필수)</span></label>
+				<br><label><input type="checkbox" name="chkC"> 이용약관에 동의합니다.<span class="nec">(필수)</span></label>
 			</div>
 			
 			<div class="iC">
 				<textarea readonly="readonly" class="fregister">
 개인정보 이용 동의
 				</textarea>
-				<br><label><input type="checkbox" name="chk" id="fre2"> 개인정보 수집 및 이용에 동의합니다.<span class="nec">(필수)</span></label>
+				<br><label><input type="checkbox" name="chkC"> 개인정보 수집 및 이용에 동의합니다.<span class="nec">(필수)</span></label>
 			</div>
 		</div>
 		
