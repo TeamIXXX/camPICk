@@ -22,11 +22,6 @@
 	display: flex;
 }
 
-.containerC > div
-, .itemC > .iC
-{
-	margin: 10px;
-}
 
 
 
@@ -95,5 +90,11 @@ button.sign
 	width: 150px;
 	height: 50px;
 	border-radius: 20px;
+}
+
+.container > div
+, .item > .iC
+{
+	margin: 10px;
 }
 
