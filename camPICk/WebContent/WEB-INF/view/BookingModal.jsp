@@ -30,6 +30,12 @@ $(function()
 		$("#bookModalForm").submit();
 	});
 	
+	$('#bookModalReset').on("click", function()
+	{
+		window.history.back();
+	});
+	
+	
 });
 
  
