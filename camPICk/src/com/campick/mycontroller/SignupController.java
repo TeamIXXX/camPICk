@@ -33,17 +33,17 @@ public class SignupController
 	}
 	
 	// 캠퍼 회원가입 폼
-	@RequestMapping(value = "signupCamperForm.wei", method = RequestMethod.GET)
+	@RequestMapping(value = "/signupCamperForm.wei", method = RequestMethod.GET)
 	public String showCamperForm()
 	{
-		return "";
+		return "/WEB-INF/view/SignCamper.jsp";
 	}
 	
 	// 파트너 회원가입 폼
-	@RequestMapping(value = "signupPartnerForm.wei", method = RequestMethod.GET)
+	@RequestMapping(value = "/signupPartnerForm.wei", method = RequestMethod.GET)
 	public String showPartnerForm()
 	{
-		return "";
+		return "/WEB-INF/view/SignPartner.jsp";
 	}
 	
 	

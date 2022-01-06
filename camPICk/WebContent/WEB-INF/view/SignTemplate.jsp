@@ -13,13 +13,13 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/util.js"></script>
 
-<%-- <script type="text/javascript" src="<%=cp%>/js/sign-camper.js"></script> --%>
+<%-- <script type="text/javascript" src="<%=cp%>/js/sign.js"></script> --%>
 
 <script type="text/javascript">
 	$(function()
 	{
 		// 라디오버튼에 따른 회원가입 폼
-		$("#pDiv").hide();
+		$("#pDiv").css("display", "none");
 		$("input[name=campa]").on("click", function()
 		{
 			var radioV = $("input[name=campa]:checked").val();
@@ -63,13 +63,13 @@
 
 <!-- 캠퍼 회원가입 -->
 <div id="cDiv">
-	 <c:import url="signupCamperForm.wei"></c:import>
+	 <c:import url="/signupCamperForm.wei"></c:import>
 </div>
 
 
 <!-- 파트너 회원가입 -->
 <div id="pDiv">
-	<c:import url="signupPartnerForm.wei"></c:import>
+	<c:import url="/signupPartnerForm.wei"></c:import>
 </div>
 
 
