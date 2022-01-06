@@ -55,6 +55,22 @@
 		
 	}
 	
+	function keywordCheck()
+	{
+		var naviSearch = document.getElementById("naviSearch").value;
+		var naviSearch = $.trim(naviSearch);
+		
+		if(naviSearch == "")
+		{
+			alert("검색어를 입력하세요");
+			return;
+		}
+		else
+		{
+			searchForm.submit();
+		}
+		
+	}
 	
 </script>
 
@@ -101,12 +117,16 @@
 			<a href="" class="subMenu" id="alert">공지사항</a>
 
 		</li>
-		
 		<li style="line-height: 5;">
-			<input type="text" class="naviSearch" placeholder="캠핑장을 검색하세요.">   
-			<a href="" id="naviToSearch"><span class="glyphicon glyphicon-search" aria-hidden="true" 
-			style="vertical-align: middle; font-size: large; color: black;"></span></a>
-			<!-- 돋보기 이미지로 만들기 -->
+			<form name ="searchForm" action="campgroundlist.wei" method="POST">
+				<input type="text" class="naviSearch" name="naviSearch" id="naviSearch" placeholder="캠핑장을 검색하세요">
+				 <button type="button" class="SearchBtn" onclick="keywordCheck()">
+				 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+				 	<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				 </svg>
+				 </button>
+				 
+			</form>
 		</li>
 		 
 	</ul>

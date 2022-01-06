@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -6,6 +7,12 @@
 	
 	String num = (String)session.getAttribute("num");
 	String account = (String)session.getAttribute("account");
+	
+	ArrayList<String> numList = new ArrayList<>();
+	numList.add("7");
+	numList.add("6");
+	numList.add("5");
+	
 	
 %>
 <!DOCTYPE html>
@@ -40,8 +47,9 @@
 	$(function()
 	{
 		$("#myCampground").click(function()
-		{
+		{			
 			$(location).attr("href", "mycampgroundtemplate.wei");
+			
 		});
 		
 		

@@ -25,4 +25,7 @@ public interface IPartnerCampgroundDAO
 	
 	// 파트너가 가지고 있는 캠핑장 아이디 검색
 	public String getCampgroundId(@RequestParam("partnerNum") String partnerNum);
+	
+	// 캠핑장을 가지고 있는 파트너번호 출력
+	public ArrayList<String> partnerCampgroundGet();
 }
