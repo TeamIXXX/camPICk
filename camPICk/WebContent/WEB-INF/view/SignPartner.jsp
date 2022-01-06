@@ -12,10 +12,12 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/SignPartner.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/util.js"></script>
-
+<%-- 
 <script type="text/javascript">
 	$(function()
-	{		
+	{
+		// 수지가 아이디 바꿔서 넣으면 될 듯!!
+		
 		// 아이디 중복 확인
 		// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
 		$("#id").keydown(function()
@@ -57,6 +59,7 @@
 					}
 					else if (args==1)
 					{
+						$("#duplMsg").css("color", "red");
 						$("#duplMsg").html("이미 사용 중인 아이디입니다.");
 					}
 
@@ -99,7 +102,7 @@
 		// 비밀번호 확인
 		$("#pw2").keyup(function()
 		{
-			chkPw();			
+			chkPw();
 		});
 		
 		
@@ -111,7 +114,6 @@
 			{
 				$("#nameMsg").html("이름은 한글만 입력 가능합니다.");
 				$("#userName").val("");
-				$("#userName").focus();
 			}
 			else
 			{
@@ -145,8 +147,7 @@
 		});
 		
 		
-		// 랜덤 인증번호 발생
-		$("#chkTelMsg").hide();
+		// 랜덤 인증번호 발송
 		var rCode = randomCode(4);
 		$("#cerNum").click(function()
 		{
@@ -168,11 +169,11 @@
 		{
 			if ($("#tel").val().length != 13)
 			{
-				$("#chkTelMsg").show();
-				return;
+				$("#chkTelMsg").html("휴대폰번호를 확인해주세요.");
 			}
 			else if($("#recerNum").val() != rCode)
 			{
+				$("#chkCerMsg").css("color", "red");
 				$("#chkCerMsg").html("인증번호를 확인해 주십시오.");
 			}
 			else if ($("#recerNum").val() == rCode)
@@ -429,3 +430,4 @@
 
 </body>
 </html>
+--%>
