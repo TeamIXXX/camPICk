@@ -38,10 +38,10 @@
 	<div class="mainItemNN" id="mainLogo">
 		<img src="<%=cp%>/img/logo_title.png">
 	</div>
-	<div class="mainItemNN sitemap">
+	<div class="mainItemNN sitemap" style="z-index: 2;">
 		<jsp:include page="CamperSitemap.jsp"></jsp:include>
 	</div>
-	 <div class="mainItemNN banner">
+	 <div class="mainItemNN banner" style="z-index: 1;">
 		<c:import url="MainBanner.jsp"></c:import>
 	</div>
 	<div class="mainItemNN">
