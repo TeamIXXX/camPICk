@@ -350,9 +350,7 @@
 						out += "									 주말 1박 기준 " + weekendprice +"원<br> 설명 : "+info;
 						out += "		</div>";
 						out += "		<div class='item_roomlist'>";
-						out += "<button type='button' class='reserveBtn' id='reservation_btn'><a href='bookingform.wei?roomId="+roomId+"&checkInDate="+ $("#datepicker1").val() +"&checkOutDate="+$("#datepicker2").val()+"'>예약</a></button>"
-						//out += "         <button type='button' class='reserveBtn' id='reservation_btn' value=" + roomId + " onclick='reservation()'>예약</button>";
-						/* out += "			<button type='button' class='reserveBtn' id='reservation_btn' onclick=''>예약</button>"; */
+						out += "<a href='bookingform.wei?roomId="+roomId+"&checkInDate="+ $("#datepicker1").val() +"&checkOutDate="+$("#datepicker2").val()+"'><button type='button' class='reserveBtn' id='reservation_btn'>예약</button></a>"
 						out += "		</div>";
 						out += "</div>";
 				

@@ -99,6 +99,12 @@
 			
 		});
 
+		$('#bookingResetBtn').on("click", function()
+		{
+			window.history.back();
+		});
+		
+		
 	});
 	
 	
@@ -213,7 +219,7 @@
 			
 		<div class="form-group center">
 			<button type="button" id="bookingInfoBtn" class="btn btn-default">예약</button>
-			<button type="button" class="btn btn-default">취소</button>
+			<button type="button" id="bookingResetBtn" class="btn btn-default">취소</button>
 		</div>
 
 	</form>
