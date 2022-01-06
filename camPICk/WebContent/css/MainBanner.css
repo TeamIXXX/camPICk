@@ -19,7 +19,6 @@
 	align-items: center;
 	text-align: center;
 	grid-gap: 1rem;
-	margin-top: 200px;
 }
 
 .bannerContentContainer a { text-decoration: none; }
@@ -28,7 +27,6 @@
 {
 	grid-column: 1/5;
 	padding: 2em;
-	padding-top : 40px;
 	/* font-color: black; */
 	-webkit-text-stroke-width: 0.2px;
 	-webkit-text-stroke-color: black;
