@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 캠퍼 회원가입 인서트 -->
+	<insert id="addCamper">
+		INSERT INTO CAMPER(CAMPERID, CAMPERNUM, CAMPERPW, CAMPERNAME, PHONE, EMAIL, SIGNUPDATE)
+		VALUES('${camperId}', 'TESTVALUE', '${camperPw}', '${camperName}', '${phone}', '${email}', SYSDATE)
+	</insert>
 	
 	<!-- 파트너 회원가입 인서트 -->
 	

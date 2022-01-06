@@ -46,7 +46,6 @@ public class SignupController
 		return "/WEB-INF/view/SignPartner.jsp";
 	}
 	
-	
 	// 아이디 중복확인 ajax (캠퍼)
 	@RequestMapping(value = "ajaxSignupId.wei", method = RequestMethod.GET)
 	public String ajaxSignupId(@RequestParam("id") String id, ModelMap model, HttpServletRequest request)
@@ -63,8 +62,19 @@ public class SignupController
 	
 	
 	// 캠퍼 회원가입(insert)
-	
-	
+	@RequestMapping(value="/camperInsert.wei", method = RequestMethod.GET)
+	public String camperSignup(CamperDTO camperDTO)
+	{
+		String result = null;
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		signupDao.addCamper(camperDTO);
+		result="redirect:loginform.wei";
+		
+		return result;
+		
+	}
 	
 	// 파트너 회원가입(insert)
 	

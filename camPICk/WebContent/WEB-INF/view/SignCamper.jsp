@@ -20,7 +20,7 @@
 		
 		// 아이디 중복 확인
 		// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
-		$("#id").keydown(function()
+		$("#camperId").keydown(function()
 		{
 			$("input[id=checked_id]").val("n");
 		});
@@ -30,17 +30,17 @@
 			// 영문 + 숫자 8~14자 이내 검사
 			var regId = /^[A-Za-z0-9]{8,14}$/;
 
-			if(!regId.test($("#id").val()))
+			if(!regId.test($("#camperId").val()))
 			{
 				alert("아이디는 영문, 숫자 8~14자 이내로 사용 가능합니다.");
 
-				$("#id").val("");
-				$("#id").focus();
+				$("#camperId").val("");
+				$("#camperId").focus();
 
 				return;
 			}
 			
-			var param = "id=" + $.trim($("#id").val());
+			var param = "id=" + $.trim($("#camperId").val());
 			
 			$.ajax({
 				type: "GET"
@@ -75,17 +75,17 @@
 		
 		
 		// 비밀번호 영문 + 숫자 검사
-		$("#pw").keyup(function()
+		$("#camperPw").keyup(function()
 		{
 			var regId = /^[A-Za-z0-9+]*$/;
 			
-			if(!regId.test($("#pw").val()))
+			if(!regId.test($("#camperPw").val()))
 			{
 				$("#pwMsg").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
-				$("#pw").val("");
+				$("#camperPw").val("");
 				return;
 			}
-			else if ($("#pw").val().length < 5)
+			else if ($("#camperPw").val().length < 5)
 			{
 				$("#pwMsg").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
 			}
@@ -107,13 +107,13 @@
 		
 		
 		// 이름 한글 검사
-		$("#userName").blur(function()
+		$("#camperName").blur(function()
 		{
 			var regExp = /^[가-힣]+$/;
-			if(!regExp.test($("#userName").val()))
+			if(!regExp.test($("#camperName").val()))
 			{
 				$("#nameMsg").html("이름은 한글만 입력 가능합니다.");
-				$("#userName").val("");
+				$("#camperName").val("");
 			}
 			else
 			{
@@ -123,9 +123,15 @@
 		
 
 		// 휴대폰 번호 대쉬(-) 자동삽입
-		$("#tel").keyup(function()
+		$("#phone").keyup(function()
 		{
 			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+		});
+		
+		// 이메일 입력 시 input에 들어가게
+		$("#email1").keyup(function()
+		{
+			//$("#email").val($("#email1").val());
 		});
 		
 		
@@ -144,6 +150,7 @@
 				$("#email2").val($("#selectEmail").val());
 				$("#email2").attr("disabled", true);	// 비활성화
 			}
+			
 		});
 		
 		
@@ -151,13 +158,13 @@
 		var rCode = randomCode(4);
 		$("#cerNum").click(function()
 		{
-			if ($("#tel").val().length != 13)
+			if ($("#phone").val().length != 13)
 			{
-				$("#chkTelMsg").html("휴대폰번호를 확인해주세요.");
+				$("#chkphoneMsg").html("휴대폰번호를 확인해주세요.");
 			}
-			else if ($("#tel").val().length == 13)
+			else if ($("#phone").val().length == 13)
 			{
-				$("#chkTelMsg").html("");
+				$("#chkphoneMsg").html("");
 				$("#recerNum").val(rCode);
 				$("#chkCerNum").attr("disabled", false);
 			}
@@ -167,9 +174,9 @@
 		// 랜덤 인증번호 확인
 		$("#chkCerNum").click(function()
 		{
-			if ($("#tel").val().length != 13)
+			if ($("#phone").val().length != 13)
 			{
-				$("#chkTelMsg").html("휴대폰번호를 확인해주세요.");
+				$("#chkphoneMsg").html("휴대폰번호를 확인해주세요.");
 			}
 			else if($("#recerNum").val() != rCode)
 			{
@@ -182,7 +189,7 @@
 				$("#chkCerMsg").html("인증번호가 확인 되었습니다.");
 				$("#chkCerNum").attr("disabled", true);
 				$("#cerNum").attr("disabled", true);
-				$("#tel").attr("readonly", true);
+				$("#phone").attr("readonly", true);
 				$("#recerNum").attr("readonly", true);
 			}
 			
@@ -213,22 +220,22 @@
 		// 필수입력 항목 확인
 		var infoCheck = function()
 		{
-			if($("#id").val() == "")
+			if($("#camperId").val() == "")
 			{
 				alert("아이디를 입력해 주십시오.");
-				$("#id").focus();
+				$("#camperId").focus();
 				return;
 			}
 			else if($("#checked_id").val() == "n" || $("#checked_id").val() == "")
 			{
 				alert("아이디 중복검사를 해 주십시오.");
-				$("#id").focus();
+				$("#camperId").focus();
 				return;
 			}
-			else if($("#pw").val() == "" || $("#pw").val().length < 5)
+			else if($("#camperPw").val() == "" || $("#camperPw").val().length < 5)
 			{
 				alert("비밀번호를 확인해 주십시오.");
-				$("#pw").focus();
+				$("#camperPw").focus();
 				return;
 			}
 			else if($("#pw2").val() == "")
@@ -237,15 +244,15 @@
 				$("#pw2").focus();
 				return;
 			}
-			else if($("#pw").val() != $("#pw2").val())
+			else if($("#camperPw").val() != $("#pw2").val())
 			{
 				alert("비밀번호와 비밀번호 확인이 다릅니다.");
-				$("#pw").focus();
+				$("#camperPw").focus();
 			}
-			else if($("#userName").val() == "")
+			else if($("#camperName").val() == "")
 			{
 				alert("이름을 입력해 주십시오.");
-				$("#userName").focus();
+				$("#camperName").focus();
 				return;
 			}
 			else if( ($("#cerNum").is(":enabled")) )
@@ -273,6 +280,10 @@
 
 		$("#sign").click(function()
 		{
+			if ($("#email1").val() != "" && $("#email2").val() != "")
+			{
+				$("#email").val($("#email1").val()+"@"+$("#email2").val());
+			}
 			infoCheck();
 		});
 		
@@ -285,10 +296,10 @@
 	{
 		var flag = true;
 		
-		if(!$("#id").val())
+		if(!$("#camperId").val())
 		{
 			alert("아이디를 입력하세요.");
-			$("#id").focus();
+			$("#camperId").focus();
 			flag=false;
 		}
 		
@@ -298,12 +309,12 @@
 	// 비밀번호 값과 비밀번호 확인 값 비교
 	function chkPw()
 	{
-		var pwd1 = $("#pw").val();
+		var pw1 = $("#camperPw").val();
 		var pw2 = $("#pw2").val();
 
-		if (pwd1 != "" && pw2 != "")
+		if (pw1 != "" && pw2 != "")
 		{
-			if (pwd1 != pw2)
+			if (pw1 != pw2)
 			{
 				$("#pw2Msg").html("비밀번호가 일치하지 않습니다.");
 			}
@@ -336,18 +347,21 @@
 <input type="hidden" id="checked_id" value="">
 
 <!-- 캠퍼 회원가입 -->
-	<form class="container" id="cFrm" action="http://www.naver.com">
+	<form class="container" id="cFrm" action="camperInsert.wei">
 		
+	<!-- 이메일 주소 -->
+	<input type="hidden" id="email" name="email" value="">
+	
 		<div class="item">아이디<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="id">
-			<button type="button" class="" id="duplBtn">중복확인</button>
+			<input type="text" id="camperId" name="camperId">
+			<button type="button" id="duplBtn">중복확인</button>
 			<br><span class="errMsg" id="duplMsg"></span>
 		</div>
 		
 		<div class="item">비밀번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="password" name="pw" id="pw" maxlength="14">
+			<input type="password" id="camperPw" name="camperPw" maxlength="14">
 			<br><span class="errMsg" id="pwMsg"></span>
 		</div>
 		
@@ -359,15 +373,15 @@
 		
 		<div class="item">이름<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="userName" maxlength="6">
+			<input type="text" id="camperName" name="camperName" maxlength="6">
 			<br><span class="errMsg" id="nameMsg"></span>
 		</div>
 		
 		<div class="item">휴대폰번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="tel">
+			<input type="text" id="phone" name="phone">
 			<button type="button" id="cerNum">인증번호 발송</button>
-			<br><span class="errMsg" id="chkTelMsg"></span>
+			<br><span class="errMsg" id="chkphoneMsg"></span>
 		</div>
 		<div class="item"></div>
 		<div class="item">
@@ -414,7 +428,7 @@
 				<button type="button" id="sign" class="sign">회원가입</button>
 			</div>
 			<div class="sel">
-				<button type="button" class="cancel">취소</button>
+				<button type="button" class="cancel" onclick="location.href='campick.wei'">취소</button>
 			</div>
 		</div>
 	</form>
