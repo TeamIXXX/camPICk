@@ -48,6 +48,13 @@
 			
 		});
 		
+		
+		$("#pw").keyup(function(e)
+		{
+			if(e.keyCode==13)
+				$("#loginForm").submit();
+		});
+						
 	});
 
 </script>
@@ -86,7 +93,7 @@
 		
 		<div class="col-md-12" style="text-align: center;">
 			<div class="item">
-				<a id="loginBtn" class="btn btn-default">로그인</a> <span class="vline">  </span>
+				<a id="loginBtn" class="btn btn-default">로그인</a><span class="vline"></span>
 				<a href="" id="joinBtn" class="btn btn-default">회원가입</a>
 			</div>
 

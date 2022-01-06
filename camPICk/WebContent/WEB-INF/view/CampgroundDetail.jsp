@@ -297,9 +297,17 @@
 	                  
 	      });
 		
+		//픽하기 탭 클릭시 css처리
+		$("#pickBtn").on("click",function()
+		{
+			$("#pickBtn").toggleClass("active");
+			//토글 class를 뺏다 꼇다
+		});
+
+	    
 	
 	});
-	
+
 	
 	// 객실 ajax
 	function ajaxRoomList(roomType)
@@ -548,7 +556,11 @@
 
 
 </script>
+<style type="text/css">
 
+	#pickBtn.active { background-color: #FFD032;}
+
+</style>
 
 </head>
 <body>
@@ -595,8 +607,8 @@
 				<span style="margin-left: 10px; font-size: 16px;">PICK<span class='badge'>${campgroundListDetail.pick }</span></span>
 				<span style="font-size: 16px;">REVIEW<span class='badge'>${campgroundListDetail.review }</span></span>
 				
-				<button type="button" class="btn1">공유하기</button>
-				<button type="button" class="btn1">픽하기</button>
+				<button type="button" class="btn1" id="shareBtn">공유하기</button>
+				<button type="button" class="btn1" id="pickBtn">픽하기</button>
 			</div>
 		</div>
 		
