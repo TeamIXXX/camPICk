@@ -13,7 +13,22 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/util.js"></script>
 
-<%-- <script type="text/javascript" src="<%=cp%>/js/sign.js"></script> --%>
+<style type="text/css">
+
+@font-face 
+{
+     font-family: 'S-CoreDream-6Bold';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+*
+{
+	font-family: 'S-CoreDream-6Bold';
+}
+
+</style>
 
 <script type="text/javascript">
 	$(function()
@@ -43,11 +58,11 @@
 </head>
 <body>
 
-<div class="item" style="text-align: center; margin-top: 5%; margin-bottom: 3%;">
-	<img src="img/logo.png" width="15%;" />
+<div class="item" style="text-align: center; margin: 3% auto; width: 1080px;">
+	<img src="img/logo.png" width="13%;" />
 </div>
 
-<div class="itemSel" style="text-align: center; margin-bottom: 3%;">
+<div class="itemSel">
 	<div class="sel">
 		<label for="camper">
 			<input type="radio" name="campa" id="camper" value="camper" checked="checked"/> 개인회원

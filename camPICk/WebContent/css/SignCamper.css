@@ -1,29 +1,34 @@
 @charset "UTF-8";
 
 /* ======== 캠퍼 회원가입 ======== */
-.container
+.containerC
 {
 	display: grid;
-	grid-template-columns: 1fr 3fr;
+	width: 800px;
+	grid-template-columns: repeat(2, minmax(auto-fit, 1fr));
 	grid-template-columns: repeat(19, minmax(auto-fit, 1fr));
 	margin:0 auto;
-	
+	align-items: center;
+    justify-content: center;
+    gap: 7px;
 }
 
-.item
+.itemC
 {
-	border: 1px solid;
-	/* margin:0 auto; */
+	/* border: 1px solid; */
+	margin:0 auto;
 }
 
-.item:nth-last-child(1)
+.itemC:nth-last-child(1)
 {
+    margin-top: 40px;
+    margin-bottom: 40px;
 	grid-column: 1 / 3;
 	display: flex;
 }
 
-.container > div
-, .item > .iC
+.containerC > div
+, .itemC > .iC
 {
 	margin: 10px;
 }
@@ -31,7 +36,7 @@
 
 .sel
 {
-	border: 1px solid;
+	/* border: 1px solid; */
 	margin:0 auto;
 }
 
@@ -42,19 +47,12 @@
 	color: red;
 }
 
-.itemSel
-{
-	grid-column: 1 / 3;
-	display: flex;
-	border: 1px solid;
-}
-
 .fregister
 {
 	resize: none;
 	padding: 10px;
-	width:95%;
-	height:150px;
+	width: 90%;
+	height: 100px;
 	border: 1px solid #d8d9df;
 	font-size: 12px;
 	color: #98989f;

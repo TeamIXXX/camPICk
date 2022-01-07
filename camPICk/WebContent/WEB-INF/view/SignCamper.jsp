@@ -271,14 +271,13 @@
 				alert("이메일을 확인해 주십시오.");
 				return;
 			}
-			else if( !($("#allChk").is(":checked")) )
+			else if( !($("#allChkC").is(":checked")) )
 			{
 				alert("모든 필수 약관에 동의하지 않으면 회원가입이 불가합니다.");
 				return;
 			}
 			else
 			{
-				alert("회원가입이 완료되었습니다.");
 				$("#cFrm").submit();
 			}
 		};
@@ -353,51 +352,51 @@
 <input type="hidden" id="checked_id" value="">
 
 <!-- 캠퍼 회원가입 -->
-	<form class="container" id="cFrm" action="camperInsert.wei">
+	<form class="containerC" id="cFrm" action="camperInsert.wei">
 		
 	<!-- 이메일 주소 -->
 	<input type="hidden" id="email" name="email" value="">
 	
-		<div class="item">아이디<span class="nec">(*)</span></div>
-		<div class="item">
+		<div class="itemC">아이디<span class="nec">(*)</span></div>
+		<div class="itemC">
 			<input type="text" id="camperId" name="camperId">
 			<button type="button" id="duplBtn">중복확인</button>
 			<br><span class="errMsg" id="duplMsg"></span>
 		</div>
 		
-		<div class="item">비밀번호<span class="nec">(*)</span></div>
-		<div class="item">
+		<div class="itemC">비밀번호<span class="nec">(*)</span></div>
+		<div class="itemC">
 			<input type="password" id="camperPw" name="camperPw" maxlength="14">
 			<br><span class="errMsg" id="pwMsg"></span>
 		</div>
 		
-		<div class="item">비밀번호 확인<span class="nec">(*)</span></div>
-		<div class="item">
+		<div class="itemC">비밀번호 확인<span class="nec">(*)</span></div>
+		<div class="itemC">
 			<input type="password" name="pw2" id="pw2" maxlength="14">
 			<br><span class="errMsg" id="pw2Msg"></span>
 		</div>
 		
-		<div class="item">이름<span class="nec">(*)</span></div>
-		<div class="item">
+		<div class="itemC">이름<span class="nec">(*)</span></div>
+		<div class="itemC">
 			<input type="text" id="camperName" name="camperName" maxlength="6">
 			<br><span class="errMsg" id="nameMsg"></span>
 		</div>
 		
-		<div class="item">휴대폰번호<span class="nec">(*)</span></div>
-		<div class="item">
+		<div class="itemC">휴대폰번호<span class="nec">(*)</span></div>
+		<div class="itemC">
 			<input type="text" id="phone" name="phone">
 			<button type="button" id="cerNum">인증번호 발송</button>
 			<br><span class="errMsg" id="chkphoneMsg"></span>
 		</div>
-		<div class="item"></div>
-		<div class="item">
+		<div class="itemC"></div>
+		<div class="itemC">
 			<input type="text" id="recerNum">
 			<button type="button" id="chkCerNum" disabled="disabled">인증번호 확인</button>
 			<br><span class="errMsg" id="chkCerMsg"></span>
 		</div>
 		
-		<div class="item">이메일<span style="font-size: small;">[선택]</span></div>
-		<div class="item">
+		<div class="itemC">이메일<span style="font-size: small;">[선택]</span></div>
+		<div class="itemC">
 			<input type="text" name="email1" id="email1"> @ <input type="text" name="email2" id="email2">
 			<select name="selectEmail" id="selectEmail">
 				<option value="1">직접입력</option>
@@ -407,8 +406,8 @@
 			</select>
 		</div>
 		
-		<div class="item">이용약관 및 개인정보 동의 <span class="nec">(*)</span></div>
-		<div class="item">
+		<div class="itemC">이용약관 및 개인정보 동의 <span class="nec">(*)</span></div>
+		<div class="itemC">
 		
 			<div class="iC">
 				<label><input type="checkbox" id="allChkC"> 모든 필수 약관에 동의합니다.</label>
@@ -429,7 +428,7 @@
 			</div>
 		</div>
 		
-		<div class="item">
+		<div class="itemC">
 			<div class="sel">
 				<button type="button" id="sign" class="sign">회원가입</button>
 			</div>
