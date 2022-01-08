@@ -12,34 +12,33 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/SignPartner.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/util.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/signupFormPartner.js"></script>
 
 <script type="text/javascript">
 	$(function()
 	{
 		// 수지가 아이디 바꿔서 넣으면 될 듯!!
 		
-		// 아이디 중복 확인
-		// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
-		$("#partnerId").keydown(function()
+		// 모든 약관 동의
+		$("#allChkP").click(function()
 		{
-			$("input[id=checked_id]").val("n");
+			callAllChkP();
+		});
+		$("input[name=chkP]").click(function()
+		{
+			callChkP();			
 		});
 		
-		$("#duplBtn").click(function()
+		
+		// 아이디 중복 확인
+		// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
+		$("#partnerId").keyup(function()
 		{
-			// 영문 + 숫자 8~14자 이내 검사
-			var regId = /^[A-Za-z0-9]{8,14}$/;
-
-			if(!regId.test($("#partnerId").val()))
-			{
-				alert("아이디는 영문, 숫자 8~14자 이내로 사용 가능합니다.");
-
-				$("#partnerId").val("");
-				$("#partnerId").focus();
-
-				return;
-			}
-			
+			$("input[id=checked_idP]").val("n");
+		});
+		
+		$("#duplBtnP").click(function()
+		{
 			var param = "id=" + $.trim($("#partnerId").val());
 			
 			$.ajax({
@@ -51,20 +50,20 @@
 				{
 					if (args==0)
 					{
-						$("#duplMsg").css("color", "#34aadc");
-						$("#duplMsg").html("사용 가능한 아이디입니다.");
+						$("#duplMsgP").css("color", "#34aadc");
+						$("#duplMsgP").html("사용 가능한 아이디입니다.");
 						
-						$("input[id=checked_id]").val("y");
+						$("input[id=checked_idP]").val("y");
 						
 					}
 					else if (args==1)
 					{
-						$("#duplMsg").css("color", "red");
-						$("#duplMsg").html("이미 사용 중인 아이디입니다.");
+						$("#duplMsgP").css("color", "red");
+						$("#duplMsgP").html("이미 사용 중인 아이디입니다.");
 					}
 
 				}
-				, beforeSend: showRequest
+				, beforeSend: showRequestP
 				, error: function(e)
 				{
 					alert(e.responseText);
@@ -77,48 +76,22 @@
 		// 비밀번호 영문 + 숫자 검사
 		$("#partnerPw").keyup(function()
 		{
-			var regId = /^[A-Za-z0-9+]*$/;
-			
-			if(!regId.test($("#partnerPw").val()))
-			{
-				$("#pwMsg").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
-				$("#partnerPw").val("");
-				return;
-			}
-			else if ($("#partnerPw").val().length < 5)
-			{
-				$("#pwMsg").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
-			}
-			else
-			{
-				$("#pwMsg").html("");
-			}
-			
-			chkPw();
-			
+			$("#pwMsgP").html("");
+			chkPwLengthP();
+			chkPwP();
 		});
 		
-
 		// 비밀번호 확인
-		$("#pw2").keyup(function()
+		$("#pw2P").keyup(function()
 		{
-			chkPw();
+			chkPwP();
 		});
 		
 		
 		// 이름 한글 검사
 		$("#partnerName").blur(function()
 		{
-			var regExp = /^[가-힣]+$/;
-			if(!regExp.test($("#partnerName").val()))
-			{
-				$("#nameMsg").html("이름은 한글만 입력 가능합니다.");
-				$("#partnerName").val("");
-			}
-			else
-			{
-				$("#nameMsg").html("");
-			}
+			chkNameP();
 		});
 		
 
@@ -128,95 +101,71 @@
 			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
 		});
 		
-		// 이메일 입력 시 input에 들어가게
-		$("#email1").keyup(function()
+		// 사업자등록번호 (-) 자동삽입
+		$("#businesslicense").keyup(function name()
 		{
-			//$("#email").val($("#email1").val());
+			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{1,2})(\d{5})$/, "$1-$2-$3") );
 		});
-		
-		
-		// 이메일 주소 선택
-		$("#selectEmail").change(function()
-		{
-			// 직접입력일 경우
-			if($(this).val() == "1")
-			{
-				$("#email2").val("");
-				$("#email2").attr("disabled", false);	//활성화
-			}
-			// 셀렉트박스 선택일 경우
-			else
-			{
-				$("#email2").val($("#selectEmail").val());
-				$("#email2").attr("disabled", true);	// 비활성화
-			}
-			
-		});
-		
 		
 		// 랜덤 인증번호 발송
-		var rCode = randomCode(4);
-		$("#cerNum").click(function()
+		var rCodeP = randomCode(4);
+		$("#cerNumP").click(function()
 		{
-			if ($("#partnerPhone").val().length != 13)
+			if(chkPhoneLengthP())
 			{
-				$("#chkTelMsg").html("휴대폰번호를 확인해주세요.");
-			}
-			else if ($("#partnerPhone").val().length == 13)
-			{
-				$("#chkTelMsg").html("");
-				$("#recerNum").val(rCode);
-				$("#chkCerNum").attr("disabled", false);
-			}
+				$("#chkTelMsgP").html("");
+				$("#recerNumP").val(rCodeP);
+				$("#chkCerNumP").attr("disabled", false);
+			};
 		});
 		
-		
 		// 랜덤 인증번호 확인
-		$("#chkCerNum").click(function()
+		$("#chkCerNumP").click(function()
 		{
-			if ($("#partnerPhone").val().length != 13)
+			var regPhone = /^\d{3}-\d{4}-\d{4}$/;
+			
+			if (!$("#partnerPhone").val())
 			{
-				$("#chkpartnerPhoneMsg").html("휴대폰번호를 확인해주세요.");
+				$("#chkTelMsgP").html("휴대폰번호를 입력해주세요.");
 			}
-			else if($("#recerNum").val() != rCode)
+			else if (!regPhone.test($("#partnerPhone").val()))
 			{
-				$("#chkCerMsg").css("color", "red");
-				$("#chkCerMsg").html("인증번호를 확인해 주십시오.");
+				$("#chkTelMsgP").html("휴대폰번호가 유효하지 않습니다.");
 			}
-			else if ($("#recerNum").val() == rCode)
+			else if($("#recerNumP").val() != rCodeP)
 			{
-				$("#chkCerMsg").css("color", "#34aadc");
-				$("#chkCerMsg").html("인증번호가 확인 되었습니다.");
-				$("#chkCerNum").attr("disabled", true);
-				$("#cerNum").attr("disabled", true);
-				$("#partnerPhone").attr("readonly", true);
-				$("#recerNum").attr("readonly", true);
+				$("#chkCerMsgP").css("color", "red");
+				$("#chkCerMsgP").html("인증번호를 확인해 주십시오.");
+			}
+			else if ($("#recerNumP").val() == rCodeP)
+			{
+				$("#chkCerMsgP").css("color", "#34aadc");
+				$("#chkCerMsgP").html("인증번호가 확인 되었습니다.");
+				$("#chkCerNumP").attr("disabled", true);
+				$("#cerNumP").attr("disabled", true);
+				//$("#partnerPhone").attr("readonly", true);
+				//$("#recerNumP").attr("readonly", true);
 			}
 			
 		});
 		
-		
-		// 모든 약관 동의 체크박스
-		$("#allChk").click(function()
+		// 휴대폰번호 수정했을 경우
+		$("#partnerPhone").keyup(function()
 		{
-			if($("#allChk").is(":checked"))
-				$("input[name=chk]").prop("checked", true);
-			else
-				$("input[name=chk]").prop("checked", false);
-		});
-
-		$("input[name=chk]").click(function()
-		{
-			var total = $("input[name=chk]").length;
-			var checked = $("input[name=chk]:checked").length;
-	
-			if(total != checked)
-				$("#allChk").prop("checked", false);
-			else
-				$("#allChk").prop("checked", true); 
+			$("#checked_phoneP").val("n");
+			$("#recerNumP").val("");
+			$("#chkCerMsgP").html("");
+			$("#cerNumP").attr("disabled", false);
+			
 		});
 		
-
+		// 이메일 주소 선택
+		$("#selectEmailP").change(function()
+		{
+			chkEmailP();
+		});
+		
+		
 		// 필수입력 항목 확인
 		var infoCheck = function()
 		{
@@ -224,191 +173,166 @@
 			{
 				alert("아이디를 입력해 주십시오.");
 				$("#partnerId").focus();
-				return;
+				return false;
 			}
-			else if($("#checked_id").val() == "n" || $("#checked_id").val() == "")
+			else if($("#checked_idP").val() == "n" || $("#checked_idP").val() == "")
 			{
 				alert("아이디 중복검사를 해 주십시오.");
 				$("#partnerId").focus();
-				return;
+				return false;
 			}
 			else if($("#partnerPw").val() == "" || $("#partnerPw").val().length < 5)
 			{
 				alert("비밀번호를 확인해 주십시오.");
 				$("#partnerPw").focus();
-				return;
+				return false;
 			}
-			else if($("#pw2").val() == "")
+			else if($("#pw2P").val() == "")
 			{
 				alert("비밀번호 확인을 입력해 주십시오.");
-				$("#pw2").focus();
-				return;
+				$("#pw2P").focus();
+				return false;
 			}
-			else if($("#partnerPw").val() != $("#pw2").val())
+			else if($("#partnerPw").val() != $("#pw2P").val())
 			{
-				alert("비밀번호와 비밀번호 확인이 다릅니다.");
+				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 				$("#partnerPw").focus();
+				return false;
 			}
 			else if($("#partnerName").val() == "")
 			{
 				alert("이름을 입력해 주십시오.");
 				$("#partnerName").focus();
-				return;
+				return false;
+			}
+			else if($("#checked_phoneP").val() == "n" || $("#checked_phoneP").val() == "")
+			{
+				
 			}
 			else if($("#partnerPhone").val() == "")
 			{
 				alert("휴대폰번호를 입력해 주십시오.");
-				$("#phone").focus();
-				return;
+				$("#partnerPhone").focus();
+				return false;
 			}
-			else if( ($("#cerNum").is(":enabled")) )
+			else if( ($("#cerNumP").is(":enabled")) )
 			{
 				alert("인증번호를 확인해 주십시오.");
-				return;
+				return false;
 			}
-			
 			////// 사업자번호 확인 추가
-			
-			else if( ($("#email1").val()=="" && $("#email2").val()!="") || ($("#email1").val()!="" && $("#email2").val()=="") )
+			//else if(!chkLicense($("#licenseNum").val()))
+			else if($("#businesslicense").val() == "")
+			{
+				alert("사업자 등록번호를 입력해주십시오.");
+				$("#businesslicense").focus();
+				return false;
+			}
+			else if(!chkLicenseLength())
+			{
+				alert("사업자 등록번호가 유효하지 않습니다.");
+				$("#businesslicense").focus();
+				return false;
+			}
+			else if( ($("#emailP1").val()=="" && $("#emailP2").val()!="") || ($("#emailP1").val()!="" && $("#emailP2").val()=="") )
 			{
 				alert("이메일을 확인해 주십시오.");
-				return;
+				return false;
 			}
-			else if( !($("#allChk").is(":checked")) )
+			else if( !($("#allChkP").is(":checked")) )
 			{
 				alert("모든 필수 약관에 동의하지 않으면 회원가입이 불가합니다.");
-				return;
+				return false;
 			}
-			else
-			{
-				alert("회원가입이 완료되었습니다.");
-				$("#cFrm").submit();
-			}
+			return true;
 		};
 		 
 
-		$("#sign").click(function()
+		$("#signP").click(function()
 		{
-			if ($("#email1").val() != "" && $("#email2").val() != "")
+			if ($("#emailP1").val() != "" && $("#emailP2").val() != "")
 			{
-				$("#email").val($("#email1").val()+"@"+$("#email2").val());
+				$("#partnerEmail").val($("#emailP1").val()+"@"+$("#emailP2").val());
 			}
-			infoCheck();
+			
+			if(infoCheck())
+			{
+				if(confirm("회원가입 하시겠습니까?"))
+				{
+					$("#pFrm").submit();
+				};
+			};
 		});
 		
 	});
 	
 	
-	
-	// 아이디 중복 확인 ajax beforeSend
-	function showRequest()
-	{
-		var flag = true;
-		
-		if(!$("#partnerId").val())
-		{
-			alert("아이디를 입력하세요.");
-			$("#partnerId").focus();
-			flag=false;
-		}
-		
-		return flag;
-	}
-	
-	// 비밀번호 값과 비밀번호 확인 값 비교
-	function chkPw()
-	{
-		var pw1 = $("#partnerPw").val();
-		var pw2 = $("#pw2").val();
-
-		if (pw1 != "" && pw2 != "")
-		{
-			if (pw1 != pw2)
-			{
-				$("#pw2Msg").html("비밀번호가 일치하지 않습니다.");
-			}
-			else
-			{
-				$("#pw2Msg").html("");
-			}
-		}
-		
-	}
-	
-	
-	// 랜덤 자리수 발생
-	function randomCode(n)
-	{
-		var str = "";
-		for (var i = 0; i <n; i++)
-		{
-			str += Math.floor(Math.random()*10);
-		}
-		
-		return str;
-	}
 </script>
 
 </head>
 <body>
 
 <!-- 아이디 중복검사 여부 확인 -->
-<input type="hidden" id="checked_id" value="">
+<input type="hidden" id="checked_idP" value="">
+<input type="hidden" id="checked_phoneP" value="">
 
 <!-- 파트너 회원가입 -->
-	<form class="container" id="pFrm">
+	<form class="container" id="pFrm" method="post" enctype="multipart/form-data" action="SignupPartner.wei">
+	
+		<!-- 이메일 주소 -->
+		<input type="hidden" id="partnerEmail" name="email" value="">
 			
 		<div class="item">아이디<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="partnerId">
-			<button type="button" class="" id="duplBtn">중복확인</button>
-			<br><span class="errMsg" id="duplMsg"></span>
+			<input type="text" id="partnerId" maxlength="14" placeholder="영문, 숫자 8~14자 이내">
+			<button type="button" class="" id="duplBtnP">중복확인</button>
+			<br><span class="errMsg" id="duplMsgP"></span>
 		</div>
 		
 		<div class="item">비밀번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="password" id="partnerPw" maxlength="14">
-			<br><span class="errMsg" id="pwMsg"></span>
+			<input type="password" id="partnerPw" maxlength="14" placeholder="영문, 숫자 5~14자 이내">
+			<br><span class="errMsg" id="pwMsgP"></span>
 		</div>
 		
 		<div class="item">비밀번호 확인<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="password" name="pw2" id="pw2" maxlength="14">
-			<br><span class="errMsg" id="pw2Msg"></span>
+			<input type="password" name="pw2" id="pw2P" maxlength="14">
+			<br><span class="errMsg" id="pw2MsgP"></span>
 		</div>
 		
 		<div class="item">이름<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="partnerName" maxlength="6">
-			<br><span class="errMsg" id="nameMsg"></span>
+			<input type="text" id="partnerName" maxlength="6" placeholder="한글만 입력 가능">
+			<br><span class="errMsg" id="nameMsgP"></span>
 		</div>
 		
 		<div class="item">휴대폰번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="partnerPhone">
-			<button type="button" id="cerNum">인증번호 발송</button>
-			<br><span class="errMsg" id="chkTelMsg"></span>
+			<input type="text" id="partnerPhone" placeholder="숫자만 입력">
+			<button type="button" id="cerNumP">인증번호 발송</button>
+			<br><span class="errMsg" id="chkTelMsgP"></span>
 		</div>
 		
 		<div class="item"></div>
 		<div class="item">
-			<input type="text" id="recerNum">
-			<button type="button" id="chkCerNum" disabled="disabled">인증번호 확인</button>
-			<br><span class="errMsg" id="chkCerMsg"></span>
+			<input type="text" id="recerNumP">
+			<button type="button" id="chkCerNumP" disabled="disabled">인증번호 확인</button>
+			<br><span class="errMsg" id="chkCerMsgP"></span>
 		</div>
 		<div class="item">사업자번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text">
+			<input type="text" id="businesslicense" maxlength="12">
 		</div>
 		<div class="item">증빙서류첨부</div>
 		<div class="item">
-			<input type="file">
+			<input type="file" id="fileP">
 		</div>
 		
 		<div class="item">이메일<span style="font-size: small;">[선택]</span></div>
 		<div class="item">
-			<input type="text" name="email1" id="email1"> @ <input type="text" name="email2" id="email2">
-			<select name="selectEmail" id="selectEmail">
+			<input type="text" name="email1" id="emailP1"> @ <input type="text" name="email2" id="emailP2">
+			<select name="selectEmail" id="selectEmailP">
 				<option value="1">직접입력</option>
 				<option value="naver.com">naver.com</option>
 				<option value="gmail.com">gmail.com</option>
@@ -420,27 +344,27 @@
 		<div class="item">
 		
 			<div class="iC">
-				<label><input type="checkbox" id="allChk"> 모든 필수 약관에 동의합니다.</label>
+				<label><input type="checkbox" id="allChkP"> 모든 필수 약관에 동의합니다.</label>
 			</div>
 		
 			<div class="iC">
 			<textarea readonly="readonly" class="fregister" >
 이용약관
 				</textarea>
-				<br><label><input type="checkbox" name="chk"> 이용약관에 동의합니다.<span class="nec">(필수)</span></label>
+				<br><label><input type="checkbox" name="chkP"> 이용약관에 동의합니다.<span class="nec">(필수)</span></label>
 			</div>
 			
 			<div class="iC">
 				<textarea readonly="readonly" class="fregister">
 개인정보 이용 동의
 				</textarea>
-				<br><label><input type="checkbox" name="chk"> 개인정보 수집 및 이용에 동의합니다.<span class="nec">(필수)</span></label>
+				<br><label><input type="checkbox" name="chkP"> 개인정보 수집 및 이용에 동의합니다.<span class="nec">(필수)</span></label>
 			</div>
 		</div>
 		
 		<div class="item">
 			<div class="sel">
-				<button type="button" id="sign" class="sign">회원가입</button>
+				<button type="button" id="signP" class="sign">회원가입</button>
 			</div>
 			<div class="sel">
 				<button type="button" class="cancel">취소</button>

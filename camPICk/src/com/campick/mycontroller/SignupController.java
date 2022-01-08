@@ -5,7 +5,10 @@
 
 package com.campick.mycontroller;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campick.dao.ISignupDAO;
 import com.campick.dto.CamperDTO;
+import com.campick.dto.PartnerDTO;
 
 @Controller
 public class SignupController
@@ -53,7 +57,7 @@ public class SignupController
 		return "/WEB-INF/view/SignOk.jsp";
 	}
 	
-	// 아이디 중복확인 ajax (캠퍼)
+	// 아이디 중복확인 ajax (캠퍼, 파트너)
 	@RequestMapping(value = "ajaxSignupId.wei", method = RequestMethod.GET)
 	public String ajaxSignupId(@RequestParam("id") String id, ModelMap model, HttpServletRequest request)
 	{
@@ -83,6 +87,14 @@ public class SignupController
 	}
 	
 	// 파트너 회원가입(insert)
+	@RequestMapping(value = "/SignupPartner.wei", method = RequestMethod.POST)
+	public String partnerSignup(PartnerDTO partner, HttpServletRequest request)
+	{
+		//String root =  System.getProperty("user.dir");
+		
+		
+		return "";
+	}
 	
 	
 	
