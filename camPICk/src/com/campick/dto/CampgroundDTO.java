@@ -11,6 +11,7 @@ public class CampgroundDTO
 	private String address1, address2, address3, tel;
 	private String extraInfo, checkInDate, checkOutDate;
 	private String roomtypelist, optionlist, themelist;
+	private String roomtypelist, optionlist, themelist;		// 캠핑 검색에 캠핑장의 룸타입, 옵션, 테마를 가져오고 있음
 	private int pick, share, review;
 	private int policyStandard1, policyStandard2, policyStandard3;
 	private double firewood;
