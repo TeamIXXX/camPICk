@@ -7,7 +7,7 @@ package com.campick.dto;
 
 public class CamperDTO
 {
-	private String camperId, camperNum, camperPw, camperName, camperPhone, camperEmail, signUpDate;
+	private String camperId, camperNum, camperPw, camperName, phone, email, signupDate;
 
 	// getter / setter
 	public String getCamperId()
@@ -49,35 +49,35 @@ public class CamperDTO
 	{
 		this.camperName = camperName;
 	}
-
-	public String getCamperPhone()
+	
+	public String getPhone()
 	{
-		return camperPhone;
+		return phone;
 	}
 
-	public void setCamperPhone(String camperPhone)
+	public void setPhone(String phone)
 	{
-		this.camperPhone = camperPhone;
+		this.phone = phone;
 	}
 
-	public String getCamperEmail()
+	public String getEmail()
 	{
-		return camperEmail;
+		return email;
 	}
 
-	public void setCamperEmail(String camperEmail)
+	public void setEmail(String email)
 	{
-		this.camperEmail = camperEmail;
+		this.email = email;
 	}
 
-	public String getSignUpDate()
+	public String getSignupDate()
 	{
-		return signUpDate;
+		return signupDate;
 	}
 
-	public void setSignUpDate(String signupDate)
+	public void setSignupDate(String signupDate)
 	{
-		this.signUpDate = signupDate;
+		this.signupDate = signupDate;
 	}
 	
 }

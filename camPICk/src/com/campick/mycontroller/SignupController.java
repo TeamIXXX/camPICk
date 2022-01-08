@@ -5,7 +5,10 @@
 
 package com.campick.mycontroller;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campick.dao.ISignupDAO;
 import com.campick.dto.CamperDTO;
+import com.campick.dto.PartnerDTO;
 
 @Controller
 public class SignupController
@@ -29,11 +33,31 @@ public class SignupController
 	@RequestMapping(value = "signupForm.wei", method = RequestMethod.GET)
 	public String showSignupForm()
 	{
-		return "/WEB-INF/view/Sign.jsp";
+		return "/WEB-INF/view/SignTemplate.jsp";
 	}
 	
+	// 캠퍼 회원가입 폼
+	@RequestMapping(value = "/signupCamperForm.wei", method = RequestMethod.GET)
+	public String showCamperForm()
+	{
+		return "/WEB-INF/view/SignCamper.jsp";
+	}
 	
-	// 아이디 중복확인 ajax (캠퍼)
+	// 파트너 회원가입 폼
+	@RequestMapping(value = "/signupPartnerForm.wei", method = RequestMethod.GET)
+	public String showPartnerForm()
+	{
+		return "/WEB-INF/view/SignPartner.jsp";
+	}
+	
+	// 회원가입 성공 폼
+	@RequestMapping(value = "/signupOkForm.wei", method = RequestMethod.GET)
+	public String signupOkForm()
+	{
+		return "/WEB-INF/view/SignOk.jsp";
+	}
+	
+	// 아이디 중복확인 ajax (캠퍼, 파트너)
 	@RequestMapping(value = "ajaxSignupId.wei", method = RequestMethod.GET)
 	public String ajaxSignupId(@RequestParam("id") String id, ModelMap model, HttpServletRequest request)
 	{
@@ -47,13 +71,30 @@ public class SignupController
 		return "/WEB-INF/view/ajaxSignupId.jsp";
 	}
 	
-	
-	
 	// 캠퍼 회원가입(insert)
-	
-	
+	@RequestMapping(value="/camperInsert.wei", method = RequestMethod.GET)
+	public String camperSignup(CamperDTO camperDTO)
+	{
+		String result = null;
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		signupDao.addCamper(camperDTO);
+		result="redirect:signupOkForm.wei";
+		
+		return result;
+		
+	}
 	
 	// 파트너 회원가입(insert)
+	@RequestMapping(value = "/SignupPartner.wei", method = RequestMethod.POST)
+	public String partnerSignup(PartnerDTO partner, HttpServletRequest request)
+	{
+		//String root =  System.getProperty("user.dir");
+		
+		
+		return "";
+	}
 	
 	
 	

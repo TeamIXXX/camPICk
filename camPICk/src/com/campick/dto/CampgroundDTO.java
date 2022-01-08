@@ -15,6 +15,9 @@ public class CampgroundDTO
 	private int policyStandard1, policyStandard2, policyStandard3;
 	private double firewood;
 	
+	// 파트너가 선택한 편의시설, 즐길거리 배열,,,
+	private String optionSelect;
+	
 	// getter / setter 구성
 	public String getCampgroundId()
 	{
@@ -184,6 +187,14 @@ public class CampgroundDTO
 	{
 		this.themelist = themelist;
 	}
+	public String getOptionSelect()
+	{
+		return optionSelect;
+	}
+	public void setOptionSelect(String optionSelect)
+	{
+		this.optionSelect = optionSelect;
+	}	
 	
 	
 }

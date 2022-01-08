@@ -22,13 +22,13 @@
 			<span class="vline">|</span>
 			광고 및 제휴문의
 			<span class="vline">|</span>
-			<a href="" class="foot">회원가입</a>
+			<a href="signupForm.wei" class="foot">회원가입</a>
 			<span class="vline">|</span>
 			<a href="loginform.wei" class="foot">로그인</a>
 			<span class="vline">|</span>
 	</div>
 	
-    <p>Copyright © 2021 I'm I Allright reseved.</p>
+    <p>Copyright © 2021 We're wei reseved.</p>
 </div>
 
 </body>

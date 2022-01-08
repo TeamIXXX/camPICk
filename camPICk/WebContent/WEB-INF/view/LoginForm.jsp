@@ -63,7 +63,7 @@
 
 
 <div style="text-align: center; margin-top: 7%; margin-bottom: 3%;">
-	<img src="img/logo.png" width="10%;" />
+	<a href="campick.wei"><img src="img/logo.png" width="10%;" /></a>
 </div>
 
 
@@ -93,7 +93,7 @@
 		<div class="col-md-12" style="text-align: center;">
 			<div class="item">
 				<a id="loginBtn" class="btn btn-default">로그인</a><span class="vline"></span>
-				<a href="" id="joinBtn" class="btn btn-default">회원가입</a>
+				<a href="signupForm.wei" id="joinBtn" class="btn btn-default">회원가입</a>
 			</div>
 
 			<div class="col-md-12">

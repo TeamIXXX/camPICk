@@ -12,10 +12,13 @@ public interface ISignupDAO
 	public int getSameIdCheck(String id);
 	
 	// 캠퍼 회원가입
-	public int add(CamperDTO camperDTO);
+	public int addCamper(CamperDTO camperDTO);
 	
 	// 캠퍼 정보 조회
-	public CamperDTO search(String camperId, String camperPw) throws Exception;
+	public CamperDTO searchCamper(String camperId, String camperPw);
+	
+	// 캠퍼 정보 수정
+	public int modifyCamper(CamperDTO camperDTO);
 	
 	// 파트너 회원가입
 	

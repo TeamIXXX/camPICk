@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.container
+{
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 60px;
+}
+
+.item
+{
+	width: 1080px;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	text-align: center;
+}
+
+.item:nth-child(2)
+{
+	flex-direction: column;
+	margin: 0 auto;
+	gap: 30px;
+}
+
+.item>.sel
+{
+	margin: 10px 20px;
+}
