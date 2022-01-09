@@ -368,7 +368,7 @@
 	</div>
 
 	<div id="listDiv">
-		
+		<!-- 이용내역 AJAX 출력 div -->
 	</div>
 </div>
 
@@ -395,7 +395,7 @@
 					<span class="bookingDetailCheckInDate"></span> ~ <span class="bookingDetailCheckOutDate"></span><br> 
 				<span class="bookingDetailSubTitle">결제일</span> : <span class="bookingDetailPaymentDate"></span><br> 
 				<span class="bookingDetailSubTitle">결제 금액</span> : <span class="bookingDetailPaymentAmount"></span>원<br>
-				<span class="bookingDetailSubTitle">인원 수</span> : <span class="bookingDetailVisitNum"></span><br>
+				<span class="bookingDetailSubTitle">예약 인원</span> : <span class="bookingDetailVisitNum"></span><br>
 				<span class="bookingDetailSubTitle">예약 시 요청사항</span> : <span class="bookingDetailRequest"></span><br>
 			</div>
 		</div>
