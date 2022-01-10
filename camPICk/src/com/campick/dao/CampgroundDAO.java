@@ -306,8 +306,10 @@ public class CampgroundDAO implements ICampgroundDAO
 		String sql = "SELECT CAMPGROUNDID, CAMPGROUNDNAME, ADDRESS1, ADDRESS2, ADDRESS3"
 				+ ", TEL, PICKCOUNT, REVIEWCOUNT, FIREWOOD"
 				+ ", EXTRAINFO, CHECKINDATE, CHECKOUTDATE"
-				+ " FROM CAMPGROUND_VIEW WHERE CAMPGROUNDID=?";
-		
+				+ ", POLICYSTANDARD1" 
+				+ ", POLICYSTANDARD2" 
+				+ ", POLICYSTANDARD3" 
+				+ " FROM CAMPGROUND_VIEW WHERE CAMPGROUNDID=?";		
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, campgroundId);
@@ -327,7 +329,9 @@ public class CampgroundDAO implements ICampgroundDAO
 			result.setExtraInfo(rs.getString("EXTRAINFO"));
 			result.setCheckInDate(rs.getString("CHECKINDATE"));
 			result.setCheckOutDate(rs.getString("CHECKOUTDATE"));
-
+			result.setPolicyStandard1(rs.getInt("POLICYSTANDARD1"));
+			result.setPolicyStandard2(rs.getInt("POLICYSTANDARD2"));
+			result.setPolicyStandard3(rs.getInt("POLICYSTANDARD3"));
 		}
 		
 		rs.close();
@@ -390,12 +394,14 @@ public class CampgroundDAO implements ICampgroundDAO
 		booking.setMemberNum("0");
 		result.add(booking);
 		
-		
 		return result;
 	}
-	// 픽 추가
-		@Override
-		public int onPick(String camperNum, String campgroundId) throws SQLException
+	
+	
+	/////////// 진희, 유동 추가 
+	//픽 하기
+	@Override
+	public int onPick(String camperNum, String campgroundId) throws SQLException
 		{
 			int result = 0;
 
@@ -424,84 +430,79 @@ public class CampgroundDAO implements ICampgroundDAO
 
 			return result;
 		}	
+	
+	//픽 해제
+	@Override
+	public int offPick(String camperNum, String campgroundId) throws SQLException
+	{
+		int result = 0;
+
+		Connection conn = dataSource.getConnection();
 		
-		//픽해제
-		@Override
-		public int offPick(String camperNum, String campgroundId) throws SQLException
+		String sql =  "DELETE" 
+					+ " FROM PICK" 
+					+ " WHERE CAMPERNUM=?,CAMPGROUNDID=?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+
+		try
 		{
-			int result = 0;
+			pstmt.setString(1, camperNum);
+			pstmt.setString(2, campgroundId);
 
-			Connection conn = dataSource.getConnection();
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		} finally
+		{
+			pstmt.close();
+			conn.close();
+		}
+
+		return result;
+	}
+	
+	//픽여부 판별
+	@Override
+	public String checkPick(String camperNum, String campgroundId) throws SQLException
+	{
+		String result = null;
+
+		Connection conn = dataSource.getConnection();
+		
+		String sql =  "SELECT NVL(PICKNUM, '0') AS PICKNUM" 
+					+ "FROM PICK" 
+					+ "WHERE CAMPERNUM=?, CAMPERGROUND=?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = null;
+
+		try
+		{
+			pstmt.setString(1, camperNum);
+			pstmt.setString(2, campgroundId);
+
+			rs = pstmt.executeQuery();
 			
-			String sql =  "DELETE" 
-						+ " FROM PICK" 
-						+ " WHERE CAMPERNUM=?,CAMPGROUNDID=?";
-			
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-
-			try
+			if (rs.next())
 			{
-				pstmt.setString(1, camperNum);
-				pstmt.setString(2, campgroundId);
-
-				result = pstmt.executeUpdate();
-
-			} catch (Exception e)
-			{
-				System.out.println(e.toString());
-			} finally
-			{
-				pstmt.close();
-				conn.close();
+				result = rs.getString("PICKNUM");	
 			}
 
-			return result;
-		}
-		//pick여부판별
-		@Override
-		public String checkPick(String camperNum, String campgroundId) throws SQLException
+		} catch (Exception e)
 		{
-			String result = null;
-
-			Connection conn = dataSource.getConnection();
-			
-			String sql =  "SELECT NVL(PICKNUM, '0') AS PICKNUM" 
-						+ "FROM PICK" 
-						+ "WHERE CAMPERNUM=?, CAMPERGROUND=?";
-			
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = null;
-
-			try
-			{
-				pstmt.setString(1, camperNum);
-				pstmt.setString(2, campgroundId);
-
-				rs = pstmt.executeQuery();
-				
-				if (rs.next())
-				{
-					result = rs.getString("PICKNUM");	
-				}
-
-			} catch (Exception e)
-			{
-				System.out.println(e.toString());
-			} finally
-			{
-				rs.close();
-				pstmt.close();
-				conn.close();
-			}
-
-			return result;
+			System.out.println(e.toString());
+		} finally
+		{
+			rs.close();
+			pstmt.close();
+			conn.close();
 		}
-	
-	
-	
 
+		return result;
+	}
 
-		
-	
 	
 }

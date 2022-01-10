@@ -18,7 +18,18 @@ String cp = request.getContextPath();
 <script type="text/javascript">
 	$(function()
 	{
-		$("#bookingCancelBtnItem").click(function()
+		
+		var paymentAmount = ${bookingDTO.paymentAmount};
+		// 환불율 퍼센트로 환산.
+		var refund = (100 - ${refund})/100;
+		
+		var refundAmount = refund*paymentAmount;
+		
+		$("#paymentAmount").html( paymentAmount.toLocaleString('ko-KR') + "원");
+		$("#refundAmount").html( refundAmount.toLocaleString('ko-KR') + "원" );
+		
+		
+		$("#bookingCancelBtn").click(function()
 		{
 			if (!$("input:checked[id='box']").is(":checked"))
 			{
@@ -30,16 +41,30 @@ String cp = request.getContextPath();
 			
 				//확인버튼 눌렀을때 이동
 				$(location).attr("href", "bookingcancelmodal.wei");
-
 		});
+		
+		$("#bookingCancelCloseBtn").click(function()
+		{
+			window.history.back();
+		});
+		
+		
+		
 	});
 </script>
 <style type="text/css">
 	
-   .form-group > .control-label
-   {
-      padding-left : 30px;   
-   }
+	@font-face 
+	{
+	     font-family: 'S-CoreDream-6Bold';
+	     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+	     font-weight: normal;
+	     font-style: normal;
+	}
+	
+	* {	font-family: 'S-CoreDream-6Bold'; }
+	
+   .form-group > .control-label { padding-left : 30px; }
    
    .star
    {
@@ -61,7 +86,7 @@ String cp = request.getContextPath();
 
 <body>
 
-	<h1 style="text-align: center;">이용내역</h1>
+	<h1 style="text-align: center; font-family: 'S-CoreDream-6Bold';">이용내역</h1>
 
 	<div class="form-horizontal">
 		<div class="form-group">
@@ -103,14 +128,13 @@ String cp = request.getContextPath();
 		<div class="form-group">
 			<label class="col-xs-4 control-label">결제 금액</label>
 			<div class="col-xs-4">
-				<p class="form-control-static">${bookingDTO.paymentAmount }</p>
+				<p class="form-control-static" id=paymentAmount><!-- 금액 --></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-xs-4 control-label">환불 금액</label>
 			<div class="col-xs-4">
-			<p class="form-control-static">${bookingDTO.paymentAmount }</p>
-			<!-- 환불규정에 맞춰서 계산 -->
+				<p class="form-control-static" id=refundAmount style="color: red; font-weight: bold; "><!-- 환불규정에 맞춰서 계산 --></p>
 			</div>
 		</div>
 
@@ -118,9 +142,9 @@ String cp = request.getContextPath();
 			<label class="col-xs-4 control-label">환불규정</label>
 			<div class="col-xs-6">
 				<textarea rows="3" cols="80" class="form-control" name="refund" id="refund" 
-					readonly="readonly">예약 당일 ~3일전 : 결제금액의 50% 이상환불
-환불 4일전~9일전: 80%이상 환불
-10일전 : 100%환불</textarea>
+					readonly="readonly">예약 당일 ~ 3일전 : 결제금액의 ${100- campgroundDTO.policyStandard1 }% 환불
+예약 4일전~9일전 : ${100- campgroundDTO.policyStandard2 }% 환불
+예약 10일전까지 : ${100- campgroundDTO.policyStandard3 }% 환불</textarea>
 			</div>
 		</div>
 
@@ -133,8 +157,8 @@ String cp = request.getContextPath();
 		</div>
 
 		<div class="form-group center">
-			<button type="button" id="bookingCancelBtnItem" class="btn btn-default">예약 취소</button>
-			<button type="button" id="bookingCancelBtn" class="btn btn-default">창닫기</button>
+			<button type="button" id="bookingCancelBtn" class="btn btn-default">예약 취소</button>
+			<button type="button" id="bookingCancelCloseBtn" class="btn btn-default">창닫기</button>
 		</div>				
 		
 	</div>

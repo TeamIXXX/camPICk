@@ -40,6 +40,28 @@ $(function()
 
  
 </script>
+<style type="text/css">
+
+	@font-face 
+	{
+		font-family: 'S-CoreDream-6Bold';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	* {	font-family: 'S-CoreDream-6Bold'; }
+	
+	.bookingDetailSubTitle
+	{
+    	color: #45818E;
+		display: inline-block;
+		width: 120px;
+		text-align: right;
+		padding: 3px 2px;
+	}
+	
+</style>
 </head>
 <body>
 
@@ -50,13 +72,17 @@ $(function()
 		<form action="booking.wei" id="bookModalForm">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">예약 확인</h4>
+					<span style="font-size: large;">예약 확인</span>
 				</div>
 				<div class="modal-body">
-					예약자명 : ${bookingDTO.name }<br> 핸드폰 번호 : ${bookingDTO.phone }<br> 예약
-					일자 : ${bookingDTO.checkInDate } ~ ${bookingDTO.checkOutDate } <br> 객실 : ${bookingDTO.roomName }<br> 예약 인원 :
-					${bookingDTO.visitNum }<br> 예약시 요청사항 : ${bookingDTO.request }<br> 결제
-					예정 금액 :<span> ${bookingDTO.paymentAmount }</span>원<br>
+					<span class="bookingDetailSubTitle">예약자</span> : ${bookingDTO.name }<br> 
+					<span class="bookingDetailSubTitle">연락처</span> : ${bookingDTO.phone }<br> 
+					<span class="bookingDetailSubTitle">체크인 ~ 체크아웃</span>: ${bookingDTO.checkInDate } ~ ${bookingDTO.checkOutDate }<br> 
+					<span class="bookingDetailSubTitle">객실</span> : ${bookingDTO.roomName }<br> 
+					<span class="bookingDetailSubTitle">예약 인원</span>: ${bookingDTO.visitNum }<br> 
+					<span class="bookingDetailSubTitle">예약시 요청사항</span> : ${bookingDTO.request }<br> 
+					<span class="bookingDetailSubTitle">결제 예정 금액</span> : <span>${bookingDTO.paymentAmount }</span>원<br>
+					
 					<br> 위 내용으로 예약하시겠습니까? 확인시 결제가 진행됩니다.<br>
 	
 				</div>

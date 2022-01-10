@@ -565,36 +565,34 @@
 
 <!-- 리뷰할 예약번호 선택 모달 div -->
 <div id="dialog-confirm" title="리뷰를 남길 예약번호를 선택하세요.">
-		<c:forEach var="bookcheck" items="${bookingCheckList }">
-			<c:if test="${bookcheck.reviewCheck eq 0 }">
-				<label>
-				<input type="radio" name="book" value="${bookcheck.bookingNum }">
-				${bookcheck.bookingNum } (${bookcheck.checkInDate } ~ ${bookcheck.checkOutDate })
-				</label>
-			</c:if>
-		</c:forEach>
+	<c:forEach var="bookcheck" items="${bookingCheckList }">
+		<c:if test="${bookcheck.reviewCheck eq 0 }">
+			<label>
+			<input type="radio" name="book" value="${bookcheck.bookingNum }">
+			${bookcheck.bookingNum } (${bookcheck.checkInDate } ~ ${bookcheck.checkOutDate })
+			</label>
+		</c:if>
+	</c:forEach>
 </div>
 
 <!-- 모달(리뷰수정)을 위한 div -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-   
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">리뷰 수정</h4>
-      </div>
-      <div class="modal-body">
-      	<input type="hidden" id="modalCotentNum" />
-      	<textarea rows="10" cols="60" id="modalContent" maxlength="250" style="resize: none;"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="modifyReview()">저장</button>
-      </div>
-     
-    </div>
-  </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">리뷰 수정</h4>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="modalCotentNum" />
+				<textarea rows="10" cols="60" id="modalContent" maxlength="250" style="resize: none;"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-primary" onclick="modifyReview()">저장</button>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- 모달 div end -->
 
