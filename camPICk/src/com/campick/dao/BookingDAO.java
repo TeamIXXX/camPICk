@@ -299,7 +299,6 @@ public class BookingDAO implements IBookingDAO
 				+ ", SYSDATE, ?)";
 		
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try
 		{
@@ -361,6 +360,7 @@ public class BookingDAO implements IBookingDAO
 		}
 		finally 
 		{
+			rs.close();
 			pstmt.close();
 			conn.close();
 		}
@@ -418,6 +418,7 @@ public class BookingDAO implements IBookingDAO
 		}
 		finally 
 		{
+			rs.close();
 			pstmt.close();
 			conn.close();
 		}	
@@ -457,7 +458,62 @@ public class BookingDAO implements IBookingDAO
 		{
 			System.out.println(e.toString());
 		}
+		finally 
+		{
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}
 		
 		return result; 
 	}
+
+
+	// 예약 취소 해당 환불 구정 구하기
+	@Override
+	public int getRefundPolicy(String bookingNum) throws SQLException
+	{
+		int result = -1;
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT CASE WHEN (FLOOR((SELECT CHECKINDATE FROM BOOKINGVIEW WHERE BOOKINGNUM = ?) - SYSDATE)) >= 10 THEN POLICYSTANDARD3"
+				   + "            WHEN (FLOOR((SELECT CHECKINDATE FROM BOOKINGVIEW WHERE BOOKINGNUM = ?) - SYSDATE)) >=4 THEN POLICYSTANDARD2"
+				   + "            WHEN (FLOOR((SELECT CHECKINDATE FROM BOOKINGVIEW WHERE BOOKINGNUM = ?) - SYSDATE)) >=0 THEN POLICYSTANDARD1"
+				   + "            END AS REFUND"
+				   + " FROM REFUNDPOLICY"
+				   + " WHERE CAMPGROUNDID = (SELECT CAMPGROUNDID FROM BOOKINGVIEW WHERE BOOKINGNUM = ?)";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bookingNum);
+			pstmt.setString(2, bookingNum);
+			pstmt.setString(3, bookingNum);
+			pstmt.setString(4, bookingNum);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				result = rs.getInt("REFUND");
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally 
+		{
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}
+		
+		return result;
+	}
+	
+
+
 }

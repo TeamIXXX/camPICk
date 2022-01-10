@@ -208,6 +208,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- 예약 취소 -->
 	<bean name="/bookingcancelform.wei" class="com.campick.controller.BookingCancelFormController">
 	   <property name="bookingDao" ref="bookingDAO"></property>
+	   <property name="campgroundDao" ref="campgroundDAO"></property>
 	</bean>
 	
 	<bean name="/bookingcancelmodal.wei" class="com.campick.controller.BookingCancelModalController"></bean>

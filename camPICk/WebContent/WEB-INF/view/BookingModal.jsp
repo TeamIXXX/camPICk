@@ -49,6 +49,9 @@ $(function()
 		font-weight: normal;
 		font-style: normal;
 	}
+
+	* {	font-family: 'S-CoreDream-6Bold'; }
+	
 	.bookingDetailSubTitle
 	{
     	color: #45818E;
@@ -69,7 +72,7 @@ $(function()
 		<form action="booking.wei" id="bookModalForm">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">예약 확인</h4>
+					<span style="font-size: large;">예약 확인</span>
 				</div>
 				<div class="modal-body">
 					<span class="bookingDetailSubTitle">예약자</span> : ${bookingDTO.name }<br> 
