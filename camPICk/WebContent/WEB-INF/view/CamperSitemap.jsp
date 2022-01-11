@@ -31,7 +31,7 @@
 		<li><a href="#">my 캠핑</a>
 			<ul class="siteSubMenu">
 				<li><a href="#">캘린더</a></li>
-				<li><a href="#">계정관리</a></li>
+				<li><a href="checkPwForm.wei">계정관리</a></li>
 				<li><a href="bookinglist.wei">my 캠핑장</a></li>
 				<li><a href="#">my Story</a></li>
 				<li><a href="#">my 크루</a></li>

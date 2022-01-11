@@ -77,30 +77,30 @@
 </head>
 <body>
 
-<div class="col-md-12" id="leftNav">
+<div class="col-md-12" id="leftNav" style="margin-top: 10px;">
 	<ul class="menu" >
 		<li style="line-height: 2;">
-			<a href="campick.wei" class="Menu" style="font-weight: bold; font-size: 1.3vw;">HOME</a>
+			<a href="campick.wei" class="Menu" style="font-weight: bold; font-size: 1.1vw;">HOME</a>
 		</li>
 		
 		<li style="line-height: 2;">
-			<span class="Menu" onclick="campers()" style="font-size: 1.3vw;">campers <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" 
-			style="vertical-align: middle; font-size: medium;"></span></span>
+			<span class="Menu" onclick="campers()" style="font-size: 1.1vw;">campers <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" 
+			style="vertical-align: middle; font-size: small;"></span></span>
 			<a href="" class="subMenu" id="together">camPICK 투게더</a>
 			<a href="" class="subMenu" id="market">camPICK 마켓</a>
 		</li>
 		
 		<li style="line-height: 2; ">
-			<a href="" class="Menu" style="font-weight: bold; font-size: 1.3vw;">camper'Story</a>
+			<a href="" class="Menu" style="font-weight: bold; font-size: 1.1vw;">camper'Story</a>
 		</li>
 		
 		<li style="line-height: 2; vertical-align: middle;">
-			<a href="" class="Menu" style="font-weight: bold; font-size: 1.3vw;">캠핑크루</a>
+			<a href="" class="Menu" style="font-weight: bold; font-size: 1.1vw;">캠핑크루</a>
 		</li>
 		
 		<li style="line-height: 2;">
-			<span class="Menu" onclick="camping()" style="font-size: 1.3vw;">my 캠핑 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"
-			style="vertical-align: middle; font-size: medium;"></span></span>
+			<span class="Menu" onclick="camping()" style="font-size: 1.1vw;">my 캠핑 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"
+			style="vertical-align: middle; font-size: small;"></span></span>
 			<a href="" class="subMenu" id="calender">캘린더</a>
 			<a href="" class="subMenu" id="member">계정관리</a>
 			<a href="bookinglist.wei" class="subMenu" id="camping">my 캠핑장</a>
@@ -109,8 +109,8 @@
 		</li>
 		
 		<li style="line-height: 2;">
-			<span class="Menu" id="QnA" onclick="QnA()" style="font-size: 1.3vw;">고객문의 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" 
-			style="vertical-align: middle; font-size: medium;"></span></span>
+			<span class="Menu" id="QnA" onclick="QnA()" style="font-size: 1.1vw;">고객문의 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" 
+			style="vertical-align: middle; font-size: small;"></span></span>
 			<a href="" class="subMenu" id="F&A" >F&A</a>
 			<a href="" class="subMenu"  id="report">신고하기</a>
 			<a href="" class="subMenu"  id="question">문의하기</a>

@@ -77,15 +77,9 @@
 		// 비밀번호 영문 + 숫자 검사
 		$("#camperPw").keyup(function()
 		{
-			var regId = /^[A-Za-z0-9+]*$/;
+			var regId = /^[A-Za-z0-9]{5,14}$/;
 			
 			if(!regId.test($("#camperPw").val()))
-			{
-				$("#pwMsg").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
-				$("#camperPw").val("");
-				return;
-			}
-			else if ($("#camperPw").val().length < 5)
 			{
 				$("#pwMsg").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
 			}
@@ -126,12 +120,6 @@
 		$("#phone").keyup(function()
 		{
 			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
-		});
-		
-		// 이메일 입력 시 input에 들어가게
-		$("#email1").keyup(function()
-		{
-			//$("#email").val($("#email1").val());
 		});
 		
 		
@@ -232,7 +220,7 @@
 				$("#camperId").focus();
 				return;
 			}
-			else if($("#camperPw").val() == "" || $("#camperPw").val().length < 5)
+			else if($("#pwMsg").html() != "")
 			{
 				alert("비밀번호를 확인해 주십시오.");
 				$("#camperPw").focus();
@@ -248,6 +236,7 @@
 			{
 				alert("비밀번호와 비밀번호 확인이 다릅니다.");
 				$("#camperPw").focus();
+				return;
 			}
 			else if($("#camperName").val() == "")
 			{

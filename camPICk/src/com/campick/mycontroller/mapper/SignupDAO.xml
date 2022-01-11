@@ -18,6 +18,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES('${camperId}', 'M'||LPAD(MEMBERSEQ.NEXTVAL, 6, '0'), '${camperPw}', '${camperName}', '${phone}', '${email}', SYSDATE)
 	</insert>
 	
+	<!-- 캠퍼 회원 정보 조회 -->
+	<select id="searchCamperId" resultType="com.campick.dto.CamperDTO">
+		SELECT *
+		FROM CAMPER
+		WHERE CAMPERNUM=#{num}
+	</select>
+	
+	<!-- 캠퍼 회원 정보 수정 -->
+	<update id="modifyCamper">
+		UPDATE CAMPER
+		SET CAMPERNAME= #{camperName}, CAMPERPW=#{camperPw}, PHONE= #{phone}, EMAIL= #{email}
+		WHERE CAMPERNUM= #{camperNum}
+	</update>
+	
+	<!-- id 찾기 -->
+	
+	
+	<!-- pw 찾기 -->
+	
+	
+	
 	<!-- 파트너 회원가입 인서트 -->
 	
 </mapper>

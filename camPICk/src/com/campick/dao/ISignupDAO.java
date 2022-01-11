@@ -15,10 +15,16 @@ public interface ISignupDAO
 	public int addCamper(CamperDTO camperDTO);
 	
 	// 캠퍼 정보 조회
-	public CamperDTO searchCamper(String camperId, String camperPw);
+	public CamperDTO searchCamperId(String camperNum);
 	
 	// 캠퍼 정보 수정
 	public int modifyCamper(CamperDTO camperDTO);
+	
+	// 캠퍼 이름, 휴대폰번호로 id 검사
+	public String findId(String name, String phone);
+	
+	// 캠퍼 이름, 휴대폰번호로 pw 검사
+	
 	
 	// 파트너 회원가입
 	
