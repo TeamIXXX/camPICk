@@ -6,6 +6,7 @@
 	
 	String num = (String)session.getAttribute("num");
 	String account = (String)session.getAttribute("account");
+	String loginId = (String)session.getAttribute("loginId");
 
 %>
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
 	{%>
 		<ul class="topmenu">
 			<li class="topmenu">
-				<%=account %>님 반갑습니다. :)
+				<%=loginId %>님 반갑습니다. :)
 			</li>
 			<li class="topmenu">
 				<a href="campick.wei" class="topmenu">HOME</a>

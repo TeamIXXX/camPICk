@@ -7,7 +7,8 @@
 	
 	String num = (String)session.getAttribute("num");
 	String account = (String)session.getAttribute("account");
-	
+	String loginId = (String)session.getAttribute("loginId");
+
 	ArrayList<String> numList = new ArrayList<>();
 	numList.add("7");
 	numList.add("6");
