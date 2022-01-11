@@ -3,12 +3,15 @@
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
+   
+	String num = (String)session.getAttribute("num");
+	String account = (String)session.getAttribute("account");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>파트너메인템플릿</title>
+<title>파트너계정관리</title>
 <style type="text/css">
 
 @font-face 
@@ -19,7 +22,7 @@
      font-style: normal;
 }
 
-*
+.PartnerMainTemplate
 {
 	font-family: 'S-CoreDream-6Bold';
 }
@@ -37,14 +40,26 @@
 		<jsp:include page="TopMenu.jsp"></jsp:include>
 	</div>
 	<div class="partnerMainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title.png" style="width: 400px;">
 	</div>
 	<div class="partnerMainItem">
 		<jsp:include page="PartnerSitemap.jsp"></jsp:include>
 	</div>
 
 	<div class="partnerMainItem">
-		<c:import url="/mycampground.wei"></c:import>
+		<%if(num.equals("0"))
+		{
+		%>
+		<c:import url="/partneraccountapproval.wei"></c:import>
+		<%
+		}
+		else
+		{
+		%>
+		<c:import url="/partneraccountmanage.wei"></c:import>
+		<%
+		}
+		%>
 	</div>
 </div>
 
