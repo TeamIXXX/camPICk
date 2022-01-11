@@ -158,9 +158,42 @@ public class PartnerMainController
 			
 			return "redirect:partnercampick.wei";
 		}
-		
-		
-		
 	}
+	
+	// 계정관리 메뉴 클릭 시 계정관리메인템플릿으로 이동
+	@RequestMapping(value = "partneraccounttemplate.wei", method = RequestMethod.GET)
+	public String toAccount(HttpServletRequest request)
+	{
+		// 세션 처리 추가
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("num")==null)
+		{
+			return "redirect:campick.wei"; 
+		}
+		else if (!session.getAttribute("account").equals("partner")) 
+		{
+			return "redirect:campick.wei";
+		}
+				
+		return "/WEB-INF/view/PartnerMainTemplateAccount.jsp";
+	}
+	
+	// 계정관리메인템플릿에서 승인 전이면 승인현황페이지 로드 
+	@RequestMapping(value = "partneraccountapproval.wei", method = RequestMethod.GET)
+	public String toAccountApproval()
+	{
+		
+		return "/WEB-INF/view/PartnerAccountApproval.jsp";
+	}
+	
+	// 계정관리메인템플릿에서 승인 후 계정관리페이지(회원정보수정) 로드
+	@RequestMapping(value = "partneraccountmanage.wei", method = RequestMethod.GET)
+	public String toAccountManage()
+	{
+		
+		return "";
+	}
+	
 	
 }
