@@ -33,7 +33,7 @@ li.Menu
 
 .menu li
 {
-	margin: 0.5vw auto;
+	margin: 7px auto;
 }
 
 .Menu a
@@ -44,7 +44,7 @@ li.Menu
 .subMenu
 {
 	display: none;
-	font-size: 0.8vw;
+	font-size: small;
 	font-weight: bold;
 	color: #ffffff;
 	text-align: center;
@@ -77,7 +77,7 @@ a.Menu:hover, .subMenu:hover, span.Menu:hover
 		border-radius : 30px;
 		height: 30px;
 		color: black;
-		font-size: 0.9vw;
+		font-size: small;
 		border-color: #45818E;
 		border-style: none;
 		align: center;
