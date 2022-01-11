@@ -1,3 +1,10 @@
+@font-face 
+{
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .partnerSitemapItem ul, .partnerSitemapItem li  
 {
@@ -25,12 +32,19 @@
 	background-color: #C4C4C4;
 	color: #45818E;
 	text-decoration: none;
-	font-size: 1.5vw;
+	font-size: 17px;
+	height: 30pt;
 	font-weight: bold;
 	display: block;
 	padding: 6px;
 	border-right: 2px solid rgba(0, 0, 0, 0.15);
 }
+
+.partnerMainMenu > li > a:hover 
+{
+	background-color: #AAAAAA;
+}
+
 
 .partnerSiteSubMenu 
 {
@@ -46,18 +60,18 @@
 	width: 100%;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 	list-style: none;
+	text-align: center;
+	height: 30pt;
+	padding: 0;
 	display : flex;
 	justify-content : center;
 	align-items : center;
-	text-align: center;
-	height: 3.5vw;
-	padding: 0;
 }
 
 .partnerSiteSubMenu >li >a 
 {
 	color: #45818E;
-	font-size: 1.4vw;
+	font-size: 16px;
 	text-decoration: none;
 	font-weight: bold;
 	vertical-align: middle;

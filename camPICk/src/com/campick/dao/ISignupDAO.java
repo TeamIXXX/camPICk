@@ -5,6 +5,7 @@
 package com.campick.dao;
 
 import com.campick.dto.CamperDTO;
+import com.campick.dto.PartnerDTO;
 
 public interface ISignupDAO
 {
@@ -19,13 +20,13 @@ public interface ISignupDAO
 	
 	// 캠퍼 정보 수정
 	public int modifyCamper(CamperDTO camperDTO);
-	
+
 	// 캠퍼 이름, 휴대폰번호로 id 검사
 	public String findId(String name, String phone);
 	
 	// 캠퍼 이름, 휴대폰번호로 pw 검사
 	
-	
-	// 파트너 회원가입
+	// 파트너 회원가입1(파트너 테이블 인서트, 승인내역테이블 인서트)
+	public int addPartner(PartnerDTO partner);
 	
 }

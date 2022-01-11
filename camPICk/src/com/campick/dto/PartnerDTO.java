@@ -8,7 +8,7 @@ package com.campick.dto;
 public class PartnerDTO
 {
 	private String partnerId, partnerNum, partnerPw, partnerName, partnerPhone;
-	private String businesslicense, email, signUpDat;
+	private String businesslicense, partnerEmail, signUpDate;
 	private String fileRoute, fileName, fileUploadDate;
 	private String approvalStatusName;
 	private int approvalStatusNum;
@@ -62,21 +62,21 @@ public class PartnerDTO
 	{
 		this.businesslicense = businesslicense;
 	}
-	public String getEmail()
+	public String getPartnerEmail()
 	{
-		return email;
+		return partnerEmail;
 	}
-	public void setEmail(String email)
+	public void setPartnerEmail(String email)
 	{
-		this.email = email;
+		this.partnerEmail = email;
 	}
-	public String getSignUpDat()
+	public String getSignUpDate()
 	{
-		return signUpDat;
+		return signUpDate;
 	}
-	public void setSignUpDat(String signUpDat)
+	public void setSignUpDate(String signUpDate)
 	{
-		this.signUpDat = signUpDat;
+		this.signUpDate = signUpDate;
 	}
 	public String getFileRoute()
 	{
@@ -118,8 +118,6 @@ public class PartnerDTO
 	{
 		this.approvalStatusNum = approvalStatusNum;
 	}
-	
-	
 	
 	
 }

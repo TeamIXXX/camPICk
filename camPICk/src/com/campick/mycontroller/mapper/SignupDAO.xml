@@ -38,7 +38,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- pw 찾기 -->
 	
 	
-	
-	<!-- 파트너 회원가입 인서트 -->
+	<!-- 파트너 회원가입1(파트너 테이블 인서트, 승인내역테이블 인서트) -->
+	<insert id="addPartner" statementType="CALLABLE" parameterType="com.campick.dto.PartnerDTO">
+		{call PRC_PARTNER_INSERT 
+			( 	#{partnerId, mode=IN, jdbcType=VARCHAR}
+			  , #{partnerPw, mode=IN, jdbcType=VARCHAR}
+			  , #{partnerName, mode=IN, jdbcType=VARCHAR}
+			  , #{partnerPhone, mode=IN, jdbcType=CHAR}
+			  , #{businesslicense, mode=IN, jdbcType=CHAR}
+			  , #{partnerEmail, mode=IN, jdbcType=VARCHAR}
+			  , #{fileRoute, mode=IN, jdbcType=VARCHAR}
+			  , #{fileName, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</insert>
 	
 </mapper>

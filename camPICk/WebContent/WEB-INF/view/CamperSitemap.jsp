@@ -23,12 +23,14 @@
 				<li><a href="#">camPICk 마켓</a></li>
 			</ul>
 		</li>
-		<li><a href="#">camper'Story</a>
+		<li>
+			<a href="#">camper'Story</a>
 		</li>
 		<li>
 			<a href="#">캠핑크루</a>
 		</li>
-		<li><a href="#">my 캠핑</a>
+		<li>
+			<a href="#">my 캠핑</a>
 			<ul class="siteSubMenu">
 				<li><a href="#">캘린더</a></li>
 				<li><a href="checkPwForm.wei">계정관리</a></li>
