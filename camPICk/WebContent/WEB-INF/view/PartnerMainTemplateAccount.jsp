@@ -22,7 +22,7 @@
      font-style: normal;
 }
 
-.mainContainer
+.PartnerMainTemplate
 {
 	font-family: 'S-CoreDream-6Bold';
 }

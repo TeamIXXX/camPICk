@@ -19,7 +19,7 @@
      font-style: normal;
 }
 
-.mainContainer
+.*
 {
 	font-family: 'S-CoreDream-6Bold';
 }

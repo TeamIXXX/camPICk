@@ -30,7 +30,7 @@
      font-style: normal;
 }
 
-.mainContainer
+.PartnerMain
 {
 	font-family: 'S-CoreDream-6Bold';
 }
