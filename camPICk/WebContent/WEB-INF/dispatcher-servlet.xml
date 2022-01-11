@@ -48,8 +48,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
-	
-	
+
 	<!-- DAO 등록 -->
 	<bean id="accountDAO" class="com.campick.dao.AccountDAO">
 		<property name="dataSource" ref="remoteDataSource"></property>
