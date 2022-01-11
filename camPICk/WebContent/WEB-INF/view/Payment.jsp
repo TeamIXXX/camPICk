@@ -25,6 +25,8 @@
      font-style: normal;
 }
 
+* {	font-family: 'S-CoreDream-6Bold'; }
+
 .mainContainer
 {
 	font-family: 'S-CoreDream-6Bold';

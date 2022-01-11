@@ -111,6 +111,17 @@
 	
 </script>
 <style type="text/css">
+	
+	@font-face 
+	{
+		font-family: 'S-CoreDream-6Bold';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+
+	* {	font-family: 'S-CoreDream-6Bold'; }
+	
 	.form-group > .control-label { padding-left : 30px; }
 	
 	.star { padding : 0 5px; color : red; }
@@ -126,7 +137,7 @@
 </head>
 <body>
 
-	<h1 style="text-align: center;">예약 정보 입력</h1>
+	<h1 style="text-align: center; font-family: 'S-CoreDream-6Bold';">예약 정보 입력</h1><br>
 
 	<form action="bookingmodal.wei" class="form-horizontal" id="bookingForm">
 		<div class="form-group">
@@ -199,9 +210,10 @@
 			<div class="col-xs-6">
 					<!-- 여기 AJAX로 처리 -->
 				<textarea rows="3" cols="50" class="form-control" name="refund" id="refund"
-					readonly="readonly">예약 당일 ~ 3일전 : 결제금액의 30% 환불
-예약 4일전~9일전 : 50% 환불
-예약 10일전까지 : 100% 환불</textarea>
+					readonly="readonly">예약 당일 ~ 3일전 : 결제금액의 ${100- campgroundDTO.policyStandard1 }% 환불
+예약 4일전~9일전 : ${100- campgroundDTO.policyStandard2 }% 환불
+예약 10일전까지 : ${100- campgroundDTO.policyStandard3 }% 환불</textarea>
+
 			</div>
 		</div>
 	

@@ -30,4 +30,7 @@ public interface IBookingDAO
 	
 	// 결제 금액 계산
 	public int getAmount(String roomId, String checkInDate, String checkOutDate) throws SQLException;
+	
+	// 예약 취소 해당 환불 구정 구하기
+	public int getRefundPolicy(String bookingNum) throws SQLException;
 }

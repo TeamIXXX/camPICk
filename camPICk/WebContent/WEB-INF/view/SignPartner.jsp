@@ -3,14 +3,18 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String root = pageContext.getServletContext().getRealPath("/");
+	//C:\FinalCampick\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\camPICk\
+	//System.out.println(root);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Sign.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp%>/css/SignPartner.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/SignPartner.css">
 <script type="text/javascript" src="<%=cp%>/js/util.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/signupFormPartner.js"></script>
 
@@ -250,11 +254,11 @@
 
 		$("#signP").click(function()
 		{
-			if ($("#emailP1").val() != "" && $("#emailP2").val() != "")
+			if ($("#emailP1").val()!="" && $("#emailP2").val()!="")
 			{
 				$("#partnerEmail").val($("#emailP1").val()+"@"+$("#emailP2").val());
 			}
-			
+			//alert("이메일:" + $("#partnerEmail").val())
 			if(infoCheck())
 			{
 				if(confirm("회원가입 하시겠습니까?"))
@@ -263,9 +267,8 @@
 				};
 			};
 		});
-		
+
 	});
-	
 	
 </script>
 
@@ -280,18 +283,18 @@
 	<form class="container" id="pFrm" method="post" enctype="multipart/form-data" action="SignupPartner.wei">
 	
 		<!-- 이메일 주소 -->
-		<input type="hidden" id="partnerEmail" name="email" value="">
+		<input type="hidden" id="partnerEmail" name="partnerEmail">
 			
 		<div class="item">아이디<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="partnerId" maxlength="14" placeholder="영문, 숫자 8~14자 이내">
+			<input type="text" id="partnerId" name="partnerId" maxlength="14" placeholder="영문, 숫자 8~14자 이내">
 			<button type="button" class="" id="duplBtnP">중복확인</button>
 			<br><span class="errMsg" id="duplMsgP"></span>
 		</div>
 		
 		<div class="item">비밀번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="password" id="partnerPw" maxlength="14" placeholder="영문, 숫자 5~14자 이내">
+			<input type="password" id="partnerPw" name="partnerPw" maxlength="14" placeholder="영문, 숫자 5~14자 이내">
 			<br><span class="errMsg" id="pwMsgP"></span>
 		</div>
 		
@@ -303,13 +306,13 @@
 		
 		<div class="item">이름<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="partnerName" maxlength="6" placeholder="한글만 입력 가능">
+			<input type="text" id="partnerName" name="partnerName" maxlength="6" placeholder="한글만 입력 가능">
 			<br><span class="errMsg" id="nameMsgP"></span>
 		</div>
 		
 		<div class="item">휴대폰번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="partnerPhone" placeholder="숫자만 입력">
+			<input type="text" id="partnerPhone" name="partnerPhone" placeholder="숫자만 입력">
 			<button type="button" id="cerNumP">인증번호 발송</button>
 			<br><span class="errMsg" id="chkTelMsgP"></span>
 		</div>
@@ -322,17 +325,17 @@
 		</div>
 		<div class="item">사업자번호<span class="nec">(*)</span></div>
 		<div class="item">
-			<input type="text" id="businesslicense" maxlength="12">
+			<input type="text" id="businesslicense" name="businesslicense" maxlength="12">
 		</div>
 		<div class="item">증빙서류첨부</div>
 		<div class="item">
-			<input type="file" id="fileP">
+			<input type="file" id="partnerSignFile" name="partnerSignFile">
 		</div>
 		
 		<div class="item">이메일<span style="font-size: small;">[선택]</span></div>
 		<div class="item">
-			<input type="text" name="email1" id="emailP1"> @ <input type="text" name="email2" id="emailP2">
-			<select name="selectEmail" id="selectEmailP">
+			<input type="text" name="emailP1" id="emailP1"> @ <input type="text" name="emailP2" id="emailP2">
+			<select name="selectEmailP" id="selectEmailP">
 				<option value="1">직접입력</option>
 				<option value="naver.com">naver.com</option>
 				<option value="gmail.com">gmail.com</option>
@@ -367,7 +370,7 @@
 				<button type="button" id="signP" class="sign">회원가입</button>
 			</div>
 			<div class="sel">
-				<button type="button" class="cancel">취소</button>
+				<button type="button" class="cancel" onclick="location.href='campick.wei'">취소</button>
 			</div>
 		</div>
 	</form>
