@@ -62,6 +62,13 @@ public class SignupController
 		return "/WEB-INF/view/SignOk.jsp";
 	}
 	
+	// id 찾기 폼
+	@RequestMapping(value = "/idFindForm.wei", method = RequestMethod.GET)
+	public String idFindForm()
+	{
+		return "/WEB-INF/view/IdFindForm.jsp";
+	}
+	
 	// 비밀번호 재확인 폼
 	@RequestMapping(value = "/checkPwForm.wei", method = RequestMethod.GET)
 	public String checkPwForm(ModelMap model, HttpServletRequest request)
