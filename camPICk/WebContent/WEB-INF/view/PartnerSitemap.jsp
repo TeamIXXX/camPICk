@@ -18,10 +18,6 @@
 	<ul class="partnerMainMenu">
 		<li>
 			<a href="#">계정 관리</a>
-			<ul class="partnerSiteSubMenu">
-				<li><a href="#">승인현황</a></li>
-				<li><a href="#">계정정보관리</a></li>
-			</ul>
 		</li>
 		<li>
 			<a href="#">예약 관리</a>

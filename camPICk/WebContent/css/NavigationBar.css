@@ -28,8 +28,12 @@ li.Menu
 	color: #ffffff;
 	text-align: center;
 	height: 40px;
-	text-decoration: none;
-	
+	text-decoration: none;	
+}
+
+.menu li
+{
+	margin: 0.5vw auto;
 }
 
 .Menu a
@@ -73,7 +77,7 @@ a.Menu:hover, .subMenu:hover, span.Menu:hover
 		border-radius : 30px;
 		height: 30px;
 		color: black;
-		/* font-size: 15px; */
+		font-size: 0.9vw;
 		border-color: #45818E;
 		border-style: none;
 		align: center;

@@ -42,59 +42,5 @@
 
 .partnerMainMenu > li > a:hover 
 {
-	background-color: #AAAAAA;
-}
-
-
-.partnerSiteSubMenu 
-{
-	background-color: #C4C4C4;
-	opacity: 0;
-	list-style: none;
-	visibility: hidden;
-	padding-right:10pt;
-}
-
-.partnerSiteSubMenu >li 
-{
-	width: 100%;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-	list-style: none;
-	text-align: center;
-	height: 30pt;
-	padding: 0;
-	display : flex;
-	justify-content : center;
-	align-items : center;
-}
-
-.partnerSiteSubMenu >li >a 
-{
-	color: #45818E;
-	font-size: 16px;
-	text-decoration: none;
-	font-weight: bold;
-	vertical-align: middle;
-}
-
-.partnerMainMenu >li:hover .partnerSiteSubMenu 
-{
-	display: block;
-	opacity: 1;
-	visibility: visible;
 	background-color: #FFD03E;
 }
-
-.partnerSiteSubMenu >li:hover 
-{
-	opacity: 1;
-	visibility: visible;
-	background-color: #45818E;
-	color: #FFD03E;
-}
-
-.partnerSiteSubMenu >li:hover > a
-{
-	color: #FFD03E;
-}
-

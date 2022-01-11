@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+.container
+{
+	text-align: center;
+	border: 1px solid #999;
+}
+
+.container h1
+{
+	font-size: 15px;
+	line-height: 30px;
+	font-weight: 500;
+}
+
+.container h2
+{
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 14px;
+	color: #999;
+}
+
+.findId strong
+{
+	display: inline-block;
+	width: 80px;
+	font-weight: normal;
+	text-align: left;
+	line-height: 30px;
+	padding-left: 3px;
+}
+
+legend
+{
+	visibility: hidden;
+}
+
+
+fieldset
+{
+	border: none;
+	width: 340px;
+	margin: 0 auto;
+}
+
+fieldset ul
+{
+	padding-left: 0;
+}
+
+.findId
+{
+	list-style: none;
+	border-bottom: 1px solid;
+	width: 340px;
+}
+
+.findId:nth-child(1)
+{
+	border-top: 1px solid;
+}
+
+.button
+{
+	list-style: none;
+	margin: 0 auto;
+}
+
+.findId input
+{
+	width: 170px;
+	height: 30px;
+    padding: 0;
+    margin: 0;
+    line-height: 30px;
+    border: 0px;
+    background: none;
+}
