@@ -52,7 +52,6 @@
 			ajaxBookingList(num);
 		});
 			
-		
 		$(document).ajaxStart(function()			// ajax 처리시 로딩 gif 추가
 		{
 			// AJAX 시작 시...
@@ -133,7 +132,7 @@
 			
 			,error : function(e)
 			{
-				out = "예약 내역이 없습니다.";
+				out = "<span id='noBookingList'><br>해당하는 결과가 없습니다.</span>";
 				$("#listDiv").html(out);
 			}
 			
@@ -290,7 +289,7 @@
 				$('.bookingDetailCheckInDate').text(checkInDate);
 				$('.bookingDetailCheckOutDate').text(checkOutDate);
 				$('.bookingDetailPaymentDate').text(bookingDate);
-				$('.bookingDetailPaymentAmount').text(paymentAmount);
+				$('.bookingDetailPaymentAmount').text(parseInt(paymentAmount).toLocaleString('ko-KR'));
 				$('.bookingDetailVisitNum').text(visitNum);
 				$('.bookingDetailRequest').text(request);
 				
@@ -320,6 +319,11 @@
 		width: 120px;
 		text-align: right;
 		padding: 3px 2px;
+	}
+	
+	#noBookingList
+	{
+		font-size: xx-large;
 	}
 	
 </style>

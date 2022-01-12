@@ -401,39 +401,39 @@ public class CampgroundDAO implements ICampgroundDAO
 	/////////// 진희, 유동 추가 
 	//픽 하기
 	@Override
-	public int onPick(String camperNum, String campgroundId) throws SQLException
+	public int pickOn(String camperNum, String campgroundId) throws SQLException
+	{
+		int result = 0;
+
+		Connection conn = dataSource.getConnection();
+		
+		String sql =  "INSERT INTO PICK (PICKNUM,CAMPERNUM,CAMPGROUNDID)"
+					+ " VALUES( 'PK' || TO_CHAR( PICKSEQ.NEXTVAL, 'FM000000'), ?, ?)";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+
+		try
 		{
-			int result = 0;
+			pstmt.setString(1, camperNum);
+			pstmt.setString(2, campgroundId);
 
-			Connection conn = dataSource.getConnection();
-			
-			String sql =  "INSERT INTO PICK (PICKNUM,CAMPERNUM,CAMPGROUNDID)"
-						+ " VALUES( 'PK' || TO_CHAR( PICKSEQ.NEXTVAL, 'FM000000'), ?, ?)";
-			
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
 
-			try
-			{
-				pstmt.setString(1, camperNum);
-				pstmt.setString(2, campgroundId);
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		} finally
+		{
+			pstmt.close();
+			conn.close();
+		}
 
-				result = pstmt.executeUpdate();
-
-			} catch (Exception e)
-			{
-				System.out.println(e.toString());
-			} finally
-			{
-				pstmt.close();
-				conn.close();
-			}
-
-			return result;
-		}	
+		return result;
+	}	
 	
 	//픽 해제
 	@Override
-	public int offPick(String camperNum, String campgroundId) throws SQLException
+	public int pickOff(String camperNum, String campgroundId) throws SQLException
 	{
 		int result = 0;
 
@@ -441,7 +441,7 @@ public class CampgroundDAO implements ICampgroundDAO
 		
 		String sql =  "DELETE" 
 					+ " FROM PICK" 
-					+ " WHERE CAMPERNUM=?,CAMPGROUNDID=?";
+					+ " WHERE CAMPERNUM=? AND CAMPGROUNDID=?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -466,15 +466,15 @@ public class CampgroundDAO implements ICampgroundDAO
 	
 	//픽여부 판별
 	@Override
-	public String checkPick(String camperNum, String campgroundId) throws SQLException
+	public String pickCheck(String camperNum, String campgroundId) throws SQLException
 	{
 		String result = null;
 
 		Connection conn = dataSource.getConnection();
 		
-		String sql =  "SELECT NVL(PICKNUM, '0') AS PICKNUM" 
-					+ "FROM PICK" 
-					+ "WHERE CAMPERNUM=?, CAMPERGROUND=?";
+		String sql = "SELECT NVL(PICKNUM, '0') AS PICKNUM" 
+					+ " FROM PICK" 
+					+ " WHERE CAMPERNUM=? AND CAMPGROUNDID=?";
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = null;

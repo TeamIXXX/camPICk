@@ -26,7 +26,6 @@ public class BookingCancelModalController implements Controller
 
 		try
 		{
-			// 원래는 리스트에서 받아오는 값
 			bookingDTO = (BookingDTO) session.getAttribute("bookingDTO");
 			
 	        mav.addObject("bookingDTO" , bookingDTO);

@@ -191,7 +191,6 @@
 	{
 		$("#dialog-confirm").hide();      // #dialog-confirm 숨기기
 		
-		
 		ajaxReviewRequest(1);						// 페이지가 로드될 때 리뷰 ajax 함수 호출
 		
 		$("#sort").change(function()
@@ -301,7 +300,12 @@
 		$("#pickBtn").on("click",function()
 		{
 			$("#pickBtn").toggleClass("active");
-			//토글 class를 뺏다 꼇다
+			
+			//if(this.classList=="active")
+				//alert("픽 상태 + ${campgroundId}");
+			//else
+				//alert("픽 해제 상태 + ${campgroundId}");
+			
 		});
 
 	    
