@@ -22,7 +22,10 @@ public interface ISignupDAO
 	public int modifyCamper(CamperDTO camperDTO);
 
 	// 캠퍼 이름, 휴대폰번호로 id 검사
-	public String findId(String name, String phone);
+	public String findCamperId(String camperName, String phone);
+	
+	// 파트너 이름, 휴대폰번호로 id 검사
+	public String findPartnerId(String partnerName, String partnerPhone);
 	
 	// 캠퍼 이름, 휴대폰번호로 pw 검사
 	
