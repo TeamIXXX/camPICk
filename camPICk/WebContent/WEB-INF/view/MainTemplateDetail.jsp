@@ -8,6 +8,7 @@
 	// 확인을 위한 코드
 	String num = (String)session.getAttribute("num");
 	String account = (String)session.getAttribute("account");
+	String loginId = (String)session.getAttribute("loginId");
 	
 	String campgroundId = request.getParameter("campgroundId");
 

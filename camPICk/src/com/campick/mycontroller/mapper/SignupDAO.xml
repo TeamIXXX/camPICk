@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 캠퍼 비밀번호 재설정 -->
 	
 	
-	<!-- 파트너 회원가입1(파트너 테이블 인서트, 승인내역테이블 인서트) -->
+	<!-- 파트너 회원가입(파트너 테이블 인서트, 승인내역테이블 인서트) -->
 	<insert id="addPartner" statementType="CALLABLE" parameterType="com.campick.dto.PartnerDTO">
 		{call PRC_PARTNER_INSERT 
 			( 	#{partnerId, mode=IN, jdbcType=VARCHAR}
@@ -64,5 +64,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 		}
 	</insert>
+	
+	
+	<!-- 파트너 회원 승인1 - 파일정보가 있는 지 확인 -->
+	
+	
+	<!-- 파트너 회원 승인2 - 마지막 승인내역 상태 확인 -->
+	
 	
 </mapper>
