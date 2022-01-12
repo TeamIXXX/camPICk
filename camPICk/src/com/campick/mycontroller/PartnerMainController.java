@@ -185,10 +185,22 @@ public class PartnerMainController
 	public String toAccountApproval(HttpServletRequest request, ModelMap model)
 	{
 		HttpSession session = request.getSession();
-		session.getAttribute("loginId");
+		String partnerId = (String)session.getAttribute("loginId");
 		
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		PartnerDTO dto = new PartnerDTO();
 		
+		// 승인상태
+		dto = signupDao.getApprovalStatus(partnerId);
+		int approvalStatusNum = dto.getApprovalStatusNum();
+		String approvalStatusName = dto.getApprovalStatusName();
+		
+		// 서류첨부 여부(대기라면)
+		int fileExist = signupDao.getFileExist(partnerId);
+		
+		model.addAttribute("approvalStatusNum", approvalStatusNum);
+		model.addAttribute("approvalStatusName", approvalStatusName);
+		model.addAttribute("fileExist", fileExist);
 		
 		return "/WEB-INF/view/PartnerAccountApproval.jsp";
 	}
