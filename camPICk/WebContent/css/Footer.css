@@ -7,10 +7,9 @@
 	left:0px;
 	bottom:0px;
 	width:100%;
-	color: white;
+	color: #999;
 	padding: 10px 0;
-	margin-top: 20px;
- 	background-color: #a7a9b3;
+	margin-top: 50px;
  	font-size: 14px;
 }
 
@@ -22,12 +21,12 @@
 a.foot
 {
 	text-decoration : none;
-	color:black;
+	color: #999;
 	
 }
 a.foot:link, a.foot:visited
 {
-	color:white;
+	color: #999;
 }
 
 #foot .footmenu .vline

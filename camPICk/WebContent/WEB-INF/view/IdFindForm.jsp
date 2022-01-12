@@ -20,6 +20,8 @@
 		// 라디오버튼에 따른 폼
 		$(".pName").css("display", "none");
 		$(".pPhone").css("display", "none");
+		$(".pCerNum").css("display", "none");
+		$(".pId_btn").css("display", "none");
 		$("input[name=campa]").on("click", function()
 		{
 			var radioV = $("input[name=campa]:checked").val();
@@ -28,39 +30,123 @@
 			{
 				$(".cName").css("display", "block");
 				$(".cPhone").css("display", "block");
+				$(".cCerNum").css("display", "block");
+				$(".cId_btn").css("display", "block");
 				$(".pName").css("display", "none");
 				$(".pPhone").css("display", "none");
+				$(".pCerNum").css("display", "none");
+				$(".pId_btn").css("display", "none");
 			}
 			else if (radioV == "partner")
 			{
 				$(".cName").css("display", "none");
 				$(".cPhone").css("display", "none");
+				$(".cCerNum").css("display", "none");
+				$(".cId_btn").css("display", "none");
 				$(".pName").css("display", "block");
 				$(".pPhone").css("display", "block");
+				$(".pCerNum").css("display", "block");
+				$(".pId_btn").css("display", "block");
 			}
 		});
 		
 		
-		// 랜덤 인증번호 확인
-		$("#chkCerNum").click(function()
+		// 캠퍼 휴대폰 번호 대쉬(-) 자동삽입
+		$("#phone").keyup(function()
+		{
+			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+		});
+		
+
+		// 파트너 휴대폰 번호 대쉬(-) 자동삽입
+		$("#partnerPhone").keyup(function()
+		{
+			$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+		});
+		
+		
+		// 캠퍼 랜덤 인증번호 발송
+		var rCode = randomCode(4);
+		$("#cerCNum").click(function()
+		{
+			if (!$("#phone").val())
+	        {
+				alert("휴대폰번호를 입력해주세요.");
+	            $("#phone").focus();
+	        }
+	         else if ($("#phone").val().length != 13)
+			{
+	        	alert("휴대폰번호를 확인해주세요.");
+	            $("#phone").val("");
+		        $("#phone").focus();
+			}
+			else if ($("#phone").val().length == 13)
+			{
+				$("#recerCNum").val(rCode);
+			}
+		});
+		
+		
+		// 파트너 랜덤 인증번호 발송
+		var rCode = randomCode(4);
+		$("#cerPNum").click(function()
+		{
+			if (!$("#partnerPhone").val())
+	        {
+				alert("휴대폰번호를 입력해주세요.");
+	        }
+	         else if ($("#partnerPhone").val().length != 13)
+			{
+	        	alert("휴대폰번호를 확인해주세요.");
+			}
+			else if ($("#partnerPhone").val().length == 13)
+			{
+				$("#recerPNum").val(rCode);
+			}
+		});
+		
+		
+		// 캠퍼 인증번호 확인
+		$("#chkCerCNum").click(function()
 		{
 			if ($("#phone").val().length != 13)
 			{
-				$("#chkphoneMsg").html("휴대폰번호를 확인해주세요.");
+				alert("휴대폰번호를 확인해주세요.");
 			}
-			else if($("#recerNum").val() != rCode)
+			else if($("#recerCNum").val() != rCode)
 			{
-				$("#chkCerMsg").css("color", "red");
-				$("#chkCerMsg").html("인증번호를 확인해 주십시오.");
+				alert("인증번호를 확인해 주십시오.");
 			}
-			else if ($("#recerNum").val() == rCode)
+			else if ($("#recerCNum").val() == rCode)
 			{
-				$("#chkCerMsg").css("color", "#34aadc");
-				$("#chkCerMsg").html("인증번호가 확인 되었습니다.");
-				$("#chkCerNum").attr("disabled", true);
-				$("#cerNum").attr("disabled", true);
+				alert("인증번호가 확인 되었습니다.");
+				$("#chkCerCNum").attr("disabled", true);
+				$("#cerCNum").attr("disabled", true);
 				$("#phone").attr("readonly", true);
-				$("#recerNum").attr("readonly", true);
+				$("#recerCNum").attr("readonly", true);
+			}
+			
+		});
+		
+		
+		// 파트너 인증번호 확인
+		$("#chkCerPNum").click(function()
+		{
+			if ($("#partnerPhone").val().length != 13)
+			{
+				alert("휴대폰번호를 확인해주세요.");
+			}
+			else if($("#recerPNum").val() != rCode)
+			{
+				alert("인증번호를 확인해 주십시오.");
+			}
+			else if ($("#recerPNum").val() == rCode)
+			{
+				alert("인증번호가 확인 되었습니다.");
+				$("#chkCerPNum").attr("disabled", true);
+				$("#cerPNum").attr("disabled", true);
+				$("#partnerPhone").attr("readonly", true);
+				$("#recerPNum").attr("readonly", true);
 			}
 			
 		});
@@ -92,7 +178,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title2.png">
 	</div>
  
 	<div class="mainItem">
@@ -103,7 +189,7 @@
 		<c:import url="NavigationBar.jsp"></c:import>
 	</div>
 	 
-	<div class="mainItem" style="background-color: none;">
+	<div class="mainItem" style="background-color: none; height: 70vh;">
 
 		<div class="id_find">
 			<h1>아이디찾기</h1>
@@ -120,6 +206,7 @@
 								<input type="radio" id="campa" name="campa" value="camper" checked="checked">
 								캠퍼회원
 							</label>
+							 &nbsp;
 							<label>
 								<input type="radio" id="campa" name="campa" value="partner">
 								파트너회원
@@ -127,33 +214,42 @@
 						</li>
 						<li class="cName">
 							<strong>이름</strong>
-							<input type="text" id="camperName" name="camperName" class="camperName" maxlength="6"
-							 placeholder="이름을 입력해주세요.">
+							<input type="text" id="camperName" name="camperName" class="camperName" maxlength="6">
 						</li>
 						<li class="pName">
 							<strong>이름</strong>
-							<input type="text" id="partnerName" name="partnerName" class="partnerName" maxlength="6"
-							 placeholder="이름을 입력해주세요.">
+							<input type="text" id="partnerName" name="partnerName" class="partnerName" maxlength="6">
 						</li>
 						<li class="cPhone">
 							<strong>휴대폰번호</strong>
-							<input type="text" id="phone" name="phone" class="phone" maxlength="13"
-							 placeholder="회원가입시 등록한 핸드폰번호를 입력해주세요.">
-							<button type="button">인증번호 받기</button><br>
-							<input type="text" id="cerPhone" name="cerPhone" class="cerPhone">
+							<input type="text" id="phone" name="phone" class="phone" maxlength="13">
+							<button type="button" id="cerCNum" class="cerNum">인증번호 받기</button>
 						</li>
 						<li class="pPhone">
 							<strong>휴대폰번호</strong>
-							<input type="text" id="partnerPhone" name="partnerPhone" class="partnerPhone" maxlength="13"
-							 placeholder="회원가입시 등록한 핸드폰번호를 입력해주세요.">
-							<button type="button">인증번호 받기</button><br>
-							<input type="text" id="cerPartnerPhone" name="cerPartnerPhone" class="cerPartnerPhone">
+							<input type="text" id="partnerPhone" name="partnerPhone" class="partnerPhone" maxlength="13">
+							<button type="button" id="cerPNum" class="cerNum">인증번호 받기</button>
+						</li>
+						<li class="cCerNum">
+							<strong>인증번호</strong>
+							<input type="text" id="recerCNum" name="recerCNum" class="recerCNum">
+							<button type="button" id="chkCerCNum" class="cerNum">인증번호 확인</button>
+						</li>
+						<li class="pCerNum">
+							<strong>인증번호</strong>
+							<input type="text" id="recerPNum" name="recerPNum" class="recerPNum">
+							<button type="button" id="chkCerPNum" class="cerNum">인증번호 확인</button>
 						</li>
 					</ul>
 					
-					<ul>
-						<li class="button">
-							<button type="button">아이디찾기</button>
+					<ul class="cId_btn">
+						<li class="button" style="border-bottom: 0px solid;">
+							<button type="button" class="id_btn">아이디찾기</button>
+						</li>
+					</ul>
+					<ul class="pId_btn">
+						<li class="button" style="border-bottom: 0px solid;">
+							<button type="button" class="id_btn">아이디찾기</button>
 						</li>
 					</ul>
 				</fieldset>

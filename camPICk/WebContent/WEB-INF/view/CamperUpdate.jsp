@@ -269,7 +269,7 @@
 	</div>
 	 
 	<div class="mainItem" style="background-color: none;">
-		<div style="margin-top: 50px; font-size: 20px;">
+		<div style="margin-top: 30px; font-size: 17px;">
 			회원정보
 			<hr style="border-top: 3px solid #eee;">
 		</div>

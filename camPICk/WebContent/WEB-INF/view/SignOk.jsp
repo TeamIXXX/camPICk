@@ -42,16 +42,20 @@
 	</div>
 	
 	<div class="item">
-		<div style="font-size: 20px;">회원가입을 축하합니다!</div>
-		<div style="font-size: 15px;">camPICk 회원으로 서비스를 이용하실 수 있습니다.</div>
+		<div style="font-size: 15px;">회원가입을 축하합니다!</div>
+		<div style="font-size: 13px;">camPICk 회원으로 서비스를 이용하실 수 있습니다.</div>
 	</div>
 	
 	<div class="item">
-		<div class="sel">
-			<button type="button" class="btn btn-default" onclick="location.href='loginform.wei'">로그인</button>
+		<div class="sel" style="font-size: 13px;">
+			<button type="button" class="btn btn-default" 
+			style="font-size: 13px;"
+			onclick="location.href='loginform.wei'">로그인</button>
 		</div>
 		<div class="sel">
-			<button type="button" class="btn btn-default" onclick="location.href='campick.wei'">Home</button>
+			<button type="button" class="btn btn-default" 
+			style="font-size: 13px;"
+			onclick="location.href='campick.wei'">Home</button>
 		</div>
 	</div>
 </div>
