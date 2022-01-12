@@ -36,7 +36,7 @@
 		<jsp:include page="TopMenu.jsp"></jsp:include>
 	</div>
 	<div class="mainItemNN" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title2.png">
 	</div>
 	<div class="mainItemNN sitemap" style="z-index: 2;">
 		<jsp:include page="CamperSitemap.jsp"></jsp:include>

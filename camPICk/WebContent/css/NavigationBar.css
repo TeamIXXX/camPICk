@@ -12,12 +12,12 @@ ul.menu
 	width: 95%;
 	list-style-type : none;
 	overflow: hidden;
-	background-color: #45818E;
+	/* background-color: #73c7b9; */
 	padding: 15px;
 	border-radius: 10px;
 	text-align: center;
 	/* background-color: rgba(69, 129, 142, 0.5); */
-	color: #ffffff;
+	color: #000;
 	font-weight: bold;
 	/* font-size: 25px; */
 }
@@ -25,7 +25,7 @@ ul.menu
 li.Menu
 {
 	display: block;
-	color: #ffffff;
+	color: #000;
 	text-align: center;
 	height: 40px;
 	text-decoration: none;	
@@ -46,7 +46,7 @@ li.Menu
 	display: none;
 	font-size: small;
 	font-weight: bold;
-	color: #ffffff;
+	color: #000;
 	text-align: center;
 	height: 20%;
 	text-decoration: none;
@@ -55,12 +55,12 @@ li.Menu
 
 a.Menu:visited
 {
-	color: #ffffff;
+	color: #000;
 }
 
 a.Menu:hover, .subMenu:hover, span.Menu:hover
 {
-	color: #FFD03E;
+	color: #FFD700;
 	cursor: pointer;
 }
 
@@ -74,16 +74,15 @@ a.Menu:hover, .subMenu:hover, span.Menu:hover
 
 .naviSearch
 {
-		border-radius : 30px;
-		height: 30px;
-		color: black;
-		font-size: small;
-		border-color: #45818E;
-		border-style: none;
-		align: center;
-		width: 80%;
-		/* padding-left:15px; */
-		text-align: center;
+	border-radius : 30px;
+	height: 30px;
+	color: black;
+	font-size: small;
+	border: 1px solid #000;
+	align: center;
+	width: 80%;
+	/* padding-left:15px; */
+	text-align: center;
 	
 }
 

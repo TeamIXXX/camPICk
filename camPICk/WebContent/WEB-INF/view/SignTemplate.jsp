@@ -58,7 +58,7 @@
 </head>
 <body>
 
-<div class="item" style="text-align: center; margin: 3% auto; width: 1080px;">
+<div class="item" style="text-align: center; margin: 30px auto; width: 1080px;">
 	<img src="img/logo.png" width="13%;" />
 </div>
 
@@ -75,7 +75,7 @@
 	</div>
 </div>
 
-
+<hr style="width: 800px;">
 <!-- 캠퍼 회원가입 -->
 <div id="cDiv">
 	 <c:import url="/signupCamperForm.wei"></c:import>

@@ -106,7 +106,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title2.png">
 	</div>
  
 	<div class="mainItem">
@@ -128,7 +128,7 @@
 			<hr style="border-top: 3px solid #eee;">
 		</div>
 		
-		<form class="containerPw" id="cFrm" action="camperUpdateForm.wei">
+		<form class="containerPw" id="cFrm" action="camperUpdateForm.wei" method="POST">
 		<!-- 회원번호 -->
 		<input type="hidden" id="camperNum" name="camperNum" value="<%=camperNum %>">
 		

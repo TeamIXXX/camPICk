@@ -49,7 +49,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title2.png">
 	</div>
  
 	<div class="mainItem">

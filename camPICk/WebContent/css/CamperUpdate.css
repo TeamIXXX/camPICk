@@ -7,11 +7,10 @@
 	width: 800px;
 	grid-template-columns: repeat(2, minmax(auto, auto));
 	grid-template-rows: repeat(8, minmax(auto, auto));
-	margin: 0 auto;
-	margin-top: 40px;
+	margin: 40px auto;
 	align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 10px;
 }
 
 .itemC
@@ -30,7 +29,7 @@
 .containerC > div
 , .itemC > .iC
 {
-	margin: 10px;
+	margin: 0 15px;
 }
 
 

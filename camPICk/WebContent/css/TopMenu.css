@@ -9,13 +9,14 @@ ul.topmenu
 {
 	list-style-type: none;
 	margin: 0;
+	margin-right: 40px;
 	padding: 0;
 	overflow: hidden;
 }
 
 li.topmenu
 {
-	margin-left: 1rem;
+	margin-left: 1.5rem;
 	float: left;
 }
 
@@ -30,7 +31,7 @@ a.topmenu:link, a.topmenu:visited
 	text-align: center;
 	text-decoration: none;
 	height: 30px;
-	font-size: 14pt;
+	font-size: small;
 	color: black;
 }
 
@@ -38,7 +39,7 @@ a.topmenu:link, a.topmenu:visited
 a.topmenu:hover, a.topmenu:active
 {
 	text-decoration: none;
-	color: #ffd03e;
+	color: #FFD700;
 }
 
 
