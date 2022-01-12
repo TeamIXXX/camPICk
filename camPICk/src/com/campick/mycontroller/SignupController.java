@@ -254,6 +254,8 @@ public class SignupController
 		return "redirect:signupOkForm.wei";
 	}
 	
+	// (최초 회원가입 이후)
+	// 승인현황 페이지에서 서류 첨부 후 신청/재신청 버튼 클릭 시, 파일정보 업데이트
 	
 	
 
