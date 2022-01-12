@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 찾기 템플릿</title>
+<title>비밀번호 재설정 템플릿</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/IdFindForm.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -192,10 +192,9 @@
 	<div class="mainItem" style="background-color: none; height: 70vh;">
 
 		<div class="id_find">
-			<h1>아이디찾기</h1>
+			<h1>비밀번호 재설정</h1>
 			<h2>
-			이메일 또는 휴대전화번호로 아이디 찾기가 가능합니다.<br>
-			찾기가 어려우시면 고객문의에 글을 남겨주세요.
+			이메일 또는 휴대전화번호로 비밀번호 재설정이 가능합니다.
 			</h2>
 			<form action="">
 				<fieldset class="idField">
@@ -244,12 +243,12 @@
 					
 					<ul class="cId_btn">
 						<li class="button" style="border-bottom: 0px solid;">
-							<button type="button" class="id_btn">아이디찾기</button>
+							<button type="button" class="id_btn">비밀번호 재설정</button>
 						</li>
 					</ul>
 					<ul class="pId_btn">
 						<li class="button" style="border-bottom: 0px solid;">
-							<button type="button" class="id_btn">아이디찾기</button>
+							<button type="button" class="id_btn">비밀번호 재설정</button>
 						</li>
 					</ul>
 				</fieldset>

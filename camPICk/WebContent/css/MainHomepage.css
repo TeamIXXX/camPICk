@@ -16,8 +16,8 @@
 	display: grid;
 	width: 1080px;
 	grid-template-columns: 260px 800px;
-	grid-template-rows: 80px 50px 810px repeat(auto-fill, minmax(0%, auto));
-	grid-gap: 20px;
+	grid-template-rows: 50px 60px repeat(auto-fill, minmax(0%, auto));
+	grid-gap: 10px;
 	margin: 0 auto;
 }
 
@@ -66,7 +66,7 @@
 
 #mainLogo > img
 { 
-	width: 100%;
+	width: 90%;
 	object-fit: cover; 
 }
 

@@ -62,11 +62,18 @@ public class SignupController
 		return "/WEB-INF/view/SignOk.jsp";
 	}
 	
-	// id 찾기 폼
+	// 아이디 찾기 폼
 	@RequestMapping(value = "/idFindForm.wei", method = RequestMethod.GET)
 	public String idFindForm()
 	{
 		return "/WEB-INF/view/IdFindForm.jsp";
+	}
+	
+	// 비밀번호 재설정 폼
+	@RequestMapping(value = "/pwResetForm.wei", method = RequestMethod.GET)
+	public String pwResetForm()
+	{
+		return "/WEB-INF/view/PwResetForm.jsp";
 	}
 	
 	// 비밀번호 재확인 폼
@@ -100,7 +107,7 @@ public class SignupController
 	}
 	
 	// 캠퍼 회원 정보 수정 폼
-	@RequestMapping(value = "/camperUpdateForm.wei", method = RequestMethod.GET)
+	@RequestMapping(value = "/camperUpdateForm.wei", method = RequestMethod.POST)
 	public String camperUpdateForm(ModelMap model, HttpServletRequest request)
 	{
 		HttpSession session = request.getSession();

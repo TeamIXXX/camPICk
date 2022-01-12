@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.campick.dao.IPartnerCampgroundDAO;
 import com.campick.dao.IPartnerMainDAO;
+import com.campick.dao.ISignupDAO;
 import com.campick.dao.ISurveyResultDAO;
 import com.campick.dao.ISurveyResultPartnerDAO;
 import com.campick.dto.CampgroundDTO;
@@ -181,8 +182,13 @@ public class PartnerMainController
 	
 	// 계정관리메인템플릿에서 승인 전이면 승인현황페이지 로드 
 	@RequestMapping(value = "partneraccountapproval.wei", method = RequestMethod.GET)
-	public String toAccountApproval()
+	public String toAccountApproval(HttpServletRequest request, ModelMap model)
 	{
+		HttpSession session = request.getSession();
+		session.getAttribute("loginId");
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
 		
 		return "/WEB-INF/view/PartnerAccountApproval.jsp";
 	}

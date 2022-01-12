@@ -98,7 +98,7 @@
 
 			<div class="col-md-12">
 				<a href="idFindForm.wei" class="btn">아이디찾기</a> | 
-				<a href="" class="btn">비밀번호찾기</a>
+				<a href="pwResetForm.wei" class="btn">비밀번호찾기</a>
 			</div>
 		</div>
 	

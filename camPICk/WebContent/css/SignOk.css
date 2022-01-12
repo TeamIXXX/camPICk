@@ -7,7 +7,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 60px;
+	gap: 50px;
 }
 
 .item
@@ -28,5 +28,5 @@
 
 .item>.sel
 {
-	margin: 10px 20px;
+	margin: 10px 10px;
 }
