@@ -407,8 +407,8 @@ public class CampgroundDAO implements ICampgroundDAO
 
 		Connection conn = dataSource.getConnection();
 		
-		String sql =  "INSERT INTO PICK (PICKNUM,CAMPERNUM,CAMPGROUNDID)"
-					+ " VALUES( 'PK' || TO_CHAR( PICKSEQ.NEXTVAL, 'FM000000'), ?, ?)";
+		String sql =  "INSERT INTO PICK (PICKNUM,CAMPERNUM,CAMPGROUNDID)" 
+					+ " VALUES( 'PK' || TO_CHAR( (SELECT NVL(MAX(SUBSTR(PICKNUM, 3)), 0) FROM PICK) + 1, 'FM00000'), ?, ?)"; 
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -472,7 +472,7 @@ public class CampgroundDAO implements ICampgroundDAO
 
 		Connection conn = dataSource.getConnection();
 		
-		String sql = "SELECT NVL(PICKNUM, '0') AS PICKNUM" 
+		String sql = "SELECT PICKNUM" 
 					+ " FROM PICK" 
 					+ " WHERE CAMPERNUM=? AND CAMPGROUNDID=?";
 		

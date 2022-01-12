@@ -155,17 +155,22 @@
 <title>CampgroundDetail.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/RoomList.css">
 
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery.min.js"></script>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 
-<script type="text/javascript" src="http://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <script type="text/javascript" src="js/bootstrap.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/css/CampgroundDetail.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=cp %>/css/CampgroundDetail.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 <script type="text/javascript">
 	
@@ -295,21 +300,6 @@
 	         });
 	                  
 	      });
-		
-		//픽하기 탭 클릭시 css처리
-		$("#pickBtn").on("click",function()
-		{
-			$("#pickBtn").toggleClass("active");
-			
-			//if(this.classList=="active")
-				//alert("픽 상태 + ${campgroundId}");
-			//else
-				//alert("픽 해제 상태 + ${campgroundId}");
-			
-		});
-
-	    
-	
 	});
 
 	
@@ -555,63 +545,93 @@
 	                        + "&checkOutDate=" + $('#datepicker2').val());
 	}
 
-
+	
+	// 픽 기능 추가
+	$(function()
+	{
+		//픽하기 탭 클릭시 css처리
+		$("#pickBtn").on("click",function()
+		{
+			if($("#pickBtn").hasClass("active"))
+				$(location).attr("href", "pickon.wei?campgroundId=${campgroundId}");
+				//alert("픽 상태 + ${campgroundId}");
+			else
+				$(location).attr("href", "pickoff.wei?campgroundId=${campgroundId}");
+		});
+		
+	});
 
 </script>
 <style type="text/css">
-
-	#pickBtn.active { background-color: #FFD032;}
-
+#pickBtn.active {
+	background-color: #FFD032;
+}
 </style>
 
 </head>
 <body>
 
-<!-- 리뷰할 예약번호 선택 모달 div -->
-<div id="dialog-confirm" title="리뷰를 남길 예약번호를 선택하세요.">
-	<c:forEach var="bookcheck" items="${bookingCheckList }">
-		<c:if test="${bookcheck.reviewCheck eq 0 }">
-			<label>
-			<input type="radio" name="book" value="${bookcheck.bookingNum }">
-			${bookcheck.bookingNum } (${bookcheck.checkInDate } ~ ${bookcheck.checkOutDate })
-			</label>
-		</c:if>
-	</c:forEach>
-</div>
+	<!-- 리뷰할 예약번호 선택 모달 div -->
+	<div id="dialog-confirm" title="리뷰를 남길 예약번호를 선택하세요.">
+		<c:forEach var="bookcheck" items="${bookingCheckList }">
+			<c:if test="${bookcheck.reviewCheck eq 0 }">
+				<label> <input type="radio" name="book"
+					value="${bookcheck.bookingNum }"> ${bookcheck.bookingNum }
+					(${bookcheck.checkInDate } ~ ${bookcheck.checkOutDate })
+				</label>
+			</c:if>
+		</c:forEach>
+	</div>
 
-<!-- 모달(리뷰수정)을 위한 div -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">리뷰 수정</h4>
-			</div>
-			<div class="modal-body">
-				<input type="hidden" id="modalCotentNum" />
-				<textarea rows="10" cols="60" id="modalContent" maxlength="250" style="resize: none;"></textarea>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-				<button type="button" class="btn btn-primary" onclick="modifyReview()">저장</button>
+	<!-- 모달(리뷰수정)을 위한 div -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">리뷰 수정</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="modalCotentNum" />
+					<textarea rows="10" cols="60" id="modalContent" maxlength="250"
+						style="resize: none;"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary"
+						onclick="modifyReview()">저장</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- 모달 div end -->
+	<!-- 모달 div end -->
 
-<div class="container-cgd">
+	<div class="container-cgd">
 		<div class="item-cgd">
 			<div class="top">
 				<span style="font-size: 30px;">${campgroundListDetail.campgroundName }</span>
-				<span style="margin-left: 10px; font-size: 16px;">PICK<span class='badge'>${campgroundListDetail.pick }</span></span>
-				<span style="font-size: 16px;">REVIEW<span class='badge'>${campgroundListDetail.review }</span></span>
-				
+				<span style="margin-left: 10px; font-size: 16px;">PICK<span
+					class='badge'>${campgroundListDetail.pick }</span></span> <span
+					style="font-size: 16px;">REVIEW<span class='badge'>${campgroundListDetail.review }</span></span>
+
 				<button type="button" class="btn1" id="shareBtn">공유하기</button>
-				<button type="button" class="btn1" id="pickBtn">픽하기</button>
+				
+				<c:choose>
+					<c:when test="${pickNum eq null}">
+						<button type="button" class="btn1 active" id="pickBtn">픽하기</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="btn1" id="pickBtn">픽하기</button>
+					</c:otherwise>
+				</c:choose>
+
 			</div>
 		</div>
-		
+
 		<div class="item-cgd">
 			<div class="image-cgd">
 				<div class="image-box">
@@ -627,61 +647,74 @@
 		</div>
 
 		<div class="item-cgd">
-			<table class="item-table">				
+			<table class="item-table">
 				<tr>
 					<td colspan="1" class="campgroundInfoTitle">주소</td>
-					<td colspan="3" class="campgroundInfoValue">${campgroundListDetail.address1 } ${campgroundListDetail.address2 } ${campgroundListDetail.address3 }</td>
+					<td colspan="3" class="campgroundInfoValue">${campgroundListDetail.address1 }
+						${campgroundListDetail.address2 } ${campgroundListDetail.address3 }</td>
 				</tr>
-				<tr><td colspan="4" style="height: 15px;"></td></tr>
+				<tr>
+					<td colspan="4" style="height: 15px;"></td>
+				</tr>
 				<tr>
 					<td class="campgroundInfoTitle">대표번호</td>
 					<td class="campgroundInfoValue">${campgroundListDetail.tel }</td>
 				</tr>
-				<tr><td colspan="4" style="height: 15px;"></td></tr>
+				<tr>
+					<td colspan="4" style="height: 15px;"></td>
+				</tr>
 				<tr>
 					<td class="campgroundInfoTitle">객실유형</td>
-					<td class="campgroundInfoValue">
-						<c:forEach var="roomTypeName" items="${roomTypeName }">
+					<td class="campgroundInfoValue"><c:forEach var="roomTypeName"
+							items="${roomTypeName }">
 							◈ ${roomTypeName }
-						</c:forEach>
-					</td>
+						</c:forEach></td>
 				</tr>
-				<tr><td colspan="4" style="height: 15px;"></td></tr>
+				<tr>
+					<td colspan="4" style="height: 15px;"></td>
+				</tr>
 				<tr>
 					<td class="campgroundInfoTitle">편의시설</td>
-					<td class="campgroundInfoValue">
-						<c:forEach var="comforts" items="${comforts }">
+					<td class="campgroundInfoValue"><c:forEach var="comforts"
+							items="${comforts }">
 							◈ ${comforts.optionName }
-						</c:forEach>
-					</td>
+						</c:forEach></td>
 				</tr>
-				<tr><td colspan="4" style="height: 15px;"></td></tr>
+				<tr>
+					<td colspan="4" style="height: 15px;"></td>
+				</tr>
 				<tr>
 					<td class="campgroundInfoTitle">즐길거리</td>
-					<td class="campgroundInfoValue">
-						<c:forEach var="entertain" items="${entertain }">
+					<td class="campgroundInfoValue"><c:forEach var="entertain"
+							items="${entertain }">
 							◈ ${entertain.optionName }
-						</c:forEach>
-					</td>
+						</c:forEach></td>
 				</tr>
-				<tr><td colspan="4" style="height: 15px;"></td></tr>
+				<tr>
+					<td colspan="4" style="height: 15px;"></td>
+				</tr>
 				<tr>
 					<td class="campgroundInfoTitle">체크인 / 체크아웃</td>
-					<td class="campgroundInfoValue">${campgroundListDetail.checkInDate }시 / ${campgroundListDetail.checkOutDate }시</td>
+					<td class="campgroundInfoValue">${campgroundListDetail.checkInDate }시
+						/ ${campgroundListDetail.checkOutDate }시</td>
 				</tr>
-				
-				<tr><td colspan="4" style="height: 30px;"></td></tr>
-				
+
+				<tr>
+					<td colspan="4" style="height: 30px;"></td>
+				</tr>
+
 				<tr>
 					<td colspan="4" class="campgroundInfoValue">"${campgroundListDetail.extraInfo }"</td>
 				</tr>
-				
-				<tr><td colspan="4" style="height: 30px;"></td></tr>
-				 
+
+				<tr>
+					<td colspan="4" style="height: 30px;"></td>
+				</tr>
+
 			</table>
-			
+
 			<table class="item-table">
-			<tr>
+				<tr>
 					<td class="btnTable">
 						<button type="button" onclick="fnMove()" class="btn0">예약</button>
 					</td>
@@ -690,59 +723,63 @@
 						if(br!=bcSize)
 						{
 						%>
-							<button type="button" onclick="" class="btn0" id="reviewBtn" >설문리뷰 등록</button>
-						<%
+						<button type="button" onclick="" class="btn0" id="reviewBtn">설문리뷰
+							등록</button> <%
 						}
 						%>
 					</td>
-					
+
 				</tr>
 			</table>
 		</div>
-		
-		<br><br>
-		
+
+		<br>
+		<br>
+
 		<!-- 통계 차트 영역 시작 -->
 		<div class="col-md-12" style="font-size: large;">캠퍼 통계</div>
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false" 
-		style="padding: 10%; padding-top: 2px; ">
+		<div id="carousel-example-generic" class="carousel slide"
+			data-ride="carousel" data-interval="false"
+			style="padding: 10%; padding-top: 2px;">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-			  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			  <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			  <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			  <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-			  <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="4"></li>
 			</ol>
-			
+
 			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox" >
-			  <div class="item active chart-content">
-			    <canvas id="myChart1"></canvas>
-			  </div>
-			  <div class="item chart-content">
-			    <canvas id="myChart2"></canvas>
-			  </div>
-			  <div class="item chart-content">
-			    <canvas id="myChart3"></canvas>
-			  </div>
-			  <div class="item chart-content">
-			    <canvas id="myChart4"></canvas>
-			  </div>
-			  <div class="item chart-content">
-			    <canvas id="myChart5"></canvas>
-			  </div>
+			<div class="carousel-inner" role="listbox">
+				<div class="item active chart-content">
+					<canvas id="myChart1"></canvas>
+				</div>
+				<div class="item chart-content">
+					<canvas id="myChart2"></canvas>
+				</div>
+				<div class="item chart-content">
+					<canvas id="myChart3"></canvas>
+				</div>
+				<div class="item chart-content">
+					<canvas id="myChart4"></canvas>
+				</div>
+				<div class="item chart-content">
+					<canvas id="myChart5"></canvas>
+				</div>
 			</div>
-			
+
 			<!-- Controls -->
-			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
-			  </a>
-			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
-			  </a>
+			<a class="left carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
 		</div>
 
 
@@ -751,82 +788,81 @@
 			<div class="col-md-12" style="font-size: large;">캠퍼 리뷰</div>
 			<div class="col-md-12" style="text-align: right;">
 				<select name="sort" id="sort" style="font-size: small;">
-					<option value="createDate" value2="asc" selected="selected">리뷰작성일 오름차순</option>
+					<option value="createDate" value2="asc" selected="selected">리뷰작성일
+						오름차순</option>
 					<option value="createDate" value2="desc">리뷰작성일 내림차순</option>
 					<option value="fireWood" value2="asc">평점 적은 순</option>
 					<option value="fireWood" value2="desc">평점 많은 순</option>
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="col-md-12" id="hide" style="text-align: center;">
-			<img src="img/loading_01.gif" alt="loading" style="align-items: center; width: 60px;"/>
+			<img src="img/loading_01.gif" alt="loading"
+				style="align-items: center; width: 60px;" />
 		</div>
 		<div class="col-md-12" id="reviewList">
 			<!-- 리뷰 영역 -->
 		</div>
-			
+
 		<div class="col-md-12">
-			<div style="text-align: center; margin: 30px auto;" id="pageIndexList">
+			<div style="text-align: center; margin: 30px auto;"
+				id="pageIndexList">
 				<!-- 리뷰 페이징 영역 -->
 			</div>
 		</div>
-		
 
-		
-		
+
+
+
 		<div class="item-cgd">
-		         <span class="errMsg">날짜를 선택하세요.</span><br>
-		         <input type="text" id="datepicker1" class="textbox" style="width: 100px; text-align: center;"> 
-		          ~ <input type="text" id="datepicker2" class="textbox" style="width: 100px; text-align: center;">
-		    </div>
-		    
-		    
-		    <div class="item-cgd" id="main">
-		     
-				<input class="tab" id="tab1" type="radio" name="tabs" checked="checked" value="90">  
-				<label for="tab1">전체</label>
-				
-				<input class="tab" id="tab2" type="radio" name="tabs" value="91">
-				<label for="tab2">오토캠핑</label>
-				
-				<input class="tab" id="tab3" type="radio" name="tabs" value="92">
-				<label for="tab3">글램핑</label>
-				
-				<input class="tab" id="tab4" type="radio" name="tabs" value="93">
-				<label for="tab4">카라반</label>
-				
-				<input class="tab" id="tab5" type="radio" name="tabs" value="94">
-				<label for="tab5">차박</label>
-				
-				<section id="content1" style="margin-bottom:20px; height: 100%;">
-					<!--  전체 객실 리스트 출력 -->
-				</section>
-				
-				<section id="content2" style="margin-bottom:20px;">
-					<!--  전체 오토캠핑 리스트 출력 -->
-				</section>
-				
-				<section id="content3" style="margin-bottom:20px;">
-					<!--  전체 글램핑 리스트 출력 -->
-				</section>
-				
-				<section id="content4" style="margin-bottom:20px;">
-					<!--  전체 카라반 리스트 출력 -->
-				</section>
-				
-				<section id="content5" style="margin-bottom:20px;">
-					<!--  전체 차박 리스트 출력 -->
-				</section>
-		  
-		  </div>
-		
-		
-		
-</div>
+			<span class="errMsg">날짜를 선택하세요.</span><br> <input type="text"
+				id="datepicker1" class="textbox"
+				style="width: 100px; text-align: center;"> ~ <input
+				type="text" id="datepicker2" class="textbox"
+				style="width: 100px; text-align: center;">
+		</div>
 
 
-<script type="text/javascript">
+		<div class="item-cgd" id="main">
+
+			<input class="tab" id="tab1" type="radio" name="tabs"
+				checked="checked" value="90"> <label for="tab1">전체</label> <input
+				class="tab" id="tab2" type="radio" name="tabs" value="91"> <label
+				for="tab2">오토캠핑</label> <input class="tab" id="tab3" type="radio"
+				name="tabs" value="92"> <label for="tab3">글램핑</label> <input
+				class="tab" id="tab4" type="radio" name="tabs" value="93"> <label
+				for="tab4">카라반</label> <input class="tab" id="tab5" type="radio"
+				name="tabs" value="94"> <label for="tab5">차박</label>
+
+			<section id="content1" style="margin-bottom: 20px; height: 100%;">
+				<!--  전체 객실 리스트 출력 -->
+			</section>
+
+			<section id="content2" style="margin-bottom: 20px;">
+				<!--  전체 오토캠핑 리스트 출력 -->
+			</section>
+
+			<section id="content3" style="margin-bottom: 20px;">
+				<!--  전체 글램핑 리스트 출력 -->
+			</section>
+
+			<section id="content4" style="margin-bottom: 20px;">
+				<!--  전체 카라반 리스트 출력 -->
+			</section>
+
+			<section id="content5" style="margin-bottom: 20px;">
+				<!--  전체 차박 리스트 출력 -->
+			</section>
+
+		</div>
+
+
+
+	</div>
+
+
+	<script type="text/javascript">
 	
 	// 차트 그리기 옵션 준비
 	var strOptionName1 = [<%=strOptionName1%>];

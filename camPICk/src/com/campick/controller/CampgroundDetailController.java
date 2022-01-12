@@ -161,8 +161,9 @@ public class CampgroundDetailController implements Controller
 			mav.addObject("bookingCheckList", bookingCheckList);
 			
 			// 픽한 캠핑장인지 아닌지 체크
-			String pickCheck = campgroundDao.pickCheck((String)session.getAttribute("num"), campgroundId);
-			mav.addObject("pickCheck", pickCheck);
+			String pickNum = campgroundDao.pickCheck((String)session.getAttribute("num"), campgroundId);
+			
+			mav.addObject("pickNum", pickNum);
 			
 			mav.setViewName("/WEB-INF/view/CampgroundDetail.jsp");
 			
