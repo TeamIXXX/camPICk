@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/* 
+.partnerOkContainer
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows:1fr 1fr 1fr 1fr 1fr;
+	align-items:center;
+	text-align: center;
+	margin:0 auto;
+	height: 100vh;
+	width:80%;
+}
+ */
+ 
+ .partnerApprovalTitle
+ {
+ 	font-size: x-large;
+ 	text-align: left;
+ 	padding-left: 50px;
+ 	margin-bottom: 100px;
+ }
+ 
+ .partnerOkItem1, .partnerOkItem2
+ {
+ 	/* text-align: center; */
+ }
+ 
+.partnerFile
+{
+	/* text-align: right; */
+}
+
+.partnerSubmit
+{
+	/* text-align: left; */
+}
+
+.approvalArrow
+{
+	height: 100px;
+	line-height: 100px;
+}
+
+.arrow
+{
+	width: 50px;
+	height: 50px;
+}
+
+.approvalstatusCircle
+{
+	font-size: large;
+	border-radius: 50%;
+	background-color: gray;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.red
+{
+	background-color: red;
+}
+
+
+
+
+
+
+
+

@@ -33,8 +33,9 @@ public interface ISignupDAO
 	public int addPartner(PartnerDTO partner);
 	
 	// 파트너 회원 승인1 - 파일정보가 있는 지 확인
-	public int getFileExist();
+	public int getFileExist(String partnerId);
 	
 	// 파트너 회원 승인2 - 마지막 승인내역 상태 확인
+	public PartnerDTO getApprovalStatus(String partnerId);
 	
 }

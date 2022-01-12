@@ -67,9 +67,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 파트너 회원 승인1 - 파일정보가 있는 지 확인 -->
+	<select id="getFileExist" resultType="java.lang.Integer">
+		SELECT COUNT(LICENSE_FILENAME) AS FILENAME
+		FROM PARTNER
+		WHERE PARTNERID = '${partnerId}'	
+	</select>
 	
 	
 	<!-- 파트너 회원 승인2 - 마지막 승인내역 상태 확인 -->
+	<select id="getApprovalStatus" resultType="com.campick.dto.PartnerDTO">
+		SELECT NVL(APPROVALSTATUSNUM, 0) AS APPROVALSTATUSNUM
+		     , NVL((SELECT APPROVALSTATUSNAME FROM APPROVAL_STATUS WHERE APPROVALSTATUSNUM = AH.APPROVALSTATUSNUM), '대기') AS APPROVALSTATUSNAME
+		FROM APPROVAL_HISTORY AH
+		WHERE PARTNERID = '${partnerId}'
+		  AND APPROVALDATE = (SELECT MAX(APPROVALDATE) FROM APPROVAL_HISTORY WHERE PARTNERID = '${partnerId}')
+	</select>
 	
 	
 </mapper>
