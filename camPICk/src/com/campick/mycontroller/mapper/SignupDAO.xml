@@ -83,7 +83,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  AND APPROVALDATE = (SELECT MAX(APPROVALDATE) FROM APPROVAL_HISTORY WHERE PARTNERID = '${partnerId}')
 	</select>
 	
-	<!-- 파트너 서류 첨부(회원가입 이후 업데이트) -->
 	
+	<!-- 파트너 서류 첨부(회원가입 이후 업데이트) -->
+	<insert id="updateFile" statementType="CALLABLE" parameterType="com.campick.dto.PartnerDTO">
+		{call PRC_PARTNER_FILEUPDATE 
+			( 	#{partnerId, mode=IN, jdbcType=VARCHAR}
+			  , #{fileRoute, mode=IN, jdbcType=VARCHAR}
+			  , #{fileName, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</insert>
 	
 </mapper>

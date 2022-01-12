@@ -182,7 +182,7 @@ public class SignupController
 	}
 	
 	// 파트너 회원가입(insert)
-	@RequestMapping(value = "/SignupPartner.wei", method = RequestMethod.POST)
+	@RequestMapping(value = "/signuppartner.wei", method = RequestMethod.POST)
 	public String partnerSignup(HttpServletRequest request)
 	{
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
@@ -256,7 +256,42 @@ public class SignupController
 	
 	// (최초 회원가입 이후)
 	// 승인현황 페이지에서 서류 첨부 후 신청/재신청 버튼 클릭 시, 파일정보 업데이트
-	
+	@RequestMapping(value = "signuppartnerfileupdate.wei", method = RequestMethod.POST)
+	public String partnerSignupFileUpdate(HttpServletRequest request)
+	{
+		HttpSession session = request.getSession();
+		String partnerId = (String)session.getAttribute("loginId");
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		PartnerDTO partner = new PartnerDTO();
+		
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String fileRoute = root + "saveFile" + File.separator + "licenseFiles";	
+		File dir = new File(fileRoute);
+		if (!dir.exists())
+			dir.mkdirs();
+		
+		String encType = "UTF-8";					//-- 인코딩 방식
+		int maxFileSize = 10*1024*1024;
+		
+		try
+		{
+			MultipartRequest multi = null;
+			multi = new MultipartRequest(request, fileRoute, maxFileSize, encType, new DefaultFileRenamePolicy());
+			String fileName = multi.getFilesystemName("partnerSignFile");
+			partner.setFileRoute(fileRoute);
+			partner.setFileName(fileName);
+			partner.setPartnerId(partnerId);
+			
+			signupDao.updateFile(partner);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "redirect:partneraccounttemplate.wei";
+	}
 	
 
 }

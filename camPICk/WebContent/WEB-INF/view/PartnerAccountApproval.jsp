@@ -34,18 +34,45 @@
 			var str2 = "";
 			if (fileExist=="0")		// 첨부한 파일 없음
 			{
-
+				$("#approval1").addClass("red");
+				$("#approval2").removeClass("red");
+				$("#approval3").removeClass("red");
+				$("#fileArea").html("<input type='file' id='ex_filename' name='partnerSignFile'>");
+				$("#btns").html("<button type='button' id='submitBtn'>신청</button>");
 			}
 			else							// 첨부한 파일 있음
 			{
-
+				$("#approval1").removeClass("red");
+				$("#approval2").addClass("red");
+				$("#approval3").removeClass("red");
+				$("#fileArea").html("서류첨부 완료. 승인처리 진행 중입니다.")
+				$("#btns").html("");
 			}
 			
 		}
 		else if(approvalStatusNum=="2")	// 반려 상태
 		{
-
+			$("#approval1").removeClass("red");
+			$("#approval2").removeClass("red");
+			$("#approval3").addClass("red");
+			$("#approval3").html("반려");
+			$("#fileArea").html("승인 결과 : 반려. 서류 재첨부 바랍니다.<br><input type='file' id='ex_filename' name='partnerSignFile'>");
+			$("#btns").html("<button type='button' id='submitBtn'>재신청</button>");
 		}
+		
+		
+		$("#submitBtn").click(function()
+		{
+			if (!$("#ex_filename").val())
+			{
+				alert("파일을 첨부해주세요.");
+				return;
+				
+			};
+
+			$("#fileUpdateForm").submit();
+			
+		});
 		
 	});
 
@@ -54,24 +81,29 @@
 <body>
 	<div class="col-md-12 partnerOkContainer">
 		<div class="col-md-12 partnerApprovalTitle">
-			승 인 현 황
+			[ 승 인 현 황 ]
 		</div>
 		
 		<div class="col-md-12 partnerOkItem1">
-			<div class="col-md-3 approvalstatus" id="approval1"><div class="approvalstatusCircle red">임시회원</div></div>
-			<div class="col-md-1 approvalArrow"><img src="img/arrow.png" class="arrow"></div>
-			<div class="col-md-3 approvalstatus" id="approval2"><div class="approvalstatusCircle">승인대기</div></div>
-			<div class="col-md-1 approvalArrow"><img src="img/arrow.png" class="arrow"></div>
-			<div class="col-md-3 approvalstatus" id="approval3"><div class="approvalstatusCircle" id="appResult">승인/반려</div></div>
+			<div class="col-md-1"></div>
+			<div class="col-md-2 approvalstatus"><div class="approvalstatusCircle red" id="approval1">임시회원</div></div>
+			<div class="col-md-2 approvalArrow"><img src="img/arrow.png" class="arrow"></div>
+			<div class="col-md-2 approvalstatus"><div class="approvalstatusCircle" id="approval2">승인대기</div></div>
+			<div class="col-md-2 approvalArrow"><img src="img/arrow.png" class="arrow"></div>
+			<div class="col-md-2 approvalstatus"><div class="approvalstatusCircle" id="approval3">승인/반려</div></div>
+			<div class="col-md-1"></div>
 		</div>
 		
-		<div class="col-md-12 partnerOkItem2">
-			<div><input type="file" id="ex_filename" class=""></div>
-			<div class="btns">
-				<button type="submit" id="submit" >신청</button>
-				<button type="submit" id="submit">재신청</button>
+		<form id="fileUpdateForm" enctype="multipart/form-data" action="signuppartnerfileupdate.wei" method="post">
+			<div class="col-md-12 partnerOkItem2" style="text-align: center;">
+				<div id="fileArea" style="text-align: center;">
+					<!-- <input type="file" id="ex_filename" class="" name="partnerSignFile"> -->
+				</div>
+				<div class="btns" id="btns">
+					<!-- <button type="button" id="submitBtn">신청</button> -->
+				</div>
 			</div>
-		</div>
+		</form>
 		
 	</div>
 
