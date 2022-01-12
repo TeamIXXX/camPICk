@@ -21,9 +21,24 @@
  	margin-bottom: 100px;
  }
  
- .partnerOkItem1, .partnerOkItem2
+  .partnerOkItem2
  {
- 	/* text-align: center; */
+ 	margin: 40px auto;
+ 	padding: 5px;
+ }
+ 
+ .partnerOkItem2 input
+ , .partnerOkItem2 .btns
+ {
+ 	width: fit-content;
+ 	margin: 30px auto;
+ }
+ 
+ 
+ 
+ .partnerSubmit
+ {
+ 	/* display: flex; */
  }
  
 .partnerFile

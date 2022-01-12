@@ -66,17 +66,12 @@
 		</div>
 		
 		<div class="col-md-12 partnerOkItem2">
-			<div class="col-md-6 partnerFile" id="fileUpload">
-				<label for="ex_filename">업로드</label>
-				<div><input type="file" id="ex_filename" class=""></div>
-	        </div>
-			
-			<div class="col-md-6 partnerSubmit" id="submitArea">
-				<button type="submit" id="submit">신청</button>
+			<div><input type="file" id="ex_filename" class=""></div>
+			<div class="btns">
+				<button type="submit" id="submit" >신청</button>
 				<button type="submit" id="submit">재신청</button>
 			</div>
 		</div>
-
 		
 	</div>
 
