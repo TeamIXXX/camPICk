@@ -9,8 +9,17 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기 템플릿</title>
-<%-- <link rel="stylesheet" type="text/css" href="<%=cp%>/css/IdFindForm.css"> --%>
+<link rel="stylesheet" type="text/css" href="<%=cp%>/css/IdFindForm.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
+<style type="text/css">
+
+#logo:hover
+{
+	cursor: pointer;
+}
+
+</style>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -151,6 +160,12 @@
 			
 		});
 		
+		$("#cId_btn").click(function()
+		{
+			$("#idFrm").submit();
+		});
+		
+		
 	});
 
 	
@@ -178,7 +193,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title2.png">
+		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem">
@@ -197,24 +212,59 @@
 			이메일 또는 휴대전화번호로 아이디 찾기가 가능합니다.<br>
 			찾기가 어려우시면 고객문의에 글을 남겨주세요.
 			</h2>
-			<form action="">
+			<form action="idFind.wei" id="idFrm" method="post">
 				<fieldset class="idField">
 					<legend class="leg">아이디찾기</legend>
 					<ul>
+						<li class="userType">
+							<label>
+								<input type="radio" id="campa" name="campa" value="camper" checked="checked">
+								캠퍼회원
+							</label>
+							 &nbsp;
+							<label>
+								<input type="radio" id="campa" name="campa" value="partner">
+								파트너회원
+							</label>
+						</li>
 						<li class="cName">
-							<strong>아이디</strong>
-							<input type="text" id="id" name="id" class="id" value="${id }">
+							<strong>이름</strong>
+							<input type="text" id="camperName" name="camperName" class="camperName" maxlength="6">
+						</li>
+						<li class="pName">
+							<strong>이름</strong>
+							<input type="text" id="partnerName" name="partnerName" class="partnerName" maxlength="6">
+						</li>
+						<li class="cPhone">
+							<strong>휴대폰번호</strong>
+							<input type="text" id="phone" name="phone" class="phone" maxlength="13">
+							<button type="button" id="cerCNum" class="cerNum">인증번호 받기</button>
+						</li>
+						<li class="pPhone">
+							<strong>휴대폰번호</strong>
+							<input type="text" id="partnerPhone" name="partnerPhone" class="partnerPhone" maxlength="13">
+							<button type="button" id="cerPNum" class="cerNum">인증번호 받기</button>
+						</li>
+						<li class="cCerNum">
+							<strong>인증번호</strong>
+							<input type="text" id="recerCNum" name="recerCNum" class="recerCNum">
+							<button type="button" id="chkCerCNum" class="cerNum">인증번호 확인</button>
+						</li>
+						<li class="pCerNum">
+							<strong>인증번호</strong>
+							<input type="text" id="recerPNum" name="recerPNum" class="recerPNum">
+							<button type="button" id="chkCerPNum" class="cerNum">인증번호 확인</button>
 						</li>
 					</ul>
 					
 					<ul class="cId_btn">
 						<li class="button" style="border-bottom: 0px solid;">
-							<button type="button" class="id_btn">아이디찾기</button>
+							<button type="button" class="id_btn" id="cId_btn">아이디찾기</button>
 						</li>
 					</ul>
 					<ul class="pId_btn">
 						<li class="button" style="border-bottom: 0px solid;">
-							<button type="button" class="id_btn">아이디찾기</button>
+							<button type="button" class="id_btn" id="pId_btn">아이디찾기</button>
 						</li>
 					</ul>
 				</fieldset>

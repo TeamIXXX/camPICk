@@ -6,7 +6,7 @@
 	display: grid;
 	width: 800px;
 	grid-template-columns: repeat(2, minmax(auto, auto));
-	grid-template-rows: repeat(8, minmax(auto, auto));
+	grid-template-rows: repeat(9, minmax(auto, auto));
 	margin: 40px auto;
 	align-items: center;
     justify-content: center;

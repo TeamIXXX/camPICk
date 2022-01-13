@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sign.jsp</title>
+<title>camperUpdate.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/CamperUpdate.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
 
@@ -30,6 +30,11 @@
 .mainContainer
 {
 	font-family: 'S-CoreDream-6Bold';
+}
+
+#logo:hover
+{
+	cursor: pointer;
 }
 
 </style>
@@ -257,7 +262,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem">
@@ -286,13 +291,19 @@
 				<input type="text" id="camperId" name="camperId" value="${camper.camperId }" disabled="disabled">
 			</div>
 			
-			<div class="itemC">비밀번호<span class="nec">(*)</span></div>
+			<div class="itemC">현재 비밀번호<span class="nec">(*)</span></div>
+			<div class="itemC">
+				<input type="password" id="nowPw" name="nowPw" value="${camper.camperId }" disabled="disabled">
+				<br><span class="errMsg" id="pwMsg"></span>
+			</div>
+			
+			<div class="itemC">수정할 비밀번호<span class="nec">(*)</span></div>
 			<div class="itemC">
 				<input type="password" id="camperPw" name="camperPw" maxlength="14">
 				<br><span class="errMsg" id="pwMsg"></span>
 			</div>
 			
-			<div class="itemC">비밀번호 확인<span class="nec">(*)</span></div>
+			<div class="itemC">수정 비밀번호 확인<span class="nec">(*)</span></div>
 			<div class="itemC">
 				<input type="password" name="pw2" id="pw2" maxlength="14">
 				<br><span class="errMsg" id="pw2Msg"></span>
