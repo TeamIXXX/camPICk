@@ -30,14 +30,20 @@ public class PickOffController implements Controller
 		
 		HttpSession session = request.getSession();
 		
+		
 		try
 		{
 			String camperNum = (String)session.getAttribute("num");
 			String campgroundId = request.getParameter("campgroundId");
 			
 			campgroundDao.pickOff(camperNum, campgroundId);
+
+			// pickList 여부에 따라 돌아가는 페이지를 다르게 한다.
+			if (request.getParameter("pickList") != null)
+				mav.setViewName("redirect:bookinglist.wei?pickList="+ request.getParameter("pickList") );
+			else
+				mav.setViewName("redirect:campickdetail.wei?campgroundId="+campgroundId);
 			
-			mav.setViewName("redirect:campickdetail.wei?campgroundId="+campgroundId);
 			
 		} catch (Exception e)
 		{

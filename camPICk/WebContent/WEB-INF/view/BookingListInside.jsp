@@ -20,13 +20,22 @@
 <script type="text/javascript">
 	
 	var num = <%=num%>;
-
+	
 	$(function()
 	{
-		
-		$("#bookingListLi").addClass("active");
-		ajaxBookingList(num);
-		
+		// 픽한 캠핑장에서 리다이렉트인 경우 바로 픽한 캠핑장 리스트로 이어지게
+		if( ${param.pickList eq null})
+		{
+			$("#bookingListLi").addClass("active");
+			ajaxBookingList(num);
+		}
+		else 
+		{
+			$("#pickCampgroundLi").addClass("active");
+			$(".selectOption").css("display", "none");
+			ajaxPickList(num)
+		}	
+			
 		
 		// 탭 클릭시 탭 전환되는 css 처리, 예약 리스트 요청
 		$("#bookingListLi > a").on("click", function()
@@ -347,7 +356,7 @@
 					
 					out += "	</div>";
 					out += "	<div class='item_bookinglist' style='text-align: center;'>";
-					out += "		<button type='button' class='btn1' id='pickBtn'>픽 해제</button><br><br><br>";
+					out += "		<button type='button' class='btn1' id='pickBtn' onclick='location.href=\"pickoff.wei?campgroundId=" + campgroundId + "&pickList=yes\"'>픽 해제</button><br><br><br>";
 					out += "		PICK  <span class='badge badge-pill'> " + pick + " </span><br>";
 					out += "		REVIEW  <span class='badge rounded-pill'> " + review + " </span><br>";
 					out += "	</div>";
@@ -459,26 +468,6 @@
 	<div id="listDiv">
 		<!-- 이용내역 AJAX 출력 div -->
 	</div>
-
-
-	<!-- <div class='container_bookinglist'>
-		<div class='item_bookinglist'>
-			<img src='img/campingjang1.jpg' class='image-room'>
-		</div>
-		<div class='item_bookinglist'>
-			<a href="#" class='bookingCPground'><p class="campName">캠핑장 이름</p></a> 
-				<span style="font-size: 15px;">주소</span><br> 
-				캠핑장 소개<br>  
-				<span class='badge rounded-pill'>장작점수</span> firewood / 5 <br> 
-				<span class='firewoods'><img src="img/blackwood.png" width="35px"></span><br>
-		</div>
-		<div class='item_bookinglist' style="text-align: center;">
-			<button type="button" class="btn1" id="pickBtn">픽 해제</button><br><br><br>
-			PICK  <span class='badge badge-pill'> pick 수 </span><br>
-			REVIEW  <span class='badge rounded-pill'> review 수 </span><br>
-		</div>
-	</div> -->
-
 
 <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
 	<div class="modal-dialog">

@@ -558,7 +558,6 @@
 			else
 				$(location).attr("href", "pickoff.wei?campgroundId=${campgroundId}");
 		});
-		
 	});
 
 </script>
@@ -624,7 +623,7 @@
 						<button type="button" class="btn1 active" id="pickBtn">픽하기</button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" class="btn1" id="pickBtn">픽하기</button>
+						<button type="button" class="btn1" id="pickBtn">픽 해제하기</button>
 					</c:otherwise>
 				</c:choose>
 
