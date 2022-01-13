@@ -13,34 +13,35 @@
 }
  */
  
- .partnerApprovalTitle
- {
- 	font-size: x-large;
- 	text-align: left;
- 	padding-left: 50px;
- 	margin-bottom: 100px;
- }
- 
-  .partnerOkItem2
- {
- 	margin: 40px auto;
- 	padding: 5px;
- }
- 
- .partnerOkItem2 input
- , .partnerOkItem2 .btns
- {
- 	width: fit-content;
- 	margin: 30px auto;
- }
- 
- 
- 
- .partnerSubmit
- {
- 	/* display: flex; */
- }
- 
+.partnerApprovalTitle
+{
+	font-size: x-large;
+	text-align: left;
+	margin: 100px 100px;
+	
+}
+
+ .partnerOkItem2
+{
+	margin: 40px auto;
+	padding: 5px;
+}
+
+.partnerOkItem2 input
+, .partnerOkItem2 .btns
+, .partnerOkItem2 div
+{
+	width: fit-content;
+	margin: 30px auto;
+}
+
+
+
+.partnerSubmit
+{
+	/* display: flex; */
+}
+
 .partnerFile
 {
 	/* text-align: right; */
@@ -53,8 +54,9 @@
 
 .approvalArrow
 {
-	height: 100px;
-	line-height: 100px;
+	height: 120px;
+	line-height: 120px;
+	text-align: center;
 }
 
 .arrow
@@ -68,9 +70,9 @@
 	font-size: large;
 	border-radius: 50%;
 	background-color: gray;
-	width: 100px;
-	height: 100px;
-	line-height: 100px;
+	width: 120px;
+	height: 120px;
+	line-height: 120px;
 	margin: 0 auto;
 	text-align: center;
 }

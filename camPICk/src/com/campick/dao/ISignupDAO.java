@@ -39,4 +39,7 @@ public interface ISignupDAO
 	// 파트너 회원 승인2 - 마지막 승인내역 상태 확인
 	public PartnerDTO getApprovalStatus(String partnerId);
 	
+	// 파트너 서류 첨부(회원가입 이후 업데이트)
+	public int updateFile(PartnerDTO partner);
+	
 }

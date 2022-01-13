@@ -7,41 +7,44 @@ package com.campick.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import com.campick.dao.IBookingDAO;
-import com.campick.dto.BookingDTO;
+import com.campick.dao.ICampgroundDAO;
 
-public class AjaxBookingDetailModalController implements Controller
+public class PickOffController implements Controller
 {
-	private IBookingDAO bookingDao;
+	private ICampgroundDAO campgroundDao;
 	
-	public void setBookingDao(IBookingDAO bookingDao)
+	public void setCampgroundDao(ICampgroundDAO campgroundDao)
 	{
-		this.bookingDao = bookingDao;
+		this.campgroundDao = campgroundDao;
 	}
 	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		ModelAndView mav = new ModelAndView();
-		BookingDTO bookingDTO = new BookingDTO();
+		
+		HttpSession session = request.getSession();
+		
 		try
 		{
-			String bookingNum = request.getParameter("bookingNum");
+			String camperNum = (String)session.getAttribute("num");
+			String campgroundId = request.getParameter("campgroundId");
 			
-			bookingDTO = bookingDao.searchBookingNum(bookingNum);
+			campgroundDao.pickOff(camperNum, campgroundId);
 			
-			mav.addObject("bookingDTO", bookingDTO);
+			mav.setViewName("redirect:campickdetail.wei?campgroundId="+campgroundId);
 			
 		} catch (Exception e)
 		{
 			System.out.println(e.toString());
 		}
 		
-		mav.setViewName("/WEB-INF/view/AjaxBookingDetailModal.jsp");
+		
 		return mav;
 	}
 	

@@ -16,34 +16,40 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
 
 <style type="text/css">
-	.containerPw
-	{
-	    margin: 40px auto;
-		display: grid;
-		height: 20vh;
-		grid-template-columns: 100px 230px;
-		grid-template-rows: repeat(auto-fit, minmax(0, auto));
-		justify-content: center;
-		align-items: center;
-	}
-	
-	.itemPw:nth-last-child(1)
-	{
-		grid-column: 1 / 3;
-		margin: 0 auto;
-		padding-top: 30px;
-	}
-	
-	.txt
-	{
-		margin: 40px auto;
-	    padding-top: 160px;
-	    font-size: 11px;
-		background: url(//image.makeshop.co.kr/makeshop/d3/basic_simple/member/bg_reconfirm.gif) 50% 0 no-repeat;
-		text-align: center;
-		line-height: 20px;
-		color: #7f7f7f;
-	}
+.containerPw
+{
+    margin: 40px auto;
+	display: grid;
+	height: 20vh;
+	grid-template-columns: 100px 230px;
+	grid-template-rows: repeat(auto-fit, minmax(0, auto));
+	justify-content: center;
+	align-items: center;
+}
+
+.itemPw:nth-last-child(1)
+{
+	grid-column: 1 / 3;
+	margin: 0 auto;
+	padding-top: 30px;
+}
+
+.txt
+{
+	margin: 40px auto;
+    padding-top: 160px;
+    font-size: 11px;
+	background: url(//image.makeshop.co.kr/makeshop/d3/basic_simple/member/bg_reconfirm.gif) 50% 0 no-repeat;
+	text-align: center;
+	line-height: 20px;
+	color: #7f7f7f;
+}
+
+#logo:hover
+{
+	cursor: pointer;
+}
+
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -106,7 +112,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title2.png">
+		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem">

@@ -43,9 +43,6 @@ public class BookingListController implements Controller
 				return mav;
 			}
 			
-			// 연결 전이라서 고정으로 줌
-			//mav.addObject("num", num);
-			
 			mav.setViewName("/WEB-INF/view/BookingList.jsp");
 			
 		} catch (Exception e)

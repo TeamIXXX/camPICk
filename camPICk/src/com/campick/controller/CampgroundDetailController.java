@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.campick.dao.CampgroundDAO;
 import com.campick.dao.ICampgroundDAO;
 import com.campick.dao.ICampgroundOptionDAO;
 import com.campick.dao.IRoomDAO;
@@ -159,6 +160,10 @@ public class CampgroundDetailController implements Controller
 			
 			mav.addObject("bookingCheckList", bookingCheckList);
 			
+			// 픽한 캠핑장인지 아닌지 체크
+			String pickNum = campgroundDao.pickCheck((String)session.getAttribute("num"), campgroundId);
+			
+			mav.addObject("pickNum", pickNum);
 			
 			mav.setViewName("/WEB-INF/view/CampgroundDetail.jsp");
 			
