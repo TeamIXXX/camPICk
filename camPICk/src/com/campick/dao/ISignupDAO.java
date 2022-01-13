@@ -7,6 +7,9 @@ package com.campick.dao;
 import com.campick.dto.CamperDTO;
 import com.campick.dto.PartnerDTO;
 
+import org.apache.ibatis.annotations.Param;
+
+
 public interface ISignupDAO
 {
 	// 아이디중복체크
@@ -21,13 +24,11 @@ public interface ISignupDAO
 	// 캠퍼 정보 수정
 	public int modifyCamper(CamperDTO camperDTO);
 
-	// 캠퍼 이름, 휴대폰번호로 id 검사
-	public String findCamperId(String camperName, String phone);
+	// 이름, 휴대폰번호로 아이디 검사
+	public String findId(@Param("camperName")String camperName, @Param("phone")String phone);
 	
-	// 파트너 이름, 휴대폰번호로 id 검사
-	public String findPartnerId(String partnerName, String partnerPhone);
-	
-	// 캠퍼 이름, 휴대폰번호로 pw 검사
+	// 이름, 휴대폰번호로 비밀번호 검사
+	/* public String findPartnerId(String partnerName, String partnerPhone); */
 	
 	// 파트너 회원가입(파트너 테이블 인서트, 승인내역테이블 인서트)
 	public int addPartner(PartnerDTO partner);

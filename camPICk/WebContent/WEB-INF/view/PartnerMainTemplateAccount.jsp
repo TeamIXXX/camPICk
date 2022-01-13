@@ -28,6 +28,11 @@
 	font-family: 'S-CoreDream-6Bold';
 }
 
+#logo:hover
+{
+	cursor: pointer;
+}
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
@@ -41,7 +46,7 @@
 		<jsp:include page="TopMenu.jsp"></jsp:include>
 	</div>
 	<div class="partnerMainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png" style="width: 400px;">
+		<img src="<%=cp%>/img/logo_title.png" style="width: 400px;" onclick="location.href='campick.wei'" id="logo">
 	</div>
 	<div class="partnerMainItem">
 		<jsp:include page="PartnerSitemap.jsp"></jsp:include>

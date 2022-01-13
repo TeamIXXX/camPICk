@@ -3,6 +3,10 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String num = (String)session.getAttribute("num");
+	String account = (String)session.getAttribute("account");
+	String loginId = (String)session.getAttribute("loginId");
 %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +14,44 @@
 <meta charset="UTF-8">
 <title>PartnerSitemap.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/PartnerSitemap.css">
+<script type="text/javascript">
+
+	$(function()
+	{
+		if (<%=num%>=="0")
+		{
+			$("#myBooking").click(function()
+			{
+				alert("회원 승인 완료 후 이용 가능합니다.");
+				return;
+			});
+			$("#myCampground").click(function()
+			{
+				alert("회원 승인 완료 후 이용 가능합니다.");
+				return;
+			});
+			$("#myQnA").click(function()
+			{
+				alert("회원 승인 완료 후 이용 가능합니다.");
+				return;
+			});
+		}
+		else
+		{
+			$("#myCampground").click(function()
+			{			
+				$(this).attr("href", "mycampgroundtemplate.wei");
+				
+			});
+			
+			$("#myAccount").click(function()
+			{
+				$(this).attr("href", "partneraccounttemplate.wei");
+			});
+		}
+	});
+
+</script>
 </head>
 <body>
 
@@ -17,16 +59,16 @@
 <div class="partnerSitemapItem">
 	<ul class="partnerMainMenu">
 		<li>
-			<a href="#">계정 관리</a>
+			<a href="" id="myAccount">계정 관리</a>
 		</li>
 		<li>
-			<a href="#">예약 관리</a>
+			<a href="" id="myBooking">예약 관리</a>
 		</li>
 		<li>
-			<a href="mycampgroundtemplate.wei">내 캠핑장 관리</a>
+			<a href="" id="myCampground">내 캠핑장 관리</a>
 		</li>
 		<li>
-			<a href="#">고객 문의</a>
+			<a href="" id="myQnA">고객 문의</a>
 		</li>
 	</ul>
 </div>
