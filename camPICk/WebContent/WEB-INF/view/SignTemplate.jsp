@@ -28,6 +28,11 @@
 	font-family: 'S-CoreDream-6Bold';
 }
 
+#logo:hover
+{
+	cursor: pointer;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -59,7 +64,7 @@
 <body>
 
 <div class="item" style="text-align: center; margin: 30px auto; width: 1080px;">
-	<img src="img/logo.png" width="13%;" />
+	<img src="img/logo.png" width="13%;" onclick="location.href='campick.wei'" id="logo"/>
 </div>
 
 <div class="itemSel">

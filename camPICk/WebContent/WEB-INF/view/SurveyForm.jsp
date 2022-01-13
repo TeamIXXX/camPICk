@@ -28,6 +28,11 @@
 	font-family: 'S-CoreDream-6Bold';
 }
 
+#logo:hover
+{
+	cursor: pointer;
+}
+
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -110,7 +115,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem">

@@ -30,6 +30,11 @@
 	font-family: 'S-CoreDream-6Bold';
 }
 
+#logo:hover
+{
+	cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -38,7 +43,7 @@
 <div class="container">
 
 	<div class="item">
-		<img src="img/logo.png" width="13%;" />
+		<img src="img/logo.png" width="13%;" onclick="location.href='campick.wei'" id="logo"/>
 	</div>
 	
 	<div class="item">

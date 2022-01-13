@@ -102,7 +102,7 @@
 			<span class="Menu" onclick="camping()" style="font-size: medium;">my 캠핑 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"
 			style="vertical-align: middle; font-size: small;"></span></span>
 			<a href="" class="subMenu" id="calender">캘린더</a>
-			<a href="" class="subMenu" id="member">계정관리</a>
+			<a href="checkPwForm.wei" class="subMenu" id="member">계정관리</a>
 			<a href="bookinglist.wei" class="subMenu" id="camping">my 캠핑장</a>
 			<a href="" class="subMenu" id="story">my stroy</a>
 			<a href="" class="subMenu" id="crew">my 크루</a>
