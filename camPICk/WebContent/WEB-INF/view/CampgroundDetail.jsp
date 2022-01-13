@@ -563,9 +563,8 @@
 
 </script>
 <style type="text/css">
-#pickBtn.active {
-	background-color: #FFD032;
-}
+	#pickBtn.active { background-color: #FFD032; }
+	#pickBtn.active:hover { background-color: #F8BB00; }
 </style>
 
 </head>
