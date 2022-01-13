@@ -35,7 +35,7 @@
 <body>
 
 <div style="text-align: center; margin-top: 7%; margin-bottom: 3%;">
-	<img src="img/logo.png" width="10%;" />
+	<a href="campick.wei"><img src="img/logo.png" width="10%;" /></a>
 </div>
 
 <div class="col-md-12" id="login" style="width: 400px; float: none; margin: 0 auto; text-align: center;">
