@@ -4,6 +4,9 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%
+	String camperId = request.getParameter("camperId");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,28 +200,26 @@
 			이메일 또는 휴대전화번호로 아이디 찾기가 가능합니다.<br>
 			찾기가 어려우시면 고객문의에 글을 남겨주세요.
 			</h2>
-			<form action="">
 				<fieldset class="idField">
 					<legend class="leg">아이디찾기</legend>
 					<ul>
 						<li class="cName">
 							<strong>아이디</strong>
-							<input type="text" id="id" name="id" class="id" value="${id }">
+							<input type="text" id="id" name="id" class="id" value="<%=camperId %>">
 						</li>
 					</ul>
 					
 					<ul class="cId_btn">
 						<li class="button" style="border-bottom: 0px solid;">
-							<button type="button" class="id_btn">아이디찾기</button>
+							<button type="button" class="id_btn">아이디 찾기</button>
 						</li>
 					</ul>
 					<ul class="pId_btn">
 						<li class="button" style="border-bottom: 0px solid;">
-							<button type="button" class="id_btn">아이디찾기</button>
+							<button type="button" class="id_btn">비밀번호 찾기</button>
 						</li>
 					</ul>
 				</fieldset>
-			</form>
 		</div>
 		
 	</div>

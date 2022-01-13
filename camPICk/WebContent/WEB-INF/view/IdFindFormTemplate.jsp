@@ -203,7 +203,7 @@
 			이메일 또는 휴대전화번호로 아이디 찾기가 가능합니다.<br>
 			찾기가 어려우시면 고객문의에 글을 남겨주세요.
 			</h2>
-			<form action="idFind.wei" id="idFrm">
+			<form action="idFind.wei" id="idFrm" method="post">
 				<fieldset class="idField">
 					<legend class="leg">아이디찾기</legend>
 					<ul>
@@ -220,7 +220,7 @@
 						</li>
 						<li class="cName">
 							<strong>이름</strong>
-							<input type="text" id="name" name="name" class="camperName" maxlength="6">
+							<input type="text" id="camperName" name="camperName" class="camperName" maxlength="6">
 						</li>
 						<li class="pName">
 							<strong>이름</strong>

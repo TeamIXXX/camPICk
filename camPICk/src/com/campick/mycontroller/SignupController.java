@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,14 @@ public class SignupController
 	@RequestMapping(value = "/idFindForm.wei", method = RequestMethod.GET)
 	public String idFindForm()
 	{
-		return "/WEB-INF/view/IdFindForm.jsp";
+		return "/WEB-INF/view/IdFindFormTemplate.jsp";
+	}
+	
+	// 아이디 찾기 결과 폼
+	@RequestMapping(value = "/idFindResultForm.wei", method = RequestMethod.GET)
+	public String idFindResultForm()
+	{
+		return "/WEB-INF/view/IdFindResultFormTemplate.jsp";
 	}
 	
 	// 비밀번호 재설정 폼
@@ -133,7 +141,7 @@ public class SignupController
 		
 		model.addAttribute("camper", signupDao.searchCamperId(num));
 		
-		return "/WEB-INF/view/CamperUpdate.jsp";
+		return "/WEB-INF/view/CamperUpdateTemplate.jsp";
 	}
 	
 	
@@ -255,6 +263,26 @@ public class SignupController
 	}
 	
 	
-	
+	// 아이디 찾기
+	@RequestMapping(value="/idFind.wei", method = RequestMethod.POST)
+	public String findId(ModelMap model, HttpServletRequest request)
+	{
+		String result = null;
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		String camperName = request.getParameter("camperName");
+		String phone = request.getParameter("phone");
+		//System.out.println(camperName);
+		//System.out.println(phone);
+		
+		model.addAttribute("camperId", signupDao.findId(camperName, phone));
+		//System.out.println(signupDao.findId(camperName, phone));
+		
+		result="redirect:idFindResultForm.wei";
+		
+		return result;
+		
+	}
 
 }

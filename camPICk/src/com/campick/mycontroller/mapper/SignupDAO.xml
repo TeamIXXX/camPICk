@@ -32,22 +32,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CAMPERNUM= #{camperNum}
 	</update>
 	
-	<!-- 캠퍼 아이디 찾기 -->
-	<select id="findCamperId" resultType="java.lang.String">
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="java.lang.String">
 		SELECT CAMPERID
 		FROM CAMPER
-		WHERE CAMPERNAME= #{camperName}, PHONE= #{phone}
-	</select>
-	
-	<!-- 파트너 아이디 찾기 -->
-	<select id="findPartnerId" resultType="java.lang.String">
-		SELECT PARTNERID
-		FROM PARTNER
-		WHERE PARTNERNAME= #{partnerName}, PARTNERPHONE= #{partnerPhone}
+		WHERE CAMPERNAME= #{camperName} AND PHONE= #{phone}
 	</select>
 	
 	
-	<!-- 캠퍼 비밀번호 재설정 -->
+	<!-- 비밀번호 재설정 -->
 	
 	
 	<!-- 파트너 회원가입(파트너 테이블 인서트, 승인내역테이블 인서트) -->

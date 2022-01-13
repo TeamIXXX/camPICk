@@ -286,13 +286,19 @@
 				<input type="text" id="camperId" name="camperId" value="${camper.camperId }" disabled="disabled">
 			</div>
 			
-			<div class="itemC">비밀번호<span class="nec">(*)</span></div>
+			<div class="itemC">현재 비밀번호<span class="nec">(*)</span></div>
+			<div class="itemC">
+				<input type="password" id="nowPw" name="nowPw" value="${camper.camperId }" disabled="disabled">
+				<br><span class="errMsg" id="pwMsg"></span>
+			</div>
+			
+			<div class="itemC">수정할 비밀번호<span class="nec">(*)</span></div>
 			<div class="itemC">
 				<input type="password" id="camperPw" name="camperPw" maxlength="14">
 				<br><span class="errMsg" id="pwMsg"></span>
 			</div>
 			
-			<div class="itemC">비밀번호 확인<span class="nec">(*)</span></div>
+			<div class="itemC">수정 비밀번호 확인<span class="nec">(*)</span></div>
 			<div class="itemC">
 				<input type="password" name="pw2" id="pw2" maxlength="14">
 				<br><span class="errMsg" id="pw2Msg"></span>
