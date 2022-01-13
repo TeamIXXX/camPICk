@@ -32,6 +32,12 @@
 	font-family: 'S-CoreDream-6Bold';
 }
 
+#logo:hover
+{
+	cursor: pointer;
+}
+
+
 </style>
 
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplateNN.css">
@@ -46,7 +52,7 @@
 		<jsp:include page="TopMenu.jsp"></jsp:include>
 	</div>
 	<div class="mainItemNN" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
 	<div class="mainItemNN">
 		<jsp:include page="CamperSitemap.jsp"></jsp:include>
