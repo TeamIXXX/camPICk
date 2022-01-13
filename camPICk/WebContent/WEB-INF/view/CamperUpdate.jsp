@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sign.jsp</title>
+<title>camperUpdate.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/CamperUpdate.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
 
@@ -30,6 +30,11 @@
 .mainContainer
 {
 	font-family: 'S-CoreDream-6Bold';
+}
+
+#logo:hover
+{
+	cursor: pointer;
 }
 
 </style>
@@ -257,7 +262,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem">

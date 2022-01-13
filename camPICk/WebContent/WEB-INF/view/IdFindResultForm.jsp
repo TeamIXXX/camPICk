@@ -11,6 +11,14 @@
 <title>아이디 찾기 템플릿</title>
 <%-- <link rel="stylesheet" type="text/css" href="<%=cp%>/css/IdFindForm.css"> --%>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
+<style type="text/css">
+
+#logo:hover
+{
+	cursor: pointer;
+}
+
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -178,7 +186,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title2.png">
+		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem">
