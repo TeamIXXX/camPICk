@@ -278,7 +278,7 @@
 <input type="hidden" id="checked_phoneP" value="">
 
 <!-- 파트너 회원가입 -->
-	<form class="containerP" id="pFrm" method="post" enctype="multipart/form-data" action="SignupPartner.wei">
+	<form class="containerP" id="pFrm" method="post" enctype="multipart/form-data" action="signuppartner.wei">
 	
 		<!-- 이메일 주소 -->
 		<input type="hidden" id="partnerEmail" name="partnerEmail">

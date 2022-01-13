@@ -75,7 +75,8 @@ public class BookingDAO implements IBookingDAO
 					+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE" 
 					+ ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE" 
 					+ ", VISITNUM, PAYMENTAMOUNT" 
-					+ ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
+					+ ", NVL(REQUEST, ' ') AS REQUEST"
+					+ ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
 					+ ", STATUS" 
 					+ " FROM" 
 					+ " (" 
@@ -92,7 +93,7 @@ public class BookingDAO implements IBookingDAO
 					+ " FROM BOOKINGVIEW_TOTAL" 
 					+ " )" 
 					+ " WHERE MEMBERNUM = ? "
-		            + " ORDER BY BOOKINGDATE DESC";  
+		            + " ORDER BY BOOKINGNUM DESC";  
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -153,7 +154,8 @@ public class BookingDAO implements IBookingDAO
 				+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE" 
 				+ ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE" 
 				+ ", VISITNUM, PAYMENTAMOUNT" 
-				+ ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
+				+ ", NVL(REQUEST, ' ') AS REQUEST"
+				+ ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
 				+ ", STATUS" 
 				+ " FROM" 
 				+ " (" 
@@ -171,7 +173,7 @@ public class BookingDAO implements IBookingDAO
 				+ " )" 
 				+ " WHERE MEMBERNUM = ? "
 	            + " AND STATUS = ? "
-	            + " ORDER BY BOOKINGDATE DESC";
+	            + " ORDER BY BOOKINGNUM DESC";
 		
 		
 		PreparedStatement pstmt = null;
@@ -234,9 +236,11 @@ public class BookingDAO implements IBookingDAO
 					+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE"
 					+ ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE"
 					+ ", VISITNUM, PAYMENTAMOUNT" 
-					+ ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
+					+ ", NVL(REQUEST, ' ') AS REQUEST"
+					+ ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
 					+ " FROM BOOKINGVIEW" 
-					+ " WHERE CAMPGROUNDID = ?";
+					+ " WHERE CAMPGROUNDID = ?"
+					+ " ORDER BY BOOKINGDATE DESC";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -381,7 +385,8 @@ public class BookingDAO implements IBookingDAO
 				   + ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE"
 				   + ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE"
 				   + ", VISITNUM, PAYMENTAMOUNT"
-				   + ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE"
+				   + ", NVL(REQUEST, ' ') AS REQUEST"
+				   + ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE"
 				   + " FROM BOOKINGVIEW_TOTAL"
 				   + " WHERE BOOKINGNUM = ?";
 		

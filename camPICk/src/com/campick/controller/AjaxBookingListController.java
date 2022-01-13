@@ -42,9 +42,6 @@ public class AjaxBookingListController implements Controller
 			if( !status.equals("전체"))
 				lists = bookingDao.bookingCPList(camperNum, status);
 			
-			
-			
-			
 			request.setAttribute("lists", lists);
 			mav.setViewName("/WEB-INF/view/AjaxBookingList.jsp");
 			

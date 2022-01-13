@@ -15,10 +15,15 @@
 
 <script type="text/javascript">
 
+	var paymentAmount = ${bookingDTO.paymentAmount }
+	var visitNum = ${bookingDTO.visitNum }
+	
 $(function()
 {
 	$('#bookModal').modal('show');
 
+	$("#paymentAmount").html( (paymentAmount*visitNum).toLocaleString('ko-KR'));
+	
 	$('#bookModal').on('hidden.bs.modal', function()
 	{
 		//alert("확인");
@@ -81,7 +86,7 @@ $(function()
 					<span class="bookingDetailSubTitle">객실</span> : ${bookingDTO.roomName }<br> 
 					<span class="bookingDetailSubTitle">예약 인원</span>: ${bookingDTO.visitNum }<br> 
 					<span class="bookingDetailSubTitle">예약시 요청사항</span> : ${bookingDTO.request }<br> 
-					<span class="bookingDetailSubTitle">결제 예정 금액</span> : <span>${bookingDTO.paymentAmount }</span>원<br>
+					<span class="bookingDetailSubTitle">결제 예정 금액</span> : <span id="paymentAmount"></span>원<br>
 					
 					<br> 위 내용으로 예약하시겠습니까? 확인시 결제가 진행됩니다.<br>
 	

@@ -35,14 +35,17 @@ public class BookingCancelController implements Controller
 			BookingDTO  bookingdto = new BookingDTO();
 			 
 			bookingdto = (BookingDTO)session.getAttribute("bookingDTO");
-			 
-			String bookingNum =  bookingdto.getBookingNum();
+			int refund = (int)session.getAttribute("refund");   
 			
-			// refund를 30으로 고정
-			int refund = 100;   //나중에 환불% 값을 받아올것
-			 
+			String bookingNum =  bookingdto.getBookingNum();
+						 
 			bookingDao.removeBooking(bookingNum, refund);         
 			
+			// 취소 프로세스에서 썼던 속성 제거.
+			session.removeAttribute("bookingDTO");
+			session.removeAttribute("refund");
+			session.removeAttribute("campgroundDTO");
+
 			mav.setViewName("redirect:bookinglist.wei"); 
 		} 
 		catch (Exception e)
