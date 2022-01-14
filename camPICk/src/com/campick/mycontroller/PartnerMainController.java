@@ -36,7 +36,7 @@ public class PartnerMainController
 	
 	// 파트너 메인 페이지로 이동(사이트맵없는)
 	@RequestMapping(value = "partnercampick.wei", method = RequestMethod.GET)
-	public String toPartnerMain(HttpServletRequest request)
+	public String toPartnerMain(HttpServletRequest request, ModelMap model)
 	{
 		// 세션 처리 추가
 		HttpSession session = request.getSession();
@@ -49,7 +49,12 @@ public class PartnerMainController
 		{
 			return "redirect:campick.wei";
 		}
-				
+		
+		// 등록된 캠핑장 없을 경우 예약 막으려고 값 추가. 유동 수정
+		IPartnerMainDAO dao = sqlSession.getMapper(IPartnerMainDAO.class);				
+		int count = dao.checkMyCampground((String)session.getAttribute("num"));
+		
+		model.addAttribute("count", count);
 		return "/WEB-INF/view/PartnerMain.jsp";
 	}
 	
