@@ -59,6 +59,12 @@
 			$("#myQnA").attr("disabled", "disabled");
 		}
 		
+		$("#myBooking").click(function()
+		{			
+			$(location).attr("href", "partnerbookingtemplate.wei");
+			
+		});
+		
 		$("#myCampground").click(function()
 		{			
 			$(location).attr("href", "mycampgroundtemplate.wei");
