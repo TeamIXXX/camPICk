@@ -87,4 +87,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		}
 	</insert>
 	
+	<!-- 파트너 비밀번호 확인 -->
+	<select id="checkPartnerPw" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM PARTNER
+		WHERE PARTNERID='${partnerId}'
+		 AND PARTNERPW='${partnerPw}'
+	</select>
+	
+	<!-- 파트너 회원 정보 조회 -->
+	<select id="searchPartner" resultType="com.campick.dto.PartnerDTO">
+		SELECT PARTNERID, PARTNERNUM, PARTNERPW, PARTNERNAME, PHONE AS PARTNERPHONE, BUSINESSLICENSE, EMAIL AS PARTNEREMAIL
+		FROM PARTNER
+		WHERE PARTNERNUM='${partnerNum}'
+	</select>
+	
+	<!-- 파트너 회원 정보 수정 -->
+	<update id="modifyPartner">
+		UPDATE PARTNER
+		SET PARTNERPW='${partnerPw}'
+		  , PARTNERNAME='${partnerName}'
+		  , PHONE='${partnerPhone}'
+		  , EMAIL='${partnerEmail}'
+		WHERE PARTNERNUM ='${partnerNum}'
+	</update>
+	
 </mapper>
