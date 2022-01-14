@@ -58,21 +58,7 @@
 			$("#myBooking").attr("disabled", "disabled");
 			$("#myCampground").attr("disabled", "disabled");
 			$("#myQnA").attr("disabled", "disabled");
-		}		
-
-		if ((${count} == 0)) 
-		{
-			$("#myBooking").attr("disabled", "disabled");
-			$(".bookingBtn").css("color", "gray");
 		}
-		else // 등록된 캠핑장이 있을 경우에만 예약 관리로 연결
-		{
-			$("#myBooking").click(function()
-			{			
-				$(location).attr("href", "partnerbookingtemplate.wei");
-			});
-		}
-		
 		
 		$("#myCampground").click(function()
 		{			
@@ -108,7 +94,7 @@
 		<div class="partnerMainButton">
 			<button type="button" id="myBooking" class="btn  btn-warning btn-lg" style="background-color: rgba(69,129,142,0.7)">
 				<img src="img/turtle.png" id="turtleImg" style="width: 200px; height: 250px;"><br><br>
-				<span class="buttonName bookingBtn">예약관리</span>
+				<span class="buttonName">예약관리</span>
 			</button>
 		</div>
 		<div class="partnerMainButton">
