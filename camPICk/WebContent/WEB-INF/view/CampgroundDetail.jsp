@@ -552,9 +552,15 @@
 		//픽하기 탭 클릭시 css처리
 		$("#pickBtn").on("click",function()
 		{
+			// 로그인 전에 픽하기를 눌렀을 경우
+			if( ${num eq null} )
+			{	
+				alert("로그인 후 이용가능합니다.");
+				return;
+			}
+			
 			if($("#pickBtn").hasClass("active"))
 				$(location).attr("href", "pickon.wei?campgroundId=${campgroundId}");
-				//alert("픽 상태 + ${campgroundId}");
 			else
 				$(location).attr("href", "pickoff.wei?campgroundId=${campgroundId}");
 		});
