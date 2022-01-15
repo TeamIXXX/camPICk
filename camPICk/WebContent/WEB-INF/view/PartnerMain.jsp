@@ -14,7 +14,6 @@
 	numList.add("6");
 	numList.add("5");
 	
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -52,26 +51,14 @@
 
 	$(function()
 	{
-		if (<%=num%>=="0")
+		var num = "<%=num%>";
+		
+		if (num=="0")
 		{
 			$("#myBooking").attr("disabled", "disabled");
 			$("#myCampground").attr("disabled", "disabled");
 			$("#myQnA").attr("disabled", "disabled");
-		}		
-
-		if ((${count} == 0)) 
-		{
-			$("#myBooking").attr("disabled", "disabled");
-			$(".bookingBtn").css("color", "gray");
 		}
-		else // 등록된 캠핑장이 있을 경우에만 예약 관리로 연결
-		{
-			$("#myBooking").click(function()
-			{			
-				$(location).attr("href", "partnerbookingtemplate.wei");
-			});
-		}
-		
 		
 		$("#myCampground").click(function()
 		{			
@@ -95,7 +82,7 @@
 		<jsp:include page="TopMenu.jsp"></jsp:include>
 	</div>
 	<div class="partnerItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
+		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
 	<div class="partnerItem">
 		<div class="partnerMainButton">
@@ -107,7 +94,7 @@
 		<div class="partnerMainButton">
 			<button type="button" id="myBooking" class="btn  btn-warning btn-lg" style="background-color: rgba(69,129,142,0.7)">
 				<img src="img/turtle.png" id="turtleImg" style="width: 200px; height: 250px;"><br><br>
-				<span class="buttonName bookingBtn">예약관리</span>
+				<span class="buttonName">예약관리</span>
 			</button>
 		</div>
 		<div class="partnerMainButton">

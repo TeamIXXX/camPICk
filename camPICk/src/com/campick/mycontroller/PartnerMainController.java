@@ -210,12 +210,23 @@ public class PartnerMainController
 		return "/WEB-INF/view/PartnerAccountApproval.jsp";
 	}
 	
-	// 계정관리메인템플릿에서 승인 후 계정관리페이지(회원정보수정) 로드
-	@RequestMapping(value = "partneraccountmanage.wei", method = RequestMethod.GET)
-	public String toAccountManage()
+	// 계정관리메인템플릿에서 승인 후 계정관리페이지(회원정보수정) 이동을 위한 비밀번호 확인 페이지 로드
+	@RequestMapping(value = "checkpartnerpwform.wei", method = RequestMethod.GET)
+	public String toAccountManage(HttpServletRequest request, ModelMap model)
 	{
+		HttpSession session = request.getSession();
+		String num = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
+		if (num == null)			// 로그인 x 일경우
+		{
+			return "redirect:loginrequest.wei";
+		}
+		else if (num!=null && !account.equals("partner"))		// 로그인 o && 파트너 회원이 아닐 경우 
+		{
+			return "redirect:limit.wei";
+		}
 		
-		return "";
+		return "/WEB-INF/view/CheckPartnerPw.jsp";
 	}
 	
 	
