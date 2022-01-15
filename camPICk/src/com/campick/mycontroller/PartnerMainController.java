@@ -50,7 +50,7 @@ public class PartnerMainController
 			return "redirect:campick.wei";
 		}
 		
-		// 등록된 캠핑장 없을 경우 예약 막으려고 값 추가. 유동 수정
+		// 유동 추가 - 등록된 캠핑장 없을 경우 예약 막으려고 값 추가. 
 		IPartnerMainDAO dao = sqlSession.getMapper(IPartnerMainDAO.class);				
 		int count = dao.checkMyCampground((String)session.getAttribute("num"));
 		

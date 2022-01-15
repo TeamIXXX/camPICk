@@ -19,10 +19,7 @@
      font-style: normal;
 }
 
-*
-{
-	font-family: 'S-CoreDream-6Bold';
-}
+* {	font-family: 'S-CoreDream-6Bold'; }
 
 #logo:hover
 {
