@@ -17,9 +17,6 @@ public interface IBookingDAO
 	// 캠퍼 예약 내역 상태별 조회 (→ my캠핑장 이용내역) 
 	public ArrayList<BookingDTO> bookingCPList(String memberNum, String status) throws SQLException;
 	
-	// 파트너 예약 내역 조회 (파트너 예약 관리)
-	public ArrayList<BookingDTO> bookingPTList(String campgroundId) throws SQLException;
-
 	// 예약 취소 
 	public int removeBooking(String bookingNum, int refund) throws SQLException;
 	
