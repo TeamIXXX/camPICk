@@ -224,7 +224,6 @@ public class BookingDAO implements IBookingDAO
 		return result;
 	}
 
-	/*
 	// 파트너 예약 내역 조회 (파트너 예약 관리)
 	@Override
 	public ArrayList<BookingDTO> bookingPTList(String campgroundId) throws SQLException
@@ -287,7 +286,6 @@ public class BookingDAO implements IBookingDAO
 		
 		return result;
 	}
-	*/
 
 	// 예약 취소
 	@Override
