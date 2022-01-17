@@ -1,3 +1,5 @@
+<%@page import="com.campick.controller.PartnerCampgroundController"%>
+<%@page import="com.campick.dao.IPartnerMainDAO"%>
 <%@page import="com.campick.dto.ThemeSurvResultPartnerDTO"%>
 <%@page import="com.campick.dto.ThemeSurvResultDTO"%>
 <%@page import="com.campick.dto.OptionSurvResultDTO"%>
@@ -15,6 +17,7 @@
 	ArrayList<ThemeSurvResultPartnerDTO> thResult = (ArrayList)request.getAttribute("themeSurvLists");
 	// THEME_TYPENUM, THEMENUM, THEMENAME, NVL(TC.COUNT, 0) AS COUNT
 	
+	String campgroundId = (String)session.getAttribute("campgroundId");	
 	
 	// 차트 라벨 자바스크립트 배열에 담기위한 문자열 구성(옵션)
 	int n1=0;
@@ -129,6 +132,8 @@
 	strThemeCount22 = strThemeCount22.substring(0, strThemeCount22.length()-2);
 	strThemeCount23 = strThemeCount23.substring(0, strThemeCount23.length()-2);
 	
+
+
 	
 %>
 <!DOCTYPE html>
@@ -478,6 +483,22 @@
 	}
 
 
+	/* function roomInsertInfo()
+	{
+		var roomType = $(".roomType").val();
+		var roomName = $("#roomNameValue").val();
+		var basicNum = $("#basicNumValue").val();
+		var maxNum = $("#maxNumValue").val();
+		var weekDayPrice = $("#weekDayPriceValue").val();
+		var weekEndPrice = $("#weekEndPriceValue").val();
+		var roomInfo = $("#roomInfo").val();
+		
+		//alert(roomInfo);
+		
+		$("#roomInsertForm").attr("action","roominsert.wei?roomName="+roomName+"&roomTypeNum="+roomType+"&basicNum="+basicNum
+				+"&maxNum="+maxNum+"&weekDayPrice="+weekDayPrice+"&weekEndPrice="+weekEndPrice+"&roomInfo="+roomInfo); 
+				
+	} */
 
 </script>
 
@@ -698,7 +719,9 @@
 
 
 <!-- 객실 추가 모달 -->
+
 <div class="modal fade" id="roomInsertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="roominsert.wei" method="get" id="roomInsertForm">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
@@ -710,23 +733,24 @@
       
          <div class="modal-body">
             <!-- 객실추가 폼 -->
+            
             <div class="roomInsertMain">
-               
                   <div class="roomInsertItem">유형선택</div>
+                  <input type="hidden" id="campgroundId" value="<%=campgroundId%>">
                   <div class="roomInsertItem">
-                     <label><input type="radio" name="roomType" value="91">오토캠핑 </label>
-                        <label><input type="radio" name="roomType" value="92">글램핑 </label>
-                        <label><input type="radio" name="roomType" value="93">카라반 </label>
-                        <label><input type="radio" name="roomType" value="94">차박 </label>
+                     	<label><input type="radio" name="roomTypeNum" value="91" class="roomTypeNum">오토캠핑 </label>
+                        <label><input type="radio" name="roomTypeNum" value="92" class="roomTypeNum">글램핑 </label>
+                        <label><input type="radio" name="roomTypeNum" value="93" class="roomTypeNum">카라반 </label>
+                        <label><input type="radio" name="roomTypeNum" value="94" class="roomTypeNum">차박 </label>
                   </div>
                   
                   <div class="roomInsertItem">객실이름</div>
-                  <div class="roomInsertItem"><input type="text" id="roomNameValue"></div>
+                  <div class="roomInsertItem"><input type="text" id="roomName" name="roomName"></div>
                   
                   <div class="roomInsertItem">인원 설정</div>
                   <div class="roomInsertItem">
-                     기준인원 <input type="number" class="intInsert" id="basicNumValue" min="0" step="1" required="required" >명 / 
-                     최대인원 <input type="number" class="intInsert" min="0" step="1" required="required" id="maxNumValue">명
+                     기준인원 <input type="number" class="intInsert" id="basicNum" min="0" step="1" required="required" name="basicNum">명 / 
+                     최대인원 <input type="number" class="intInsert" min="0" step="1" required="required"  id="maxNum" name="maxNum">명
                   </div>
                   <div class="roomInsertItem">사진</div>
                   <div class="roomInsertItem">
@@ -734,22 +758,24 @@
                   </div>
                   <div class="roomInsertItem">가격정보</div>
                   <div class="roomInsertItem">
-                     주중 가격  <input type="text" placeholder="일~목" class="weekPrice" id="weekDayPriceValue">원 / 
-                     주말 가격  <input type="text" placeholder="금/토" class="weekPrice" id="weekEndPriceValue">원
+                     주중 가격  <input type="text" placeholder="일~목" class="weekPrice" id="weekDayPrice" name="weekDayPrice">원 / 
+                     주말 가격  <input type="text" placeholder="금/토" class="weekPrice" id="weekEndPrice" name="weekEndPrice">원
                   </div>
                   <div class="roomInsertItem">추가설명</div>
-                  <div class="roomInsertItem"><textarea rows="5" cols="50" style="resize: none" id="roomInfo"></textarea> </div>
+                  <div class="roomInsertItem"><textarea rows="5" cols="50" style="resize: none" id="roomInfo" name="roomInfo"></textarea> </div>
             </div>
+            
          </div>
 
          <div class="modal-footer" style="align-content: center;">
             <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-            <button type="button" class="btn btn-primary" id="roomInsertConfirmBtn" onclick="roomInsertInfo()">확인</button>
+            <button type="submit" class="btn btn-primary" id="roomInsertConfirmBtn">확인</button>
          </div>
          
          
       </div>
    </div>
+   </form>
 </div><!-- 객실 추가 모달 끝 -->
 
 

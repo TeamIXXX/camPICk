@@ -26,6 +26,8 @@ public class LogoutController implements Controller
 		session.removeAttribute("num");
 		session.removeAttribute("account");
 		
+		session.removeAttribute("campgroundId");
+		
 		// 로그아웃 뷰 페이지(→ 안전하게 로그아웃 되었습니다. 로그인 페이지로 돌아가기) 없이
 		// 바로 로그인 페이지를 다시 요청할 수 있도록 처리.
 		mav.setViewName("/WEB-INF/view/LogoutForm.jsp");
