@@ -28,7 +28,7 @@
 	
 		<div class="itemC">아이디<span class="nec">(*)</span></div>
 		<div class="itemC">
-			<input type="text" id="camperId" name="camperId" placeholder="영문, 숫자 8~14자 이내">
+			<input type="text" id="camperId" name="camperId" maxlength="14" placeholder="영문, 숫자 8~14자 이내">
 			<button type="button" id="duplBtn">중복확인</button>
 			<br><span class="errMsg" id="duplMsg"></span>
 		</div>

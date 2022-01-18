@@ -1,21 +1,35 @@
 @charset "UTF-8";
 
 .id_find
+, .pw_find
+, .pw_reset
 {
-	border: 1px solid #999;
+	border: 1px solid #ccc;
 	width: 90%;
-	margin: 20px auto;
+	padding: 30px 0;
+	margin: 50px auto;
+}
+
+#idFrm
+, #pwFrm
+{
+	margin: 0 auto;
 }
 
 .id_find h1
+, .pw_find h1
+, .pw_reset h1
 {
 	font-size: 15px;
 	line-height: 30px;
 	font-weight: 500;
 	text-align: center;
+	margin: 0 auto;
 }
 
 .id_find h2
+, .pw_find h2
+, .pw_reset h2
 {
 	font-size: 11px;
 	font-weight: 500;
@@ -26,13 +40,20 @@
 }
 
 .id_find strong
+, .pw_find strong
+, .pw_reset strong
 {
 	display: inline-block;
-	width: 80px;
+	width: 90px;
 	font-weight: normal;
 	text-align: left;
 	line-height: 30px;
 	padding-left: 10px;
+}
+
+.pw_reset strong
+{
+	width: 110px;
 }
 
 .leg
@@ -40,57 +61,56 @@
 	display: none;
 }
 
-
-.idField
-{
-	border: none;
-	width: 340px;
-	margin: 0 auto;
-}
-
-.idField ul
+fieldset ul
 {
 	padding-left: 0;
+}
+
+.li_idsel
+, .idCField li
+, .idPField li
+, .pwCField li
+, .pwPField li
+{
+	list-style: none;
+	border-bottom: 1px solid;
+	width: 400px;
+	margin: 0 auto;
 }
 
 .idField li
 {
 	list-style: none;
-	border-bottom: 1px solid;
 	width: 400px;
-}
-
-input[type=radio]
-{
-	width: 13px;
-	height: 13px;
-	margin: 0 3px 0 0;
-	padding: 0;
-	border: 0;
+	margin: 0 auto;
 }
 
 .cerNum
 {
-	margin-left: 15px;
+	margin-left: 5px;
 }
 
-.button
+.id_btn
 {
 	list-style: none;
 	margin: 20px 0;
 }
 
-.id_btn
+.cBtn
+, .pBtn
+, .login_btn
+, .sign_btn
+, .update_pw
 {
 	width: 400px;
 }
 
-.cName input
-, .pName input
-, .cPhone input
-, .pPhone input
-, .cCerNum input
-, .pCerNum input
+.li_name input
+, .li_phone input
+, .li_num input
+, .li_id input
+, .li_pw input
+, .li_rePw input
 {
 	width: 190px;
 	height: 30px;

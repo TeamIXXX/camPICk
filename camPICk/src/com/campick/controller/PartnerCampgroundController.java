@@ -1,8 +1,3 @@
-/*==============================
-	BookingFormController.java
-	- 사용자 정의 컨트롤러
-===============================*/
-
 package com.campick.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +30,7 @@ public class PartnerCampgroundController implements Controller
 		
 		CampgroundDTO campground = new CampgroundDTO();
 		
-		System.out.println(num);
+		//System.out.println(num);
 		
 		/*
 		if (num == null)
@@ -65,9 +60,9 @@ public class PartnerCampgroundController implements Controller
 			String tel = request.getParameter("tel");
 			String extraInfo = request.getParameter("extra");
 			
-			System.out.println(num);
-			System.out.println("캠핑장이름" + campgroundName);
-			System.out.println(option);
+			//System.out.println(num);
+			//System.out.println("캠핑장이름" + campgroundName);
+			//System.out.println(option);
 			
 				
 			campground.setParterNum(num);
