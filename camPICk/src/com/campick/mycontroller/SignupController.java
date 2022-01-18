@@ -118,7 +118,7 @@ public class SignupController
 		
 		model.addAttribute("camper", signupDao.searchCamperId(num));
 		
-		return "/WEB-INF/view/CheckCamperPw.jsp";
+		return "/WEB-INF/view/CheckCamperPwTemplate.jsp";
 	}
 	
 	// 캠퍼 회원 정보 수정 폼
@@ -376,8 +376,7 @@ public class SignupController
 		try
 		{
 			signupDao.resetCPw(camperPw, camperId, camperPhone);
-			result="/signupOkForm.wei";
-			// POST 페이지 만들기
+			result="/loginform.wei";
 		}
 		catch(Exception e)
 		{
@@ -399,15 +398,13 @@ public class SignupController
 		try
 		{
 			signupDao.resetPPw(partnerPw, partnerId, partnerPhone);
-			result="/signupOkForm.wei";
-			// POST 페이지 만들기
 		}
 		catch(Exception e)
 		{
 			System.out.println(e.toString());
 		}
 		
-		return result;
+		return "/loginform.wei";
 	}
 
 	// (최초 회원가입 이후)

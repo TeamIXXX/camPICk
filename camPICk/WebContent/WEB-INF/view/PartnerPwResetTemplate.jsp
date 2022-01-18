@@ -60,6 +60,7 @@ $(function()
 			}
 			else
 			{
+				alert("비밀번호가 수정되었습니다. 로그인해주세요.");
 				$("#pwFrm").submit();
 			}
 		}

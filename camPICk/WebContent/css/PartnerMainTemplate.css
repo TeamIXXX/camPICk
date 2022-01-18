@@ -12,11 +12,11 @@
 
 .PartnerMainTemplate
 {
-   width: 90%;
+   width: 1080px;
    display: grid;
-   grid-template-columns: 1fr 4fr;
-   grid-template-rows: 1fr 1fr auto;
-   grid-gap: 10pt;
+   grid-template-columns: 260px 800px;
+   grid-template-rows: 50px 60px repeat(auto-fill, minmax(0%, auto));
+   grid-gap: 10px;
    margin: 0 auto;
 }
 
@@ -27,6 +27,8 @@
    grid-row: 1 / 2;
    justify-self: end;
    align-self: flex-end; 
+   grid-gap: 10px;
+   margin-right: 28px;
    
 }
 
@@ -52,6 +54,6 @@
 
 #mainLogo > img
 { 
-	width: 95%;
+	width: 90%;
 	object-fit: cover; 
 }

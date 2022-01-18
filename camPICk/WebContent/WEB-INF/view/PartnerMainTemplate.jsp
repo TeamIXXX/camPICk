@@ -42,7 +42,7 @@
       <jsp:include page="TopMenu.jsp"></jsp:include>
    </div>
    <div class="partnerMainItem" id="mainLogo">
-      <img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
+      <img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
    </div>
    <div class="partnerMainItem">
       <jsp:include page="PartnerSitemap.jsp"></jsp:include>
