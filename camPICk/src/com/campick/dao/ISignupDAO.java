@@ -24,11 +24,23 @@ public interface ISignupDAO
 	// 캠퍼 정보 수정
 	public int modifyCamper(CamperDTO camperDTO);
 
-	// 이름, 휴대폰번호로 아이디 검사
-	public String findId(@Param("camperName")String camperName, @Param("phone")String phone);
+	// 이름, 휴대폰번호로 캠퍼 아이디 조회
+	public String findCId(@Param("camperName")String camperName, @Param("camperPhone")String camperPhone);
 	
-	// 이름, 휴대폰번호로 비밀번호 검사
-	/* public String findPartnerId(String partnerName, String partnerPhone); */
+	// 이름, 휴대폰번호로 파트너 아이디 조회
+	public String findPId(@Param("partnerName")String partnerName, @Param("partnerPhone")String partnerPhone);
+	
+	// 아이디, 휴대폰번호로 비밀번호 조회
+	public String findCPw(@Param("camperId")String camperId, @Param("camperPhone")String camperPhone);
+	
+	// 아이디, 휴대폰번호로 비밀번호 조회
+	public String findPPw(@Param("partnerId")String partnerId, @Param("partnerPhone")String partnerPhone);
+	
+	// 캠퍼 비밀번호 재설정
+	public int resetCPw(@Param("camperPw")String camperPw, @Param("camperId")String camperId, @Param("camperPhone")String camperPhone);
+	
+	// 캠퍼 비밀번호 재설정
+	public int resetPPw(@Param("partnerPw")String partnerPw, @Param("partnerId")String partnerId, @Param("partnerPhone")String partnerPhone);
 	
 	// 파트너 회원가입(파트너 테이블 인서트, 승인내역테이블 인서트)
 	public int addPartner(PartnerDTO partner);

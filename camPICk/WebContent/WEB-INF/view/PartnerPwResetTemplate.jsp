@@ -28,14 +28,14 @@ $(function()
 {	
 	$("#updatePw").click(function()
 	{
-		var pw1 = $("#camperPw").val();
+		var pw1 = $("#partnerPw").val();
 		var pw2 = $("#pw2").val();
 		var regPw = /^[A-Za-z0-9]{5,14}$/;
 
 		if(pw1 == "")
 		{
 			alert("비밀번호를 입력하세요.");
-			$("#camperPw").focus();
+			$("#partnerPw").focus();
 			return;
 		}
 		else if(pw2 == "")
@@ -44,11 +44,11 @@ $(function()
 			$("#pw2").focus();
 			return;
 		}
-		else if(!regPw.test($("#camperPw").val()))
+		else if(!regPw.test($("#partnerPw").val()))
 		{
 			alert("영문, 숫자 5~14자 이내로 입력해 주십시오.");
-			$("#camperPw").val("");
-			$("#camperPw").focus();
+			$("#partnerPw").val("");
+			$("#partnerPw").focus();
 			return;
 		}
 		else if(pw1 != "" && pw2 != "")
@@ -119,19 +119,19 @@ $(function()
 					<h2>
 					비밀번호를 변경해주세요.
 					</h2>
-					<form id="pwFrm" action="resetCPw.wei" method="post">
+					<form id="pwFrm" action="resetPPw.wei" method="post">
 					
 					<!-- 캠퍼 아이디 -->
-					<input type="hidden" id="camperId" name="camperId" value="${id }">
+					<input type="hidden" id="partnerId" name="partnerId" value="${id }">
 					<!-- 캠퍼 휴대폰번호 -->
-					<input type="hidden" id="camperPhone" name="camperPhone" value="${phone }">
+					<input type="hidden" id="partnerPhone" name="partnerPhone" value="${phone }">
 					
 						<fieldset class="pwCField">
 							<legend class="leg">비밀번호 재설정</legend>
 							<ul>
 								<li class="li_pw">
 									<strong>비밀번호 입력</strong>
-									<input type="text" id="camperPw" name="camperPw" maxlength="14"
+									<input type="text" id="partnerPw" name="partnerPw" maxlength="14"
 									placeholder="영문, 숫자 5~14자 이내로 입력">
 								</li>
 								<li class="li_rePw">

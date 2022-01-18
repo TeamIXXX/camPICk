@@ -32,15 +32,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CAMPERNUM= #{camperNum}
 	</update>
 	
-	<!-- 아이디 찾기 -->
-	<select id="findId" resultType="java.lang.String">
+	<!-- 캠퍼 아이디 조회 -->
+	<select id="findCId" resultType="java.lang.String">
 		SELECT CAMPERID
 		FROM CAMPER
-		WHERE CAMPERNAME= #{camperName} AND PHONE= #{phone}
+		WHERE CAMPERNAME=#{camperName} AND PHONE=#{camperPhone}
 	</select>
 	
+	<!-- 파트너 아이디 조회 -->
+	<select id="findPId" resultType="java.lang.String">
+		SELECT PARTNERID
+		FROM PARTNER
+		WHERE PARTNERNAME=#{partnerName} AND PHONE=#{partnerPhone}
+	</select>
 	
-	<!-- 비밀번호 재설정 -->
+	<!-- 캠퍼 비밀번호 조회 -->
+	<select id="findCPw" resultType="java.lang.String">
+		SELECT CAMPERPW
+		FROM CAMPER
+		WHERE CAMPERID=#{camperId} AND PHONE=#{camperPhone}
+	</select>
+	
+	<!-- 파트너 비밀번호 조회 -->
+	<select id="findPPw" resultType="java.lang.String">
+		SELECT PARTNERPW
+		FROM PARTNER
+		WHERE PARTNERID=#{partnerId} AND PHONE=#{partnerPhone}
+	</select>
+	
+	<!-- 캠퍼 비밀번호 재설정 -->
+	<update id="resetCPw">
+		UPDATE CAMPER
+		SET CAMPERPW=#{camperPw}
+		WHERE CAMPERID=#{camperId} AND PHONE=#{camperPhone}
+	</update>
+	
+	<!-- 파트너 비밀번호 재설정 -->
+	<update id="resetPPw">
+		UPDATE PARTNER
+		SET PARTNERPW=#{partnerPw}
+		WHERE PARTNERID=#{partnerId} AND PHONE=#{partnerPhone}
+	</update>
 	
 	
 	<!-- 파트너 회원가입(파트너 테이블 인서트, 승인내역테이블 인서트) -->

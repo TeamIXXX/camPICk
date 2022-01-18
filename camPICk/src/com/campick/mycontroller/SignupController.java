@@ -63,25 +63,32 @@ public class SignupController
 		return "/WEB-INF/view/SignOk.jsp";
 	}
 	
-	// 아이디 찾기 폼
+	// 아이디, 비밀번호 찾기 폼
 	@RequestMapping(value = "/idFindForm.wei", method = RequestMethod.GET)
-	public String idFindForm()
+	public String idPwFindForm()
 	{
-		return "/WEB-INF/view/IdFindFormTemplate.jsp";
+		return "/WEB-INF/view/IdPwFindTemplate.jsp";
 	}
 	
 	// 아이디 찾기 결과 폼
-	@RequestMapping(value = "/idFindResultForm.wei", method = RequestMethod.GET)
+	@RequestMapping(value = "/idFindResultForm.wei", method = RequestMethod.POST)
 	public String idFindResultForm()
 	{
-		return "/WEB-INF/view/IdFindResultFormTemplate.jsp";
+		return "/WEB-INF/view/IdPwFindResultTemplate.jsp";
 	}
 	
-	// 비밀번호 재설정 폼
-	@RequestMapping(value = "/pwResetForm.wei", method = RequestMethod.GET)
-	public String pwResetForm()
+	// 캠퍼 비밀번호 찾기 결과 폼
+	@RequestMapping(value = "/camperPwFindForm.wei", method = RequestMethod.POST)
+	public String camperPwFindResultForm()
 	{
-		return "/WEB-INF/view/PwResetForm.jsp";
+		return "/WEB-INF/view/CamperPwResetTemplate.jsp";
+	}
+	
+	// 파트너 비밀번호 찾기 결과 폼
+	@RequestMapping(value = "/partnerPwFindForm.wei", method = RequestMethod.POST)
+	public String pwFindResultForm()
+	{
+		return "/WEB-INF/view/PartnerPwResetTemplate.jsp";
 	}
 	
 	// 비밀번호 재확인 폼
@@ -143,6 +150,7 @@ public class SignupController
 		
 		return "/WEB-INF/view/CamperUpdateTemplate.jsp";
 	}
+	
 	
 	
 	// 아이디 중복확인 ajax (캠퍼, 파트너)
@@ -262,26 +270,144 @@ public class SignupController
 		return "redirect:signupOkForm.wei";
 	}
 	
-	// 아이디 찾기
-	@RequestMapping(value="/idFind.wei", method = RequestMethod.POST)
-	public String findId(ModelMap model, HttpServletRequest request)
+	// 캠퍼 아이디 조회
+	@RequestMapping(value="/findCId.wei", method = RequestMethod.POST)
+	public String findCId(@Param("camperName")String camperName, @Param("camperPhone")String camperPhone, ModelMap model, HttpServletRequest request)
 	{
 		String result = null;
 		
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
 		
-		String camperName = request.getParameter("camperName");
-		String phone = request.getParameter("phone");
-		//System.out.println(camperName);
-		//System.out.println(phone);
-		
-		model.addAttribute("camperId", signupDao.findId(camperName, phone));
-		//System.out.println(signupDao.findId(camperName, phone));
-		
-		result="redirect:idFindResultForm.wei";
+		try
+		{
+			String id = signupDao.findCId(camperName, camperPhone);
+			model.addAttribute("id", id);
+			result="idFindResultForm.wei";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+		}
 		
 		return result;
+	}
+	
+	// 파트너 아이디 조회
+	@RequestMapping(value="/findPId.wei", method = RequestMethod.POST)
+	public String findPId(@Param("partnerName")String partnerName, @Param("partnerPhone")String partnerPhone, ModelMap model, HttpServletRequest request)
+	{
+		String result = null;
 		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		try
+		{
+			String id = signupDao.findPId(partnerName, partnerPhone);
+			model.addAttribute("id", id);
+			result="idFindResultForm.wei";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 캠퍼 비밀번호 조회
+	@RequestMapping(value="/findCamper.wei", method = RequestMethod.POST)
+	public String findCPw(@Param("camperId")String camperId, @Param("camperPhone")String camperPhone, ModelMap model, HttpServletRequest request)
+	{
+		String result = null;
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		try
+		{
+			String id = request.getParameter("camperId");
+			String phone = request.getParameter("camperPhone");
+			model.addAttribute("pw", signupDao.findCPw(id, camperPhone));
+			model.addAttribute("id", id);
+			model.addAttribute("phone", phone);
+			result="/camperPwFindForm.wei";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 파트너 비밀번호 조회
+	@RequestMapping(value="/findPartner.wei", method = RequestMethod.POST)
+	public String findPPw(@Param("partnerId")String partnerId, @Param("partnerPhone")String partnerPhone, ModelMap model, HttpServletRequest request)
+	{
+		String result = null;
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		try
+		{
+			String id = request.getParameter("partnerId");
+			String phone = request.getParameter("partnerPhone");
+			model.addAttribute("pw", signupDao.findPPw(id, partnerPhone));
+			model.addAttribute("id", id);
+			model.addAttribute("phone", phone);
+			result="/partnerPwFindForm.wei";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 캠퍼 비밀번호 재설정
+	@RequestMapping(value="/resetCPw.wei", method = RequestMethod.POST)
+	public String resetCPw(@Param("camperPw")String camperPw, @Param("camperId")String camperId
+						 , @Param("camperPhone")String camperPhone, ModelMap model, HttpServletRequest request)
+	{
+		String result = null;
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		try
+		{
+			signupDao.resetCPw(camperPw, camperId, camperPhone);
+			result="/signupOkForm.wei";
+			// POST 페이지 만들기
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	// 파트너 비밀번호 재설정
+	@RequestMapping(value="/resetPPw.wei", method = RequestMethod.POST)
+	public String resetPPw(@Param("partnerPw")String partnerPw, @Param("partnerId")String partnerId
+						 , @Param("partnerPhone")String partnerPhone, ModelMap model, HttpServletRequest request)
+	{
+		String result = null;
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		
+		try
+		{
+			signupDao.resetPPw(partnerPw, partnerId, partnerPhone);
+			result="/signupOkForm.wei";
+			// POST 페이지 만들기
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 
 	// (최초 회원가입 이후)
