@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/* 
+.partnerOkContainer
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows:1fr 1fr 1fr 1fr 1fr;
+	align-items:center;
+	text-align: center;
+	margin:0 auto;
+	height: 100vh;
+	width:80%;
+}
+ */
+ 
+.partnerApprovalTitle
+{
+	font-size: x-large;
+	text-align: left;
+	margin: 100px 100px;
+	
+}
+
+ .partnerOkItem2
+{
+	margin: 40px auto;
+	padding: 5px;
+}
+
+.partnerOkItem2 input
+, .partnerOkItem2 .btns
+, .partnerOkItem2 div
+{
+	width: fit-content;
+	margin: 30px auto;
+}
+
+
+
+.partnerSubmit
+{
+	/* display: flex; */
+}
+
+.partnerFile
+{
+	/* text-align: right; */
+}
+
+.partnerSubmit
+{
+	/* text-align: left; */
+}
+
+.approvalArrow
+{
+	height: 120px;
+	line-height: 120px;
+	text-align: center;
+}
+
+.arrow
+{
+	width: 50px;
+	height: 50px;
+}
+
+.approvalstatusCircle
+{
+	font-size: large;
+	border-radius: 50%;
+	background-color: gray;
+	width: 120px;
+	height: 120px;
+	line-height: 120px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.red
+{
+	background-color: red;
+}
+
+
+
+
+
+
+
+

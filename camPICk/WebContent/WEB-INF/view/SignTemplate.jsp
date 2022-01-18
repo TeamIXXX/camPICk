@@ -28,6 +28,11 @@
 	font-family: 'S-CoreDream-6Bold';
 }
 
+#logo:hover
+{
+	cursor: pointer;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -58,8 +63,8 @@
 </head>
 <body>
 
-<div class="item" style="text-align: center; margin: 3% auto; width: 1080px;">
-	<img src="img/logo.png" width="13%;" />
+<div class="item" style="text-align: center; margin: 30px auto; width: 1080px;">
+	<img src="img/logo.png" width="13%;" onclick="location.href='campick.wei'" id="logo"/>
 </div>
 
 <div class="itemSel">
@@ -75,7 +80,7 @@
 	</div>
 </div>
 
-
+<hr style="width: 800px;">
 <!-- 캠퍼 회원가입 -->
 <div id="cDiv">
 	 <c:import url="/signupCamperForm.wei"></c:import>

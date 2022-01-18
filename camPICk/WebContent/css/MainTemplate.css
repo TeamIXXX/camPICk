@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+@font-face 
+{
+     font-family: 'S-CoreDream-6Bold';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
 @media (min-width: 1200px)
 {
 	html, body
@@ -15,9 +23,10 @@
 	width: 1080px;
 	display: grid;
 	grid-template-columns: 260px 800px;
-	grid-template-rows: 80px 50px repeat(auto-fill, minmax(0%, auto));;
-	grid-gap: 20px;
+	grid-template-rows: 50px 60px repeat(auto-fill, minmax(0%, auto));
+	grid-gap: 10px;
 	margin: 0 auto;
+	font-family: 'S-CoreDream-6Bold';
 	/* background-color: gray; */
 }
 
@@ -31,7 +40,8 @@
 	grid-column: 1 / 3;
 	grid-row: 1 / 2;
 	justify-self: end;
-	align-self: flex-end; 
+	align-self: flex-end;
+	grid-gap: 10px;
 	
 }
 
@@ -65,8 +75,7 @@
 
 #mainLogo > img
 { 
-	width: 95%;
-	width: 100%;
+	width: 90%;
 	object-fit: cover; 
 }
 

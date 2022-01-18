@@ -51,7 +51,7 @@ public class BookingCancelFormController implements Controller
 			campgroundDTO = campgroundDao.campgroundListDetail(bookingDTO.getCampgroundId());
 	        
 			session.setAttribute("bookingDTO", bookingDTO);
-			mav.addObject("refund", refund);
+			session.setAttribute("refund", refund);
 			session.setAttribute("campgroundDTO", campgroundDTO);
 	        
 	        mav.setViewName("/WEB-INF/view/BookingCancelForm.jsp");

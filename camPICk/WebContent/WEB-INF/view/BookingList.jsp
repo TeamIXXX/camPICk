@@ -29,6 +29,11 @@
 	font-family: 'S-CoreDream-6Bold';
 }
 
+#logo:hover
+{
+   cursor: pointer;
+}
+
 </style>
 
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
@@ -45,7 +50,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png">
+		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem" style="z-index: 1;">

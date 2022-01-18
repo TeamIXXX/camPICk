@@ -3,19 +3,19 @@
 /* ======== 캠퍼 회원가입 ======== */
 .containerC
 {
+	font-size: 14px;
 	display: grid;
 	width: 800px;
-	grid-template-columns: repeat(2, minmax(auto-fit, 1fr));
-	grid-template-columns: repeat(19, minmax(auto-fit, 1fr));
+	grid-template-columns: repeat(2, minmax(auto, auto));
+    grid-template-rows: repeat(9, minmax(auto, auto));
 	margin:0 auto;
 	align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 10px;
 }
 
 .itemC
 {
-	/* border: 1px solid; */
 	margin:0 auto;
 }
 
@@ -30,7 +30,7 @@
 .containerC > div
 , .itemC > .iC
 {
-	margin: 10px;
+	margin: 0;
 }
 
 
@@ -43,7 +43,7 @@
 .errMsg
 , .nec
 {
-	font-size: small;
+	font-size: x-small;
 	color: red;
 }
 
@@ -52,9 +52,9 @@
 	resize: none;
 	padding: 10px;
 	width: 90%;
-	height: 100px;
+	height: 75px;
 	border: 1px solid #d8d9df;
-	font-size: 12px;
+	font-size: 10px;
 	color: #98989f;
 	line-height: 1.6em;
 	overflow:auto; 

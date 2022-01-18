@@ -65,6 +65,7 @@ public class LoginController implements Controller
 					// 관리자로 로그인 성공
 					session.setAttribute("num", num);
 					session.setAttribute("account", "admin");
+					session.setAttribute("loginId", id);
 					mav.setViewName("redirect:campick.wei");
 					return mav;
 				}
@@ -72,6 +73,7 @@ public class LoginController implements Controller
 				// 캠퍼로 로그인 성공
 				session.setAttribute("num", num);
 				session.setAttribute("account", "camper");
+				session.setAttribute("loginId", id);
 				mav.setViewName("redirect:campick.wei");
 				
 			}
@@ -92,6 +94,7 @@ public class LoginController implements Controller
 					// 관리자로 로그인 성공
 					session.setAttribute("num", num);
 					session.setAttribute("account", "admin");
+					session.setAttribute("loginId", id);
 					mav.setViewName("redirect:campick.wei");
 					return mav;
 				}
@@ -99,7 +102,7 @@ public class LoginController implements Controller
 				// 파트너로 로그인 성공
 				session.setAttribute("num", num);
 				session.setAttribute("account", "partner");
-				//session.setAttribute("campgroundId", campgroundDao.getCampgroundId(num));
+				session.setAttribute("loginId", id);
 				mav.setViewName("redirect:partnercampick.wei");
 			}
 			

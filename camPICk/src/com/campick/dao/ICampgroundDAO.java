@@ -27,12 +27,12 @@ public interface ICampgroundDAO
 	public ArrayList<BookingDTO> bookCheckList(String campgroundId) throws SQLException;
 	
 	//픽 하기
-	public int onPick(String camperNum, String campgroundId) throws SQLException;
+	public int pickOn(String camperNum, String campgroundId) throws SQLException;
 	
-	//픽 해제
-	public int offPick(String camperNum, String campgroundId)throws SQLException;
+	//픽 해제 
+	public int pickOff(String camperNum, String campgroundId)throws SQLException;
 	
 	//픽여부 판별
-	public String checkPick(String camperNum, String campground) throws SQLException;
-	
+	public String pickCheck(String camperNum, String campground) throws SQLException;
+
 }

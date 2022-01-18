@@ -18,6 +18,98 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES('${camperId}', 'M'||LPAD(MEMBERSEQ.NEXTVAL, 6, '0'), '${camperPw}', '${camperName}', '${phone}', '${email}', SYSDATE)
 	</insert>
 	
-	<!-- 파트너 회원가입 인서트 -->
+	<!-- 캠퍼 회원 정보 조회 -->
+	<select id="searchCamperId" resultType="com.campick.dto.CamperDTO">
+		SELECT *
+		FROM CAMPER
+		WHERE CAMPERNUM=#{num}
+	</select>
+	
+	<!-- 캠퍼 회원 정보 수정 -->
+	<update id="modifyCamper">
+		UPDATE CAMPER
+		SET CAMPERNAME= #{camperName}, CAMPERPW=#{camperPw}, PHONE= #{phone}, EMAIL= #{email}
+		WHERE CAMPERNUM= #{camperNum}
+	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="java.lang.String">
+		SELECT CAMPERID
+		FROM CAMPER
+		WHERE CAMPERNAME= #{camperName} AND PHONE= #{phone}
+	</select>
+	
+	
+	<!-- 비밀번호 재설정 -->
+	
+	
+	<!-- 파트너 회원가입(파트너 테이블 인서트, 승인내역테이블 인서트) -->
+	<insert id="addPartner" statementType="CALLABLE" parameterType="com.campick.dto.PartnerDTO">
+		{call PRC_PARTNER_INSERT 
+			( 	#{partnerId, mode=IN, jdbcType=VARCHAR}
+			  , #{partnerPw, mode=IN, jdbcType=VARCHAR}
+			  , #{partnerName, mode=IN, jdbcType=VARCHAR}
+			  , #{partnerPhone, mode=IN, jdbcType=CHAR}
+			  , #{businesslicense, mode=IN, jdbcType=CHAR}
+			  , #{partnerEmail, mode=IN, jdbcType=VARCHAR}
+			  , #{fileRoute, mode=IN, jdbcType=VARCHAR}
+			  , #{fileName, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</insert>
+	
+	
+	<!-- 파트너 회원 승인1 - 파일정보가 있는 지 확인 -->
+	<select id="getFileExist" resultType="java.lang.Integer">
+		SELECT COUNT(LICENSE_FILENAME) AS FILENAME
+		FROM PARTNER
+		WHERE PARTNERID = '${partnerId}'	
+	</select>
+	
+	
+	<!-- 파트너 회원 승인2 - 마지막 승인내역 상태 확인 -->
+	<select id="getApprovalStatus" resultType="com.campick.dto.PartnerDTO">
+		SELECT NVL(APPROVALSTATUSNUM, 0) AS APPROVALSTATUSNUM
+		     , NVL((SELECT APPROVALSTATUSNAME FROM APPROVAL_STATUS WHERE APPROVALSTATUSNUM = AH.APPROVALSTATUSNUM), '대기') AS APPROVALSTATUSNAME
+		FROM APPROVAL_HISTORY AH
+		WHERE PARTNERID = '${partnerId}'
+		  AND APPROVALDATE = (SELECT MAX(APPROVALDATE) FROM APPROVAL_HISTORY WHERE PARTNERID = '${partnerId}')
+	</select>
+	
+	
+	<!-- 파트너 서류 첨부(회원가입 이후 업데이트) -->
+	<insert id="updateFile" statementType="CALLABLE" parameterType="com.campick.dto.PartnerDTO">
+		{call PRC_PARTNER_FILEUPDATE 
+			( 	#{partnerId, mode=IN, jdbcType=VARCHAR}
+			  , #{fileRoute, mode=IN, jdbcType=VARCHAR}
+			  , #{fileName, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+	</insert>
+	
+	<!-- 파트너 비밀번호 확인 -->
+	<select id="checkPartnerPw" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM PARTNER
+		WHERE PARTNERID='${partnerId}'
+		 AND PARTNERPW='${partnerPw}'
+	</select>
+	
+	<!-- 파트너 회원 정보 조회 -->
+	<select id="searchPartner" resultType="com.campick.dto.PartnerDTO">
+		SELECT PARTNERID, PARTNERNUM, PARTNERPW, PARTNERNAME, PHONE AS PARTNERPHONE, BUSINESSLICENSE, EMAIL AS PARTNEREMAIL
+		FROM PARTNER
+		WHERE PARTNERNUM='${partnerNum}'
+	</select>
+	
+	<!-- 파트너 회원 정보 수정 -->
+	<update id="modifyPartner">
+		UPDATE PARTNER
+		SET PARTNERPW='${partnerPw}'
+		  , PARTNERNAME='${partnerName}'
+		  , PHONE='${partnerPhone}'
+		  , EMAIL='${partnerEmail}'
+		WHERE PARTNERNUM ='${partnerNum}'
+	</update>
 	
 </mapper>

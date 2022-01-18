@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import com.campick.dto.BookingDTO;
+import com.campick.dto.CampgroundDTO;
 
 import oracle.jdbc.OracleTypes;
 
@@ -75,7 +76,8 @@ public class BookingDAO implements IBookingDAO
 					+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE" 
 					+ ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE" 
 					+ ", VISITNUM, PAYMENTAMOUNT" 
-					+ ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
+					+ ", NVL(REQUEST, ' ') AS REQUEST"
+					+ ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
 					+ ", STATUS" 
 					+ " FROM" 
 					+ " (" 
@@ -92,7 +94,7 @@ public class BookingDAO implements IBookingDAO
 					+ " FROM BOOKINGVIEW_TOTAL" 
 					+ " )" 
 					+ " WHERE MEMBERNUM = ? "
-		            + " ORDER BY BOOKINGDATE DESC";  
+		            + " ORDER BY BOOKINGNUM DESC";  
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -153,7 +155,8 @@ public class BookingDAO implements IBookingDAO
 				+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE" 
 				+ ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE" 
 				+ ", VISITNUM, PAYMENTAMOUNT" 
-				+ ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
+				+ ", NVL(REQUEST, ' ') AS REQUEST"
+				+ ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
 				+ ", STATUS" 
 				+ " FROM" 
 				+ " (" 
@@ -171,7 +174,7 @@ public class BookingDAO implements IBookingDAO
 				+ " )" 
 				+ " WHERE MEMBERNUM = ? "
 	            + " AND STATUS = ? "
-	            + " ORDER BY BOOKINGDATE DESC";
+	            + " ORDER BY BOOKINGNUM DESC";
 		
 		
 		PreparedStatement pstmt = null;
@@ -234,9 +237,11 @@ public class BookingDAO implements IBookingDAO
 					+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE"
 					+ ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE"
 					+ ", VISITNUM, PAYMENTAMOUNT" 
-					+ ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
+					+ ", NVL(REQUEST, ' ') AS REQUEST"
+					+ ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
 					+ " FROM BOOKINGVIEW" 
-					+ " WHERE CAMPGROUNDID = ?";
+					+ " WHERE CAMPGROUNDID = ?"
+					+ " ORDER BY BOOKINGDATE DESC";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -381,7 +386,8 @@ public class BookingDAO implements IBookingDAO
 				   + ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE"
 				   + ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE"
 				   + ", VISITNUM, PAYMENTAMOUNT"
-				   + ", REQUEST, TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE"
+				   + ", NVL(REQUEST, ' ') AS REQUEST"
+				   + ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE"
 				   + " FROM BOOKINGVIEW_TOTAL"
 				   + " WHERE BOOKINGNUM = ?";
 		
@@ -468,7 +474,6 @@ public class BookingDAO implements IBookingDAO
 		return result; 
 	}
 
-
 	// 예약 취소 해당 환불 구정 구하기
 	@Override
 	public int getRefundPolicy(String bookingNum) throws SQLException
@@ -514,6 +519,62 @@ public class BookingDAO implements IBookingDAO
 		return result;
 	}
 	
-
-
+	// 픽한 캠핑장 조회
+	public ArrayList<CampgroundDTO> pickList(String memberNum) throws SQLException
+	{
+		ArrayList<CampgroundDTO> result = new ArrayList<CampgroundDTO>();
+		
+		Connection conn = dataSource.getConnection();
+		
+		String sql = "SELECT CGV.CAMPGROUNDID, CAMPGROUNDNAME, ADDRESS1, ADDRESS2, ADDRESS3"
+				   + ", EXTRAINFO"
+				   + ", PICKCOUNT AS PICK"
+				   + ", FIREWOOD"
+				   + ", REVIEWCOUNT AS REVIEW"
+				   + " FROM CAMPGROUND_VIEW CGV"
+				   + " LEFT JOIN PICK P"
+				   + " ON CGV.CAMPGROUNDID = P.CAMPGROUNDID"
+				   + " WHERE CAMPERNUM = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberNum);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next())
+			{
+				CampgroundDTO dto = new CampgroundDTO();
+				
+				dto.setCampgroundId(rs.getString("CAMPGROUNDID"));
+				dto.setCampgroundName(rs.getString("CAMPGROUNDNAME"));
+				dto.setAddress1(rs.getString("ADDRESS1"));
+				dto.setAddress2(rs.getString("ADDRESS2"));
+				dto.setAddress3(rs.getString("ADDRESS3"));
+				dto.setExtraInfo(rs.getString("EXTRAINFO"));
+				dto.setPick(rs.getInt("PICK"));
+				dto.setFirewood(rs.getDouble("FIREWOOD"));
+				dto.setReview(rs.getInt("REVIEW"));
+				
+				result.add(dto);
+			}
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		finally 
+		{
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}
+		
+		return result;
+	}
+	
+	
 }

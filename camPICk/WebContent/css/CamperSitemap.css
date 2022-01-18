@@ -8,7 +8,8 @@
 
 .sitemapItem ul, .sitemapItem li  
 {
-	margin: 0;
+	/* margin: 0; */			/* 임의 */
+	margin: 0 auto;				/* 임의 */
 	padding: 0;
 	text-align: center;
 	list-style: none;
@@ -28,20 +29,21 @@
 
 .mainMenu >li >a 
 {
-	background-color: #C4C4C4;
-	color: #45818E;
+	/* background-color: #C4C4C4; */	/* 임의 */
+	/* color: #45818E; */				/* 임의 */
+	color: #000;						/* 임의 */
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 16px;
 	height: 30pt;
 	font-weight: bold;
 	display: block;
 	padding: 6px;
-	border-right: 2px solid rgba(0, 0, 0, 0.15);
+	/* border-right: 2px solid rgba(0, 0, 0, 0.15); */	/* 임의 */
 }
 
 .mainMenu > li > a:hover 
 {
-	background-color: #AAAAAA;
+	/* background-color: #AAAAAA; */	/* 임의 */
 }
 
 .siteSubMenu 
@@ -51,6 +53,8 @@
 	list-style: none;
 	visibility: hidden;
 	padding-right:10pt;
+	width: 70%;				/* 임의 */
+	justify-content: center;
 }
 
 .siteSubMenu >li 
@@ -59,7 +63,8 @@
 	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 	list-style: none;
 	text-align: center;
-	height: 30pt;
+	/* height: 30pt; */		/* 임의 */
+	height: 20pt;
 	padding: 0;
 	display: flex;
 	justify-content: center;
@@ -69,7 +74,7 @@
 .siteSubMenu >li >a 
 {
 	color: #45818E;
-	font-size: 16px;
+	font-size: small;
 	text-decoration: none;
 	font-weight: bold;
 	vertical-align: middle;
@@ -80,7 +85,7 @@
 	display: block;
 	opacity: 1;
 	visibility: visible;
-	background-color: #FFD03E;
+	background-color: #FFD700;
 }
 
 .siteSubMenu >li:hover 
@@ -88,11 +93,13 @@
 	opacity: 1;
 	visibility: visible;
 	background-color: #45818E;
-	color: #FFD03E;
+	/* color: #FFD03E; */		/* 임의 */
+	color: #FFD700;
 }
 
 .siteSubMenu >li:hover > a
 {
-	color: #FFD03E;
+	/* color: #FFD03E; */		/* 임의 */
+	color: #FFD700;
 }
 

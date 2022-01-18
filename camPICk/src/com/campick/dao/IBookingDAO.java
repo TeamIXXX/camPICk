@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.campick.dto.BookingDTO;
+import com.campick.dto.CampgroundDTO;
 
 public interface IBookingDAO
 {
@@ -33,4 +34,7 @@ public interface IBookingDAO
 	
 	// 예약 취소 해당 환불 구정 구하기
 	public int getRefundPolicy(String bookingNum) throws SQLException;
+	
+	// 픽한 캠핑장 조회
+	public ArrayList<CampgroundDTO> pickList(String memberNum) throws SQLException;
 }

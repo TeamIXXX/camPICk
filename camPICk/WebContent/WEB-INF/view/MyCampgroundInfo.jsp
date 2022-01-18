@@ -12,6 +12,7 @@
 	
 	String num = (String)session.getAttribute("num");
 	String account = (String)session.getAttribute("account");
+	String loginId = (String)session.getAttribute("loginId");
 	
 	ArrayList<OptionSurvResultDTO> opResult = (ArrayList)request.getAttribute("opSurvLists");
 	ArrayList<ThemeSurvResultPartnerDTO> thResult = (ArrayList)request.getAttribute("themeSurvLists");

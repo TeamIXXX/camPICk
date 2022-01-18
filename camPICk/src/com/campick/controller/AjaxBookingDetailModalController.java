@@ -33,7 +33,7 @@ public class AjaxBookingDetailModalController implements Controller
 			String bookingNum = request.getParameter("bookingNum");
 			
 			bookingDTO = bookingDao.searchBookingNum(bookingNum);
-	
+			
 			mav.addObject("bookingDTO", bookingDTO);
 			
 		} catch (Exception e)

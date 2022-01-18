@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.campick.dao.IPartnerCampgroundDAO;
 import com.campick.dao.IPartnerMainDAO;
+import com.campick.dao.ISignupDAO;
 import com.campick.dao.ISurveyResultDAO;
 import com.campick.dao.ISurveyResultPartnerDAO;
 import com.campick.dto.CampgroundDTO;
@@ -36,7 +37,7 @@ public class PartnerMainController
 	
 	// 파트너 메인 페이지로 이동(사이트맵없는)
 	@RequestMapping(value = "partnercampick.wei", method = RequestMethod.GET)
-	public String toPartnerMain(HttpServletRequest request)
+	public String toPartnerMain(HttpServletRequest request, ModelMap model)
 	{
 		// 세션 처리 추가
 		HttpSession session = request.getSession();
@@ -49,7 +50,12 @@ public class PartnerMainController
 		{
 			return "redirect:campick.wei";
 		}
-				
+		
+		// 유동 추가 - 등록된 캠핑장 없을 경우 예약 막으려고 값 추가. 
+		IPartnerMainDAO dao = sqlSession.getMapper(IPartnerMainDAO.class);				
+		int count = dao.checkMyCampground((String)session.getAttribute("num"));
+		
+		model.addAttribute("count", count);
 		return "/WEB-INF/view/PartnerMain.jsp";
 	}
 	
@@ -165,11 +171,53 @@ public class PartnerMainController
 			
 			return "redirect:partnercampick.wei";
 		}
-		
-		
-		
 	}
 	
+	// 계정관리 메뉴 클릭 시 계정관리메인템플릿으로 이동
+	@RequestMapping(value = "partneraccounttemplate.wei", method = RequestMethod.GET)
+	public String toAccount(HttpServletRequest request)
+	{
+		// 세션 처리 추가
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("num")==null)
+		{
+			return "redirect:campick.wei"; 
+		}
+		else if (!session.getAttribute("account").equals("partner")) 
+		{
+			return "redirect:campick.wei";
+		}
+				
+		return "/WEB-INF/view/PartnerMainTemplateAccount.jsp";
+	}
+	
+	// 계정관리메인템플릿에서 승인 전이면 승인현황페이지 로드 
+	@RequestMapping(value = "partneraccountapproval.wei", method = RequestMethod.GET)
+	public String toAccountApproval(HttpServletRequest request, ModelMap model)
+	{
+		HttpSession session = request.getSession();
+		String partnerId = (String)session.getAttribute("loginId");
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		PartnerDTO dto = new PartnerDTO();
+		
+		// 승인상태
+		dto = signupDao.getApprovalStatus(partnerId);
+		int approvalStatusNum = dto.getApprovalStatusNum();
+		String approvalStatusName = dto.getApprovalStatusName();
+		
+		// 서류첨부 여부(대기라면)
+		int fileExist = signupDao.getFileExist(partnerId);
+		
+		model.addAttribute("approvalStatusNum", approvalStatusNum);
+		model.addAttribute("approvalStatusName", approvalStatusName);
+		model.addAttribute("fileExist", fileExist);
+		
+		return "/WEB-INF/view/PartnerAccountApproval.jsp";
+	}
+	
+
 	
 	@RequestMapping(value = "roominsert.wei", method = RequestMethod.GET)
 	public String roomInfoInsert(HttpServletRequest request, ModelMap model) throws SQLException
@@ -197,4 +245,26 @@ public class PartnerMainController
 		
 	}
 	
+
+	// 계정관리메인템플릿에서 승인 후 계정관리페이지(회원정보수정) 이동을 위한 비밀번호 확인 페이지 로드
+	@RequestMapping(value = "checkpartnerpwform.wei", method = RequestMethod.GET)
+	public String toAccountManage(HttpServletRequest request, ModelMap model)
+	{
+		HttpSession session = request.getSession();
+		String num = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
+		if (num == null)			// 로그인 x 일경우
+		{
+			return "redirect:loginrequest.wei";
+		}
+		else if (num!=null && !account.equals("partner"))		// 로그인 o && 파트너 회원이 아닐 경우 
+		{
+			return "redirect:limit.wei";
+		}
+		
+		return "/WEB-INF/view/CheckPartnerPw.jsp";
+	}
+	
+	
+
 }
