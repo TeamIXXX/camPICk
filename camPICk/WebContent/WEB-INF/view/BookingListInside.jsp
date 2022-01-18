@@ -265,9 +265,6 @@
 		//alert("함수 호출");
 		var bookingNum = bookingNum;
 				
-		var str = "";
-		var strFooter = "";
-		
 		$.ajax(
 		{
 			type : "POST"

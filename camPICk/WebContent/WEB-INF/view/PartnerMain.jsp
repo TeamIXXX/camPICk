@@ -36,6 +36,12 @@
 	cursor: pointer;
 }
 
+.btn-warning:focus, .btn-warning.focus, .btn-warning:active, .btn-warning.active
+{
+	background-color: white;
+    border-color: black;
+} 
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -102,15 +108,9 @@
 			</button>
 		</div>
 		<div class="partnerMainButton">
-<<<<<<< HEAD
-			<button type="button" id="myBooking" class="btn  btn-warning btn-lg" style="background-color: rgba(69,129,142,0.7)">
-				<img src="img/turtle.png" id="turtleImg" style="width: 200px; height: 250px;"><br><br>
-				<span class="buttonName bookingBtn">예약관리</span>
-=======
 			<button type="button" id="myBooking" class="btn  btn-warning btn-lg">
 				<img src="img/turtle.png" id="turtleImg" style="width: 150px; height: 150px;"><br><br>
-				<span class="buttonName">예약관리</span>
->>>>>>> origin/campick
+				<span class="buttonName bookingBtn">예약관리</span>
 			</button>
 		</div>
 		<div class="partnerMainButton">
