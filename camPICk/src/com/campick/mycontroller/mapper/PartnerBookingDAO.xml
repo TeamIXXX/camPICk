@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campick.dao.IPartnerBookingDAO">
+	
+	<select id="bookingPTList" resultType="com.campick.dto.BookingDTO">
+		SELECT BOOKINGNUM, ROOMNAME                                        
+			   , TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE             
+			   , TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE           
+		FROM BOOKINGVIEW                                               
+		WHERE CAMPGROUNDID = #{campgroundId}                                         
+		ORDER BY BOOKINGDATE DESC                                     
+	</select>
+	
+	<select id="roomList" resultType="com.campick.dto.RoomDTO">
+		SELECT ROOMID, ROOMNAME
+		FROM ROOM
+		WHERE CAMPGROUNDID = #{campgroundId}
+		ORDER BY ROOMID
+	</select>
+	
+	
+</mapper>

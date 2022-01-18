@@ -23,53 +23,74 @@
 	
 	$(function()
 	{
-		alert("${campgroundId}");
-		
 		var weekList = ['일','월','화','수','목','금','토'];
 	    var calendarEl = document.getElementById('calendar');
-	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	    	initialView: 'dayGridMonth'
-			, headerToolbar: {
-				left: 'prevYear,prev today next,nextYear'
-				, center: 'title'
-				/* , right: 'dayGridMonth,dayGridDay' */ 
-				, right: 'dayGridMonth,listMonth'
-			  }
-			, titleFormat : function(date) { 
-				return date.date.year + "년 " + (date.date.month +1) + "월"; 
-	    	  }  
-			, dayHeaderContent: function (date) {
-		            return weekList[date.dow];
-		            
-			  }
+	    
+	    var calendar = new FullCalendar.Calendar(calendarEl
+	    	, {
+	    		initialView: 'dayGridMonth'
+				, headerToolbar: 
+				{
+					left: 'prevYear,prev today next,nextYear'
+					, center: 'title'
+					/* , right: 'dayGridMonth,dayGridDay' */ 
+					, right: 'dayGridMonth,listMonth'
+				}
+				, titleFormat : function(date) 
+				{ 
+					return date.date.year + "년 " + (date.date.month +1) + "월"; 
+		    	}  
+				, dayHeaderContent: function (date) 
+				{
+					return weekList[date.dow];
+				}
 	    	/* , eventLimit: true */
 
-	    	, eventClick: function(info) {
-				alert('Event: ' + info.event.title); // 상세 정보 띄우는...모달이나 뭐로 연결
-			  }
-			, events : [
-				// ajax로 내용 가져오기
+		    	, eventClick: function(info) 
+		    	{
+					alert('Event: ' + info.event.id); // 상세 정보 띄우는...모달이나 뭐로 연결
+				} 
+	 			, events : function(info, successCallback, failureCallback) 
+ 				{
+					$.ajax(
+					{
+						type : "GET"
+						, url : "ajaxpartnerbookinglist.wei"
+						, data : "campgroundId=" + "${campgroundId}"
+	 					, dataType : "json"
+	 					, success : function(obj) {
+	 						successCallback(obj);
+					}
+	 					,error : function(e)
+		 				{
+		 					alert(e.responseText);
+		 				}
+					});	// end ajax()
+				}// end events
+				, dateClick: function(info)
 				{
-					"title" : "All Day Event"
-					, "start" : "2022-01-01"
+					alert(info.dateStr);
+					/* $.ajax(
+					{
+						type : "GET"
+						, url : "ajaxpartnerdailybookinglist.wei"
+						, data : "campgroundId=${campgroundId}&checkInDate=" + 
+	 					, dataType : "json"
+	 					, success : function(obj) {
+	 						successCallback(obj);
+					}
+	 					,error : function(e)
+		 				{
+		 					alert(e.responseText);
+		 				}
+					}); */
 				}
-				,{
-					"title" : "Long Event"
-					, "start" : "2022-01-07"
-					, "end" : "2022-01-10"
-				}
-				,{
-					"title" : '고정값'
-					, "start" : '2022-01-13'
-					, "end" : '2022-01-15'
-					, "groupId" : '해오름'
-				}]
+			}); // end calendar
 
-		});
-
-		calendar.render();
-
+			calendar.render();
+	
 	});
+	
 </script>
 <style type="text/css">
 
@@ -102,13 +123,22 @@ a { color: black; }
 				<th>객실 이름</th>
 				<th>예약 현황</th>
 			</tr>
+			
+			<c:forEach var="room" items="${roomList}">
 			<tr>
-				<td>용왕님방</td>
-				<td>김예약 2명</td>
+				<td>${room.roomName}</td>
+				<td>이름 / 인원 수 </td>
 			</tr>
+			</c:forEach>
 		</table>
 	</div>
 </div>
+
+
+
+
+
+
 
 </body>
 </html>

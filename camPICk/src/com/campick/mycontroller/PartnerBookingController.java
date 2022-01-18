@@ -16,17 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.campick.dao.IPartnerCampgroundDAO;
+import com.campick.dao.IPartnerBookingDAO;
 import com.campick.dao.IPartnerMainDAO;
-import com.campick.dao.ISignupDAO;
-import com.campick.dao.ISurveyResultDAO;
-import com.campick.dao.ISurveyResultPartnerDAO;
-import com.campick.dto.CampgroundDTO;
-import com.campick.dto.OptionSurvResultDTO;
-import com.campick.dto.PartnerDTO;
-import com.campick.dto.ThemeSurvResultDTO;
-import com.campick.dto.ThemeSurvResultPartnerDTO;
+import com.campick.dto.BookingDTO;
+import com.campick.dto.RoomDTO;
 
 @Controller
 public class PartnerBookingController
@@ -38,7 +33,8 @@ public class PartnerBookingController
 	@RequestMapping(value = "partnerbookingtemplate.wei", method = RequestMethod.GET)
 	public String toPartnerBooking(HttpServletRequest request, ModelMap model)
 	{
-		// 세션 처리 추가
+		String result = "/WEB-INF/view/";
+		
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute("num")==null)
@@ -50,16 +46,57 @@ public class PartnerBookingController
 			return "redirect:campick.wei";
 		}
 		
+		try
+		{
+			IPartnerMainDAO dao = sqlSession.getMapper(IPartnerMainDAO.class);
+			String campgroundId = dao.getCampgroundId((String)session.getAttribute("num"));
+			
+			IPartnerBookingDAO bookingDao = sqlSession.getMapper(IPartnerBookingDAO.class);
+			
+			model.addAttribute("campgroundId", campgroundId);
+			model.addAttribute("roomList", bookingDao.roomList(campgroundId));
+			
+			for (RoomDTO room : bookingDao.roomList(campgroundId))
+			{
+				System.out.println(room.getRoomName());
+			}
+			
+			result += "PartnerBookingTemplate.jsp";
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
 		
-		IPartnerMainDAO dao = sqlSession.getMapper(IPartnerMainDAO.class);
-		String campgroundId = dao.getCampgroundId((String)session.getAttribute("num"));
-		
-		model.addAttribute("campgroundId", campgroundId);
-		
-		return "/WEB-INF/view/PartnerBookingTemplate.jsp";
+		return result;
 	}
 	
 
+	@RequestMapping(value = "ajaxpartnerbookinglist.wei", method = RequestMethod.GET)
+	public String bookingPTList(HttpServletRequest request, ModelMap model)
+	/*public String bookingPTList(@RequestParam("campgroundId") String campgroundId, HttpServletRequest request, ModelMap model)*/	
+	{
+		String result = "/WEB-INF/view/";
+		String campgroundId = request.getParameter("campgroundId");
+		
+		try
+		{
+			IPartnerBookingDAO dao = sqlSession.getMapper(IPartnerBookingDAO.class);
+			
+			model.addAttribute("lists", dao.bookingPTList(campgroundId));
+			
+			result += "AjaxPartnerBookingList.jsp";
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	//@RequestMapping(value = "ajaxpartnerbookingdetail.wei", method = RequestMethod.GET)
+	
 	
 	
 }
