@@ -80,28 +80,28 @@
 	<div class="partnerItem" id="mainLogo">
 		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
-	<div class="partnerItem">
+	<div class="partnerItem" style="height: 70vh;">
 		<div class="partnerMainButton">
-			<button type="button" id="myAccount" class="btn  btn-warning btn-lg" style="background-color: rgba(255,208,50,0.7)">
-				<img src="img/turtle.png" id="turtleImg" style="width: 200px; height: 250px;"><br><br>
+			<button type="button" id="myAccount" class="btn  btn-warning btn-lg">
+				<img src="img/turtle.png" id="turtleImg" style="width: 150px; height: 150px;"><br><br>
 				<span class="buttonName">계정관리</span>
 			</button>
 		</div>
 		<div class="partnerMainButton">
-			<button type="button" id="myBooking" class="btn  btn-warning btn-lg" style="background-color: rgba(69,129,142,0.7)">
-				<img src="img/turtle.png" id="turtleImg" style="width: 200px; height: 250px;"><br><br>
+			<button type="button" id="myBooking" class="btn  btn-warning btn-lg">
+				<img src="img/turtle.png" id="turtleImg" style="width: 150px; height: 150px;"><br><br>
 				<span class="buttonName">예약관리</span>
 			</button>
 		</div>
 		<div class="partnerMainButton">
-			<button type="button" id="myCampground" class="btn btn-warning btn-lg" style="background-color: rgba(255,208,50,0.7)">
-				<img src="img/turtle.png" id="turtleImg" style="width: 200px; height: 250px;"><br><br>
+			<button type="button" id="myCampground" class="btn btn-warning btn-lg">
+				<img src="img/turtle.png" id="turtleImg" style="width: 150px; height: 150px;"><br><br>
 				<span class="buttonName">내 캠핑장 관리</span>
 			</button>
 		</div>
 		<div class="partnerMainButton">
-			<button type="button" id="myQnA" class="btn btn-warning btn-lg" style="background-color: rgba(69,129,142,0.7)">
-				<img src="img/turtle.png" id="turtleImg" style="width: 200px; height: 250px;"><br><br>
+			<button type="button" id="myQnA" class="btn btn-warning btn-lg">
+				<img src="img/turtle.png" id="turtleImg" style="width: 150px; height: 150px;"><br><br>
 				<span class="buttonName">고객문의</span>
 			</button>
 		</div>

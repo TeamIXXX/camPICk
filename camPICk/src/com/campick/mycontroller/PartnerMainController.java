@@ -78,7 +78,7 @@ public class PartnerMainController
 		
 		IPartnerCampgroundDAO partnerDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
 		
-		ArrayList<String> numList = partnerDao.partnerCampgroundGet();
+		//ArrayList<String> numList = partnerDao.partnerCampgroundGet();
 		
 		if (session.getAttribute("num")==null)
 		{
@@ -89,15 +89,7 @@ public class PartnerMainController
 			return "redirect:campick.wei";
 		}
 		
-		for(String partnerNum:numList)
-		{
-			if(numStr.equals(partnerNum))
-			{
-				return "/WEB-INF/view/PartnerMainTemplateCampground.jsp";
-			}
-		}
-		
-		return "/WEB-INF/view/MyCampgroundInfoInsert.jsp"; 
+		return "/WEB-INF/view/PartnerMainTemplateCampground.jsp"; 
 	}
 	
 	// 캠핑장관리 템플릿의 메인영역에 include 되는 페이지
@@ -128,7 +120,6 @@ public class PartnerMainController
 		
 		if (count>0)			// 등록된 캠핑장이 있다면... (캠핑장관리 jsp 호출)
 		{
-			
 			opSurvLists = surveyResultDao.getOptionResult(campgroundId);
 			
 			
@@ -169,7 +160,7 @@ public class PartnerMainController
 		} else					// 등록된 캠핑장이 없다면... ( 캠핑장 등록 폼 jsp 호출. 현재 임의)
 		{
 			
-			return "redirect:partnercampick.wei";
+			return "/WEB-INF/view/MyCampgroundInfoInsert.jsp";
 		}
 	}
 	
