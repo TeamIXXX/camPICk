@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 	
-	// AjaxPartnerBookingList.jsp
+	// AjaxPartnerDailyBookingList.jsp
 	ArrayList<BookingDTO> lists = (ArrayList<BookingDTO>) request.getAttribute("lists");
 	
 	String result = "";
@@ -14,13 +14,12 @@
 	for(BookingDTO booking : lists)
 	{
 		StringBuffer sb = new StringBuffer();
-		
-		sb.append("{\"id\":\"" + booking.getBookingNum() +"\"");
-		sb.append(", \"title\":\"" + booking.getRoomName() +"\"");
-		sb.append(", \"start\":\"" + booking.getCheckInDate() +"\"");
-		sb.append(", \"end\":\"" + booking.getCheckOutDate() + "\"");
-		sb.append(", \"color\":\"#45818e\"");
-		sb.append(", \"allDay\":\"" + true + "\"},");
+		sb.append("{\"bookingNum\":\"" + booking.getBookingNum() +"\"");
+		sb.append(", \"roomId\":\"" + booking.getRoomId() +"\"");
+		sb.append(", \"roomName\":\"" + booking.getRoomName() +"\"");
+		sb.append(", \"name\":\"" + booking.getName() +"\"");
+		sb.append(", \"phone\":\"" + booking.getPhone() +"\"");
+		sb.append(", \"visitNum\":\"" + booking.getVisitNum() + "\"},");
 		
 		result += sb.toString();
 	}

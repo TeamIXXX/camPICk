@@ -14,6 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY BOOKINGDATE DESC                                     
 	</select>
 	
+	<select id="bookingDailyList" resultType="com.campick.dto.BookingDTO">
+		SELECT BOOKINGNUM, ROOMID, ROOMNAME, NAME, PHONE, VISITNUM                                        
+		FROM BOOKINGVIEW                                               
+		WHERE CAMPGROUNDID = '${campgroundId}'                                         
+		AND TO_DATE(#{date}, 'YYYY-MM-DD') BETWEEN CHECKINDATE AND (CHECKOUTDATE-1)                    
+	</select>
+	
 	<select id="roomList" resultType="com.campick.dto.RoomDTO">
 		SELECT ROOMID, ROOMNAME
 		FROM ROOM

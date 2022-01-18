@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,13 +54,8 @@ public class PartnerBookingController
 			
 			IPartnerBookingDAO bookingDao = sqlSession.getMapper(IPartnerBookingDAO.class);
 			
-			model.addAttribute("campgroundId", campgroundId);
+			session.setAttribute("campgroundId", campgroundId);
 			model.addAttribute("roomList", bookingDao.roomList(campgroundId));
-			
-			for (RoomDTO room : bookingDao.roomList(campgroundId))
-			{
-				System.out.println(room.getRoomName());
-			}
 			
 			result += "PartnerBookingTemplate.jsp";
 			
@@ -77,10 +73,12 @@ public class PartnerBookingController
 	/*public String bookingPTList(@RequestParam("campgroundId") String campgroundId, HttpServletRequest request, ModelMap model)*/	
 	{
 		String result = "/WEB-INF/view/";
-		String campgroundId = request.getParameter("campgroundId");
+		HttpSession session = request.getSession();
+		
 		
 		try
 		{
+			String campgroundId = (String) session.getAttribute("campgroundId");
 			IPartnerBookingDAO dao = sqlSession.getMapper(IPartnerBookingDAO.class);
 			
 			model.addAttribute("lists", dao.bookingPTList(campgroundId));
@@ -95,7 +93,31 @@ public class PartnerBookingController
 		return result;
 	}
 	
-	//@RequestMapping(value = "ajaxpartnerbookingdetail.wei", method = RequestMethod.GET)
+	@RequestMapping(value = "ajaxpartnerdailybookinglist.wei", method = RequestMethod.GET)
+	public String bookingDailyList(HttpServletRequest request, ModelMap model)
+	{
+		String result = "/WEB-INF/view/";
+		HttpSession session = request.getSession();
+		
+		try
+		{
+			String campgroundId = (String) session.getAttribute("campgroundId");
+			String date = request.getParameter("date");
+			
+			IPartnerBookingDAO dao = sqlSession.getMapper(IPartnerBookingDAO.class);
+			
+			model.addAttribute("lists", dao.bookingDailyList(campgroundId, date));
+			
+			result += "AjaxPartnerDailyBookingList.jsp";
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return result;
+		
+	}
 	
 	
 	
