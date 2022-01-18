@@ -98,6 +98,7 @@ public class SignupController
 		HttpSession session = request.getSession();
 		
 		String num = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
 		
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
 		
@@ -105,10 +106,7 @@ public class SignupController
 		{ 
 			if (num == null) 
 				return "redirect:loginrequest.wei";
-			
-			else if (!session.getAttribute("account").equals("camper")
-						&& !session.getAttribute("account").equals("partner")
-						&& !session.getAttribute("account").equals("admin"))
+			else if (num!=null && !account.equals("camper"))
 				return "redirect:limit.wei";
 
 		} catch (Exception e)
@@ -118,7 +116,7 @@ public class SignupController
 		
 		model.addAttribute("camper", signupDao.searchCamperId(num));
 		
-		return "/WEB-INF/view/CheckCamperPw.jsp";
+		return "/WEB-INF/view/CheckCamperPwTemplate.jsp";
 	}
 	
 	// 캠퍼 회원 정보 수정 폼
@@ -128,6 +126,7 @@ public class SignupController
 		HttpSession session = request.getSession();
 		
 		String num = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
 		
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
 		
@@ -135,10 +134,7 @@ public class SignupController
 		{ 
 			if (num == null) 
 				return "redirect:loginrequest.wei";
-			
-			else if (!session.getAttribute("account").equals("camper")
-						&& !session.getAttribute("account").equals("partner")
-						&& !session.getAttribute("account").equals("admin"))
+			else if (num!=null && !account.equals("camper"))
 				return "redirect:limit.wei";
 
 		} catch (Exception e)
@@ -188,6 +184,12 @@ public class SignupController
 	{
 		HttpSession session = request.getSession();
 		String num = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
+		
+		if (num == null) 
+			return "redirect:loginrequest.wei";
+		else if (num!=null && !account.equals("camper"))
+			return "redirect:limit.wei";
 		
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
 		signupDao.modifyCamper(camperDTO);
@@ -416,6 +418,17 @@ public class SignupController
 	public String partnerSignupFileUpdate(HttpServletRequest request)
 	{
 		HttpSession session = request.getSession();
+		String partnerNum = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
+		if (partnerNum == null)			// 로그인 x 일경우
+		{
+			return "redirect:loginrequest.wei";
+		}
+		else if (partnerNum!=null && !account.equals("partner"))		// 로그인 o && 파트너 회원이 아닐 경우 
+		{
+			return "redirect:limit.wei";
+		}
+		
 		String partnerId = (String)session.getAttribute("loginId");
 		
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
@@ -453,6 +466,18 @@ public class SignupController
 	@RequestMapping(value = "ajaxcheckpartnerpw.wei", method = RequestMethod.GET)
 	public String getPartnerPw(HttpServletRequest request, ModelMap model)
 	{
+		HttpSession session = request.getSession();
+		String partnerNum = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
+		if (partnerNum == null)			// 로그인 x 일경우
+		{
+			return "redirect:loginrequest.wei";
+		}
+		else if (partnerNum!=null && !account.equals("partner"))		// 로그인 o && 파트너 회원이 아닐 경우 
+		{
+			return "redirect:limit.wei";
+		}
+		
 		String partnerId = request.getParameter("partnerId");
 		String partnerPw = request.getParameter("partnerPw");
 		PartnerDTO partner = new PartnerDTO();

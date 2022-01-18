@@ -27,7 +27,7 @@
      font-style: normal;
 }
 
-.mainContainer
+*
 {
 	font-family: 'S-CoreDream-6Bold';
 }
@@ -233,10 +233,10 @@
 		<jsp:include page="PartnerSitemap.jsp"></jsp:include>
 	</div>
 	 
-	<div class="partnerMainItem" style="background-color: none;">
-		<div style="margin-top: 30px; font-size: 17px;">
+	<div class="partnerMainItem" style="background-color: none; flex-direction: column;">
+		<div style="margin-top: 30px; font-size: 17px; width: 800px; align-self: center;">
 			회원정보
-			<hr style="border-top: 3px solid #eee;">
+			<hr style="border-top: 2px solid #eee;">
 		</div>
 		
 		<div class="containerC">
@@ -305,7 +305,7 @@
 			</div>
 		</div>
 		
-		<form class="containerC" id="partnerUpdateForm" action="partnerupdate.wei" method="post">
+		<form class="containerC" id="partnerUpdateForm" action="partnerupdate.wei" method="post" style="height: 5px;">
 			<!-- 아이디 -->
 			<input type="hidden" id="partnerId" name="partnerId" value="${partner.partnerId }">
 			<!-- 회원번호 -->
@@ -319,12 +319,11 @@
 			<!-- 이메일 주소 -->
 			<input type="hidden" id="partnerEmail" name="partnerEmail" value="${partner.partnerEmail }">
 		</form>
-		
 	</div>
 	 
 </div> 
 
-<div>
+<div >
   <c:import url="Footer.jsp"></c:import>
 </div>
 

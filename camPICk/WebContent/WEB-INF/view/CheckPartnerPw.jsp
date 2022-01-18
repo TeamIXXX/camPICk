@@ -14,9 +14,9 @@
 <meta charset="UTF-8">
 <title>패스워드 재확인</title>
 <%-- <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css"> --%>
-
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <style type="text/css">
-/* 
+
 .containerPw
 {
     margin: 40px auto;
@@ -34,7 +34,7 @@
 	margin: 0 auto;
 	padding-top: 30px;
 }
-*/
+
 .txt
 {
 	margin: 40px auto;
@@ -137,12 +137,11 @@
 		});
 	}
 	
-	
 </script>
 </head>
 <body>
 
-<div class="mainContainer">
+<!-- <div class="mainContainer"> -->
 	<%-- 
 	<div class="mainItem">
 		<jsp:include page="TopMenu.jsp"></jsp:include>
@@ -160,7 +159,7 @@
 		<c:import url="NavigationBar.jsp"></c:import>
 	</div>
 	  --%>
-	<div class="mainItem" style="background-color: none;">
+	<div class="mainItem" style="background-color: none; width: 900px;">
 		<div style="margin: 40px auto; font-size: 20px; text-align: center;">
 			<span style="font-size: 15px;">비밀번호 재확인</span>
 			<br>
@@ -168,29 +167,28 @@
 				회원님의 소중한 개인정보를 안전하게 보호하고<br>
 				개인정보 도용으로 인한 피해를 예방하기 위하여 비밀번호를 확인합니다.<br>
 				비밀번호는 타인에게 노출되지 않도록 주의해주세요.</p>
-			<hr style="border-top: 3px solid #eee;">
 		</div>
+		<hr style="border-top: 3px solid #eee;">
 		
-		<!-- 회원번호 -->
-		<div class="itemPw">아이디</div>
-		<div class="itemPw">
-			<%=loginId %>
+		<div class="containerPw">
+			<!-- 회원번호 -->
+			<div class="itemPw">아이디</div>
+			<div class="itemPw"><%=loginId %></div>
+
+			<div class="itemPw">비밀번호</div>
+			<div class="itemPw">
+				<input type="password" id="partnerPw" name="partnerPw" maxlength="14">
+				<br><span class="errMsg" id="pwMsg"></span>
+			</div>
+			
+			<div class="itemPw">
+				<button type="button" id="sign" class="sign">내 정보 확인하기</button>
+			</div>
 		</div>
-		
-		<div class="itemPw">비밀번호</div>
-		<div class="itemPw">
-			<input type="password" id="partnerPw" name="partnerPw" maxlength="14">
-			<br><span class="errMsg" id="pwMsg"></span>
-		</div>
-		
-		<div class="itemPw">
-			<button type="button" id="sign" class="sign">내 정보 확인하기</button>
-		</div>
-		
 		<hr style="border-top: 3px solid #eee;">
 	</div>
 	 
-</div>
+<!-- </div> -->
 <%-- 
 <footer>
 	<c:import url="Footer.jsp"></c:import>

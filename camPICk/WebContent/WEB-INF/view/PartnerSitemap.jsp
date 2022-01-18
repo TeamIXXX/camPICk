@@ -14,11 +14,14 @@
 <meta charset="UTF-8">
 <title>PartnerSitemap.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/PartnerSitemap.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 
 	$(function()
 	{
-		if (<%=num%>=="0")
+		var num = "<%=num%>";
+		
+		if (num=="0")
 		{
 			$("#myBooking").click(function()
 			{
@@ -49,6 +52,8 @@
 				$(this).attr("href", "partneraccounttemplate.wei");
 			});
 		}
+		
+
 	});
 
 </script>
