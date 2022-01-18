@@ -552,20 +552,24 @@
 		//픽하기 탭 클릭시 css처리
 		$("#pickBtn").on("click",function()
 		{
+			// 로그인 전에 픽하기를 눌렀을 경우
+			if( ${num eq null} )
+			{	
+				alert("로그인 후 이용가능합니다.");
+				return;
+			}
+			
 			if($("#pickBtn").hasClass("active"))
 				$(location).attr("href", "pickon.wei?campgroundId=${campgroundId}");
-				//alert("픽 상태 + ${campgroundId}");
 			else
 				$(location).attr("href", "pickoff.wei?campgroundId=${campgroundId}");
 		});
-		
 	});
 
 </script>
 <style type="text/css">
-#pickBtn.active {
-	background-color: #FFD032;
-}
+	#pickBtn.active { background-color: #FFD032; }
+	#pickBtn.active:hover { background-color: #F8BB00; }
 </style>
 
 </head>
@@ -625,7 +629,7 @@
 						<button type="button" class="btn1 active" id="pickBtn">픽하기</button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" class="btn1" id="pickBtn">픽하기</button>
+						<button type="button" class="btn1" id="pickBtn">픽 해제하기</button>
 					</c:otherwise>
 				</c:choose>
 

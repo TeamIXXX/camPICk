@@ -84,7 +84,7 @@ public class SignupController
 		return "/WEB-INF/view/PwResetForm.jsp";
 	}
 	
-	// 비밀번호 재확인 폼
+	// 캠퍼 계정관리 접근 시, 비밀번호 재확인 폼
 	@RequestMapping(value = "/checkPwForm.wei", method = RequestMethod.GET)
 	public String checkPwForm(ModelMap model, HttpServletRequest request)
 	{
@@ -321,6 +321,72 @@ public class SignupController
 		}
 		
 		return "redirect:partneraccounttemplate.wei";
+	}
+	
+	// 파트너 계정관리 접근 시 비밀번호 확인 ajax
+	@RequestMapping(value = "ajaxcheckpartnerpw.wei", method = RequestMethod.GET)
+	public String getPartnerPw(HttpServletRequest request, ModelMap model)
+	{
+		String partnerId = request.getParameter("partnerId");
+		String partnerPw = request.getParameter("partnerPw");
+		PartnerDTO partner = new PartnerDTO();
+		
+		partner.setPartnerId(partnerId);
+		partner.setPartnerPw(partnerPw);
+		
+		//System.out.println(partnerId);
+		//System.out.println(partnerPw);
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		int result = signupDao.checkPartnerPw(partner);
+		//System.out.println(result);
+		
+		model.addAttribute("result", result);
+		return "/WEB-INF/view/AjaxCheckPartnerPw.jsp";
+	}
+	
+	// 파트너 계정관리 회원정보 수정 폼
+	@RequestMapping(value = "partnerupdateform.wei", method = RequestMethod.GET)
+	public String toPartnerUpdateForm(HttpServletRequest request, ModelMap model)
+	{
+		HttpSession session = request.getSession();
+		String partnerNum = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
+		if (partnerNum == null)			// 로그인 x 일경우
+		{
+			return "redirect:loginrequest.wei";
+		}
+		else if (partnerNum!=null && !account.equals("partner"))		// 로그인 o && 파트너 회원이 아닐 경우 
+		{
+			return "redirect:limit.wei";
+		}
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		model.addAttribute("partner", signupDao.searchPartner(partnerNum));
+		
+		return "/WEB-INF/view/PartnerUpdateTemplate.jsp";
+	}
+	
+	// 파트너 계정관리 회원정보 수정 액션 처리
+	@RequestMapping(value = "partnerupdate.wei", method = RequestMethod.POST)	
+	public String partnerUpdate(PartnerDTO partner, HttpServletRequest request, ModelMap model)
+	{
+		HttpSession session = request.getSession();
+		String partnerNum = (String)session.getAttribute("num");
+		String account = (String)session.getAttribute("account");
+		if (partnerNum == null)			// 로그인 x 일경우
+		{
+			return "redirect:loginrequest.wei";
+		}
+		else if (partnerNum!=null && !account.equals("partner"))		// 로그인 o && 파트너 회원이 아닐 경우 
+		{
+			return "redirect:limit.wei";
+		}
+		
+		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
+		signupDao.modifyPartner(partner);
+			
+		return "redirect:partnerupdateform.wei";
 	}
 	
 

@@ -19,255 +19,252 @@
 <script type="text/javascript" src="<%=cp%>/js/signupFormPartner.js"></script>
 
 <script type="text/javascript">
-   $(function()
-   {
-      // 모든 약관 동의
-      $("#allChkP").click(function()
-      {
-         callAllChkP();
-      });
-      $("input[name=chkP]").click(function()
-      {
-         callChkP();         
-      });
-      
-      
-      // 아이디 중복 확인
-      // 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
-      $("#partnerId").keyup(function()
-      {
-         $("input[id=checked_idP]").val("n");
-      });
-      
-      $("#duplBtnP").click(function()
-      {
-         var param = "id=" + $.trim($("#partnerId").val());
-         
-         $.ajax({
-            type: "GET"
-            , url: "ajaxSignupId.wei"
-            , data: param
-            , dataType: "text"
-            , success: function(args)
-            {
-               if (args==0)
-               {
-                  $("#duplMsgP").css("color", "#34aadc");
-                  $("#duplMsgP").html("사용 가능한 아이디입니다.");
-                  
-                  $("input[id=checked_idP]").val("y");
-                  
-               }
-               else if (args==1)
-               {
-                  $("#duplMsgP").css("color", "red");
-                  $("#duplMsgP").html("이미 사용 중인 아이디입니다.");
-               }
 
-            }
-            , beforeSend: showRequestP
-            , error: function(e)
-            {
-               alert(e.responseText);
-            }
-         });
-         
-      });
+	$(function()
+	{
+		// 모든 약관 동의
+		$("#allChkP").click(function()
+		{
+			callAllChkP();
+		});
+		$("input[name=chkP]").click(function()
+		{
+			callChkP();         
+		});
       
       
-      // 비밀번호 영문 + 숫자 검사
-      $("#partnerPw").keyup(function()
-      {
-         $("#pwMsgP").html("");
-         chkPwLengthP();
-         chkPwP();
-      });
-      
-      // 비밀번호 확인
-      $("#pw2P").keyup(function()
-      {
-         chkPwP();
-      });
-      
-      
-      // 이름 한글 검사
-      $("#partnerName").blur(function()
-      {
-         chkNameP();
-      });
+		// 아이디 중복 확인
+		// 아이디 중복 확인 후 수정할 수 있으므로 다시 중복 확인하게 하기 위함
+		$("#partnerId").keyup(function()
+		{
+			$("input[id=checked_idP]").val("n");
+		});
       
 
-      // 휴대폰 번호 대쉬(-) 자동삽입
-      $("#partnerPhone").keyup(function()
-      {
-         $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
-      });
-      
-      // 사업자등록번호 (-) 자동삽입
-      $("#businesslicense").keyup(function name()
-      {
-         $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{1,2})(\d{5})$/, "$1-$2-$3") );
-      });
-      
-      // 랜덤 인증번호 발송
-      var rCodeP = randomCode(4);
-      $("#cerNumP").click(function()
-      {
-         if(chkPhoneLengthP())
-         {
-            $("#chkTelMsgP").html("");
-            $("#recerNumP").val(rCodeP);
-            $("#chkCerNumP").attr("disabled", false);
-         };
-      });
-      
-      // 랜덤 인증번호 확인
-      $("#chkCerNumP").click(function()
-      {
-         var regPhone = /^\d{3}-\d{4}-\d{4}$/;
-         
-         if (!$("#partnerPhone").val())
-         {
-            $("#chkTelMsgP").html("휴대폰번호를 입력해주세요.");
-         }
-         else if (!regPhone.test($("#partnerPhone").val()))
-         {
-            $("#chkTelMsgP").html("휴대폰번호가 유효하지 않습니다.");
-         }
-         else if($("#recerNumP").val() != rCodeP)
-         {
-            $("#chkCerMsgP").css("color", "red");
-            $("#chkCerMsgP").html("인증번호를 확인해 주십시오.");
-         }
-         else if ($("#recerNumP").val() == rCodeP)
-         {
-            $("#chkCerMsgP").css("color", "#34aadc");
-            $("#chkCerMsgP").html("인증번호가 확인 되었습니다.");
-            $("#chkCerNumP").attr("disabled", true);
-            $("#cerNumP").attr("disabled", true);
-            //$("#partnerPhone").attr("readonly", true);
-            //$("#recerNumP").attr("readonly", true);
-         }
-         
-      });
-      
-      // 휴대폰번호 수정했을 경우
-      $("#partnerPhone").keyup(function()
-      {
-         $("#checked_phoneP").val("n");
-         $("#recerNumP").val("");
-         $("#chkCerMsgP").html("");
-         $("#cerNumP").attr("disabled", false);
-         
-      });
-      
-      // 이메일 주소 선택
-      $("#selectEmailP").change(function()
-      {
-         chkEmailP();
-      });
-      
-      
-      // 필수입력 항목 확인
-      var infoCheck = function()
-      {
-         if($("#partnerId").val() == "")
-         {
-            alert("아이디를 입력해 주십시오.");
-            $("#partnerId").focus();
-            return false;
-         }
-         else if($("#checked_idP").val() == "n" || $("#checked_idP").val() == "")
-         {
-            alert("아이디 중복검사를 해 주십시오.");
-            $("#partnerId").focus();
-            return false;
-         }
-         else if($("#partnerPw").val() == "" || $("#partnerPw").val().length < 5)
-         {
-            alert("비밀번호를 확인해 주십시오.");
-            $("#partnerPw").focus();
-            return false;
-         }
-         else if($("#pw2P").val() == "")
-         {
-            alert("비밀번호 확인을 입력해 주십시오.");
-            $("#pw2P").focus();
-            return false;
-         }
-         else if($("#partnerPw").val() != $("#pw2P").val())
-         {
-            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-            $("#partnerPw").focus();
-            return false;
-         }
-         else if($("#partnerName").val() == "")
-         {
-            alert("이름을 입력해 주십시오.");
-            $("#partnerName").focus();
-            return false;
-         }
-         else if($("#checked_phoneP").val() == "n" || $("#checked_phoneP").val() == "")
-         {
-            
-         }
-         else if($("#partnerPhone").val() == "")
-         {
-            alert("휴대폰번호를 입력해 주십시오.");
-            $("#partnerPhone").focus();
-            return false;
-         }
-         else if( ($("#cerNumP").is(":enabled")) )
-         {
-            alert("인증번호를 확인해 주십시오.");
-            return false;
-         }
-         ////// 사업자번호 확인 추가
-         //else if(!chkLicense($("#licenseNum").val()))
-         else if($("#businesslicense").val() == "")
-         {
-            alert("사업자 등록번호를 입력해주십시오.");
-            $("#businesslicense").focus();
-            return false;
-         }
-         else if(!chkLicenseLength())
-         {
-            alert("사업자 등록번호가 유효하지 않습니다.");
-            $("#businesslicense").focus();
-            return false;
-         }
-         else if( ($("#emailP1").val()=="" && $("#emailP2").val()!="") || ($("#emailP1").val()!="" && $("#emailP2").val()=="") )
-         {
-            alert("이메일을 확인해 주십시오.");
-            return false;
-         }
-         else if( !($("#allChkP").is(":checked")) )
-         {
-            alert("모든 필수 약관에 동의하지 않으면 회원가입이 불가합니다.");
-            return false;
-         }
-         return true;
-      };
-       
+		$("#duplBtnP").click(function()
+		{
+			var param = "id=" + $.trim($("#partnerId").val());
 
-      $("#signP").click(function()
-      {
-         if ($("#emailP1").val()!="" && $("#emailP2").val()!="")
-         {
-            $("#partnerEmail").val($("#emailP1").val()+"@"+$("#emailP2").val());
-         }
-         //alert("이메일:" + $("#partnerEmail").val())
-         if(infoCheck())
-         {
-            if(confirm("회원가입 하시겠습니까?"))
-            {
-               $("#pFrm").submit();
-            };
-         };
-      });
+			$.ajax(
+			{
+				type : "GET",
+				url : "ajaxSignupId.wei",
+				data : param,
+				dataType : "text",
+				success : function(args)
+				{
+					if (args == 0)
+					{
+						$("#duplMsgP").css("color", "#34aadc");
+						$("#duplMsgP").html("사용 가능한 아이디입니다.");
 
-   });
-   
+						$("input[id=checked_idP]").val("y");
+
+					} else if (args == 1)
+					{
+						$("#duplMsgP").css("color", "red");
+						$("#duplMsgP").html("이미 사용 중인 아이디입니다.");
+					}
+
+				},
+				beforeSend : showRequestP,
+				error : function(e)
+				{
+					alert(e.responseText);
+				}
+			});
+
+		});
+
+		// 비밀번호 영문 + 숫자 검사
+		$("#partnerPw").keyup(function()
+		{
+			$("#pwMsgP").html("");
+			chkPwLengthP();
+			chkPwP();
+		});
+
+		// 비밀번호 확인
+		$("#pw2P").keyup(function()
+		{
+			chkPwP();
+		});
+
+		// 이름 한글 검사
+		$("#partnerName").blur(function()
+		{
+			chkNameP();
+		});
+
+		// 휴대폰 번호 대쉬(-) 자동삽입
+		$("#partnerPhone").keyup(function()
+		{
+			$(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-"));
+		});
+
+		// 사업자등록번호 (-) 자동삽입
+		$("#businesslicense").keyup(function name()
+		{
+			$(this).val($(this).val().replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{1,2})(\d{5})$/,"$1-$2-$3"));
+		});
+
+		// 랜덤 인증번호 발송
+		var rCodeP = randomCode(4);
+		$("#cerNumP").click(function()
+		{
+			if (chkPhoneLengthP())
+			{
+				$("#chkTelMsgP").html("");
+				$("#recerNumP").val(rCodeP);
+				$("#chkCerNumP").attr("disabled", false);
+			}
+			;
+		});
+
+		// 랜덤 인증번호 확인
+		$("#chkCerNumP").click(function()
+		{
+			var regPhone = /^\d{3}-\d{4}-\d{4}$/;
+
+			if (!$("#partnerPhone").val())
+			{
+				$("#chkTelMsgP").html("휴대폰번호를 입력해주세요.");
+			} else if (!regPhone.test($("#partnerPhone").val()))
+			{
+				$("#chkTelMsgP").html("휴대폰번호가 유효하지 않습니다.");
+			} else if ($("#recerNumP").val() != rCodeP)
+			{
+				$("#chkCerMsgP").css("color", "red");
+				$("#chkCerMsgP").html("인증번호를 확인해 주십시오.");
+			} else if ($("#recerNumP").val() == rCodeP)
+			{
+				$("#chkCerMsgP").css("color", "#34aadc");
+				$("#chkCerMsgP").html("인증번호가 확인 되었습니다.");
+				$("#chkCerNumP").attr("disabled", true);
+				$("#cerNumP").attr("disabled", true);
+				//$("#partnerPhone").attr("readonly", true);
+				//$("#recerNumP").attr("readonly", true);
+			}
+
+		});
+
+		// 휴대폰번호 수정했을 경우
+		$("#partnerPhone").keyup(function()
+		{
+			$("#checked_phoneP").val("n");
+			$("#recerNumP").val("");
+			$("#chkCerMsgP").html("");
+			$("#cerNumP").attr("disabled", false);
+
+		});
+
+		// 이메일 주소 선택
+		$("#selectEmailP").change(function()
+		{
+			chkEmailP();
+		});
+
+		// 필수입력 항목 확인
+		var infoCheck = function()
+		{
+			if ($("#partnerId").val() == "")
+			{
+				alert("아이디를 입력해 주십시오.");
+				$("#partnerId").focus();
+				return false;
+			} 
+			else if ($("#checked_idP").val() == "n" || $("#checked_idP").val() == "")
+			{
+				alert("아이디 중복검사를 해 주십시오.");
+				$("#partnerId").focus();
+				return false;
+			} 
+			else if ($("#partnerPw").val() == "" || $("#partnerPw").val().length < 5)
+			{
+				alert("비밀번호를 확인해 주십시오.");
+				$("#partnerPw").focus();
+				return false;
+			} 
+			else if ($("#pw2P").val() == "")
+			{
+				alert("비밀번호 확인을 입력해 주십시오.");
+				$("#pw2P").focus();
+				return false;
+			} 
+			else if ($("#partnerPw").val() != $("#pw2P").val())
+			{
+				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+				$("#partnerPw").focus();
+				return false;
+			} 
+			else if ($("#partnerName").val() == "")
+			{
+				alert("이름을 입력해 주십시오.");
+				$("#partnerName").focus();
+				return false;
+			} 
+			else if (!$("#partnerPhone").val() == "" && $("#checked_phoneP").val() == "n" || $("#checked_phoneP").val() == "")
+			{
+				alert("휴대폰번호 인증을 해주세요.");
+				return false;
+			} 
+			else if ($("#partnerPhone").val() == "")
+			{
+				alert("휴대폰번호를 입력해 주십시오.");
+				$("#partnerPhone").focus();
+				return false;
+			} 
+			else if (($("#cerNumP").is(":enabled")))
+			{
+				alert("인증번호를 확인해 주십시오.");
+				return false;
+			}
+			////// 사업자번호 확인 추가
+			//else if(!chkLicense($("#licenseNum").val()))
+			else if ($("#businesslicense").val() == "")
+			{
+				alert("사업자 등록번호를 입력해주십시오.");
+				$("#businesslicense").focus();
+				return false;
+			} 
+			else if (!chkLicenseLength())
+			{
+				alert("사업자 등록번호가 유효하지 않습니다.");
+				$("#businesslicense").focus();
+				return false;
+			} 
+			else if (($("#emailP1").val() == "" && $("#emailP2").val() != "")	|| ($("#emailP1").val() != "" && $("#emailP2").val() == ""))
+			{
+				alert("이메일을 확인해 주십시오.");
+				return false;
+			} 
+			else if (!($("#allChkP").is(":checked")))
+			{
+				alert("모든 필수 약관에 동의하지 않으면 회원가입이 불가합니다.");
+				return false;
+			}
+			return true;
+		};
+
+		$("#signP").click(function()
+		{
+			if ($("#emailP1").val() != "" && $("#emailP2").val() != "")
+			{
+				$("#partnerEmail").val($("#emailP1").val() + "@" + $("#emailP2").val());
+			}
+			//alert("이메일:" + $("#partnerEmail").val())
+			if (infoCheck())
+			{
+				if (confirm("회원가입 하시겠습니까?"))
+				{
+					$("#pFrm").submit();
+				}
+				;
+			}
+			;
+		});
+
+	});
 </script>
 
 </head>

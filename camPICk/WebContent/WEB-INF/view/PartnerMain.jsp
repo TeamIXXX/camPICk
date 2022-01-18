@@ -14,7 +14,6 @@
 	numList.add("6");
 	numList.add("5");
 	
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -52,7 +51,9 @@
 
 	$(function()
 	{
-		if (<%=num%>=="0")
+		var num = "<%=num%>";
+		
+		if (num=="0")
 		{
 			$("#myBooking").attr("disabled", "disabled");
 			$("#myCampground").attr("disabled", "disabled");
@@ -81,7 +82,7 @@
 		<jsp:include page="TopMenu.jsp"></jsp:include>
 	</div>
 	<div class="partnerItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
+		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
 	<div class="partnerItem">
 		<div class="partnerMainButton">

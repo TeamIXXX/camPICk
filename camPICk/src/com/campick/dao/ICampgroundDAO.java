@@ -29,10 +29,10 @@ public interface ICampgroundDAO
 	//픽 하기
 	public int pickOn(String camperNum, String campgroundId) throws SQLException;
 	
-	//픽 해제
+	//픽 해제 
 	public int pickOff(String camperNum, String campgroundId)throws SQLException;
 	
 	//픽여부 판별
 	public String pickCheck(String camperNum, String campground) throws SQLException;
-	
+
 }

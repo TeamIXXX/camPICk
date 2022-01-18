@@ -221,6 +221,10 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean name="/pickoff.wei" class="com.campick.controller.PickOffController">
 	   <property name="campgroundDao" ref="campgroundDAO"></property>
 	</bean>
+	
+	<bean name="/ajaxpicklist.wei" class="com.campick.controller.AjaxPickListController">
+	   <property name="bookingDao" ref="bookingDAO"></property>   
+	</bean>
 
 	
 	<!-- 파트너 캠핑장 등록 -->
