@@ -83,8 +83,7 @@
 	border: 1px solid #000;
 }
 
-.btn:hover
-, .btn:active
+.btn:hover, .btn:active, .btn-warning:focus, .btn-warning:active
 {
 	background-color: white;
 	border-color: #FFD700;
