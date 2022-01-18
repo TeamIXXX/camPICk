@@ -8,7 +8,8 @@
 
 .partnerSitemapItem ul, .partnerSitemapItem li  
 {
-	margin: 0;
+	/* margin: 0; */		/* 임의 */
+	margin: 0 auto;			/* 임의 */
 	padding: 0;
 	text-align: center;
 	list-style: none;
@@ -29,18 +30,19 @@
 
 .partnerMainMenu >li >a 
 {
-	background-color: #C4C4C4;
-	color: #45818E;
+	/* background-color: #C4C4C4; */	/* 임의 */
+	/* color: #45818E; */				/* 임의 */
+	color: #000;						/* 임의 */
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 16px;
 	height: 30pt;
 	font-weight: bold;
 	display: block;
 	padding: 6px;
-	border-right: 2px solid rgba(0, 0, 0, 0.15);
+	/* border-right: 2px solid rgba(0, 0, 0, 0.15); */	/* 임의 */
 }
 
 .partnerMainMenu > li > a:hover 
 {
-	background-color: #FFD03E;
+	/* background-color: #AAAAAA; */	/* 임의 */
 }

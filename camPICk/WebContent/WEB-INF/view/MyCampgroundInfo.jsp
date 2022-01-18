@@ -1,4 +1,3 @@
-<%@page import="com.campick.controller.PartnerCampgroundController"%>
 <%@page import="com.campick.dao.IPartnerMainDAO"%>
 <%@page import="com.campick.dto.ThemeSurvResultPartnerDTO"%>
 <%@page import="com.campick.dto.ThemeSurvResultDTO"%>
