@@ -12,11 +12,11 @@
 
 .PartnerMain
 {
-	width: 85%;
+	width: 1080px;
 	display: grid;
-	grid-template-columns: 1fr 3fr;
-	grid-template-rows: 1fr 8fr 0.5fr;
-	grid-gap: 2%;
+	grid-template-columns: 260px 800px;
+	grid-template-rows: 110px repeat(auto-fill, minmax(0%, auto));
+	grid-gap: 10px;
 	margin: 0 auto;
 	/* background-color: gray; */
 }
@@ -36,6 +36,7 @@
 	grid-column: 1 / 2;
 	grid-row: 1 / 2;	
 	margin: 5px;
+	margin-top: 60px;
 }
 
 .partnerItem:nth-child(3) /* 내용 영역 */
@@ -65,12 +66,32 @@
 
 #mainLogo > img
 { 
-	width: 100%;
+	width: 234px;
 	object-fit: cover; 
 }
 
 .buttonName
 {
 	font-weight: bold; 
-	font-size: 30px;"
+	font-size: 18px;
+	color: #000;
+}
+
+.btn
+{
+	background-color: white;
+	border: 1px solid #000;
+}
+
+.btn:hover
+, .btn:active
+{
+	background-color: white;
+	border-color: #FFD700;
+}
+
+.btn:hover .buttonName
+, .btn:active .buttonName
+{
+	color: #FFD700;
 }
