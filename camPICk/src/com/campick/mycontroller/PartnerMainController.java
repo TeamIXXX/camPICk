@@ -218,7 +218,7 @@ public class PartnerMainController
 	}
 	
 
-	
+	// 객실 추가 후 캠핑장 관리 페이지로 이동
 	@RequestMapping(value = "roominsert.wei", method = RequestMethod.GET)
 	public String roomInfoInsert(HttpServletRequest request, ModelMap model) throws SQLException
 	{
@@ -238,6 +238,35 @@ public class PartnerMainController
 		room.setWeekDayPrice(Integer.parseInt(request.getParameter("weekDayPrice")));
 		room.setWeekEndPrice(Integer.parseInt(request.getParameter("weekEndPrice")));
 		room.setRoomInfo(request.getParameter("roomInfo"));
+		
+		model.addAttribute("roomInfo",partnerDao.roomInsert(room));
+
+		return "redirect:mycampgroundtemplate.wei";
+		
+	}
+	
+	// 객실 수정 후 캠핑장 관리 페이지로 이동
+	@RequestMapping(value = "roomupdate.wei", method = RequestMethod.GET)
+	public String roomInfoUpdate(HttpServletRequest request, ModelMap model, RoomDTO room) throws SQLException
+	{
+		HttpSession session = request.getSession();
+		String campgroundId = (String)session.getAttribute("campgroundId");
+		
+		IPartnerCampgroundDAO partnerDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
+		
+		/*
+		RoomDTO room = new RoomDTO();
+		
+		room.setCampgroundId(campgroundId);
+		room.setRoomId(roomId);
+		room.setRoomTypeNum(Integer.parseInt(request.getParameter("roomTypeNum")));
+		room.setRoomName(request.getParameter("roomName"));
+		room.setBasicNum(Integer.parseInt(request.getParameter("basicNum")));
+		room.setMaxNum(Integer.parseInt(request.getParameter("maxNum")));
+		room.setWeekDayPrice(Integer.parseInt(request.getParameter("weekDayPrice")));
+		room.setWeekEndPrice(Integer.parseInt(request.getParameter("weekEndPrice")));
+		room.setRoomInfo(request.getParameter("roomInfo"));
+		*/
 		
 		model.addAttribute("roomInfo",partnerDao.roomInsert(room));
 

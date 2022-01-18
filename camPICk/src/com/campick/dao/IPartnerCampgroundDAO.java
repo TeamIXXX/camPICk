@@ -30,6 +30,7 @@ public interface IPartnerCampgroundDAO
 	
 	// 객실 추가 
 	public int roomInsert(RoomDTO room);
-	//public int roomInsert(int roomTypeNum, String roomName, int weekDayPrice, int weekEndPrice, int basicNum, int maxNum, String roomInfo );
-	
+
+	// 객실 수정
+	public int roomUpdate(RoomDTO room);
 }

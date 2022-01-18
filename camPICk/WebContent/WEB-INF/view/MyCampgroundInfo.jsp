@@ -465,7 +465,7 @@
 						out += "									 주말 1박 기준 " + weekendprice +"원<br> 설명 : "+info;
 						out += "		</div>";
 						out += "		<div class='item_roomlist'>";
-						out += "			<button type='button' class='roomlistBtn' id='updateBtn' onclick=''>수정</button>";
+						out += "			<button type='button' class='roomlistBtn' id='updateBtn' data-toggle='modal' data-target='#roomUpdateModal'>수정</button>";
 						out += "			<button type='button' class='roomlistBtn' id='deleteBtn' onclick=''>삭제</button>";
 						out += "		</div>";
 						out += "</div>";
@@ -778,6 +778,65 @@
    </div>
    </form>
 </div><!-- 객실 추가 모달 끝 -->
+
+
+<!-- 객실 수정 모달  -->
+<div class="modal fade" id="roomUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="roomupdate.wei" method="get" id="roomUpdateForm">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+            <h3 class="modal-title" id="myModalLabel" style="text-align: center">객실 수정</h3>
+         </div>
+      
+         <div class="modal-body">
+            <!-- 객실수정 폼 -->
+            <div class="roomInsertMain">
+                  <div class="roomInsertItem">유형선택</div>
+                  <input type="hidden" id="campgroundId" value="<%=campgroundId%>">
+                  <div class="roomInsertItem">
+                     	<label><input type="radio" name="roomTypeNum" value="91" class="roomTypeNum">오토캠핑 </label>
+                        <label><input type="radio" name="roomTypeNum" value="92" class="roomTypeNum">글램핑 </label>
+                        <label><input type="radio" name="roomTypeNum" value="93" class="roomTypeNum">카라반 </label>
+                        <label><input type="radio" name="roomTypeNum" value="94" class="roomTypeNum">차박 </label>
+                  </div>
+                  
+                  <div class="roomInsertItem">객실이름</div>
+                  <div class="roomInsertItem"><input type="text" id="roomName" name="roomName" value=""></div>
+                  
+                  <div class="roomInsertItem">인원 설정</div>
+                  <div class="roomInsertItem">
+                     기준인원 <input type="number" class="intInsert" id="basicNum" min="0" step="1" required="required" name="basicNum">명 / 
+                     최대인원 <input type="number" class="intInsert" min="0" step="1" required="required"  id="maxNum" name="maxNum">명
+                  </div>
+                  <div class="roomInsertItem">사진</div>
+                  <div class="roomInsertItem">
+                     <input type="file">
+                  </div>
+                  <div class="roomInsertItem">가격정보</div>
+                  <div class="roomInsertItem">
+                     주중 가격  <input type="text" placeholder="일~목" class="weekPrice" id="weekDayPrice" name="weekDayPrice">원 / 
+                     주말 가격  <input type="text" placeholder="금/토" class="weekPrice" id="weekEndPrice" name="weekEndPrice">원
+                  </div>
+                  <div class="roomInsertItem">추가설명</div>
+                  <div class="roomInsertItem"><textarea rows="5" cols="50" style="resize: none" id="roomInfo" name="roomInfo"></textarea> </div>
+            </div>
+            
+         </div>
+
+         <div class="modal-footer" style="align-content: center;">
+            <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+            <button type="submit" class="btn btn-primary" id="roomInsertConfirmBtn">확인</button>
+         </div>
+         
+         
+      </div>
+   </div>
+   </form>
+</div><!-- 객실 수정 모달 끝 -->
 
 
 <script type="text/javascript">

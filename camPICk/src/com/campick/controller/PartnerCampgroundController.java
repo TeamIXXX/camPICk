@@ -63,7 +63,6 @@ public class PartnerCampgroundController implements Controller
 			//System.out.println(num);
 			//System.out.println("캠핑장이름" + campgroundName);
 			//System.out.println(option);
-			
 				
 			campground.setParterNum(num);
 			campground.setCampgroundName(campgroundName);
