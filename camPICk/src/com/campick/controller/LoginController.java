@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.campick.dao.IAccountDAO;
+import com.campick.dao.IPartnerCampgroundDAO;
 
 public class LoginController implements Controller
 {
@@ -22,6 +23,14 @@ public class LoginController implements Controller
 	{
 		this.dao = dao;
 	}
+
+	private IPartnerCampgroundDAO campgroundDao;
+	
+	public void setCampgroundDao(IPartnerCampgroundDAO campgroundDao)
+	{
+		this.campgroundDao = campgroundDao;
+	}
+
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception

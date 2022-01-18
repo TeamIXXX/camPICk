@@ -40,5 +40,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM CAMPGROUND
 	</select>
 	
+	
+	<!-- 객실 추가 -->
+	<insert id="roomInsert" parameterType="com.campick.dto.RoomDTO">
+		INSERT INTO ROOM(ROOMID,CAMPGROUNDID,ROOMTYPENUM,ROOMNAME,WEEKDAYPRICE,WEEKENDPRICE,BASICNUM,MAXNUM,ROOMINFO)
+		VALUES('RM' || TO_CHAR(ROOMSEQ.NEXTVAL, 'FM0000'),#{campgroundId },#{roomTypeNum },#{roomName },#{weekDayPrice },#{weekEndPrice },#{basicNum },#{maxNum },#{roomInfo })
+	</insert>
+	
 </mapper>
 
