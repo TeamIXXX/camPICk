@@ -259,7 +259,7 @@
 							out += "<div class=\"groundList\">";
 							out += "					<div class=\"groundInfoContainer\">";
 							out += "						<div class=\"groundInfoItem\">";
-							out += "							<br><img src=\"img/campingjang1.jpg\" width=\"80%\">";
+							out += "							<br><img src=\"img/campingjang1.jpg\" width=\"85%\" style='padding-left:20pt;'>";
 							out += "						</div>";
 							out += "						<div class=\"groundInfoItem\">";
 							out += "							<a href=\"campickdetail.wei?campgroundId=" + campgroundId +"\"><span id='cgName'>" + campgroundName + "</span>";
@@ -282,8 +282,10 @@
 							out += "							PICK　　<span class='badge badge-pill'>" + pick + "</span> <br>";
 							out += "							REVIEW　<span class='badge rounded-pill'>" + review + "</span> <br>";
 							out += "						</div>";
-							out += "						<div class=\"groundInfoItem rot\">";
-							out += "						    <br><span class='badge'>객실유형</span><br>"+roomtypelist+" <br><br><span class='badge'>옵　션</span><br>"+optionlist+"<br><br><span class='badge'>테　마</span><br>"+themelist+"";
+							out += "						<div class=\"groundInfoItem rot\"><br>";
+							out += "						    <span class='badge'>객실유형</span>    "+roomtypelist+" <br><br>";
+							out += "						    <span class='badge'>옵　션</span>    "+optionlist+"<br><br>";
+							out += "						    <span class='badge'>테　마</span>    "+themelist;
 							out += "						</div>";
 							out += "						<br>";
 							out += "				    </div>";
@@ -402,7 +404,6 @@
 			</select>
 		</div>
 	</div>
-		
 					
 		<div class="mainContentItem">
 			<div class="groundInfo">

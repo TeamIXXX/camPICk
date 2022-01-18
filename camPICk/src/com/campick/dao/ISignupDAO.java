@@ -8,6 +8,7 @@ import com.campick.dto.CamperDTO;
 import com.campick.dto.PartnerDTO;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 public interface ISignupDAO
@@ -53,5 +54,14 @@ public interface ISignupDAO
 	
 	// 파트너 서류 첨부(회원가입 이후 업데이트)
 	public int updateFile(PartnerDTO partner);
+	
+	// 파트너 비밀번호 확인
+	public int checkPartnerPw(PartnerDTO partner);
+	
+	// 파트너 회원 정보 조회
+	public PartnerDTO searchPartner(String partnerNum);
+	
+	// 파트너 회원 정보 수정
+	public int modifyPartner(PartnerDTO partner);
 	
 }

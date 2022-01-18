@@ -20,30 +20,39 @@
 <script type="text/javascript">
 	
 	var num = <%=num%>;
-
+	
 	$(function()
 	{
-		
-		$("#bookingListLi").addClass("active");
-		ajaxBookingList(num);
-		
+		// 픽한 캠핑장에서 리다이렉트인 경우 바로 픽한 캠핑장 리스트로 이어지게
+		if( ${param.pickList eq null})
+		{
+			$("#bookingListLi").addClass("active");
+			ajaxBookingList(num);
+		}
+		else 
+		{
+			$("#pickCampgroundLi").addClass("active");
+			$(".selectOption").css("display", "none");
+			ajaxPickList(num)
+		}	
+			
 		
 		// 탭 클릭시 탭 전환되는 css 처리, 예약 리스트 요청
 		$("#bookingListLi > a").on("click", function()
 		{
 			$("#pickCampgroundLi").removeClass("active");
 			$("#bookingListLi").addClass("active");
-			$(".bookingList").css("display", "inline");
+			$(".selectOption").css("display", "inline");
 			ajaxBookingList(num);
 		});
 		
-		// 탭 클릭시 탭 전환되는 css 처리, 예약 리스트 요청
+		// 탭 클릭시 탭 전환되는 css 처리, 픽 리스트 요청
 		$("#pickCampgroundLi > a").on("click", function()
 		{
 			$("#bookingListLi").removeClass("active");
 			$("#pickCampgroundLi").addClass("active");
-			$(".bookingList").css("display", "none");
-			// ㄴ 픽한 캠핑장 목록으로 변경
+			$(".selectOption").css("display", "none");
+			ajaxPickList(num)
 		});
 	
 		// 이용 상태 따라 캠핑장 리스트 변경
@@ -302,6 +311,71 @@
 		});		
 		
 	}
+	
+	
+	// 픽한 캠핑장 리스트
+	function ajaxPickList(camperNum)
+	{
+		var out = "";
+					
+		$.ajax(
+		{
+			type : "POST"
+			, url : "ajaxpicklist.wei"
+			, data : "camperNum=" + camperNum
+			, dataType : "json"
+			, success : function(jsonObj)
+			{
+				 
+				for(var idx=0; idx<jsonObj.length; idx++)
+				{
+					var campgroundName = jsonObj[idx].campgroundName;
+					var campgroundId = jsonObj[idx].campgroundId;
+					var address = jsonObj[idx].address;
+					var extraInfo = jsonObj[idx].extraInfo;
+					var pick = jsonObj[idx].pick;
+					var firewood = jsonObj[idx].firewood;
+					var review = jsonObj[idx].review;
+					
+					out += "<div class='container_bookinglist'>";
+					out += "	<div class='item_bookinglist'>";
+					out += "		<img src='img/campingjang1.jpg' class='image-room' style='width: 150px;'>";
+					out += "	</div>";
+					out += "	<div class='item_bookinglist pickDetail'>";
+					out += "		<a href='campickdetail.wei?campgroundId=" + campgroundId + "' class='bookingCPground'><p class='campName'> " + campgroundName + "</p></a>"
+					out += "		" + address + "<br>";
+					out += "<span style='font-size: 11px;'>\"" + extraInfo + "\"</span><br>";
+					out += "		<span class='badge rounded-pill'>장작점수</span> " + firewood + "/ 5 <br> ";
+					for (var i=1; i <= 5; i++)			// 장작점수 만큼 장작아이콘 랜더링
+					{
+						if (i<=firewood)
+							out+= "<img src='img/firewood_ver2_Color.png' style='width: 30px;'>";
+						else
+							out+= "<img src='img/firewood_ver2_BW.png' style='width: 30px;'>";
+					}
+					
+					out += "	</div>";
+					out += "	<div class='item_bookinglist' style='text-align: center;'>";
+					out += "		<button type='button' class='btn1' id='pickBtn' onclick='location.href=\"pickoff.wei?campgroundId=" + campgroundId + "&pickList=yes\"'>픽 해제</button><br><br><br>";
+					out += "		PICK  <span class='badge badge-pill'> " + pick + " </span><br>";
+					out += "		REVIEW  <span class='badge rounded-pill'> " + review + " </span><br>";
+					out += "	</div>";
+					out += "</div>";
+					
+				}	
+				
+				$("#listDiv").html(out);
+				
+			}
+			
+			,error : function(e)
+			{
+				out = "<span id='noList'><br>해당하는 결과가 없습니다.</span>";
+				$("#listDiv").html(out);
+			}
+			
+		}); 
+	}
 		
 </script>
 <style type="text/css">
@@ -321,10 +395,29 @@
 		padding: 3px 2px;
 	}
 	
-	#noBookingList
+	#noList
 	{
 		font-size: xx-large;
 	}
+	
+	.btn1
+	{
+	   border: none;
+	   border-radius: 40px;
+	   padding: 5px;
+	   width: 100px;
+	   background-color: #ffd03e;
+	}
+	
+	.btn1:hover { background-color: #F8BB00; color: white; }
+	
+	.badge 
+	{ 
+		background-color: #FFD03E;
+		color : black; 
+	}
+	
+	.pickDetail { width: 300px; }
 	
 </style>
 </head>
@@ -359,7 +452,7 @@
 	<li role="presentation" id="pickCampgroundLi" class="campTab"><a>PICk 캠핑장</a></li>
 </ul>
 
-<div class="bookingList">
+<div class="selectOption">
 	<div class="col-12">
 		<div class="col-12" style="font-size: large;">
 			<select name="status" id="status" class="selectpicker" style="text-align: center;">
@@ -370,13 +463,11 @@
 			</select>
 		</div>
 	</div>
+</div>
 
 	<div id="listDiv">
 		<!-- 이용내역 AJAX 출력 div -->
 	</div>
-</div>
-
-
 
 <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
 	<div class="modal-dialog">
@@ -385,7 +476,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">
+				<h4 class="modal-title" id="myModalLabel" >
 					<a class="bookingDetailModalCampgroundName"><span class="bookingDetailCampgroundName campName">캠핑장 이름</span></a>
 				</h4>
 			</div>
