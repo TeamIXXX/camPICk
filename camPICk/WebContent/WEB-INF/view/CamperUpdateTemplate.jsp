@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>camperUpdate.jsp</title>
+<title>캠퍼계정 수정.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/CamperUpdate.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/css/MainTemplate.css">
 
@@ -293,7 +293,7 @@
 			
 			<div class="itemC">현재 비밀번호<span class="nec">(*)</span></div>
 			<div class="itemC">
-				<input type="password" id="nowPw" name="nowPw" value="${camper.camperId }" disabled="disabled">
+				<input type="password" id="nowPw" name="nowPw" value="${camper.camperPw }" disabled="disabled">
 				<br><span class="errMsg" id="pwMsg"></span>
 			</div>
 			

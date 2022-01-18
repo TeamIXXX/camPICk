@@ -5,12 +5,12 @@
 package com.campick.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public interface IAccountDAO
 {
 	public String camperLogin(String id, String pw) throws SQLException;
 	public String adminLogin(String id, String pw) throws SQLException;
 	public String partnerLogin(String id, String pw) throws SQLException;
+	
 
 }

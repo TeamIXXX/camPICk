@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campick.dto.CampgroundDTO;
+import com.campick.dto.RoomDTO;
 
 public interface IPartnerCampgroundDAO
 {
@@ -26,5 +27,9 @@ public interface IPartnerCampgroundDAO
 	
 	// 캠핑장을 가지고 있는 파트너번호 출력
 	public ArrayList<String> partnerCampgroundGet();
+	
+	// 객실 추가 
+	public int roomInsert(RoomDTO room);
+	//public int roomInsert(int roomTypeNum, String roomName, int weekDayPrice, int weekEndPrice, int basicNum, int maxNum, String roomInfo );
 	
 }

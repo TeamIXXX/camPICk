@@ -25,6 +25,7 @@ import com.campick.dao.ISurveyResultPartnerDAO;
 import com.campick.dto.CampgroundDTO;
 import com.campick.dto.OptionSurvResultDTO;
 import com.campick.dto.PartnerDTO;
+import com.campick.dto.RoomDTO;
 import com.campick.dto.ThemeSurvResultDTO;
 import com.campick.dto.ThemeSurvResultPartnerDTO;
 
@@ -68,6 +69,12 @@ public class PartnerMainController
 		// 세션 처리 추가
 		HttpSession session = request.getSession();
 		String numStr = (String)session.getAttribute("num");
+		
+		IPartnerMainDAO dao = sqlSession.getMapper(IPartnerMainDAO.class);
+		String campgroundId = dao.getCampgroundId(numStr);
+		
+		// 캠핑장id session 추가
+		session.setAttribute("campgroundId",campgroundId);
 		
 		IPartnerCampgroundDAO partnerDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
 		
@@ -210,6 +217,35 @@ public class PartnerMainController
 		return "/WEB-INF/view/PartnerAccountApproval.jsp";
 	}
 	
+
+	
+	@RequestMapping(value = "roominsert.wei", method = RequestMethod.GET)
+	public String roomInfoInsert(HttpServletRequest request, ModelMap model) throws SQLException
+	{
+		HttpSession session = request.getSession();
+		String partnerNum = (String)session.getAttribute("num");
+		String campgroundId = (String)session.getAttribute("campgroundId");
+		
+		IPartnerCampgroundDAO partnerDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
+		
+		RoomDTO room = new RoomDTO();
+		
+		room.setCampgroundId(campgroundId);
+		room.setRoomTypeNum(Integer.parseInt(request.getParameter("roomTypeNum")));
+		room.setRoomName(request.getParameter("roomName"));
+		room.setBasicNum(Integer.parseInt(request.getParameter("basicNum")));
+		room.setMaxNum(Integer.parseInt(request.getParameter("maxNum")));
+		room.setWeekDayPrice(Integer.parseInt(request.getParameter("weekDayPrice")));
+		room.setWeekEndPrice(Integer.parseInt(request.getParameter("weekEndPrice")));
+		room.setRoomInfo(request.getParameter("roomInfo"));
+		
+		model.addAttribute("roomInfo",partnerDao.roomInsert(room));
+
+		return "redirect:mycampgroundtemplate.wei";
+		
+	}
+	
+
 	// 계정관리메인템플릿에서 승인 후 계정관리페이지(회원정보수정) 이동을 위한 비밀번호 확인 페이지 로드
 	@RequestMapping(value = "checkpartnerpwform.wei", method = RequestMethod.GET)
 	public String toAccountManage(HttpServletRequest request, ModelMap model)
@@ -230,4 +266,5 @@ public class PartnerMainController
 	}
 	
 	
+
 }
