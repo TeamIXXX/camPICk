@@ -21,17 +21,6 @@
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-
-<script type="text/javascript">
-	function test(a)
-	{
-		var blId = "bl"+a;
-		var piId = "pi"+a;
-		var bl = document.getElementById(blId).value;
-		var pi = document.getElementById(piId).value;
-		location.href = "partnerapprovaldmodal.wei?bl="+bl+"&pi="+pi;
-	}
-</script>
 </head>
 <body>
 
@@ -45,7 +34,7 @@
 	<a href="partnernotapproved.wei"><button type="button" class="btn btn-success">승인반려</button></a>
 	<hr>
 	<div id="bbsList_title1">
-		 <span class="badge badge-title">승인 대기 파트너</span>
+		<span class="badge badge-title">승인 완료 파트너</span>
 	</div>
 	
 	<div id="bbsList_list">
@@ -57,25 +46,24 @@
 				<dt class="item3">이름</dt>
 				<dt class="item4">휴대폰번호</dt>
 				<dt class="item5">사업자번호</dt>
-				<dt class="item6">신청일자</dt>
+				<dt class="item6">처리일자</dt>
 			</dl>
 		</div>
 		
 		<div id="lists">
 			<dl>
-				<c:forEach var="list" items="${lists}" varStatus="status">
-					<c:if test="${list.approvalStatusNum eq '0'}">
+				<c:forEach var="list" items="${lists}">
+					<c:if test="${list.approvalStatusNum eq '1'}">
 						<dd class="item1">${list.approvalNum}</dd>
-						<dd class="item2"><input type="hidden" id="pi${status.count }" value="${list.partnerId}">${list.partnerId}</dd>
+						<dd class="item2">${list.partnerId}</dd>
 						<dd class="item3">${list.partnerName}</dd>
 						<dd class="item4">${list.partnerPhone}</dd>
-						<dd class="item5" ><input type="hidden" id="bl${status.count }" value="${list.businesslicense}">${list.businesslicense}</dd>
+						<dd class="item5">${list.businesslicense}</dd>
 						<dd class="item6">${list.approvalDate}</dd>
 						<dd class="item7">
-							<%-- <a href="partnerapprovalmodal.wei" class="fileButton" id="fileButton">
-							<span class="badge badge-file" id="${status.count }">파일</span></a> --%>
-							<span class="badge badge-file" id="${status.count }" onclick="test(this.id)">파일</span>
-						</dd>
+						<a href="partnerapprovedmodal.wei" class="fileButton" id="fileButton">
+						<span class="badge badge-file">파일</span></a>
+					</dd>
 						<br>
 					</c:if>
 				</c:forEach>
@@ -83,8 +71,9 @@
 		</div>
 		
 		<div id="footer">
-			<%-- ${pageIndexList } --%>
-			<%-- <!-- <p>1 Prev 21 22 23 24 25 26 27 28 29 30 Next 55</p> -->
+		<%-- ${pageIndexList } --%>
+		<%-- 
+			<!-- <p>1 Prev 21 22 23 24 25 26 27 28 29 30 Next 55</p> -->
 			<!-- <p>등록된 게시물이 존재하지 않습니다.</p> -->
 			<p>
 			<%
@@ -101,7 +90,8 @@
 			<%
 			}
 			%>
-			</p> --%>
+			</p>
+		--%>
 		</div>
 		
 	</div> <!-- close #bbsList_list -->
