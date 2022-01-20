@@ -224,69 +224,6 @@ public class BookingDAO implements IBookingDAO
 		return result;
 	}
 
-	// 파트너 예약 내역 조회 (파트너 예약 관리)
-	@Override
-	public ArrayList<BookingDTO> bookingPTList(String campgroundId) throws SQLException
-	{
-		ArrayList<BookingDTO> result = new ArrayList<BookingDTO>();
-		
-		Connection conn = dataSource.getConnection();
-		
-		String sql = "SELECT BOOKINGNUM, ROOMID, ROOMNAME, CAMPGROUNDID, CAMPGROUNDNAME"
-					+ ", MEMBERNUM, NAME, PHONE" 
-					+ ", TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE"
-					+ ", TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE"
-					+ ", VISITNUM, PAYMENTAMOUNT" 
-					+ ", NVL(REQUEST, ' ') AS REQUEST"
-					+ ", TO_CHAR(BOOKINGDATE, 'YYYY-MM-DD') AS BOOKINGDATE" 
-					+ " FROM BOOKINGVIEW" 
-					+ " WHERE CAMPGROUNDID = ?"
-					+ " ORDER BY BOOKINGDATE DESC";
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try
-		{
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, campgroundId);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next())
-			{
-				BookingDTO booking = new BookingDTO();
-				booking.setBookingNum(rs.getString("BOOKINGNUM"));
-				booking.setRoomId(rs.getString("ROOMID"));
-				booking.setRoomName(rs.getString("ROOMNAME"));
-				booking.setCampgroundId(rs.getString("CAMPGROUNDID"));
-				booking.setCampgroundName(rs.getString("CAMPGROUNDNAME"));
-				booking.setMemberNum(rs.getNString("MEMBERNUM"));
-				booking.setName(rs.getString("NAME"));
-				booking.setPhone(rs.getString("PHONE"));
-				booking.setCheckInDate(rs.getString("CHECKINDATE"));
-				booking.setCheckOutDate(rs.getString("CHECKOUTDATE"));
-				booking.setVisitNum(rs.getInt("VISITNUM"));
-				booking.setPaymentAmount(rs.getInt("PAYAMOUNT"));
-				booking.setRequest(rs.getString("REQUEST"));
-				booking.setBookingDate(rs.getString("BOOKINGDATE"));
-				
-				result.add(booking);
-			}
-			
-		} catch (Exception e)
-		{
-			System.out.println(e.toString());
-		}
-		finally 
-		{
-			rs.close();
-			pstmt.close();
-			conn.close();
-		}
-		
-		return result;
-	}
-
 	// 예약 취소
 	@Override
 	public int removeBooking(String bookingNum, int refund) throws SQLException

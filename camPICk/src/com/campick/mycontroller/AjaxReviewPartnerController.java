@@ -39,7 +39,7 @@ public class AjaxReviewPartnerController
 		IReviewPartnerDAO dao = sqlSession.getMapper(IReviewPartnerDAO.class);
 		
 		// 세션 처리 추가(추후)
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); 
 		
 		if (session.getAttribute("num")==null)
 		{
@@ -116,7 +116,7 @@ public class AjaxReviewPartnerController
 		
 		dao.addReply(r);
 		
-		return "/WEB-INF/view/AjaxReviewPartnerInsert.jsp";
+		return "/WEB-INF/view/  .jsp";
 	}
 	
 	
