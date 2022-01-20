@@ -47,5 +47,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES('RM' || TO_CHAR(ROOMSEQ.NEXTVAL, 'FM0000'),#{campgroundId },#{roomTypeNum },#{roomName },#{weekDayPrice },#{weekEndPrice },#{basicNum },#{maxNum },#{roomInfo })
 	</insert>
 	
+	
+	<!-- 캠핑장 수정 시 필요한 정보 가져오기 -->
+	<select id="getCampgroundInfoForUpdate" resultType="com.campick.dto.CampgroundDTO">
+		SELECT CAMPGROUNDID, CAMPGROUNDNAME, ADDRESS1, ADDRESS2, ADDRESS3, TEL, EXTRAINFO, CHECKINDATE, CHECKOUTDATE, POLICYSTANDARD1, POLICYSTANDARD2, POLICYSTANDARD3
+		FROM CAMPGROUND_VIEW
+		WHERE PARTNERNUM=#{partnerNum}
+	</select>
+	
+	<!-- 캠핑장 수정 시 필요한 옵션(편의시설) 정보(OPTIONNUM 포함) -->
+	<select id="comfortsListForUpdate" resultType="com.campick.dto.OptionDTO">
+		SELECT OPTIONNAME, OPTIONNUM
+		FROM OPTION_VIEW1
+		WHERE CAMPGROUNDID =(SELECT CAMPGROUNDID FROM CAMPGROUND_VIEW WHERE PARTNERNUM = #{partnerNum})
+	</select>
+	
+	<!-- 캠핑장 수정 시 필요한 옵션(즐길거리) 정보(OPTIONNUM 포함) -->
+	<select id="funListForUpdate" resultType="com.campick.dto.OptionDTO">
+		SELECT OPTIONNAME, OPTIONNUM
+		FROM OPTION_VIEW2
+		WHERE CAMPGROUNDID =(SELECT CAMPGROUNDID FROM CAMPGROUND_VIEW WHERE PARTNERNUM = #{partnerNum})
+	</select>
+	
 </mapper>
 

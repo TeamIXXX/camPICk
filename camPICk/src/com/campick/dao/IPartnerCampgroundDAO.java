@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campick.dto.CampgroundDTO;
+import com.campick.dto.OptionDTO;
 import com.campick.dto.RoomDTO;
 
 public interface IPartnerCampgroundDAO
@@ -31,5 +32,16 @@ public interface IPartnerCampgroundDAO
 	// 객실 추가 
 	public int roomInsert(RoomDTO room);
 	//public int roomInsert(int roomTypeNum, String roomName, int weekDayPrice, int weekEndPrice, int basicNum, int maxNum, String roomInfo );
+	
+	
+	// 캠핑장 수정 시 필요한 캠핑장 정보 가져오기(환불규정 포함)
+	public CampgroundDTO getCampgroundInfoForUpdate(@RequestParam("partnerNum") String partnerNum);
+	
+	// 캠핑장 수정 시 필요한 옵션(편의시설) 정보(OPTIONNUM 포함)
+	public ArrayList<OptionDTO> comfortsListForUpdate(@RequestParam("partnerNum") String partnerNum);
+	
+	// 캠핑장 수정 시 필요한 옵션(즐길거리) 정보(OPTIONNUM 포함)
+	public ArrayList<OptionDTO> funListForUpdate(@RequestParam("partnerNum") String partnerNum);
+		
 	
 }
