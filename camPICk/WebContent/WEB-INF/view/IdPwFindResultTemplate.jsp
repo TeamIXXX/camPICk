@@ -80,10 +80,15 @@
 								<strong>아이디</strong>
 								
 								<c:if test="${id ne null && id !='' }">
-									${fn:substring(id,0,5) }
+								
+									<c:forEach begin="1" end="2" step="1">
+									*
+									</c:forEach>
+									
+									${fn:substring(id,2,5) }
 								</c:if>
 								
-								<c:forEach begin="6" end="${fn:length(id)}" step="1">
+								<c:forEach begin="${fn:length(id)-1}" end="${fn:length(id)}" step="1">
 									*
 								</c:forEach>
 							</li>
