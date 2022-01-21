@@ -253,14 +253,18 @@
 		
 	}
 	
+	/////////////////////////////////////////////
 	// 파트너 예약 취소
 	function ptBookingCancel(obj)
 	{			
 		//alert(obj.id);
-		//$(location).attr("href", "ptBookingCancel.wei?campgroundId="+ obj.id);
 		$('#ptBookingCancelModal').modal('show');
+		
+		// Ajax 처리
+		ajaxBookingCancelModal(obj.id)
 	}	
 	
+	// 예약 막기
 	function ptBookingStop(obj)
 	{		
 		alert(obj.parentElement.id + " / " + obj.value);
@@ -268,6 +272,7 @@
 	}	
 	
 	
+	// 취소 모달 유효성 검사
 	$(function()
 	{
 		//var paymentAmount = ${bookingDTO.paymentAmount};
@@ -306,6 +311,61 @@
 
 	});
 
+	
+	// 예약 상세 모달띄우기 
+	function ajaxBookingCancelModal(bookingNum)
+	{
+						
+		$.ajax(
+		{
+			type : "POST"
+			, url : "ajaxbookingdetailmodal.wei"
+			, data : "bookingNum=" + bookingNum
+			, dataType : "json"
+			, success : function(jsonObj)
+			{
+				var roomName = jsonObj.roomName;
+				var checkInDate = jsonObj.checkInDate;
+				var checkOutDate = jsonObj.checkOutDate;
+				var campgroundId = jsonObj.campgroundId;
+				var campgroundName = jsonObj.campgroundName;
+				var name= jsonObj.name;
+				var phone = jsonObj.phone;
+				var visitNum = jsonObj.visitNum;
+				var paymentAmount = jsonObj.paymentAmount;
+				var request = jsonObj.request;
+				var bookingDate = jsonObj.bookingDate;
+				
+				$('.ptCancelDetailRoomName').text(roomName);
+				$('.ptCancelDetailCheckInDate').text(checkInDate);
+				$('.ptCancelDetailCheckOutDate').text(checkOutDate);
+				$('.ptCancelDetailBookingNum').text(bookingNum);
+				$('.ptCancelDetailBookingDate').text(bookingDate);
+				$('.ptCancelDetailName').text(name);
+				$('.ptCancelDetailPhone').text(phone);
+				$('.ptCancelDetailPaymentDate').text(bookingDate);
+				$('.ptCancelDetailPaymentAmount').text(parseInt(paymentAmount).toLocaleString('ko-KR'));
+				$('.ptCancelDetailVisitNum').text(visitNum);
+				$('.ptCancelDetailRequest').text(request);
+				
+				// 적용해야함
+				$('.ptCancelDetailRefundAmount').text(parseInt(paymentAmount).toLocaleString('ko-KR'));
+				
+				
+				
+			}
+			,error : function(e)
+			{
+				alert("상세 예약내역을 불러올 수 없습니다.");
+			}
+			
+		});		
+		
+	}
+	
+	
+	
+	
 	
 </script>
 
@@ -379,7 +439,7 @@
 				</button>
 				<span class="modal-title" id="myModalLabel">
 					<span class="ptCancelDetailRoomName roomName">객실 이름</span>
-					( 체크인 : <span class="ptCancelDetailCheckInDate"></span> / 체크아웃 : <span class="bookingDetailCheckOutDate"></span> )
+					( 체크인 : <span class="ptCancelDetailCheckInDate"></span> / 체크아웃 : <span class="ptCancelDetailCheckOutDate"></span> )
 				</span>
 			</div>
 			<div class="modal-body" style="font-size: medium;">
@@ -415,8 +475,6 @@
 				
 				<div style="display: flex; justify-content: center;">
 					<button type="button" id="cancelModalBtn" class="btn btn-default">예약 취소하기</button>
-					&nbsp;&nbsp;&nbsp;
-					<button type="button" class="btn btn-default">돌아가기</button>
 				</div>
 			</div>		
 		</div>

@@ -115,8 +115,8 @@ public class PartnerBookingController
 		}
 		
 		return result;
-		
 	}
+	
 	
 	
 	
