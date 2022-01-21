@@ -82,9 +82,9 @@ $(function()
 				<div class="modal-body">
 					<span class="bookingDetailSubTitle">예약자</span> : ${bookingDTO.name }<br> 
 					<span class="bookingDetailSubTitle">연락처</span> : ${bookingDTO.phone }<br> 
-					<span class="bookingDetailSubTitle">체크인 ~ 체크아웃</span>: ${bookingDTO.checkInDate } ~ ${bookingDTO.checkOutDate }<br> 
+					<span class="bookingDetailSubTitle">체크인 ~ 체크아웃</span> : ${bookingDTO.checkInDate } ~ ${bookingDTO.checkOutDate }<br> 
 					<span class="bookingDetailSubTitle">객실</span> : ${bookingDTO.roomName }<br> 
-					<span class="bookingDetailSubTitle">예약 인원</span>: ${bookingDTO.visitNum }<br> 
+					<span class="bookingDetailSubTitle">예약 인원</span> : ${bookingDTO.visitNum }<br> 
 					<span class="bookingDetailSubTitle">예약시 요청사항</span> : ${bookingDTO.request }<br> 
 					<span class="bookingDetailSubTitle">결제 예정 금액</span> : <span id="paymentAmount"></span>원<br>
 					

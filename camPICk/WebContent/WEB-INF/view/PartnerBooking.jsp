@@ -17,6 +17,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/PartnerBooking.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
 
 <script type="text/javascript">
@@ -38,7 +39,6 @@
 				{
 					left: 'prevYear,prev today next,nextYear'
 					, center: 'title'
-					/* , right: 'dayGridMonth,dayGridDay' */ 
 					, right: 'dayGridMonth,listMonth'
 				}
 				, titleFormat : function(date) 
@@ -49,14 +49,19 @@
 				{
 					return weekList[date.dow];
 				}
-	    	/* , eventLimit: true */
-
+				
+				// 이거 의견 묻기
+				//, showNonCurrentDates : false
+				
+				// 달력 스크롤 없이, 이벤트 추가되면 날짜 높이 증가 
+				, aspectRatio: 2
+				, contentHeight: "auto"
+				, fixedWeekCount : false
+				
 		    	, eventClick: function(info) 
 		    	{
-		    		//alert('Event: ' + info.event.id); // 상세 정보 띄우는...모달이나 뭐로 연결
 		    		$('#bookingModal').modal('show');
 		    		ajaxBookingDetailModal(info.event.id);
-		    		
 				} 
 	 			, events : function(info, successCallback, failureCallback) 
  				{
@@ -77,29 +82,48 @@
 				, dateClick: function(info)
 				{
 					var dateStr = info.dateStr
+					
+					console.log(JSON.stringify(info));
+					
+					// background-color 초기화
+					$(".fc-day-future").css("background-color", "white");
+					$(".fc-day-past").css("background-color", "white");
+					$(".fc-day-other").css("background-color", "#eee");
+					$(".fc-day-today").css("background-color", "rgba(255,220,40,.15)");
+					$(info.dayEl).css("background-color", "#d7ecfb");
+					
 					$.ajax(
 					{
 						type : "GET"
 						, url : "ajaxpartnerdailybookinglist.wei"
-						, data : "date=" + info.dateStr  
+						, data : "date=" + dateStr  
 	 					, dataType : "json"
 	 					, success : function(obj) 
 	 					{
-	 						$(".selectDate").html(info.dateStr);
+	 						$(".selectDate").html(dateStr);
 	 						$(".ptBookingDetail").html("예약 없음");
-	 						$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' value='" + dateStr + "'>예약 마감</button>");
-
+	 						
+	 						if(dateStr >= jToday)
+	 							$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + dateStr + "'>예약 마감</button>");
+	 						else
+	 							$(".ptBookingBtn").html("");
+	 						
 	 						for(var idx=0; idx<obj.length; idx++)
 	 						{
 	 							var bookingNum = obj[idx].bookingNum;
 	 							var roomId = obj[idx].roomId;
 	 							var roomName = obj[idx].roomName;
+	 							var checkInDate = obj[idx].checkInDate;
 	 							var name = obj[idx].name;
 	 							var phone = obj[idx].phone;
 	 							var visitNum = obj[idx].visitNum;	 						
-		 						
-	 							$("#"+ roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명");
-	 							$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' onclick='ptBookingCancel(this)'>취소</button>");
+	 							
+ 								$("#"+ roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명");
+ 								
+ 								if( checkInDate > jToday )
+	 								$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingCancel(this)'>취소</button>");
+ 								else 
+ 									$("#"+ roomId + ".ptBookingBtn").html("<button class='ptCancelBtn2' disabled='disabled'>취소</button>");
 	 						}
 	 						
 						}
@@ -107,7 +131,11 @@
 		 				{
 	 						$(".selectDate").html(info.dateStr);
 	 						$(".ptBookingDetail").html("예약 없음");
-	 						$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' value='" + dateStr + "'>예약 마감</button>");
+	 						
+	 						if(dateStr >= jToday)
+	 							$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + dateStr + "'>예약 마감</button>");
+	 						else
+	 							$(".ptBookingBtn").html("");	 						
 		 				}
 					}); // end ajax()
 				} // end dateClick
@@ -135,20 +163,25 @@
 			{
 				$(".selectDate").html(today);
 				$(".ptBookingDetail").html("예약 없음");
-				$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' value='" + today + "'>예약 마감</button>");
-
+				$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + today + "'>예약 마감</button>");
 				
 				for(var idx=0; idx<obj.length; idx++)
 				{
 					var bookingNum = obj[idx].bookingNum;
 					var roomId = obj[idx].roomId;
 					var roomName = obj[idx].roomName;
+					var checkInDate = obj[idx].checkInDate;
 					var name = obj[idx].name;
 					var phone = obj[idx].phone;
-					var visitNum = obj[idx].visitNum;
+					var visitNum = obj[idx].visitNum;	 						
 					
-					$("#" + roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명" );
-					$("#" + roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' onclick='ptBookingCancel(this)'>취소</button>");
+					$("#"+ roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명");
+					
+					if( checkInDate > today )
+						$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingCancel(this)'>취소</button>");
+					else 
+						$("#"+ roomId + ".ptBookingBtn").html("<button class='ptCancelBtn2' disabled='disabled'>취소</button>");
+					
 				}
 				
 			}
@@ -156,7 +189,7 @@
 			{
 				$(".selectDate").html(today);
 				$(".ptBookingDetail").html("예약 없음");
-				$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' value='" + today + "'>예약 마감</button>");
+				$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + today + "'>예약 마감</button>");
 			}
 		});
 		
@@ -225,60 +258,57 @@
 	{			
 		//alert(obj.id);
 		//$(location).attr("href", "ptBookingCancel.wei?campgroundId="+ obj.id);
+		$('#ptBookingCancelModal').modal('show');
 	}	
 	
 	function ptBookingStop(obj)
 	{		
-		//alert(obj.parentElement.id + " / " + obj.value);
+		alert(obj.parentElement.id + " / " + obj.value);
 		//$(location).attr("href", "ptBookingStop.wei?roomId="+ obj.parentElement.id +"&checkInDate"+ obj.value );
 	}	
 	
 	
+	$(function()
+	{
+		//var paymentAmount = ${bookingDTO.paymentAmount};
+		var paymentAmount = 100000;
+		
+		$("#err").css("display", "none");
+		
+		// 환불 금액 변경시 환불 금액 계산
+		$("#refund").on("input", function() 
+		{
+			$("#err").html("");
+			
+			if (parseInt($("#refund").val()) > 100
+					|| parseInt($("#refund").val()) < 0)
+			{
+				$("#err").html("0 ~ 100 사이만 입력 가능합니다.");
+				$("#err").css("display", "inline");
+				$("#refund").focus();
+				$(".ptCancelDetailRefundAmount").html("");
+				
+				return;
+			}
+			
+			if ( $("#refund").val() =="")
+			{
+				$(".ptCancelDetailRefundAmount").html("");
+				return;
+			}
+			
+			var refundAmount = parseInt($("#refund").val()) / 100 * paymentAmount;
+			
+			$(".ptCancelDetailRefundAmount").html( refundAmount.toLocaleString('ko-KR') + "원");
+			//$(".ptCancelDetailRefundAmount").html( (paymentAmount * parseInt($("#visitNum").val())).toLocaleString('ko-KR') + "원");
+			
+		});
+
+	});
+
+	
 </script>
-<style type="text/css">
 
-	* { font-size: medium;}
-	a { color: black; }
-	.fc-day-sun a { color: red; } 
-	.fc-day-sat a { color: blue; }
-	
-	.partnerBookingItem { padding: 50pt; width:800px;}
-	.partnerBookingContainer
-	{
-		display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	}
-	
-	table { text-align: center; }
-	th { text-align: center; font-size: 14pt; }
-	.ptBookingRoomName { color: #45818E; }
-	.selectDate { font-size: 14pt; }
-	
-	.ptBookingBtn > button 
-	{
-		font-size: small;
-		border: none;
-		border-radius: 40px;
-		padding: 5px;
-		width: 100px;
-		background-color: #FFD032;
-	}
-	
-	.ptBookingBtn > button:hover { background-color: #c4c4c4; }
-
-	.bookingDetailSubTitle
-	{
-    	color: #45818E;
-		display: inline-block;
-		width: 150px;
-		text-align: right;
-		padding: 3px 2px;
-	}
-	
-	.roomName {	font-size: 20px; }
-
-</style>
 
 </head>
 <body>
@@ -311,7 +341,7 @@
 </div>
 
 
-
+<!-- 예약 상세 모달 -->
 <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -334,6 +364,61 @@
 				<span class="bookingDetailSubTitle">예약 인원</span> : <span class="bookingDetailVisitNum"></span><br>
 				<span class="bookingDetailSubTitle">예약 시 요청사항</span> : <span class="bookingDetailRequest"></span><br>
 			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 예약 취소 모달 -->
+<div class="modal fade" id="ptBookingCancelModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span class="modal-title" id="myModalLabel">
+					<span class="ptCancelDetailRoomName roomName">객실 이름</span>
+					( 체크인 : <span class="ptCancelDetailCheckInDate"></span> / 체크아웃 : <span class="bookingDetailCheckOutDate"></span> )
+				</span>
+			</div>
+			<div class="modal-body" style="font-size: medium;">
+				<span class="bookingDetailSubTitle">예약 번호</span> : <span class="ptCancelDetailBookingNum"></span><br>
+				<span class="bookingDetailSubTitle">예약일</span> : <span class="ptCancelDetailBookingDate"></span><br> 
+				<span class="bookingDetailSubTitle">예약자</span> : <span class="ptCancelDetailName"></span><br>
+				<span class="bookingDetailSubTitle">연락처</span> : <span class="ptCancelDetailPhone"></span><br> 
+				<span class="bookingDetailSubTitle">결제일</span> : <span class="ptCancelDetailPaymentDate"></span><br> 
+				<span class="bookingDetailSubTitle">결제 금액</span> : <span class="ptCancelDetailPaymentAmount"></span>원<br>
+				<span class="bookingDetailSubTitle">예약 인원</span> : <span class="ptCancelDetailVisitNum"></span><br>
+				<span class="bookingDetailSubTitle">예약 시 요청사항</span> : <span class="ptCancelDetailRequest"></span><br>
+				
+				<hr>
+				<form action="">
+					<div class="col-12" style="display: flex;">				
+						<span class="bookingDetailSubTitle" style="color: red;">환불 % </span> &nbsp;
+						<input type="number" class="form-control" id="refund" name="refund" min="0" max="100" step="5" 
+								placeholder="적용예정 환불 퍼센트" style="width: 250px;">
+					</div>
+				</form>
+				<span class="bookingDetailSubTitle">환불 예정 금액</span> : <span class="ptCancelDetailRefundAmount"></span><br><br>
+			
+				<span class="input-group-addon" style="background-color: #ffc0ce80">
+	        		<label>
+	        			<input type="checkbox" id="box"><span style="color: red;"> * </span> 환불금액을 확인했으며, 취소후에는 번복이 불가함을 확인했습니다. 
+	        		</label>
+	      		</span>
+				
+				<div style="text-align: center;">
+					<p id="err" style="color: red; font-weight: bold; display: none;"></p>
+				</div>
+				<hr>
+				
+				<div style="display: flex; justify-content: center;">
+					<button type="button" id="cancelModalBtn" class="btn btn-default">예약 취소하기</button>
+					&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default">돌아가기</button>
+				</div>
+			</div>		
 		</div>
 	</div>
 </div>

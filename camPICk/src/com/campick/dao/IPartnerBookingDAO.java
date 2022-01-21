@@ -19,4 +19,6 @@ public interface IPartnerBookingDAO
 	
 	// 캠핑장에 객실 리스트 
 	public ArrayList<RoomDTO> roomList(@RequestParam("campgroundId") String campgroundId);
+
+	
 }

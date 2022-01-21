@@ -41,10 +41,14 @@
 		}
 		else
 		{
+			$("#myBooking").click(function()
+			{			
+				$(this).attr("href", "partnerbookingtemplate.wei");
+			});
+			
 			$("#myCampground").click(function()
 			{			
 				$(this).attr("href", "mycampgroundtemplate.wei");
-				
 			});
 			
 			$("#myAccount").click(function()

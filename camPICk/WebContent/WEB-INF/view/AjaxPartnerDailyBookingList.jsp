@@ -19,7 +19,9 @@
 		sb.append(", \"roomName\":\"" + booking.getRoomName() +"\"");
 		sb.append(", \"name\":\"" + booking.getName() +"\"");
 		sb.append(", \"phone\":\"" + booking.getPhone() +"\"");
-		sb.append(", \"visitNum\":\"" + booking.getVisitNum() + "\"},");
+		sb.append(", \"visitNum\":\"" + booking.getVisitNum() + "\"");
+		sb.append(", \"checkInDate\":\"" + booking.getCheckInDate() +"\"");
+		sb.append(", \"checkOutDate\":\"" + booking.getCheckOutDate() + "\"},");
 		
 		result += sb.toString();
 	}
