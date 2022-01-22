@@ -44,6 +44,7 @@
 	$(function()
 	{
 		//debugger;
+		// 페이지가 로드될 때, 해당 캠핑장이 가지고 있는 옵션항목에 checked 속성 추가
 		var comfortsNumList = [<%=comfortsNumList%>];
 		var funNumList = [<%=funNumList%>];
 		
@@ -53,7 +54,15 @@
 		for (var i = 0; i < funNumList.length; i++)
 			$('input:checkbox[value="'+funNumList[i]+'"]').attr("checked", true);
 		
+		
+		// 대표 번호 대쉬(-) 자동삽입
+		$("#tel").keyup(function()
+		{
+			$(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-"));
+		});
+		
 	});
+	
 	
 	function count_ck_comfort(obj)
 	{
@@ -72,6 +81,7 @@
 			obj.checked = false;
 			return false;
 		}
+		
 	}
 	
 	function count_ck_fun(obj)
@@ -213,15 +223,15 @@
 				<div class="refund">예약일 기준으로부터</div>
 				<div class="refund">예약 당일 ~ 3일 전</div>
 				<div class="refund">결제금액의 
-					<input type="number" class="intInsert" min="0" max="50" step="5" placeholder="0~50" required="required" id="policyStandard1" value="${myCampgroundInfo.policyStandard1 }"> 
+					<input type="number" class="intInsert" min="0" max="${guidStandardInfo.guideStandard1 }" step="5" placeholder="0~${guidStandardInfo.guideStandard1 }" required="required" id="policyStandard1" value="${myCampgroundInfo.policyStandard1 }"> 
 					 % 공제 후 환불</div>
 				<div class="refund">4일 전 ~ 9일 전</div>
 				<div class="refund">결제금액의 
-					 <input type="number" class="intInsert" min="0" max="20" step="5" placeholder="0~20" required="required" id="policyStandard2" value="${myCampgroundInfo.policyStandard2 }"> 
+					 <input type="number" class="intInsert" min="0" max="${guidStandardInfo.guideStandard2 }" step="5" placeholder="0~${guidStandardInfo.guideStandard2 }" required="required" id="policyStandard2" value="${myCampgroundInfo.policyStandard2 }"> 
 					 % 공제 후 환불</div>
 				<div class="refund">10일 이후</div>
 				<div class="refund">결제금액의 
-					<input type=text class="intInsert"  value="0" readonly="readonly" id="policyStandard3" value="${myCampgroundInfo.policyStandard3 }">
+					<input type="number" class="intInsert" min="0" max="${guidStandardInfo.guideStandard3 }" step="5" placeholder="0~${guidStandardInfo.guideStandard3 }" required="required" id="policyStandard3" value="${myCampgroundInfo.policyStandard3 }">
 					 % 공제 후 환불</div>
 				<div class="refund notice">※ 가이드라인을 벗어난 공제율은 작성이 불가합니다.</div>
 			</div>

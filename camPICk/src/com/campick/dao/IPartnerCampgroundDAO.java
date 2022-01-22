@@ -42,6 +42,9 @@ public interface IPartnerCampgroundDAO
 	
 	// 캠핑장 수정 시 필요한 옵션(즐길거리) 정보(OPTIONNUM 포함)
 	public ArrayList<OptionDTO> funListForUpdate(@RequestParam("partnerNum") String partnerNum);
+	
+	// 환불규정 가이드라인 조회
+	public CampgroundDTO getGuidStandard();
 		
 	
 }

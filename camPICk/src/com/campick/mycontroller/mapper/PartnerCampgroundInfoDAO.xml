@@ -69,5 +69,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CAMPGROUNDID =(SELECT CAMPGROUNDID FROM CAMPGROUND_VIEW WHERE PARTNERNUM = #{partnerNum})
 	</select>
 	
+	<select id="getGuidStandard" resultType="com.campick.dto.CampgroundDTO">
+		SELECT GUIDESTANDARD1,GUIDESTANDARD2, GUIDESTANDARD3
+		FROM REFUNDGUIDE
+	</select>
+	
 </mapper>
 

@@ -14,6 +14,7 @@ public class CampgroundDTO
 	private int pick, share, review;
 	private int policyStandard1, policyStandard2, policyStandard3;
 	private double firewood;
+	private int guideStandard1, guideStandard2, guideStandard3; 
 	
 	// 파트너가 선택한 편의시설, 즐길거리 배열,,,
 	private String optionSelect;
@@ -194,7 +195,32 @@ public class CampgroundDTO
 	public void setOptionSelect(String optionSelect)
 	{
 		this.optionSelect = optionSelect;
-	}	
+	}
+	public int getGuideStandard1()
+	{
+		return guideStandard1;
+	}
+	public void setGuideStandard1(int guideStandard1)
+	{
+		this.guideStandard1 = guideStandard1;
+	}
+	public int getGuideStandard2()
+	{
+		return guideStandard2;
+	}
+	public void setGuideStandard2(int guideStandard2)
+	{
+		this.guideStandard2 = guideStandard2;
+	}
+	public int getGuideStandard3()
+	{
+		return guideStandard3;
+	}
+	public void setGuideStandard3(int guideStandard3)
+	{
+		this.guideStandard3 = guideStandard3;
+	}
+	
 	
 	
 }

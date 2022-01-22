@@ -184,12 +184,15 @@ public class PartnerMainController
 		IPartnerCampgroundDAO campgroundDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
 		
 		CampgroundDTO myCampgroundInfo = new CampgroundDTO();
+		CampgroundDTO guidStandardInfo = new CampgroundDTO();
 		myCampgroundInfo = campgroundDao.getCampgroundInfoForUpdate(partnerNum);
+		guidStandardInfo = campgroundDao.getGuidStandard();
 		
 		// 캠핑장 정보 출력
 		model.addAttribute("myCampgroundInfo", myCampgroundInfo);					// 캠핑장 정보(환불규정 포함)
 		model.addAttribute("comfortsList", campgroundDao.comfortsListForUpdate(partnerNum));	// 편의시설
 		model.addAttribute("funList", campgroundDao.funListForUpdate(partnerNum));			// 즐길거리
+		model.addAttribute("guidStandardInfo", guidStandardInfo);
 		
 		return "/WEB-INF/view/MyCampgroundInfoUpdate.jsp";
 	}
