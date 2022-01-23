@@ -1,0 +1,155 @@
+@CHARSET "UTF-8";
+
+#bbsList 
+{
+	width:690px;
+	margin:30px auto;
+	text-align:left;
+}
+
+
+.badge-title
+{
+	background-color: #FFD03E;
+	color: black;
+    text-align: center;
+    font-size: 12pt;
+}
+
+.badge-file
+{
+	background-color: #FFD03E;
+	color: black;
+    text-align: center;
+    font-size: 9pt;
+}
+
+#bbsList_title1 
+{
+	width:690px;   /* 690px - (padding-left+border:3px+border:3px) */
+	height:40px;
+	text-align:left;
+	font-weight: bold;
+	line-height:40px;
+	font-size:10pt;
+	margin-bottom:10px;
+}
+
+#bbsList_header 
+{
+	height:27px;
+}
+
+#bbsList_header #leftHeader
+{
+	float:left;
+	width:345px;
+	text-align:left;
+}
+
+#bbsList_header #rightHeader
+{
+	float:right;
+	width:345px;
+	text-align:right;
+}
+
+#bbsList_header .selectFiled 
+{
+	border:1px solid; 
+	border-color:#666666; 
+	background-color:#ffffff; 
+	font-family:굴림; 
+	font-size:9pt;
+	height: 20px;
+}
+
+
+#bbsList_list 
+{
+	clear:both;
+}
+
+#bbsList_list dd 
+{
+	float:left;
+	height:27px;
+	line-height:27px;
+	text-align:center;
+}
+
+
+#bbsList_list #title 
+{
+	height:30px;
+	border-top:1px solid #CCCCCC;
+	border-bottom:1px solid #CCCCCC;
+	background-color: #E6E4E6;
+}
+
+
+#bbsList_list #title dl 
+{
+	height:27px;
+	border-left:0px solid #5db062;
+	border-right:0px solid #5db062;
+}
+
+#bbsList_list #title dt 
+{
+	float:left;
+	line-height:34px;
+	text-align:center;
+}
+
+#bbsList_list .item1 {width:60px;}
+#bbsList_list .item2 {width:100px;}
+#bbsList_list .item3 {width:70px;}
+#bbsList_list .item4 {width:120px;}
+#bbsList_list .item5 {width:140px;}
+#bbsList_list .item6 {width:150px;}
+#bbsList_list .item7 {width:10px;}
+
+#bbsList_list #lists 
+{
+	clear:both;
+}
+
+#bbsList_list #lists dl 
+{
+	float:left;
+	border-bottom:1px solid #E4E4E4;
+}
+/* 
+#bbsList_list dd.item2 
+{
+	width:30px;
+	margin-left:10px;
+	text-align:left;
+}
+
+#bbsList_list dd.item3 
+{
+	width:70px;
+	margin-left:60px;
+	text-align:left;
+}
+ */
+
+
+#bbsList_list a 
+{
+	line-height: 27px;
+}
+
+#bbsList_list #footer 
+{
+	clear:both;
+	height:32px;
+	line-height:32px;
+	margin-top:5px;
+	text-align:center;
+}
+
+
+
