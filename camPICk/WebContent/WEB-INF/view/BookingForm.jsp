@@ -84,14 +84,19 @@
 			$("#err").html("");
 			
 			if (parseInt($("#visitNum").val()) > maxNum
-					|| parseInt($("#visitNum").val()) < basicNum 
-					|| $("#visitNum").val()=="" )
+					|| parseInt($("#visitNum").val()) < basicNum )
 			{
 				$("#err").html("기준인원이상 최대인원이하 예약이 가능합니다");
 				$("#err").css("display", "inline");
 				$("#visitNum").focus();
 				
 				$("#paymentAmount").html( paymentAmount.toLocaleString('ko-KR') + "원 (1인 기준)");
+				return;
+			}
+			
+			if($("#visitNum").val()=="")
+			{
+				$("#err").css("display", "none");
 				return;
 			}
 			
@@ -181,7 +186,7 @@
 		<div class="form-group">
 			<label class="col-xs-4 control-label">인원 수<span class="star">*</span></label>
 			<div class="col-xs-4">
-				<input type="number" class="form-control" id="visitNum" name="visitNum"  min="${roomDTO.basicNum}" max="${roomDTO.maxNum}"
+				<input type="number" class="form-control" id="visitNum" name="visitNum" min="${roomDTO.basicNum}" max="${roomDTO.maxNum}"
 					placeholder="${bookingDTO.roomName }방의 기준 인원 : ${roomDTO.basicNum}  /  최대 인원 : ${roomDTO.maxNum}">
 			</div>
 		</div>

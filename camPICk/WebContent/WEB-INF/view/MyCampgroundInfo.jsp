@@ -1,4 +1,3 @@
-<%@page import="com.campick.controller.PartnerCampgroundController"%>
 <%@page import="com.campick.dao.IPartnerMainDAO"%>
 <%@page import="com.campick.dto.ThemeSurvResultPartnerDTO"%>
 <%@page import="com.campick.dto.ThemeSurvResultDTO"%>
@@ -599,7 +598,7 @@
 						<td><span style="font-size: 16px;">REVIEW<span class='badge'>${myCampgroundInfo.review }</span></span></td>
 					</tr>
 				</table>
-				<div class="col-md-4" style="text-align: right;"><button type="button" id="myCampgroundUpdate" class="btn0">캠핑장 수정</button></div>
+				<div class="col-md-4" style="text-align: right;"><button type="button" id="myCampgroundUpdate" class="btn0" onclick="location.href='mycampgroundupdatetemplate.wei'">캠핑장 수정</button></div>
 				<%-- <span style="font-size: 30px;">${myCampgroundInfo.campgroundName }</span>
 				<span style="margin-left: 10px; font-size: 16px;">PICK<span class='badge'>${myCampgroundInfo.pick }</span></span>
 				<span style="font-size: 16px;">REVIEW<span class='badge'>${myCampgroundInfo.review }</span></span>

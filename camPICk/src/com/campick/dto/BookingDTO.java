@@ -13,6 +13,7 @@ public class BookingDTO
 	private int visitNum, paymentAmount;				
 	private String request, bookingDate, status;
 	private int reviewCheck;
+	private int refund;
 	
 	// 김진령 getter / setter 구성
 	public int getReviewCheck()
@@ -144,5 +145,15 @@ public class BookingDTO
 	public void setStatus(String status)
 	{
 		this.status = status;
+	}
+
+	// refund 추가하면서 getter/setter 추가 
+	public int getRefund()
+	{
+		return refund;
+	}
+	public void setRefund(int refund)
+	{
+		this.refund = refund;
 	}
 }

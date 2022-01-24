@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +61,7 @@ public class PartnerMainController
 	}
 	
 	
-	// 메인에서 『캠핑장 관리』 메뉴 선택 시 캠핑장 유무에 따라 이동
-	// → 있으면... 템플릿있는 상세 페이지
-	// → 없으면... 등록 페이지
+	// 메인에서 『캠핑장 관리』 메뉴 선택 시 이동
 	@RequestMapping(value = "mycampgroundtemplate.wei", method = RequestMethod.GET)
 	public String toMyCampground(HttpServletRequest request, ModelMap model)
 	{
@@ -93,6 +92,7 @@ public class PartnerMainController
 	}
 	
 	// 캠핑장관리 템플릿의 메인영역에 include 되는 페이지
+	// 등록된 캠핑장 유무에 따라 분기
 	@RequestMapping(value = "mycampground.wei", method = RequestMethod.GET)
 	public String toMyCampgroundInfo(HttpServletRequest request, ModelMap model) throws SQLException
 	{
@@ -163,6 +163,44 @@ public class PartnerMainController
 			return "/WEB-INF/view/MyCampgroundInfoInsert.jsp";
 		}
 	}
+	
+	// 캠핑장 관리 에서 캠핑장 수정 클릭 시 수정 폼으로 이동
+	@RequestMapping(value = "mycampgroundupdatetemplate.wei", method = RequestMethod.GET)
+	public String toCampgroundUpdateTemplate(HttpServletRequest request, ModelMap model)
+	{
+		return "/WEB-INF/view/PartnerMainTemplateCampUpdateForm.jsp";
+	}
+	
+	
+	// 캠핑장 수정 템플릿의 메인 영역에 include 되는 페이지
+	// 현재 캠핑장 정보를 가져와 뿌려줘야 함.
+	// 캠핑장명, 입실시간/퇴실시간, 환불규정1/2/3, 주소1/2/3, 대표번호, 추가정보, 편의시설리스트, 즐길거리리스트, 사진
+	@RequestMapping(value = "mycampgroundupdateform.wei", method = RequestMethod.GET)
+	public String toCampgroundUpdateForm(HttpServletRequest request, ModelMap model)
+	{
+		HttpSession session = request.getSession();
+		String partnerNum = (String)session.getAttribute("num");
+		
+		IPartnerCampgroundDAO campgroundDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
+		
+		CampgroundDTO myCampgroundInfo = new CampgroundDTO();
+		CampgroundDTO guidStandardInfo = new CampgroundDTO();
+		myCampgroundInfo = campgroundDao.getCampgroundInfoForUpdate(partnerNum);
+		guidStandardInfo = campgroundDao.getGuidStandard();
+		
+		// 캠핑장 정보 출력
+		model.addAttribute("myCampgroundInfo", myCampgroundInfo);					// 캠핑장 정보(환불규정 포함)
+		model.addAttribute("comfortsList", campgroundDao.comfortsListForUpdate(partnerNum));	// 편의시설
+		model.addAttribute("funList", campgroundDao.funListForUpdate(partnerNum));			// 즐길거리
+		model.addAttribute("guidStandardInfo", guidStandardInfo);
+		
+		return "/WEB-INF/view/MyCampgroundInfoUpdate.jsp";
+	}
+	
+	
+	
+	
+	//----------------------------------- 계정 관련 -----------------------------
 	
 	// 계정관리 메뉴 클릭 시 계정관리메인템플릿으로 이동
 	@RequestMapping(value = "partneraccounttemplate.wei", method = RequestMethod.GET)

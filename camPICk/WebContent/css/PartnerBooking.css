@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+	a { color: black; }
+	.fc-day-sun a { color: red; } 
+	.fc-day-sat a { color: blue; }
+	.fc-day-other { background-color: #eee; }
+	
+	.partnerBookingItem { padding: 30pt; width:800px;}
+	.partnerBookingContainer
+	{
+		display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	}
+	
+	
+	table { text-align: center; }
+	th { text-align: center; font-size: 14pt; }
+	.partnerBookingItem td { font-size: medium; }
+	.ptBookingRoomName { color: #45818E; }
+	.selectDate { font-size: 14pt; }
+	
+	.ptBookingBtn > button 
+	{
+		font-size: small;
+		border: none;
+		border-radius: 40px;
+		padding: 5px;
+		width: 100px;
+	}
+	
+	.ptStopBtn { background-color: #ffd03e; }
+	.ptCancelBtn { background-color: #ffd1db; }
+	.ptCancelBtn2 { background-color: #c4c4c4; }
+	
+	.ptBookingBtn > button:hover { background-color: #c4c4c4; }
+
+	.bookingDetailSubTitle
+	{
+    	color: #45818E;
+		display: inline-block;
+		width: 150px;
+		text-align: right;
+		padding: 3px 2px;
+	}
+	
+	.roomName {	font-size: 20px; }

@@ -66,8 +66,10 @@
 	</div>
 	 
 	<div class="mainItem" style="background-color: none;">
+		<%-- 
 		회원번호 : <%=num %><br>
 		캠퍼/파트너/관리자 : <%=account %>
+		 --%>
 		<c:import url="/campgrounddetail.wei">
 			<c:param name="campgroundId" value="${campgroundId }"></c:param>
 		</c:import>
