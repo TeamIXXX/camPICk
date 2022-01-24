@@ -67,7 +67,6 @@ public class PartnerBookingController
 		return result;
 	}
 	
-
 	@RequestMapping(value = "ajaxpartnerbookinglist.wei", method = RequestMethod.GET)
 	public String bookingPTList(HttpServletRequest request, ModelMap model)
 	/*public String bookingPTList(@RequestParam("campgroundId") String campgroundId, HttpServletRequest request, ModelMap model)*/	
@@ -116,8 +115,8 @@ public class PartnerBookingController
 		}
 		
 		return result;
-		
 	}
+	
 	
 	
 	

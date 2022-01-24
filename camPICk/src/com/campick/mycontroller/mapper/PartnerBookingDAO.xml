@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="bookingDailyList" resultType="com.campick.dto.BookingDTO">
 		SELECT BOOKINGNUM, ROOMID, ROOMNAME, NAME, PHONE, VISITNUM                                        
+			   , TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE             
+			   , TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE
 		FROM BOOKINGVIEW                                               
 		WHERE CAMPGROUNDID = '${campgroundId}'                                         
 		AND TO_DATE(#{date}, 'YYYY-MM-DD') BETWEEN CHECKINDATE AND (CHECKOUTDATE-1)                    

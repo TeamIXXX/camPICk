@@ -46,7 +46,8 @@
 	padding: 10px;
 }
 
-.campgroundInsertItem:nth-child(21)
+/* 이벤트칸 없어지면서 nth-child(21) => 19로 변경 */
+.campgroundInsertItem:nth-child(19)
 {
 	grid-column: 1/3;
 	background-color: white;
