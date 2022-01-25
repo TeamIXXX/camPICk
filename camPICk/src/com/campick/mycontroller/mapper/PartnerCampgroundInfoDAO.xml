@@ -69,10 +69,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CAMPGROUNDID =(SELECT CAMPGROUNDID FROM CAMPGROUND_VIEW WHERE PARTNERNUM = #{partnerNum})
 	</select>
 	
+	<!-- 환불규정 가이드라인 조회 -->
 	<select id="getGuidStandard" resultType="com.campick.dto.CampgroundDTO">
 		SELECT GUIDESTANDARD1,GUIDESTANDARD2, GUIDESTANDARD3
 		FROM REFUNDGUIDE
 	</select>
+	
+	<!-- 캠핑장 정보 수정① (옵션 제외 처리) -->
+	<update id="modifyCampground" statementType="CALLABLE" parameterType="com.campick.dto.CampgroundDTO">
+		{call PRC_CAMPGROUND_UPDATE 
+			( 	#{campgroundId, mode=IN, jdbcType=VARCHAR}
+			  , #{campgroundName, mode=IN, jdbcType=VARCHAR}
+			  , #{address1, mode=IN, jdbcType=VARCHAR}
+			  , #{address2, mode=IN, jdbcType=VARCHAR}
+			  , #{address3, mode=IN, jdbcType=VARCHAR}
+			  , #{tel, mode=IN, jdbcType=VARCHAR}
+			  , #{extraInfo, mode=IN, jdbcType=VARCHAR}
+			  , #{checkInDate, mode=IN, jdbcType=CHAR}
+			  , #{checkOutDate, mode=IN, jdbcType=CHAR}
+			  , #{fileRoute, mode=IN, jdbcType=VARCHAR}
+			  , #{fileName, mode=IN, jdbcType=VARCHAR}
+			  , #{policyStandard1, mode=IN, jdbcType=INTEGER}
+			  , #{policyStandard2, mode=IN, jdbcType=INTEGER}
+			  , #{policyStandard3, mode=IN, jdbcType=INTEGER}
+			)
+		}
+	</update>
+	
+	<!-- 캠핑장 정보 수정② (옵션 정보 삭제) -->
+	<delete id="removeOptionStatus">
+		DELETE
+		FROM OPTIONSTATUS
+		WHERE CAMPGROUNDID=#{campgroundId}
+	</delete>
+	
+	<!-- 캠핑장 정보 수정③ (옵션 정보 추가) -->
+	<insert id="addOptionStatus">
+		INSERT INTO OPTIONSTATUS(OPTIONSTATUSNUM, CAMPGROUNDID, OPTIONNUM) VALUES(OPTIONSEQ.NEXTVAL, #{campgroundId}, ${optionNum})
+	</insert>
+	
 	
 </mapper>
 

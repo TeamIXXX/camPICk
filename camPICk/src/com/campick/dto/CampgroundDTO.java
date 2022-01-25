@@ -15,6 +15,7 @@ public class CampgroundDTO
 	private int policyStandard1, policyStandard2, policyStandard3;
 	private double firewood;
 	private int guideStandard1, guideStandard2, guideStandard3; 
+	private String fileRoute, fileName;
 	
 	// 파트너가 선택한 편의시설, 즐길거리 배열,,,
 	private String optionSelect;
@@ -219,6 +220,22 @@ public class CampgroundDTO
 	public void setGuideStandard3(int guideStandard3)
 	{
 		this.guideStandard3 = guideStandard3;
+	}
+	public String getFileRoute()
+	{
+		return fileRoute;
+	}
+	public void setFileRoute(String fileRoute)
+	{
+		this.fileRoute = fileRoute;
+	}
+	public String getFileName()
+	{
+		return fileName;
+	}
+	public void setFileName(String fileName)
+	{
+		this.fileName = fileName;
 	}
 	
 	

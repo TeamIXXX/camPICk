@@ -4,6 +4,7 @@
 
 package com.campick.mycontroller;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ import com.campick.dto.PartnerDTO;
 import com.campick.dto.RoomDTO;
 import com.campick.dto.ThemeSurvResultDTO;
 import com.campick.dto.ThemeSurvResultPartnerDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class PartnerMainController
@@ -195,6 +198,77 @@ public class PartnerMainController
 		model.addAttribute("guidStandardInfo", guidStandardInfo);
 		
 		return "/WEB-INF/view/MyCampgroundInfoUpdate.jsp";
+	}
+	
+	@RequestMapping(value = "mycampgroundupdate.wei", method = RequestMethod.POST)
+	public String updateCampgroundInfo(HttpServletRequest request, ModelMap model)
+	{
+		IPartnerCampgroundDAO campgroundDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
+		CampgroundDTO campground = new CampgroundDTO();
+		String comfortsStr = "";
+		String funStr = "";
+				
+		String root = request.getSession().getServletContext().getRealPath("/");
+		//System.out.println(root);
+		//C:\FinalCampick\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\camPICk\
+		String fileRoute = root + "saveFile" + File.separator + "licenseFiles";	
+		File dir = new File(fileRoute);
+		
+		if (!dir.exists())
+			dir.mkdirs();
+		
+		String encType = "UTF-8";					//-- 인코딩 방식
+		int maxFileSize = 10*1024*1024;
+		
+		try
+		{
+			// 옵션 제외 캠핑장 정보 수정
+			MultipartRequest multi = null;
+			multi = new MultipartRequest(request, fileRoute, maxFileSize, encType, new DefaultFileRenamePolicy());
+			String fileName = multi.getFilesystemName("partnerSignFile");
+			campground.setCampgroundId(multi.getParameter("campgroundId"));
+			campground.setCampgroundName(multi.getParameter("campgroundName"));
+			campground.setAddress1(multi.getParameter("address1"));
+			campground.setAddress2(multi.getParameter("address2"));
+			campground.setAddress3(multi.getParameter("address3"));
+			campground.setTel(multi.getParameter("tel"));
+			campground.setExtraInfo(multi.getParameter("extraInfo"));
+			campground.setCheckInDate(multi.getParameter("checkInDate"));
+			campground.setCheckOutDate(multi.getParameter("checkOutDate"));
+			campground.setFileRoute(fileRoute);
+			campground.setFileName(fileName);
+			campground.setPolicyStandard1(Integer.parseInt(multi.getParameter("policyStandard1")));
+			campground.setPolicyStandard2(Integer.parseInt(multi.getParameter("policyStandard2")));
+			campground.setPolicyStandard3(Integer.parseInt(multi.getParameter("policyStandard3")));
+			
+			campgroundDao.modifyCampground(campground);
+			
+			// 옵션 현황 정보 수정
+			// 현재 옵션 삭제
+			campgroundDao.removeOptionStatus(multi.getParameter("campgroundId"));
+			
+			// 선택한 옵션 insert 
+			comfortsStr = multi.getParameter("comfortsList");
+			funStr = multi.getParameter("funList");
+			String[] comfortsList = comfortsStr.split(",");
+			for (int i = 0; i < comfortsList.length; i++)
+			{
+				campgroundDao.addOptionStatus(multi.getParameter("campgroundId"), comfortsList[i]);
+				//System.out.println(comfortsList[i]);
+			}
+			String[] funList = funStr.split(",");
+			for (int i = 0; i < funList.length; i++)
+			{
+				campgroundDao.addOptionStatus(multi.getParameter("campgroundId"), funList[i]);
+				//System.out.println(funList[i]);
+			}
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "redirect:mycampgroundtemplate.wei";
 	}
 	
 	
