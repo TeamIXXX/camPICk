@@ -80,7 +80,7 @@
 	</div>
 </div>
 
-<hr style="width: 800px;">
+<hr style="width: 800px; border: 0; border-top: 3px solid #eee;">
 <!-- 캠퍼 회원가입 -->
 <div id="cDiv">
 	 <c:import url="/signupCamperForm.wei"></c:import>

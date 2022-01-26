@@ -3,6 +3,10 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String num = (String)session.getAttribute("num");
+	String account = (String)session.getAttribute("account");
+	String loginId = (String)session.getAttribute("loginId");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +20,9 @@
 <div id="foot">
 
 	<div class="footmenu">
+	
+	<%if(session.getAttribute("num")==null && session.getAttribute("account")==null)
+	{%>
 			개인정보 취급방침
 			<span class="vline">|</span>
 			홈페이지 이용약관
@@ -26,9 +33,20 @@
 			<span class="vline">|</span>
 			<a href="loginform.wei" class="foot">로그인</a>
 			<span class="vline">|</span>
-	</div>
+	<%} 
+	else
+	{%>
+			개인정보 취급방침
+			<span class="vline">|</span>
+			홈페이지 이용약관
+			<span class="vline">|</span>
+			광고 및 제휴문의
+	<%
+	} 
+	%>
 	
-    <p>Copyright © 2021 We're wei reseved.</p>
+	</div>
+
 </div>
 
 </body>
