@@ -2,6 +2,7 @@ package com.campick.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campick.dto.CampgroundDTO;
@@ -45,6 +46,15 @@ public interface IPartnerCampgroundDAO
 	
 	// 환불규정 가이드라인 조회
 	public CampgroundDTO getGuidStandard();
+	
+	// 캠핑장 정보 수정① (옵션 제외 처리)
+	public int modifyCampground(CampgroundDTO campground);
+	
+	// 캠핑장 정보 수정② (옵션 정보 삭제)
+	public int removeOptionStatus(@RequestParam("campgroundId") String campgroundId);
+	
+	// 캠핑장 정보 수정③ (옵션 정보 추가)
+	public int addOptionStatus(@Param("campgroundId") String campgroundId, @Param("optionNum") String optionNum);
 		
 	
 }
