@@ -180,49 +180,6 @@
         }).open();
     }
     
-
-    /*
-    function campgroundInsert()
-	{
-		var chkArray = new Array(); // 배열 선언
-		 
-        $('input:checkbox[name=comforts]:checked').each(function() 	// 체크된 체크박스의 value 값을 가지고 온다.
-        { 
-            chkArray.push(this.value);
-        });
-        
-        $('input:checkbox[name=fun]:checked').each(function()
-		{
-        	chkArray.push(this.value);
-		});
-        
-        $('#hiddenValue').val(chkArray);
-        
-        //alert($('#hiddenValue').val()); 
-        
-        var campgroundName = $("#campgroundNameInput").val();
-        var checkInDate = $("#checkInDate").val();
-        var checkOutDate = $("#checkOutDate").val();
-        var policyStandard1 = $("#policyStandard1").val();
-        var policyStandard2 = $("#policyStandard2").val();
-        var policyStandard3 = $("#policyStandard3").val();
-        var option = $('#hiddenValue').val();
-        var address1 = $("#sample6_address").val();
-        var address2 = $("#sample6_extraAddress").val();
-        var address3 = $("#sample6_detailAddress").val();
-        var tel = $("#tel").val();
-        var extraInfo = $("#extraInfo").val();
-        
-       	//alert(typeof option);
-                
-        $("#campgroundForm").attr("action","mycampgroundinsert.wei?name="+campgroundName+"&checkin="+checkInDate+"&checkout="+checkOutDate
-        							+"&ps1="+policyStandard1+"&ps2="+policyStandard2+"&ps3="+policyStandard3+"&option="+option
-        							+"&ad1="+address1+"&ad2="+address2+"&ad3="+address3+"&tel="+tel+"&extra="+extraInfo); 
-        							
-       	//$("#campgroundForm").attr("action","mycampgroundinsert.wei");
-	}
-    */
-    
   
 </script>
 
