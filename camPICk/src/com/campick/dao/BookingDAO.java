@@ -237,8 +237,7 @@ public class BookingDAO implements IBookingDAO
 				+ ", ?" 
 				+ ", ( SELECT MEMBERNUM" 
 				+ " FROM BOOKINGVIEW"
-				+ " WHERE BOOKINGNUM = ?)"
-				+ ", SYSDATE, ?)";
+				+ " WHERE BOOKINGNUM = ?), SYSDATE, ?)";
 		
 		PreparedStatement pstmt = null;
 		

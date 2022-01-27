@@ -39,8 +39,8 @@ String cp = request.getContextPath();
 				return;
 			}
 			
-				//확인버튼 눌렀을때 이동
-				$(location).attr("href", "bookingcancelmodal.wei");
+			//확인버튼 눌렀을때 이동
+			$(location).attr("href", "bookingcancelmodal.wei");
 		});
 		
 		$("#bookingCancelCloseBtn").click(function()

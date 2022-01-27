@@ -232,7 +232,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="campgroundInsertDao" ref="campgroundInsertDAO" ></property>
 	</bean>
 	
-
 </beans>
 
 
