@@ -179,7 +179,7 @@ public class SignupController
 	}
 	
 	// 캠퍼 회원 정보 수정(update)
-	@RequestMapping(value="/camperUpdate.wei", method = RequestMethod.GET)
+	@RequestMapping(value="/camperUpdate.wei", method = RequestMethod.POST)
 	public String modifyCamper(CamperDTO camperDTO, ModelMap model, HttpServletRequest request)
 	{
 		HttpSession session = request.getSession();
@@ -196,7 +196,7 @@ public class SignupController
 		
 		model.addAttribute("num", num);
 		
-		return "redirect:camperUpdateForm.wei";
+		return "/camperUpdateForm.wei";
 	}
 	
 	// 파트너 회원가입(insert)
@@ -393,8 +393,6 @@ public class SignupController
 	public String resetPPw(@Param("partnerPw")String partnerPw, @Param("partnerId")String partnerId
 						 , @Param("partnerPhone")String partnerPhone, ModelMap model, HttpServletRequest request)
 	{
-		String result = null;
-		
 		ISignupDAO signupDao = sqlSession.getMapper(ISignupDAO.class);
 		
 		try

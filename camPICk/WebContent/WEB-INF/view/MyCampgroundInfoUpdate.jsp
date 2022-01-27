@@ -61,6 +61,35 @@
 			$(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-"));
 		});
 		
+		
+		$("#submitBtn").click(function()
+		{
+			var comfortsStr = "";
+			var funStr = "";
+			$("input:checkbox[name=comforts]:checked").each(function()
+			{
+				comfortsStr += $(this).val() + ",";
+			});
+			
+			$("input:checkbox[name=fun]:checked").each(function()
+			{
+				funStr += $(this).val() + ",";
+			});
+			
+			comfortsStr = comfortsStr.replace(/,$/, '');
+			funStr = funStr.replace(/,$/, '');
+			//alert(comfortsStr + " / " + funStr);
+			
+			$("#comfortsList").val(comfortsStr);
+			$("#funList").val(funStr);
+			//alert($("#comfortsList").val() + " / " + $("#funList").val());
+			
+			if (confirm("캠핑장을 수정하시겠습니까?"))
+			{
+				$("#campgroundForm").submit();
+			};
+		});
+		
 	});
 	
 	
@@ -193,7 +222,8 @@
        	//$("#campgroundForm").attr("action","mycampgroundinsert.wei");
 	}
     */
-			  
+    
+  
 </script>
 
 </head>
@@ -204,10 +234,11 @@
 </div>
 
 <div class="campgroundInsertMain">
-	<form action="mycampgroundinsert.wei" method="post" id="campgroundForm" onsubmit="">
-		<div class="campgroundInsertItem" id="campgroundName">캠핑장명(*)</div>            
+	<form action="mycampgroundupdate.wei" method="post" id="campgroundForm" enctype="multipart/form-data">
+		<div class="campgroundInsertItem" id="campgroundNameInput">캠핑장명(*)</div>            
 		<div class="campgroundInsertItem" id="campgroundNameValue">	
-			<input type="text" class="textValue" required="required" id="campgroundNameInput" name="campgroundNameInput" value="${myCampgroundInfo.campgroundName }">
+			<input type="hidden" name="campgroundId" value="${myCampgroundInfo.campgroundId }">
+			<input type="text" class="textValue" required="required" id="campgroundNameInput" name="campgroundName" value="${myCampgroundInfo.campgroundName }">
 		</div>
 		
 		<div class="campgroundInsertItem" id="checkIn-Out">입퇴실 시간 설정(*)</div>
@@ -223,15 +254,15 @@
 				<div class="refund">예약일 기준으로부터</div>
 				<div class="refund">예약 당일 ~ 3일 전</div>
 				<div class="refund">결제금액의 
-					<input type="number" class="intInsert" min="0" max="${guidStandardInfo.guideStandard1 }" step="5" placeholder="0~${guidStandardInfo.guideStandard1 }" required="required" id="policyStandard1" value="${myCampgroundInfo.policyStandard1 }"> 
+					<input type="number" class="intInsert" name="policyStandard1" min="0" max="${guidStandardInfo.guideStandard1 }" step="5" placeholder="0~${guidStandardInfo.guideStandard1 }" required="required" id="policyStandard1" value="${myCampgroundInfo.policyStandard1 }"> 
 					 % 공제 후 환불</div>
 				<div class="refund">4일 전 ~ 9일 전</div>
 				<div class="refund">결제금액의 
-					 <input type="number" class="intInsert" min="0" max="${guidStandardInfo.guideStandard2 }" step="5" placeholder="0~${guidStandardInfo.guideStandard2 }" required="required" id="policyStandard2" value="${myCampgroundInfo.policyStandard2 }"> 
+					 <input type="number" class="intInsert" name="policyStandard2" min="0" max="${guidStandardInfo.guideStandard2 }" step="5" placeholder="0~${guidStandardInfo.guideStandard2 }" required="required" id="policyStandard2" value="${myCampgroundInfo.policyStandard2 }"> 
 					 % 공제 후 환불</div>
 				<div class="refund">10일 이후</div>
 				<div class="refund">결제금액의 
-					<input type="number" class="intInsert" min="0" max="${guidStandardInfo.guideStandard3 }" step="5" placeholder="0~${guidStandardInfo.guideStandard3 }" required="required" id="policyStandard3" value="${myCampgroundInfo.policyStandard3 }">
+					<input type="number" class="intInsert" name="policyStandard3" min="0" max="${guidStandardInfo.guideStandard3 }" step="5" placeholder="0~${guidStandardInfo.guideStandard3 }" required="required" id="policyStandard3" value="${myCampgroundInfo.policyStandard3 }">
 					 % 공제 후 환불</div>
 				<div class="refund notice">※ 가이드라인을 벗어난 공제율은 작성이 불가합니다.</div>
 			</div>
@@ -260,7 +291,7 @@
 			<label><input type="checkbox" name="comforts" id="disabled-facilities" onclick="count_ck_comfort(this)" value="13">장애인 편의시설</label>
 			<label><input type="checkbox" name="comforts" id="hotwater" onclick="count_ck_comfort(this)" value="14">온수제공</label>
 			<label><input type="checkbox" name="comforts" id="children-playground" onclick="count_ck_comfort(this)" value="15">어린이 놀이터</label>
-			
+			<input type="hidden" name="comfortsList" id="comfortsList" value=""/>
 		</div>
 		
 		<div class="campgroundInsertItem" id="entertain">
@@ -279,35 +310,34 @@
 			<label><input type="checkbox" name="fun" id="atv" onclick="count_ck_fun(this)" value="22">ATV</label><br>
 			<label><input type="checkbox" name="fun" id="zip-line" onclick="count_ck_fun(this)" value="23">짚라인</label><br>
 			<label><input type="checkbox" name="fun" id="bike" onclick="count_ck_fun(this)" value="24">자전거대여</label><br>
-			<input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>
-
+			<input type="hidden" name="funList" id="funList" value=""/>
 		</div>
 		
 		<div class="campgroundInsertItem" id="campgroundAddr">캠핑장 주소(*)</div>		
 		<div class="campgroundInsertItem">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기" required="required">
 			<input type="hidden" id="sample6_postcode" placeholder="우편번호"><br>
-			<input type="text" id="sample6_address" placeholder="주소" style="width: 200px;" value="${myCampgroundInfo.address1 }">
-			<input type="text" id="sample6_extraAddress" placeholder="참고항목" value="${myCampgroundInfo.address2 }"><br>
-			<input type="text" id="sample6_detailAddress" placeholder="상세주소" value="${myCampgroundInfo.address3 }">
+			<input type="text" id="sample6_address" placeholder="주소" style="width: 200px;" name="address1" value="${myCampgroundInfo.address1 }">
+			<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="address2" value="${myCampgroundInfo.address2 }"><br>
+			<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address3" value="${myCampgroundInfo.address3 }">
 		</div>
 			
 		<div class="campgroundInsertItem" id="phone">대표번호(*)</div>
 		<div class="campgroundInsertItem" id="phoneValue">	
-			<input type="tel" class="textValue" required="required" id="tel" value="${myCampgroundInfo.tel }">	
+			<input type="tel" class="textValue" required="required" id="tel" name="tel" value="${myCampgroundInfo.tel }">	
 		</div>
 		
 		<div class="campgroundInsertItem" id="campgroundPhoto">캠핑장 대표 사진</div>
 			
 		<div class="campgroundInsertItem" id="campgroundPhotoValue">
-			<input type="file" id="image" accept="image/*" onchange="setThumbnail(event);">
+			<input type="file" id="image">
 			<div id="image_container"> </div>
 		</div>
 		
 		<div class="campgroundInsertItem" id="campgroundExtraInfo">캠핑장 추가 정보</div>
 		
 		<div class="campgroundInsertItem" id="campgroundExtraInfoValue"> 
-			<textarea rows="5" cols="90" class="textValue" style="resize: none;" id="extraInfo">${myCampgroundInfo.extraInfo }</textarea>
+			<textarea rows="5" cols="90" class="textValue" style="resize: none;" name="extraInfo" id="extraInfo">${myCampgroundInfo.extraInfo }</textarea>
 		</div>
 		<!-- 
 		<div class="campgroundInsertItem" id="campgroundEvent">캠핑장 이벤트</div>
@@ -318,7 +348,7 @@
 		-->
 		<div class="campgroundInsertItem">
 			<button type="reset" class="btn">초기화</button>
-			<button type="submit" class="btn">수정</button>
+			<button type="button" class="btn" id="submitBtn">수정</button>
 		</div>
 	</form>
 </div>                

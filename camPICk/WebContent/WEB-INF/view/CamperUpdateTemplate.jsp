@@ -46,11 +46,11 @@
 	$(function()
 	{		
 		// 비밀번호 영문 + 숫자 검사
-		$("#camperPw").keyup(function()
+		$("#pw1").keyup(function()
 		{
 			var regId = /^[A-Za-z0-9]{5,14}$/;
 			
-			if(!regId.test($("#camperPw").val()))
+			if(!regId.test($("#pw1").val()))
 			{
 				$("#pwMsg").html("영문, 숫자 5~14자 이내로 입력해 주십시오.");
 			}
@@ -154,66 +154,18 @@
 			
 		});
 		
-
-		// 필수입력 항목 확인
-		var infoCheck = function()
-		{
-			if($("#pwMsg").html() != "")
-			{
-				alert("비밀번호를 확인해 주십시오.");
-				$("#camperPw").focus();
-				return;
-			}
-			else if($("#pw2").val() == "")
-			{
-				alert("비밀번호 확인을 입력해 주십시오.");
-				$("#pw2").focus();
-				return;
-			}
-			else if($("#camperPw").val() != $("#pw2").val())
-			{
-				alert("비밀번호와 비밀번호 확인이 다릅니다.");
-				$("#camperPw").focus();
-				return;
-			}
-			else if($("#camperName").val() == "")
-			{
-				alert("이름을 입력해 주십시오.");
-				$("#camperName").focus();
-				return;
-			}
-			else if($("#phone").val() == "")
-			{
-				alert("휴대폰번호를 입력해 주십시오.");
-				$("#phone").focus();
-				return;
-			}
-			else if( ($("#cerNum").is(":enabled")) )
-			{
-				alert("인증번호를 확인해 주십시오.");
-				return;
-			}
-			else if( ($("#email1").val()=="" && $("#email2").val()!="") || ($("#email1").val()!="" && $("#email2").val()=="") )
-			{
-				alert("이메일을 확인해 주십시오.");
-				return;
-			}
-			else
-			{
-				$("#cFrm").submit();
-				alert("회원정보 수정이 완료되었습니다.");
-			}
-		};
-		 
-
+		// 수정 버튼 클릭 시
 		$("#sign").click(function()
 		{
-			if ($("#email1").val() != "" && $("#email2").val() != "")
+			if(infoCheck())
 			{
-				$("#email").val($("#email1").val()+"@"+$("#email2").val());
+				if (confirm("회원정보를 수정하시겠습니까?"))
+				{
+					$("#cFrm").submit();
+				}
 			}
-			infoCheck();
 		});
+		
 		
 	});
 	
@@ -221,7 +173,7 @@
 	// 비밀번호 값과 비밀번호 확인 값 비교
 	function chkPw()
 	{
-		var pw1 = $("#camperPw").val();
+		var pw1 = $("#pw1").val();
 		var pw2 = $("#pw2").val();
 
 		if (pw1 != "" && pw2 != "")
@@ -250,6 +202,72 @@
 		
 		return str;
 	}
+	
+
+	// 필수입력 항목 확인
+	function infoCheck()
+	{
+		if ($("#pw1").val() != "" && $("#pw1").val().length < 5)
+		{
+			alert("비밀번호를 확인해 주십시오.");
+			$("#pw1").focus();
+			return false;
+		}
+		else if ($("#pw1").val() != "" && $("#pw2").val() == "")
+		{
+			alert("비밀번호 확인을 입력해 주십시오.");
+			$("#pw2").focus();
+			return false;
+		}
+		else if ($("#pw1").val() != $("#pw2").val())
+		{
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			$("#pw1").focus();
+			return false;
+		}
+		else if($("#camperName").val() == "")
+		{
+			alert("이름을 입력해 주십시오.");
+			$("#camperName").focus();
+			return false;
+		}
+		else if($("#phone").val() == "")
+		{
+			alert("휴대폰번호를 입력해 주십시오.");
+			$("#phone").focus();
+			return false;
+		}
+		else if( ($("#cerNum").is(":enabled")) )
+		{
+			alert("인증번호를 확인해 주십시오.");
+			return false;
+		}
+		else if( ($("#email1").val()=="" && $("#email2").val()!="") || ($("#email1").val()!="" && $("#email2").val()=="") )
+		{
+			alert("이메일을 확인해 주십시오.");
+			return false;
+		}
+		else
+		{
+			if (!$("#pw1").val())
+			{
+				$("#camperPw").val($("#nowPw").val());
+			}
+			else
+			{
+				$("#camperPw").val($("#pw1").val());
+			}
+			
+			if ($("#email1").val() != "" && $("#email2").val() != "")
+			{
+				$("#email").val($("#email1").val()+"@"+$("#email2").val());
+			}
+			
+			return true;
+		}
+	}
+	 
+
 </script>
 
 </head>
@@ -262,7 +280,7 @@
 	</div>
  
 	<div class="mainItem" id="mainLogo">
-		<img src="<%=cp%>/img/logo_title.png" onclick="location.href='campick.wei'" id="logo">
+		<img src="<%=cp%>/img/logo_title2.png" onclick="location.href='campick.wei'" id="logo">
 	</div>
  
 	<div class="mainItem">
@@ -279,12 +297,14 @@
 			<hr style="border-top: 3px solid #eee;">
 		</div>
 		
-		<form class="containerC" id="cFrm" action="camperUpdate.wei">
+		<form class="containerC" id="cFrm" method="POST" action="camperUpdate.wei">
 		
 		<!-- 이메일 주소 -->
-		<input type="hidden" id="email" name="email" value="">
+		<input type="hidden" id="email" name="email">
 		<!-- 회원번호 -->
 		<input type="hidden" id="camperNum" name="camperNum" value="<%=camperNum %>">
+		<!-- 비밀번호 -->
+		<input type="hidden" id="camperPw" name="camperPw">
 			
 			<div class="itemC">아이디<span class="nec">(*)</span></div>
 			<div class="itemC">
@@ -294,18 +314,17 @@
 			<div class="itemC">현재 비밀번호<span class="nec">(*)</span></div>
 			<div class="itemC">
 				<input type="password" id="nowPw" name="nowPw" value="${camper.camperPw }" disabled="disabled">
+			</div>
+			
+			<div class="itemC">수정할 비밀번호</div>
+			<div class="itemC">
+				<input type="text" id="pw1" name="pw1" maxlength="14">
 				<br><span class="errMsg" id="pwMsg"></span>
 			</div>
 			
-			<div class="itemC">수정할 비밀번호<span class="nec">(*)</span></div>
+			<div class="itemC">수정 비밀번호 확인</div>
 			<div class="itemC">
-				<input type="password" id="camperPw" name="camperPw" maxlength="14">
-				<br><span class="errMsg" id="pwMsg"></span>
-			</div>
-			
-			<div class="itemC">수정 비밀번호 확인<span class="nec">(*)</span></div>
-			<div class="itemC">
-				<input type="password" name="pw2" id="pw2" maxlength="14">
+				<input type="text" name="pw2" id="pw2" maxlength="14">
 				<br><span class="errMsg" id="pw2Msg"></span>
 			</div>
 			
