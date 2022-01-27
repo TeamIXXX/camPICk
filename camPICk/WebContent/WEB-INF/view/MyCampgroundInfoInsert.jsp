@@ -111,6 +111,7 @@
         level: 3 // 지도의 확대 레벨
     }; 
     
+    
     /* 사진파일올릴때보이는거,,,,  */
     function setThumbnail(event) 
     { 

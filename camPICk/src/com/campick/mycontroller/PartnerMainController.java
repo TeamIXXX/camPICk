@@ -297,7 +297,7 @@ public class PartnerMainController
 		room.setRoomInfo(request.getParameter("roomInfo"));
 		*/
 		
-		model.addAttribute("roomInfo",partnerDao.roomInsert(room));
+		model.addAttribute("room",partnerDao.roomInsert(room));
 
 		return "redirect:mycampgroundtemplate.wei";
 		

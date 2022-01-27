@@ -49,7 +49,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 객실 수정 -->
 	<update id="roomUpdate" parameterType="com.campick.dto.RoomDTO">
-		
+		UPDATE ROOM
+		SET ROOMTYPENUM=${roomTypeNum}, ROOMNAME='${roomName}', WEEKDAYPRICE=${weekDayPrice}, WEEKENDPRICE=${weekEndPrice}, BASICNUM=${basicNum}, MAXNUM=${maxNum}, ROOMINFO='${roomInfo}'
+		WHERE ROOMID='${roomId }'
 	</update>
 	
 	<!-- 캠핑장 수정 시 필요한 정보 가져오기 -->
