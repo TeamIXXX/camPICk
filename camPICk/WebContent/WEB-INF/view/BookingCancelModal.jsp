@@ -61,31 +61,36 @@ String cp = request.getContextPath();
 </style>
 </head>
 <body>
-<div class="modal fade" id="bookCancelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-   
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">예약 취소가 완료 되었습니다.</h4>
-      </div>
-      <div class="modal-body">
-					<span class="bookingDetailSubTitle">예약번호</span> : ${bookingDTO.bookingNum }<br>
+	<div class="modal fade" id="bookCancelModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">예약 취소가 완료 되었습니다.</h4>
+				</div>
+				<div class="modal-body">
+					<span class="bookingDetailSubTitle">예약번호</span> : ${bookingDTO.bookingNum }<br> 
 					<span class="bookingDetailSubTitle">예약 날짜</span> : ${bookingDTO.bookingDate }<br> 
-					<span class="bookingDetailSubTitle">객실</span> : ${bookingDTO.roomName }<br> 
-					<span class="bookingDetailSubTitle">예약자 명</span> :	${bookingDTO.name }<br>
+					<span class="bookingDetailSubTitle">객실</span> : ${bookingDTO.roomName }<br>
+					<span class="bookingDetailSubTitle">예약자 명</span> : ${bookingDTO.name }<br> 
 					<span class="bookingDetailSubTitle">체크인 ~ 체크아웃</span> : ${bookingDTO.checkInDate } ~ ${bookingDTO.checkOutDate }<br>
-					<span class="bookingDetailSubTitle">결제 금액</span> : <span id="paymentAmount"></span>원<br>
-					<span class="bookingDetailSubTitle">환불 금액</span> : <span id="refundAmount" style="color: red;"></span>원<br><br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-      </div>
-     
-    </div>
-  </div>
-</div>
-<!-- 모달 div end -->
+					<span class="bookingDetailSubTitle">결제 금액</span> : <span id="paymentAmount"></span>원<br> <span
+						class="bookingDetailSubTitle">환불 금액</span> : <span id="refundAmount" style="color: red;"></span>원<br>
+					<br>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- 모달 div end -->
 
 </body>
 </html>

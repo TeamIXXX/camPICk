@@ -29,7 +29,152 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 <script type="text/javascript">
+
+	$(function()
+	{
+		// 차트 그리기
+		ajaxPTchart();
+		
+		var jDate = new Date();
+		const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+		
+		// 오늘 날짜 형식을 yyyy-mm-dd 형식으로 맞춤
+		var jToday = jDate.getFullYear() +"-" + months[jDate.getMonth()] + "-" + (jDate.getDate() < 10 ? '0'+jDate.getDate() : jDate.getDate()); 
+
+		// 달력 그리기
+		var weekList = ['일','월','화','수','목','금','토'];
+	    var calendarEl = document.getElementById('calendar');
+	    
+	    var calendar = new FullCalendar.Calendar(calendarEl
+	    	, {
+	    		initialView: 'dayGridMonth'
+				, headerToolbar: 
+				{
+					left: 'prevYear,prev today next,nextYear'
+					, center: 'title'
+					, right: 'dayGridMonth,listMonth'
+				}
+				, titleFormat : function(date) 
+				{ 
+					return date.date.year + "년 " + (date.date.month +1) + "월"; 
+		    	}  
+				, dayHeaderContent: function (date) 
+				{
+					return weekList[date.dow];
+				}
+				
+				// 이거 의견 묻기
+				//, showNonCurrentDates : false
+				
+				// 달력 스크롤 없이, 이벤트 추가되면 날짜 높이 증가 
+				, aspectRatio: 2
+				, contentHeight: "auto"
+				, fixedWeekCount : false
+				
+		    	, eventClick: function(info) 
+		    	{
+		    		$('#bookingModal').modal('show');
+		    		ajaxBookingDetailModal(info.event.id);
+				} 
+	 			, events : function(info, successCallback, failureCallback) 
+ 				{
+					$.ajax(
+					{
+						type : "GET"
+						, url : "ajaxpartnerbookinglist.wei"
+	 					, dataType : "json"
+	 					, success : function(obj) {
+	 						successCallback(obj);
+					}
+	 					,error : function(e)
+		 				{
+		 					alert(e.responseText);
+		 				}
+					});	// end ajax()
+				}// end events
+				, dateClick: function(info)
+				{
+					var dateStr = info.dateStr
+					
+					// background-color 초기화
+					$(".fc-day-future").css("background-color", "white");
+					$(".fc-day-past").css("background-color", "white");
+					$(".fc-day-other").css("background-color", "#eee");
+					$(".fc-day-today").css("background-color", "rgba(255,220,40,.15)");
+					$(info.dayEl).css("background-color", "#d7ecfb");
+					
+					$.ajax(
+					{
+						type : "GET"
+						, url : "ajaxpartnerdailybookinglist.wei"
+						, data : "date=" + dateStr  
+	 					, dataType : "json"
+	 					, success : function(obj) 
+	 					{
+	 						$(".selectDate").html(dateStr);
+	 						$(".ptBookingDetail").html("예약 없음");
+	 						
+	 						if(dateStr >= jToday)
+	 							$(".ptBookingBtn").html("<button onclick='ptBookingStopModal(this)' class='ptStopBtn' value='" + dateStr + "'>예약 마감</button>");
+	 						else
+	 							$(".ptBookingBtn").html("");
+	 						
+	 						for(var idx=0; idx<obj.length; idx++)
+	 						{
+	 							var bookingNum = obj[idx].bookingNum;
+	 							var roomId = obj[idx].roomId;
+	 							var roomName = obj[idx].roomName;
+	 							var checkInDate = obj[idx].checkInDate;
+	 							var name = obj[idx].name;
+	 							var phone = obj[idx].phone;
+	 							var visitNum = obj[idx].visitNum;	 						
+	 							
+	 							// 예약 마감일 경우
+	 							if(bookingNum.substring(0, 1)=='P')
+ 								{
+ 									$("#"+ roomId + ".ptBookingDetail").html("<span style='color: #c4c4c4; font-size: medium;'>" + name + "</span>");
+ 									
+ 									if( checkInDate >= jToday )
+		 								$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingStopCancel(this)'>마감 취소</button>");
+	 								else 
+	 									$("#"+ roomId + ".ptBookingBtn").html("");
+ 								}
+	 							else	// 아닐 경우
+	 							{
+ 									$("#"+ roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명");
+ 									
+	 								if( checkInDate > jToday )
+		 								$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingCancelModal(this)'>취소</button>");
+	 								else 
+	 									$("#"+ roomId + ".ptBookingBtn").html("<button class='ptCancelBtn2' disabled='disabled'>취소</button>");
+	 							}
+	 						}
+	 						
+						}
+	 					,error : function(e)
+		 				{
+	 						$(".selectDate").html(info.dateStr);
+	 						$(".ptBookingDetail").html("예약 없음");
+	 						
+	 						if(dateStr >= jToday)
+	 							$(".ptBookingBtn").html("<button onclick='ptBookingStopModal(this)' class='ptStopBtn' value='" + dateStr + "'>예약 마감</button>");
+	 						else
+	 							$(".ptBookingBtn").html("");	 						
+		 				}
+					}); // end ajax()
+				} // end dateClick
+				
+			}); // end calendar
+
+		calendar.render();
 			
+		// 예약현황 표에 오늘 예약 내역이 뜨도록 
+		ajaxToday(jToday);
+		
+	});
+
+	
+	// 월별 예약 수 차트 그리기
 	function ajaxPTchart()
 	{
 		$.ajax(
@@ -45,7 +190,6 @@
 				var arr92 = obj.arr92;
 				var arr93 = obj.arr93;
 				var arr94 = obj.arr94;
-				
 				
 				// 차트 그리기
 				var context = document.getElementById('partnerChart').getContext('2d');
@@ -124,135 +268,7 @@
 		});
 		
 	}	
-
-	$(function()
-	{
-		// 차트 그리기
-		ajaxPTchart();
-		
-		var jDate = new Date();   
-
-		var jToday = jDate.getFullYear() +"-" + jDate.getMonth() + 1 + "-" + jDate.getDate(); 
-
-		// 달력 그리기
-		var weekList = ['일','월','화','수','목','금','토'];
-	    var calendarEl = document.getElementById('calendar');
-	    
-	    var calendar = new FullCalendar.Calendar(calendarEl
-	    	, {
-	    		initialView: 'dayGridMonth'
-				, headerToolbar: 
-				{
-					left: 'prevYear,prev today next,nextYear'
-					, center: 'title'
-					, right: 'dayGridMonth,listMonth'
-				}
-				, titleFormat : function(date) 
-				{ 
-					return date.date.year + "년 " + (date.date.month +1) + "월"; 
-		    	}  
-				, dayHeaderContent: function (date) 
-				{
-					return weekList[date.dow];
-				}
-				
-				// 이거 의견 묻기
-				//, showNonCurrentDates : false
-				
-				// 달력 스크롤 없이, 이벤트 추가되면 날짜 높이 증가 
-				, aspectRatio: 2
-				, contentHeight: "auto"
-				, fixedWeekCount : false
-				
-		    	, eventClick: function(info) 
-		    	{
-		    		$('#bookingModal').modal('show');
-		    		ajaxBookingDetailModal(info.event.id);
-				} 
-	 			, events : function(info, successCallback, failureCallback) 
- 				{
-					$.ajax(
-					{
-						type : "GET"
-						, url : "ajaxpartnerbookinglist.wei"
-	 					, dataType : "json"
-	 					, success : function(obj) {
-	 						successCallback(obj);
-					}
-	 					,error : function(e)
-		 				{
-		 					alert(e.responseText);
-		 				}
-					});	// end ajax()
-				}// end events
-				, dateClick: function(info)
-				{
-					var dateStr = info.dateStr
-					
-					// background-color 초기화
-					$(".fc-day-future").css("background-color", "white");
-					$(".fc-day-past").css("background-color", "white");
-					$(".fc-day-other").css("background-color", "#eee");
-					$(".fc-day-today").css("background-color", "rgba(255,220,40,.15)");
-					$(info.dayEl).css("background-color", "#d7ecfb");
-					
-					$.ajax(
-					{
-						type : "GET"
-						, url : "ajaxpartnerdailybookinglist.wei"
-						, data : "date=" + dateStr  
-	 					, dataType : "json"
-	 					, success : function(obj) 
-	 					{
-	 						$(".selectDate").html(dateStr);
-	 						$(".ptBookingDetail").html("예약 없음");
-	 						
-	 						if(dateStr >= jToday)
-	 							$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + dateStr + "'>예약 마감</button>");
-	 						else
-	 							$(".ptBookingBtn").html("");
-	 						
-	 						for(var idx=0; idx<obj.length; idx++)
-	 						{
-	 							var bookingNum = obj[idx].bookingNum;
-	 							var roomId = obj[idx].roomId;
-	 							var roomName = obj[idx].roomName;
-	 							var checkInDate = obj[idx].checkInDate;
-	 							var name = obj[idx].name;
-	 							var phone = obj[idx].phone;
-	 							var visitNum = obj[idx].visitNum;	 						
-	 							
- 								$("#"+ roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명");
- 								
- 								if( checkInDate > jToday )
-	 								$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingCancelModal(this)'>취소</button>");
- 								else 
- 									$("#"+ roomId + ".ptBookingBtn").html("<button class='ptCancelBtn2' disabled='disabled'>취소</button>");
-	 						}
-	 						
-						}
-	 					,error : function(e)
-		 				{
-	 						$(".selectDate").html(info.dateStr);
-	 						$(".ptBookingDetail").html("예약 없음");
-	 						
-	 						if(dateStr >= jToday)
-	 							$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + dateStr + "'>예약 마감</button>");
-	 						else
-	 							$(".ptBookingBtn").html("");	 						
-		 				}
-					}); // end ajax()
-				} // end dateClick
-				
-			}); // end calendar
-
-		calendar.render();
-			
-		// 예약현황 표에 오늘 예약 내역이 뜨도록 
-		ajaxToday(jToday);
-		
-	});
-
+	
 	
 	// 예약 페이지 뜨자마다 오늘 날짜 예약 내역이 표에 입력되는 에이젝스 
 	function ajaxToday(today)
@@ -267,7 +283,7 @@
 			{
 				$(".selectDate").html(today);
 				$(".ptBookingDetail").html("예약 없음");
-				$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + today + "'>예약 마감</button>");
+				$(".ptBookingBtn").html("<button onclick='ptBookingStopModal(this)' class='ptStopBtn' value='" + today + "'>예약 마감</button>");
 				
 				for(var idx=0; idx<obj.length; idx++)
 				{
@@ -279,12 +295,22 @@
 					var phone = obj[idx].phone;
 					var visitNum = obj[idx].visitNum;	 						
 					
-					$("#"+ roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명");
+					// 예약 마감일 경우
+					if(bookingNum.substring(0, 1)=='P')
+					{
+						$("#"+ roomId + ".ptBookingDetail").html("<span style='color: #c4c4c4; font-size: medium;'>" + name + "</span>");
+						$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingStopCancel(this)'>마감 취소</button>");
+					}
+					else	// 아닐 경우
+					{
+						$("#"+ roomId + ".ptBookingDetail").html( name + " / " + phone + " / " + visitNum + "명");
+						
+						if( checkInDate > today )
+							$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingCancelModal(this)'>취소</button>");
+						else 
+							$("#"+ roomId + ".ptBookingBtn").html("<button class='ptCancelBtn2' disabled='disabled'>취소</button>");
+					}
 					
-					if( checkInDate > today )
-						$("#"+ roomId + ".ptBookingBtn").html("<button id='" + bookingNum + "' class='ptCancelBtn' onclick='ptBookingCancelModal(this)'>취소</button>");
-					else 
-						$("#"+ roomId + ".ptBookingBtn").html("<button class='ptCancelBtn2' disabled='disabled'>취소</button>");
 					
 				}
 				
@@ -293,7 +319,7 @@
 			{
 				$(".selectDate").html(today);
 				$(".ptBookingDetail").html("예약 없음");
-				$(".ptBookingBtn").html("<button onclick='ptBookingStop(this)' class='ptStopBtn' value='" + today + "'>예약 마감</button>");
+				$(".ptBookingBtn").html("<button onclick='ptBookingStopModal(this)' class='ptStopBtn' value='" + today + "'>예약 마감</button>");
 			}
 		});
 		
@@ -302,7 +328,7 @@
 	// 달력에서 이벤트 클릭시 예약 상세 모달 띄우기
 	function showBookingDetail(obj)
 	{
-		$('#bookingModal').modal('show');
+		$('#ptBookingDetailModal').modal('show');
 		
 		// Ajax 처리
 		ajaxBookingDetailModal(obj.id)
@@ -357,7 +383,6 @@
 		
 	}
 	
-	/////////////////////////////////////////////
 	// 파트너 예약 취소 모달
 	function ptBookingCancelModal(obj)
 	{			
@@ -392,15 +417,79 @@
 		//var modalRefund = $("#refund").val();
 		$("#ptBookingCancelForm").submit();
 	}	
+
 	
+	// 예약 마감
+	function ptBookingStopModal(obj)
+	{		
+		var roomId = $(obj).parent().attr("id");
+		var roomName = $(obj).parent().attr("name");
+		var checkInDate = obj.value;
+		
+		// 마감 시작 날짜 넣기부터 
+		$("#bookingStopCheckInDate").attr("value", checkInDate);
+		$("#bookingStopRoomId").attr("value", roomId);
+		$(".bookingStopRoomName").html(roomName);
+		
+		// 마감 가능 유효성검사 초기화 
+		document.getElementById("bookingStopCheckOutDate").value = "";
+		document.getElementById("bookingStopCheckOutDate").min = checkInDate;
+		$(".bookingStopErr").html("");
+		
+		$('#ptBookingStopModal').modal('show');
+		
+		// checkOutDate 선택 시 유효성 검사
+		$("#bookingStopCheckOutDate").on("change", function()
+		{
+			$(".bookingStopErr").html("");
+			var checkOutDate = document.getElementById("bookingStopCheckOutDate").value
+			
+			ajaxBookingStopCheck(roomId, checkInDate, checkOutDate);
+		})
+		
+	}
 	
+	function ajaxBookingStopCheck(roomId, checkInDate, checkOutDate)
+	{
+		$.ajax(
+		{
+			type : "GET"
+			, url : "ajaxptbookingstopcheck.wei"
+			, data : "roomId=" + roomId + "&checkInDate=" + checkInDate + "&checkOutDate=" + checkOutDate
+			, dataType : "text"
+			, success : function(bookingCheck)
+			{
+				$(".bookingStopErr").html("");
+				$("#bookingStopBtn").attr("value", bookingCheck);  
+				
+				if(parseInt(bookingCheck) > 0)
+					$(".bookingStopErr").html("예약이 존재하는 기간에는 예약마감이 불가합니다.");
+			}
+			,error : function(e)
+			{
+				console.log(e.responseText)
+			}
+			
+		});		
+	}
 	
-	// 예약 막기
+	// 예약 마감
 	function ptBookingStop(obj)
 	{		
-		//alert(obj.parentElement.id + " / " + obj.value);
-		$(location).attr("href", "ptBookingStop.wei?roomId="+ obj.parentElement.id +"&checkInDate"+ obj.value );
+		//$(location).attr("href", "ptbookingstop.wei?roomId="+ obj.parentElement.id +"&checkInDate"+ obj.value );
+		if (obj.value > 0)
+			return;
+		
+		$("#ptBookingStopForm").submit();
 	}	
+	
+	// 예약 마감 취소
+	function ptBookingStopCancel(obj)
+	{
+		if (confirm("이 객실의 예약을 다시 활성화 하시겠습니까?\n마감되어있던 기간이 전부 활성화 됩니다."))
+			$(location).attr("href", "ptbookingstopcancel.wei?bookingNum=" + obj.id);		
+	}
+
 	
 	
 	// 취소 모달 유효성 검사
@@ -504,10 +593,12 @@
 
 <div class="partnerBookingContainer">
 
+	<!-- 차트 영역 -->
 	<div class="partnerBookingItem" style="width: 800px;">
 		<canvas id="partnerChart"></canvas>
 	</div>
 	
+	<!-- 달력 영역 -->
 	<div class="partnerBookingItem" id='calendar'>
 	</div>
 	
@@ -523,7 +614,8 @@
 			<tr>
 				<td id="${room.roomId}" class="ptBookingRoomName">${room.roomName}</td>
 				<td id="${room.roomId}" class="ptBookingDetail"></td>
-				<td id="${room.roomId}" class="ptBookingBtn"></td>
+				<td id="${room.roomId}" name="${room.roomName}" class="ptBookingBtn"></td>
+				
 			</tr>
 			</c:forEach>
 		</table>
@@ -532,7 +624,7 @@
 
 
 <!-- 예약 상세 모달 -->
-<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+<div class="modal fade" id="ptBookingDetailModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -609,6 +701,39 @@
 					<button type="button" class="btn btn-default" onclick="ptBookingCancel()">예약 취소하기</button>
 				</div>
 			</div>		
+		</div>
+	</div>
+</div>
+
+
+<!-- 예약 마감 모달 -->
+<div class="modal fade" id="ptBookingStopModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span class="modal-title" id="myModalLabel">
+					<span class="bookingStopRoomName roomName">객실 이름</span>
+				</span>
+			</div>
+			<div class="modal-body" style="font-size: medium;">
+				<form action="ptbookingstop.wei" id="ptBookingStopForm">
+					마감할 날짜를 선택하세요 <br> 
+					<input type="hidden" id="bookingStopRoomId" name="roomId">
+					
+					<span class="bookingDetailSubTitle">마감 시작</span> : <input type="date" readonly="readonly" id="bookingStopCheckInDate" name="stopStartDate"><br>
+					<span class="bookingDetailSubTitle">마감 끝</span> : <input type="date" id="bookingStopCheckOutDate" name="stopEndDate"><br>
+					<span class="bookingStopErr" style="color: red;"></span><br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div style="display: flex; justify-content: center;">
+					<button type="button" id="bookingStopBtn" class="btn btn-default" onclick="ptBookingStop(this)">예약 마감하기</button><br>
+					
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

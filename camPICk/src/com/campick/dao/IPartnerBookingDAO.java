@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campick.dto.BookingDTO;
-import com.campick.dto.CampgroundDTO;
 import com.campick.dto.RoomDTO;
 
 public interface IPartnerBookingDAO
@@ -28,5 +27,14 @@ public interface IPartnerBookingDAO
 
 	// 월별 캠핑유형별 예약 수 세기
 	public String countRoomtype(@Param("campgroundId") String campgroundId, @Param("date") String month, @Param("roomtypeNum") int roomtypeNum);
+	
+	// 예약 마감 → 기간사이에 예약이 있는지 조회
+	public int bookingCheck(@Param("roomId") String roomId, @Param("checkInDate") String checkInDate, @Param("checkOutDate") String checkOutDate);
+	
+	// 예약 마감 
+	public int bookingStop(@Param("roomId") String roomId, @Param("num") String num, @Param("checkInDate") String checkInDate, @Param("checkOutDate") String checkOutDate);
+	
+	// 예약 마감 취소 
+	public int bookingStopCancel(@RequestParam("bookingNum") String bookingNum);
 	
 }

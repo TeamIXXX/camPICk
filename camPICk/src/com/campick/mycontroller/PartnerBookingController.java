@@ -272,7 +272,80 @@ public class PartnerBookingController
 		return result;
 	}
 	
+	// 기간 동안 예약이 있는지 조회
+	@RequestMapping(value = "ajaxptbookingstopcheck.wei", method = RequestMethod.GET)
+	public String ajaxPTBookingCheck(HttpServletRequest request, ModelMap model)
+	{
+		String result = "/WEB-INF/view/";
+		
+		try
+		{
+			String roomId = request.getParameter("roomId");
+			String checkInDate = request.getParameter("checkInDate");
+			String checkOutDate = request.getParameter("checkOutDate");
+			
+			IPartnerBookingDAO dao = sqlSession.getMapper(IPartnerBookingDAO.class);
+			
+			int bookingCount = dao.bookingCheck(roomId, checkInDate, checkOutDate);
+			
+			model.addAttribute("bookingCount", bookingCount);  
+			
+			result += "AjaxPartnerBookingCheck.jsp";
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		// 주소 추가
+		return result;
+		
+	}
 	
+	// 예약 마감
+	@RequestMapping(value = "ptbookingstop.wei", method = RequestMethod.GET)
+	public String PTbookingStop(HttpServletRequest request)
+	{
+		HttpSession session = request.getSession();
+		
+		try
+		{
+			String num = (String) session.getAttribute("num");
+			String roomId = request.getParameter("roomId");
+			String checkInDate = request.getParameter("stopStartDate");
+			String checkOutDate = request.getParameter("stopEndDate");
+			
+			IPartnerBookingDAO dao = sqlSession.getMapper(IPartnerBookingDAO.class);
+			
+			dao.bookingStop(roomId, num, checkInDate, checkOutDate);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "redirect:partnerbookingtemplate.wei";
+	}
+	
+	// 예약 마감
+	@RequestMapping(value = "ptbookingstopcancel.wei", method = RequestMethod.GET)
+	public String PTbookingStopCancel(HttpServletRequest request)
+	{
+		try
+		{
+			String bookingNum = request.getParameter("bookingNum");
+			
+			IPartnerBookingDAO dao = sqlSession.getMapper(IPartnerBookingDAO.class);
+			
+			dao.bookingStopCancel(bookingNum);
+			
+		} catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return "redirect:partnerbookingtemplate.wei";
+	}
 	
 	
 }
