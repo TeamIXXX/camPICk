@@ -274,6 +274,7 @@ public class PartnerMainController
 	
 	
 	
+	
 	//----------------------------------- 계정 관련 -----------------------------
 	
 	// 계정관리 메뉴 클릭 시 계정관리메인템플릿으로 이동
@@ -348,6 +349,7 @@ public class PartnerMainController
 		
 	}
 	
+	
 	// 객실 수정 후 캠핑장 관리 페이지로 이동
 	@RequestMapping(value = "roomupdate.wei", method = RequestMethod.GET)
 	public String roomInfoUpdate(HttpServletRequest request, ModelMap model, RoomDTO room) throws SQLException
@@ -356,6 +358,9 @@ public class PartnerMainController
 		String campgroundId = (String)session.getAttribute("campgroundId");
 		
 		IPartnerCampgroundDAO partnerDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
+		
+		
+		System.out.println("출력" + room.getRoomId());
 		
 		/*
 		RoomDTO room = new RoomDTO();

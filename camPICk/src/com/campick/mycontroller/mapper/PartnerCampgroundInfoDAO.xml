@@ -47,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES('RM' || TO_CHAR(ROOMSEQ.NEXTVAL, 'FM0000'),#{campgroundId },#{roomTypeNum },#{roomName },#{weekDayPrice },#{weekEndPrice },#{basicNum },#{maxNum },#{roomInfo })
 	</insert>
 	
+	
 	<!-- 객실 수정 -->
 	<update id="roomUpdate" parameterType="com.campick.dto.RoomDTO">
 		UPDATE ROOM
