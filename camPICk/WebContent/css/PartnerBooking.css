@@ -29,11 +29,16 @@
 		width: 100px;
 	}
 	
-	.ptStopBtn { background-color: #ffd03e; }
-	.ptCancelBtn { background-color: #ffd1db; }
+	.ptStopBtn { background-color: rgb(255, 229, 107); }
+	.ptStopBtn:hover { background-color: rgb(250, 208, 50); }
+	/* ffd03e */
+	/* .ptCancelBtn { background-color: #ffd1db; } */
+	.ptCancelBtn { background-color: rgba(255, 209, 219, 0.7); } 
+	.ptCancelBtn:hover { background-color: rgb(245, 193, 205); } 
+	
 	.ptCancelBtn2 { background-color: #c4c4c4; }
 	
-	.ptBookingBtn > button:hover { background-color: #c4c4c4; }
+	/* .ptBookingBtn > button:hover { background-color: #c4c4c4; } */
 
 	.bookingDetailSubTitle
 	{

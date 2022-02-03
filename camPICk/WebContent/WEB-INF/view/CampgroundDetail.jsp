@@ -155,22 +155,16 @@
 <title>CampgroundDetail.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/css/RoomList.css">
 
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 
-<script type="text/javascript"
-	src="http://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <script type="text/javascript" src="js/bootstrap.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="<%=cp %>/css/CampgroundDetail.css">
-
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/css/CampgroundDetail.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 <script type="text/javascript">
 	

@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			   , TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE             
 			   , TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE
 		FROM BOOKINGVIEW                                               
-		WHERE CAMPGROUNDID = '${campgroundId}'                                         
+		WHERE CAMPGROUNDID = #{campgroundId}                                         
 		AND TO_DATE(#{date}, 'YYYY-MM-DD') BETWEEN CHECKINDATE AND (CHECKOUTDATE-1)                    
 	</select>
 	
@@ -30,5 +30,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY ROOMID
 	</select>
 	
+	<select id="bookingCancelModal" resultType="com.campick.dto.BookingDTO">
+		SELECT BOOKINGNUM, ROOMID, ROOMNAME
+		, NAME, PHONE, VISITNUM, PAYMENTAMOUNT 
+		, BOOKINGDATE                                        
+		, TO_CHAR(CHECKINDATE, 'YYYY-MM-DD') AS CHECKINDATE             
+		, TO_CHAR(CHECKOUTDATE, 'YYYY-MM-DD') AS CHECKOUTDATE
+		, CASE WHEN (FLOOR(CHECKINDATE - SYSDATE)) >= 10 THEN POLICYSTANDARD3
+			   WHEN (FLOOR(CHECKINDATE - SYSDATE)) >=4 THEN POLICYSTANDARD2
+			   WHEN (FLOOR(CHECKINDATE - SYSDATE)) >=0 THEN POLICYSTANDARD1
+		  END AS REFUND
+		, NVL(REQUEST, ' ') AS REQUEST	
+		FROM BOOKINGVIEW BV
+		LEFT JOIN REFUNDPOLICY RP
+		ON BV.CAMPGROUNDID = RP.CAMPGROUNDID
+		WHERE BOOKINGNUM = #{bookingNum}
+	</select>
 	
+	<select id="countRoomtype" resultType="java.lang.String">
+		SELECT NVL(COUNT(*), 0) AS COUNT
+		FROM ROOMTYPE RT FULL JOIN ROOM R
+		     ON RT.ROOMTYPENUM = R.ROOMTYPENUM
+		     LEFT JOIN BOOKINGVIEW BV 
+		     ON R.ROOMID = BV.ROOMID 
+		WHERE BV.CAMPGROUNDID = #{campgroundId}
+		AND TO_CHAR(CHECKINDATE, 'YYYY-MM') = #{date}
+		AND RT.ROOMTYPENUM = ${roomtypeNum}
+		AND SUBSTR(BV.BOOKINGNUM, 0, 1) = 'C'
+	</select> 
+	
+	<insert id="bookingCancel">
+		INSERT INTO BOOKING_CANCEL (CANCELNUM, BOOKINGNUM, MEMBERNUM, CANCELDATE, REFUND) 
+		VALUES( 'BC' || TO_CHAR( SEQBOOK_CAN.NEXTVAL, 'FM0000'), #{bookingNum}, #{num}, SYSDATE, #{refund})
+	</insert>
+	
+	<select id="bookingCheck" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BOOKINGVIEW 
+		WHERE CHECKINDATE BETWEEN TO_DATE(#{checkInDate}, 'YYYY-MM-DD') AND TO_DATE(#{checkOutDate}, 'YYYY-MM-DD')
+		AND ROOMID = #{roomId}
+	</select> 
+	
+	<insert id="bookingStop">
+		INSERT INTO BOOKING(BOOKINGNUM, ROOMID, MEMBERNUM, NAME, PHONE, CHECKINDATE, CHECKOUTDATE, VISITNUM, REQUEST, BOOKINGDATE)
+		VALUES('P' || TO_CHAR(SYSDATE, 'YYMMDD') || TO_CHAR(SEQBOOK.NEXTVAL, 'FM0000'), #{roomId}, #{num}, '예약 마감', NULL
+     		   , TO_DATE(#{checkInDate}, 'YYYY-MM-DD'), TO_DATE(#{checkOutDate}, 'YYYY-MM-DD'), NULL, NULL, SYSDATE)
+	</insert>
+	
+	<delete id="bookingStopCancel">
+		DELETE 
+		FROM BOOKING
+		WHERE BOOKINGNUM = #{bookingNum}
+	</delete>
 </mapper>

@@ -53,9 +53,7 @@ public class BookingCancelFormController implements Controller
 			session.setAttribute("bookingDTO", bookingDTO);
 			session.setAttribute("refund", refund);
 			session.setAttribute("campgroundDTO", campgroundDTO);
-	        
-	        mav.setViewName("/WEB-INF/view/BookingCancelForm.jsp");
-	         
+			mav.setViewName("/WEB-INF/view/BookingCancelForm.jsp");
 	         
 		} catch (Exception e)
 		{

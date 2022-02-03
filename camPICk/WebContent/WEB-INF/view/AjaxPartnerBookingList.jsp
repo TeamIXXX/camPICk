@@ -8,6 +8,7 @@
 	
 	// AjaxPartnerBookingList.jsp
 	ArrayList<BookingDTO> lists = (ArrayList<BookingDTO>) request.getAttribute("lists");
+	String num = (String) session.getAttribute("num");
 	
 	String result = "";
 	
@@ -19,7 +20,13 @@
 		sb.append(", \"title\":\"" + booking.getRoomName() +"\"");
 		sb.append(", \"start\":\"" + booking.getCheckInDate() +"\"");
 		sb.append(", \"end\":\"" + booking.getCheckOutDate() + "\"");
-		sb.append(", \"color\":\"#45818e\"");
+		
+		// 예약 마감인 경우 이벤트 타이틀 색을 회색으로 표시
+		if(booking.getBookingNum().substring(0, 1).equals("P"))
+			sb.append(", \"color\":\"#c4c4c4\"");
+		else
+			sb.append(", \"color\":\"#45818e\"");
+		
 		sb.append(", \"allDay\":\"" + true + "\"},");
 		
 		result += sb.toString();
