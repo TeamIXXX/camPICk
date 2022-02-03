@@ -352,31 +352,11 @@ public class PartnerMainController
 	
 	// 객실 수정 후 캠핑장 관리 페이지로 이동
 	@RequestMapping(value = "roomupdate.wei", method = RequestMethod.GET)
-	public String roomInfoUpdate(HttpServletRequest request, ModelMap model, RoomDTO room) throws SQLException
+	public String roomInfoUpdate(HttpServletRequest request, ModelMap model,RoomDTO room) throws SQLException
 	{
-		HttpSession session = request.getSession();
-		String campgroundId = (String)session.getAttribute("campgroundId");
-		
 		IPartnerCampgroundDAO partnerDao = sqlSession.getMapper(IPartnerCampgroundDAO.class);
 		
-		
-		System.out.println("출력" + room.getRoomId());
-		
-		/*
-		RoomDTO room = new RoomDTO();
-		
-		room.setCampgroundId(campgroundId);
-		room.setRoomId(roomId);
-		room.setRoomTypeNum(Integer.parseInt(request.getParameter("roomTypeNum")));
-		room.setRoomName(request.getParameter("roomName"));
-		room.setBasicNum(Integer.parseInt(request.getParameter("basicNum")));
-		room.setMaxNum(Integer.parseInt(request.getParameter("maxNum")));
-		room.setWeekDayPrice(Integer.parseInt(request.getParameter("weekDayPrice")));
-		room.setWeekEndPrice(Integer.parseInt(request.getParameter("weekEndPrice")));
-		room.setRoomInfo(request.getParameter("roomInfo"));
-		*/
-		
-		model.addAttribute("room",partnerDao.roomInsert(room));
+		model.addAttribute("room",partnerDao.roomUpdate(room));
 
 		return "redirect:mycampgroundtemplate.wei";
 		

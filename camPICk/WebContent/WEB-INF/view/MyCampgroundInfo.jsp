@@ -491,8 +491,7 @@
 	function roomIdSend(obj)
 	{
 		//roomUpdate(obj.id)
-		$('#roomIdSend').val(obj.id);
-		
+		$('#roomIdUpdate').val(obj.id);
 		
 		var roomTypeName = $(obj).next('input').attr('roomTypeName')
 		var roomname = $(obj).next('input').attr('roomname')
@@ -846,7 +845,7 @@
             <!-- 객실수정 폼 -->
             <div class="roomInsertMain">
                   <div class="roomInsertItem">유형선택</div>
-                  <input type="hidden" id="roomIdUpdate" name="roomIdUpdate">
+                  <input type="hidden" id="roomIdUpdate" name="roomId">
                   <div class="roomInsertItem">
                      	<label><input type="radio" name="roomTypeNum" value="91" class="roomTypeNum" id="91">오토캠핑 </label>
                         <label><input type="radio" name="roomTypeNum" value="92" class="roomTypeNum" id="92">글램핑 </label>
@@ -855,12 +854,12 @@
                   </div>
                   
                   <div class="roomInsertItem">객실이름</div>
-                  <div class="roomInsertItem"><input type="text" id="roomNameUpdate" name="roomNameUpdate"></div>
+                  <div class="roomInsertItem"><input type="text" id="roomNameUpdate" name="roomName"></div>
                   
                   <div class="roomInsertItem">인원 설정</div>
                   <div class="roomInsertItem">
-                     기준인원 <input type="number" class="intInsert" id="basicNumUpdate" min="0" step="1" required="required" name="basicNumUpdate">명 / 
-                     최대인원 <input type="number" class="intInsert" min="0" step="1" required="required"  id="maxNumUpdate" name="maxNumUpdate">명
+                     기준인원 <input type="number" class="intInsert" id="basicNumUpdate" min="0" step="1" required="required" name="basicNum">명 / 
+                     최대인원 <input type="number" class="intInsert" min="0" step="1" required="required"  id="maxNumUpdate" name="maxNum">명
                   </div>
                   <div class="roomInsertItem">사진</div>
                   <div class="roomInsertItem">
@@ -868,11 +867,11 @@
                   </div>
                   <div class="roomInsertItem">가격정보</div>
                   <div class="roomInsertItem">
-                     주중 가격  <input type="text" placeholder="일~목" class="weekPrice" id="weekDayPriceUpdate" name="weekDayPriceUpdate">원 / 
-                     주말 가격  <input type="text" placeholder="금/토" class="weekPrice" id="weekEndPriceUpdate" name="weekEndPriceUpdate">원
+                     주중 가격  <input type="text" placeholder="일~목" class="weekPrice" id="weekDayPriceUpdate" name="weekDayPrice">원 / 
+                     주말 가격  <input type="text" placeholder="금/토" class="weekPrice" id="weekEndPriceUpdate" name="weekEndPrice">원
                   </div>
                   <div class="roomInsertItem">추가설명</div>
-                  <div class="roomInsertItem"><textarea rows="5" cols="50" style="resize: none" id="roomInfoUpdate" name="roomInfoUpdate"></textarea> </div>
+                  <div class="roomInsertItem"><textarea rows="5" cols="50" style="resize: none" id="roomInfoUpdate" name="roomInfo"></textarea> </div>
             </div>
             
          </div>
