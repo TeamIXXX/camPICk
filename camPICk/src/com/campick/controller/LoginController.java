@@ -66,7 +66,7 @@ public class LoginController implements Controller
 					session.setAttribute("num", num);
 					session.setAttribute("account", "admin");
 					session.setAttribute("loginId", id);
-					mav.setViewName("redirect:campick.wei");
+					mav.setViewName("redirect:admincampick.wei");
 					return mav;
 				}
 				
@@ -95,7 +95,7 @@ public class LoginController implements Controller
 					session.setAttribute("num", num);
 					session.setAttribute("account", "admin");
 					session.setAttribute("loginId", id);
-					mav.setViewName("redirect:campick.wei");
+					mav.setViewName("redirect:admincampick.wei");
 					return mav;
 				}
 				
