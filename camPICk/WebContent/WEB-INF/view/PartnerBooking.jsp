@@ -16,10 +16,9 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.min.js"></script>
 
 
-
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
 <link rel="stylesheet" type="text/css" href="css/PartnerBooking.css">
 
 <!-- 달력 -->
@@ -73,7 +72,7 @@
 				
 		    	, eventClick: function(info) 
 		    	{
-		    		$('#bookingModal').modal('show');
+		    		$('#ptBookingDetailModal').modal('show');
 		    		ajaxBookingDetailModal(info.event.id);
 				} 
 	 			, events : function(info, successCallback, failureCallback) 
