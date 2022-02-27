@@ -27,6 +27,11 @@
 
 <%-- <%=cp %> --%>
 
+<div class="topContainer">
+	<div></div>
+	<jsp:include page="AdminTopMenu.jsp"></jsp:include>
+</div>
+
 <div id="bbsList">
 	<br><br>
 	<a href="partnerapproval.wei"><button type="button" class="btn btn-success">승인대기</button></a>

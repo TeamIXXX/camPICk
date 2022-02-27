@@ -6,6 +6,7 @@
 	
 	String num = (String)session.getAttribute("num");
 	String account = (String)session.getAttribute("account");
+	String loginId = (String)session.getAttribute("loginId");
 
 %>
 <!DOCTYPE html>
@@ -18,37 +19,20 @@
 <body>
 
 <div id="topmenu">
-	<%if(session.getAttribute("num")==null && session.getAttribute("account")==null)
-	{%>
 		<ul class="topmenu">
 			<li class="topmenu">
-				<a href="campick.wei" class="topmenu">HOME</a>
+				<%=loginId %> 관리자님 반갑습니다. :)
 			</li>
 			<li class="topmenu">
-				<a href="loginform.wei" class="topmenu">로그인</a>
-			</li>
-			<li class="topmenu">
-				<a href="signupForm.wei" class="topmenu">회원가입</a>
-			</li>
-		</ul>
-	<%} 
-	else
-	{%>
-		<ul class="topmenu">
-			<li class="topmenu">
-				<%=account %>님 반갑습니다. :)
-			</li>
-			<li class="topmenu">
-				<a href="campick.wei" class="topmenu">HOME</a>
+				<a href="admincampick.wei" class="topmenu">HOME</a>
 			</li>
 			<li class="topmenu">
 				<a href="logout.wei" class="topmenu">로그아웃</a>
 			</li>
+			<li class="topmenu">
+				<a href="adminmenu.wei" class="topmenu">관리자메뉴</a>
+			</li>
 		</ul>
-	<%
-	} 
-	%>
-	
 </div>
 
 </body>
