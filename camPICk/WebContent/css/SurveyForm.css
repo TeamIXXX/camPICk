@@ -4,11 +4,11 @@
 
 .mainContainer
 {
-	width: 85%;
+	width: 1080px;
 	display: grid;
-	grid-template-columns: 1fr 4fr;
-	grid-template-rows: 0.3fr 0.5fr 4fr;
-	grid-gap: 2%;
+	grid-template-columns: 260px 800px;
+	grid-template-rows: 50px 60px repeat(auto-fill, minmax(0%, auto));
+	grid-gap: 10px;
 	margin: 0 auto;
 	/* background-color: gray; */
 }
